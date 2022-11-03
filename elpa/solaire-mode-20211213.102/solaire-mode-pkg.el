@@ -1,0 +1,2 @@
+;;; Generated package description from solaire-mode.el  -*- no-byte-compile: t -*-
+(define-package "solaire-mode" "20211213.102" "make certain buffers grossly incandescent" '((emacs "25.1") (cl-lib "0.5")) :commit "8af65fbdc50b25ed3214da949b8a484527c7cc14" :authors '(("Henrik Lissner <http://github/hlissner>")) :maintainer '("Henrik Lissner" . "contact@henrik.io") :keywords '("dim" "bright" "window" "buffer" "faces") :url "https://github.com/hlissner/emacs-solaire-mode")

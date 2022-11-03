@@ -1,0 +1,14 @@
+(undo-tree-save-format-version . 1)
+"f97a8b405492fc419642a665bc76632ba90d2d0d"
+[nil nil nil nil (25439 28092 854150 854000) 0 nil]
+([nil nil ((#("8" 0 1 (fontified t)) . -12465) (undo-tree-id7 . -1) (undo-tree-id8 . -1) 12466 (t 25438 11030 650632 698000)) nil (25439 28092 854144 498000) 0 nil])
+([nil nil ((12465 . 12466)) nil (25439 28092 854132 835000) 0 nil])
+([nil nil ((#("7" 0 1 (fontified t)) . -12490) (undo-tree-id0 . -1) (undo-tree-id1 . -1) (undo-tree-id2 . -1) (undo-tree-id3 . -1) (undo-tree-id4 . -1) (undo-tree-id5 . -1) (undo-tree-id6 . -1) 12491) nil (25439 28092 854125 152000) 0 nil])
+([nil nil ((12490 . 12491)) nil (25439 28092 854044 346000) 0 nil])
+([nil nil ((apply -6 12297 12351 undo--wrap-and-run-primitive-undo 12297 12351 ((12334 . 12337) (12307 . 12310) 12344)) (t 25439 28092 972333 632000)) nil (25440 1172 987188 324000) 0 nil])
+([nil nil ((apply 6 12307 12344 undo--wrap-and-run-primitive-undo 12307 12344 ((#(";; " 0 3 (face font-lock-comment-delimiter-face fontified t)) . -12331) (#(";; " 0 3 (face font-lock-comment-delimiter-face fontified t)) . -12307))) (t 25440 1173 104544 670000)) nil (25440 1465 550682 956000) 0 nil])
+([nil nil ((#("emacs" 0 5 (fontified t face font-lock-string-face)) . 4295) (undo-tree-id0 . -5) (t 25440 1465 672959 691000)) nil (25441 30070 944590 495000) 0 nil])
+([nil nil ((4295 . 4305)) nil (25441 30070 944530 781000) 0 nil])
+([nil nil ((#("160" 0 3 (fontified t)) . -4115) (undo-tree-id1 . -3) (undo-tree-id2 . -3) (undo-tree-id3 . -3) (undo-tree-id4 . -3) (undo-tree-id5 . -3) (undo-tree-id6 . -3) (undo-tree-id7 . -3) (undo-tree-id8 . -3) (undo-tree-id9 . -3) (undo-tree-id10 . -3) (undo-tree-id11 . -3) (undo-tree-id12 . -3) (undo-tree-id13 . -3) (undo-tree-id14 . -3) (undo-tree-id15 . -3) (undo-tree-id16 . -3) (undo-tree-id17 . -3) (undo-tree-id18 . -3) (undo-tree-id19 . -3) (undo-tree-id20 . -3) 4118 (t 25441 30071 96186 813000)) nil (25441 30104 580513 483000) 0 nil])
+([nil current ((4115 . 4118)) nil (25441 30104 580440 569000) 0 nil])
+nil

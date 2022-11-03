@@ -1,0 +1,68 @@
+;;; custom.el --- Customizations file for Emacs
+
+;; Author: Likhon
+;; Maintainer: Likhon
+;; Version: version
+;; Package-Requires: (dependencies)
+;; Homepage: homepage
+;; Keywords: keywords
+
+;; This file is not part of GNU Emacs
+
+;; This file is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 3, or (at your option)
+;; any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; For a full copy of the GNU General Public License
+;; see <http://www.gnu.org/licenses/>.
+
+
+;;; Commentary:
+
+;;; Code:
+;; Emacs as External Editor
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(company-box-doc-delay 0.0)
+ '(ivy-mode nil)
+ '(mode-line-format
+   '("%I %e" mode-line-front-space mode-line-mule-info mode-line-client mode-line-modified mode-line-remote mode-line-frame-identification mode-line-buffer-identification " " mode-line-position evil-mode-line-tag
+     ((:eval
+       (number-to-string
+        (count-lines
+         (point-min)
+         (point-max))))
+      "L")
+     (vc-mode vc-mode)
+     " " mode-line-modes mode-line-misc-info mode-line-end-spaces))
+ '(mode-line-position-column-line-format '("%l:%c"))
+ '(package-selected-packages
+   '(solaire-mode org-alert helm company-lsp doom-modeline modern-cpp-font-lock org-bullets ivy-hydra ivy-avy ycmd company-rtags company-prescient olivetti org-mime mu4e openwith alert minions emojify projectile dired files git-gutter no-littering company-quickhelp company-statistics company-shell company-c-headers company-box flychek avy benchmark-init expand-region aggressive-indent diminish yasnippet-snippets yasnippet dashboard uniquify-files delight ivy-posframe ivy-prescient prescient flyspell ivy-rich company-posframe try counsel company-wordfreq emmet-mode doom-themes rainbow-delimiters beacon which-key add-hooks windswap company-dict use-package undo-tree bind-key))
+ '(smtpmail-smtp-service 25)
+ '(tab-width 4)
+ '(warning-suppress-log-types '((initialization) (initialization)))
+ '(warning-suppress-types '((org) (org) (initialization) (initialization))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(cursor ((t (:background "BlanchedAlmond"))))
+ '(dashboard-heading ((t (:foreground "#f1fa8c" :weight bold))))
+ '(flycheck-error ((t (:underline (:color "#fb4934" :style line :position line)))))
+ '(flycheck-info ((t (:underline (:color "#83a598" :style line :position line)))))
+ '(flycheck-warning ((t (:underline (:color "#fabd2f" :style line :position line)))))
+ '(mode-line ((t (:background "#37302f" :foreground "#dfd2b8" :box nil))))
+ '(quote (flycheck-warning ((t (:background "#282828" :underline "#fabd2f"))))))
+(provide 'custom)
+;;; custom.el ends here

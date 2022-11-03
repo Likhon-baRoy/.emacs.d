@@ -1,0 +1,7 @@
+        # -*- mode: snippet -*-
+        # name: pkg
+        # key: pkg
+        # --
+        (use-package $1
+        :ensure
+        $2)

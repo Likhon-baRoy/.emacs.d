@@ -1,0 +1,74 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// Shortcuts for "common" data type in contests
+typedef long long 		ll;
+typedef pair<int,int> 	ii;
+typedef vector<int> 	vi;
+typedef vector<ii> 		vii;
+#define INF 100'00'00'000;
+#define REP(i,a,b) for (for i = a; i <= b; i++)
+#define precise cout << fixed << setprecision(4);
+
+#define fast ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+#define zn(a,b,c) for(ll a=b;a<c;a++)
+#define nz(a,b,c) for(ll a=b;a>c;a--)
+
+int main () {
+
+  fast;
+  // freopen("input.txt", "r", stdin);
+  // freopen("output.txt", "w", stdout);
+  // char ch[10]; scanf(" %[^\n]", ch);
+  // (A-Z)[65-90], (a-z)[97-122], (0-9)[48-57]
+
+
+  int T = 0, N = 0, count = 0, ans = 0, total = 0, a = 0, b = 0, c = 0, i = 0, j = 0, k = 0, l = 0, m = 0, n = 0, p = 0, max = 0, min = 0;
+   double avg = 0, sum = 0;
+
+   cin >> N;
+   int arr[N];
+   max = 1;
+   for (i = 0; i < N; i++) {
+     cin >> k;
+     if (k >= l) {
+       count++;
+     } else count = 1;
+     l = k;
+     if (max < count) max = count;
+   }
+   cout << max << "\n";
+
+   // cin >> a >> b >> c;
+     // i = (a+b+c);
+   // j = (a+b)*c;
+   // k = a*(b+c);
+   // l = (a*b*c);
+   // // max = (a > b) ? ((a > c) ? a : c) : ((b > c) ? b : c);
+   // ans = (i > j) ? ((i > k) ? ((i > l) ? i : l) : k) : ((j > k) ? ((j > l) ? j : l) : ((k > l) ? k : l));
+   // cout << ans << "\n";
+
+   // if (a == 1 && b == 1 && c == 1) {
+   //   ans = 3;
+   // } else if (a == b == c) {
+   //   ans = a * b * c;
+   // } else if (a == 1 || b == 1 || c == 1) {
+   //   if (a != 1 && b != 1) {
+   //     ans = a * (b + c);
+   //   } else if (b != 1 && c != 1) {
+   //     ans = (1 + b) * c;
+   //   } else if (b == 1 && a != 1 && c != 1) {
+   //     if (a < c) ans = (a + b) * c;
+   //     else ans = a * (b + c);
+   //   } else if (a == 1 && b == 1) {
+   //     ans = 2 * c;
+   //   } else if (a != 1 && b == 1 && c == 1) {
+   //     ans = a * (b + c);
+   //   } else ans = a + b + c;
+   // } else {
+   //   ans = a * b * c;
+   // }
+
+
+   return 0;
+}

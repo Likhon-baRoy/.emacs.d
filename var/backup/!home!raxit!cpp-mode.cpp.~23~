@@ -1,0 +1,12 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main () {
+
+  int i, N;
+  scanf("%d", &N);
+  for (i = 0; i < N; ++i) {
+    printf("Hello Emacs Lover!\n");
+  }
+  return 0;
+}

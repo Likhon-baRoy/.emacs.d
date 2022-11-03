@@ -1,0 +1,183 @@
+##################
+# video settings #
+##################
+fs=yes 								# start in fullscreen mode by default
+border                              				# no window title bar
+pause=yes 							# no autoplay
+ontop=yes 							# keep the player window on top of all other windows
+osd-bar=no 							# don't show a huge volume box on screen when turning the volume up/down
+keep-open=yes 							# keep the player open when a file's end is reached
+audio-display=no						# play on terminal if no videos
+save-position-on-quit=yes 					# always save the current playback position on exit
+#force-window=yes 						# always open a video window even with no video
+force-seekable=yes 						# always allow seeking, e.g. allow seeking within a local cache of HTTP stream
+geometry=50%:50% 						# force starting with centered window
+cursor-autohide=50 						# cursor hide in ms
+cursor-autohide-fs-only                 			# don't autohide the cursor in window mode, only fullscreen
+#force-window=immediate						# don't wait with showing the video window until it has loaded
+msg-color=yes                           			# color log messages on terminal
+msg-module=yes                          			# prepend module name to log messages
+hls-bitrate=max                         			# use max quality for HLS streams
+term-osd-bar=yes                        			# display a progress bar on the terminal
+use-filedir-conf=yes                    			# look for additional config files in the directory of the opened file
+input-media-keys=no                     			# enable/disable OSX media keys
+prefetch-playlist=yes
+
+# Defaults for all profiles
+hwdec=no							# enable hardware decoding if available.
+tscale=oversample                      				# [sharp] oversample <-> linear (triangle) <-> catmull_rom <-> mitchell <-> gaussian <-> bicubic [smooth]
+opengl-early-flush=no
+opengl-pbo=no                          				# "yes" is currently bugged: https://github.com/mpv-player/mpv/issues/4988
+icc-profile-auto
+
+screenshot-format=png
+screenshot-png-compression=8
+screenshot-template='~/pix/mpv/%F (%P) %n'
+
+##################
+# audio settings #
+##################
+volume=82							# default volume, 100 = unchanged
+volume-max=200							# maximum volume in %, everything above 100 results in amplification
+audio-delay=+0.084						# Useful if you're watching with your headphones on PC
+audio-file-auto=fuzzy						# external audio doesn't has to match the file name exactly to autoload
+alang=hi,hin,bn,ben,en						# play Hindi/Bengali/English audio if available, fall back to English otherwise.
+audio-pitch-correction=yes					# automatically insert scaletempo when playing with higher speed
+#audio-device=alsa/default					# specify default audio device. You can list devices with: --audio-device=help
+
+##########################
+# subtitle configuration #
+##########################
+demuxer-mkv-subtitle-preroll=yes        			# try to show embedded subs when seeking even when no index information is present
+demuxer-mkv-subtitle-preroll-secs=2
+
+slang=en		             				# automatically select these subtitles (decreasing priority)
+sub-auto=fuzzy                          			# external subs don't have to match the file name exactly to autoload
+sub-file-paths-append=ass               			# search for external subs in these relative subdirectories
+sub-file-paths-append=srt
+sub-file-paths-append=sub
+sub-file-paths-append=subs
+sub-file-paths-append=subtitles
+
+embeddedfonts=yes                       			# use embedded fonts for SSA/ASS subs
+sub-fix-timing=no                       			# do not try to fix gaps (which might make it worse in some cases)
+sub-ass-force-style=Kerning=yes         			# allows you to override style parameters of ASS scripts
+sub-use-margins
+sub-ass-force-margins
+
+# the following options only apply to subtitles without own styling (i.e. not ASS but e.g. SRT)
+sub-font="Source Sans Pro Semibold"
+sub-font-size=38
+sub-color="#FFFFFFFF"
+sub-border-color="#FF262626"
+sub-border-size=1.5
+sub-shadow-offset=0
+sub-shadow-color="#B9101010"
+sub-spacing=0.8
+sub-blur=0
+blend-subtitles=yes
+sub-fix-timing=no
+sub-margin-x=100
+sub-margin-y=50
+# sub-pos=95 							# subtitle position 5 percent above the bottom of the screen
+
+[default]
+#########
+# Cache #
+#########
+cache=yes 							# Use a large seekable RAM cache even for local input.
+demuxer-max-bytes=400MiB 					# Use extra large RAM cache (needs cache=yes to make it useful).
+demuxer-max-back-bytes=150MiB
+# include=/path/to/the/file/you/want/to/include 		# You can also include other configuration files.
+
+#############
+# OSD / OSC #
+#############
+osd-level=1                             			# enable osd and display --osd-status-msg on interaction
+osd-duration=2500                       			# hide the osd after x ms
+osd-status-msg='${time-pos} / ${duration}${?percent-pos:　(${percent-pos}%)}${?frame-drop-count:${!frame-drop-count==0:　Dropped: ${frame-drop-count}}}\n${?chapter:Chapter: ${chapter}}'
+
+osd-font='Source Sans Pro'
+osd-font-size=32
+osd-color='#CCFFFFFF'                   			# ARGB format
+osd-border-color='#DD322640'            			# ARGB format
+osd-shadow-offset=1                    				# pixel width for osd text and progress bar
+osd-bar-align-y=0                       			# progress bar y alignment (-1 top, 0 centered, 1 bottom)
+osd-border-size=2                       			# size for osd text and progress bar
+osd-bar-h=2                             			# height of osd bar as a fractional percentage of your screen height
+osd-bar-w=60                            			# width of " " "
+
+##################
+# other settings #
+##################
+[high-quality]
+# Describe this profile
+profile-desc=cond:is_high(get('width', 0), get('height', 0), get('estimated-vf-fps', 0))
+#scale=ewa_hanning						# hanning with this radius is broken on OSX due to OpenGL driver bug
+#scale-radius=3.2383154841662362
+scale=ewa_lanczossharp
+cscale=ewa_lanczossoft
+dscale=mitchell
+scale-antiring=0
+cscale-antiring=0
+dither-depth=auto
+correct-downscaling=yes
+sigmoid-upscaling=yes
+deband=yes
+#glsl-shaders-append="~/.mpv/shaders/KrigBilateral.glsl"
+glsl-shaders-append="~/.mpv/shaders/ravu-lite-r4.hook"
+glsl-shaders-append="~/.mpv/shaders/ravu-lite-r4.hook"
+glsl-shaders-append="~/.mpv/shaders/ravu-lite-r4.hook"
+
+[mid-quality]
+profile-desc=cond:is_mid(get('width', 0), get('height', 0), get('estimated-vf-fps', 0))
+scale=spline36
+cscale=bicubic
+dscale=mitchell
+scale-antiring=1.0
+cscale-antiring=1.0
+dither-depth=auto
+correct-downscaling=yes
+sigmoid-upscaling=yes
+deband=yes
+glsl-shaders-set=""
+
+[low-quality]
+profile-desc=cond:is_low(get('width', 0), get('height', 0), get('estimated-vf-fps', 0))
+scale=bilinear
+cscale=bilinear
+dscale=bilinear
+scale-antiring=0
+cscale-antiring=0
+dither-depth=no
+correct-downscaling=no
+sigmoid-upscaling=no
+deband=no
+glsl-shaders-set=""
+
+[4K-lavc-threads]
+profile-desc=cond:get('width', -math.huge) >= 3840
+vd-lavc-threads=32
+
+[4K-lavc-threads-inverted]
+profile-desc=cond:get('width', math.huge) < 3840
+vd-lavc-threads=0
+
+[ytdl-desktop]
+profile-desc=cond:dedicated_gpu()
+ytdl-format=bestvideo[height<=?2160]+bestaudio/best
+
+[ytdl-laptop]
+profile-desc=cond:not dedicated_gpu()
+ytdl-format=bestvideo[height<=?1080][fps<=?30][vcodec!=?vp9][protocol!=http_dash_segments]+bestaudio/best
+
+###################################
+# Protocol Specific Configuration #
+###################################
+[protocol.https]
+cache=yes
+user-agent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/20100101 Firefox/58.0'
+
+[protocol.http]
+cache=yes
+user-agent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/20100101 Firefox/58.0'

@@ -1,0 +1,9 @@
+alias cls clear 1
+alias l ls -la
+alias d dired $1
+alias ff find-file $1
+alias ll ls -AFGhl --color=always $1
+alias e find-file-other-window $1
+alias gd magit-diff-unstaged
+alias gds magit-diff-staged
+alias gg git log --color --graph --oneline --abbrev-commit --decorate --all --date=short --pretty=format:"%C(cyan)%h %C(yellow)%ad %C(bold green)%d %C(reset)%s"

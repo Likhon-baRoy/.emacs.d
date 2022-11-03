@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: comfi
+# key: comfi
+# --
+#include <bits/stdc++.h>
+using namespace std;
+
+// Shortcuts for "common" data type in contests
+typedef long long 		ll;
+typedef pair<int,int> 	ii;
+typedef vector<int> 	vi;
+typedef vector<ii> 		vii;
+#define INF 1000000000;
+#define REP(i,a,b) for (for i = a; i <= b; i++)
+
+int main () {
+
+  // ios::sync_with_stdio(0);
+  // cin.tie(0);
+
+  // freopen("input.txt", "r", stdin);
+  // freopen("output.txt", "w", stdout);
+  // char ch[10]; scanf(" %[^\n]", ch);
+
+    int T, N, count = 0, ans = 0, total = 0;
+    double avg = 0;
+
+    $0
+
+    return 0;
+}

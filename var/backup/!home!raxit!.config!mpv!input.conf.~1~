@@ -1,0 +1,16 @@
+# Ctrl+q closes player
+#Ctrl+q quit
+# D removes the current file from playlist
+D playlist-remove current
+# R shuffles the current playlist
+R playlist-shuffle
+
+f      cycle fullscreen ; show-text "Scale: ${window-scale}"
+l seek 5
+h seek -5
+j seek -60
+k seek 60
+s cycle sub
+
+SHIFT+a cycle-values sub-font "Gandhi Sans" "Arial"
+SHIFT+c cycle-values sub-color "#FFFF00" "#00FF00" "#FF0000" "#FFFFFF"

@@ -1,0 +1,60 @@
+2017-02-23  Ingo Lohmar	 <i.lohmar@gmail.com>
+
+	Merge commit 'e62157d43b2c874d2edbd547c3bdfb05d0a7ae5c' from
+	company-statistics
+
+	* commit 'e62157d43b2c874d2edbd547c3bdfb05d0a7ae5c':
+	 Bump version
+	 Avoid write-file side-effects, fixed encoding
+	 Fix byte-compile warnings about unused variable
+
+2015-11-26  Ingo Lohmar	 <i.lohmar@gmail.com>
+
+	Merge commit '906d8137224c1a5bd1dc913940e0d32ffecf5523' from
+	company-statistics
+
+	* commit '906d8137224c1a5bd1dc913940e0d32ffecf5523':
+	 Bump version
+	 Fix --last-keyword
+
+2015-06-28  Ingo Lohmar	 <i.lohmar@gmail.com>
+
+	Merge commit '45bc13aec56fcd0b55686d2305cf6e6852d467e8' from
+	company-statistics
+
+	* commit '45bc13aec56fcd0b55686d2305cf6e6852d467e8':
+	 Bump version
+	 Cleanup similar to ELPA version
+	 Update version
+	 Offer light and heavy context scoring
+	 fix typo
+
+	Conflicts:
+	packages/company-statistics/company-statistics.el
+
+2015-04-26  Stefan Monnier  <monnier@iro.umontreal.ca>
+
+	* packages/company-statistics/company-statistics.el: Use
+	lexical-binding. Remove redundant :group args.
+
+2015-02-07  Ingo Lohmar	 <i.lohmar@gmail.com>
+
+	Merge commit 'd1e03c129603bf589e2c6d98cc93d05de48138c6'
+
+	Fix again for ELPA inclusion
+
+2015-02-07  Ingo Lohmar	 <i.lohmar@gmail.com>
+
+	Merge commit '50127e91c39a8c72eb2ea1ffadf708f31699cf84'
+
+	Correct license wording Only save when variables have been initialized
+
+2015-01-28  Dmitry Gutov  <dgutov@yandex.ru>
+
+	Add 'packages/company-statistics/' from commit
+	'f8d15c7edb2a182f484c5e6eb86f322df473e763'
+
+	git-subtree-dir: packages/company-statistics git-subtree-mainline:
+	0d834ff627ae024cd1edfb21023f506737139f24 git-subtree-split:
+	f8d15c7edb2a182f484c5e6eb86f322df473e763
+

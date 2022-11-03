@@ -1,0 +1,6 @@
+(undo-tree-save-format-version . 1)
+"e67f5d71645e012e71a3d3969db0c219c9d99a8e"
+[nil nil nil nil (25441 24715 431050 739000) 0 nil]
+([nil current ((1 . 70) (#("00003	Wed Nov  2 00:08:11 2022	Likhon Barai <likhonhere007@gmail.com>" 0 69 (fontified nil)) . -1) (undo-tree-id0 . -69) (#("
+" 0 1 (fontified nil)) . 71) (undo-tree-id1 . -1) (1 . 71) (#("00003	Wed Nov  2 00:08:11 2022	Likhon Barai <likhonhere007@gmail.com>" 0 69 (fontified nil)) . 1) (1 . 71) (t . -1)) nil (25441 24715 431039 6000) 0 nil])
+nil

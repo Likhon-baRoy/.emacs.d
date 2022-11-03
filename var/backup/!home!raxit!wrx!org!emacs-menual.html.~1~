@@ -1,0 +1,709 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-10-23 Sun 19:21 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>EMACS KEYBINDINGS</title>
+<meta name="author" content="Likhon Barai" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="http://thomasf.github.io/solarized-css/solarized-dark.min.css" />
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">EMACS KEYBINDINGS</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org6afacc9">1. ORG</a></li>
+<li><a href="#org07f7546">2. Enter Numeric valus</a></li>
+<li><a href="#org59abe55">3. Display line number</a></li>
+<li><a href="#org7b6aaa3">4. Formatting paragraph with shell cmnd</a></li>
+<li><a href="#orgc2419fe">5. Moving around on Emacs</a>
+<ul>
+<li><a href="#orgd03ea8a">5.1. make cursor jump back to the previous position?</a></li>
+</ul>
+</li>
+<li><a href="#orgd51997a">6. Registers:</a>
+<ul>
+<li><a href="#orgfa12326">6.1. Save Positions in Registers:</a></li>
+</ul>
+</li>
+<li><a href="#org0b9a2b2">7. Search:</a></li>
+<li><a href="#orgcab5096">8. Help Menu:</a></li>
+<li><a href="#org5a6e805">9. Bookmarks:</a></li>
+<li><a href="#orgfddc5a3">10. Exchange point and mark:</a></li>
+<li><a href="#orge730720">11. Keyboard Macros</a></li>
+<li><a href="#org2d9443b">12. Rename an open file in Emacs?</a></li>
+<li><a href="#orgc9dc3d4">13. Selecting words or sexps without moving the cursor</a></li>
+<li><a href="#orga33025c">14. DELETE COMMANDS:</a></li>
+<li><a href="#orgaa89234">15. KILL COMMANDS:</a></li>
+<li><a href="#orgdd9a167">16. REPEAT ANY COMMAND:</a></li>
+<li><a href="#org8849a49">17. SPELL CHECKING:</a></li>
+<li><a href="#org82b0ccf">18. UNDO-REDO:</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org6afacc9" class="outline-2">
+<h2 id="org6afacc9"><span class="section-number-2">1.</span> ORG</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>C-c C-, (org-insert-structure-template)</li>
+</ul>
+<p>
+for farther explanation, <a href="https://orgmode.org/manual/Structure-Templates.html#Structure-Templates">go here</a>
+</p>
+
+<p>
+also put this in your init.el
+</p>
+<ul class="org-ul">
+<li>(require 'org-tempo)</li>
+</ul>
+
+<pre class="example">
+a	‘#+BEGIN_EXPORT ascii’ … ‘#+END_EXPORT’
+c	‘#+BEGIN_CENTER’ … ‘#+END_CENTER’
+C	‘#+BEGIN_COMMENT’ … ‘#+END_COMMENT’
+e	‘#+BEGIN_EXAMPLE’ … ‘#+END_EXAMPLE’
+E	‘#+BEGIN_EXPORT’ … ‘#+END_EXPORT’
+h	‘#+BEGIN_EXPORT html’ … ‘#+END_EXPORT’
+l	‘#+BEGIN_EXPORT latex’ … ‘#+END_EXPORT’
+q	‘#+BEGIN_QUOTE’ … ‘#+END_QUOTE’
+s	‘#+BEGIN_SRC’ … ‘#+END_SRC’
+v	‘#+BEGIN_VERSE’ … ‘#+END_VERSE’
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org07f7546" class="outline-2">
+<h2 id="org07f7546"><span class="section-number-2">2.</span> Enter Numeric valus</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>Insert number input trough a significant point <code>C-10 C-u 0</code> this will enter 10
+zeros after the point.</li>
+</ul>
+<p>
+[-] [X] [ ] -&gt; :kissing<sub>heart</sub>: 💠
+</p>
+<ul class="org-ul">
+<li><b>C-x C-b o</b> to view a file in <i>other window</i>.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org59abe55" class="outline-2">
+<h2 id="org59abe55"><span class="section-number-2">3.</span> Display line number</h2>
+<div class="outline-text-2" id="text-3">
+<ul class="org-ul">
+<li>M-x d-nu RET</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org7b6aaa3" class="outline-2">
+<h2 id="org7b6aaa3"><span class="section-number-2">4.</span> Formatting paragraph with shell cmnd</h2>
+<div class="outline-text-2" id="text-4">
+<ul class="org-ul">
+<li>First select the region for formatted then enter into shell by pressing <code>M-!</code>.
+And then enter command ~fmt -w 80~f</li>
+
+<li>M-|               - runs the command shell-command-on-region</li>
+
+<li>C-u M-|           - run shell command in buffer region</li>
+
+<li>C-h i m emacs RET - guide to learning Emacs Lisp for non-programmers for
+reference. * The Emacs Lisp Reference *</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgc2419fe" class="outline-2">
+<h2 id="orgc2419fe"><span class="section-number-2">5.</span> Moving around on Emacs</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-orgd03ea8a" class="outline-3">
+<h3 id="orgd03ea8a"><span class="section-number-3">5.1.</span> make cursor jump back to the previous position?</h3>
+<div class="outline-text-3" id="text-5-1">
+<ul class="org-ul">
+<li>C-SPC C-SPC
+<ul class="org-ul">
+<li>In Emacs you can save the position of the cursor by pressing <code>C-space C-space</code>.</li>
+<li>set mark (activates and then deactivates region) pushes the
+current position to the mark ring (without leaving it active).</li>
+</ul></li>
+
+<li>C-u C-SPC
+<ul class="org-ul">
+<li>When you are in another part of the document, jump back with
+<code>C-u C-space</code>.</li>
+<li>move to previous mark pops the mark ring, jumping to the
+previous position. You can use this repeatedly to navigate
+through the entire ring.</li>
+</ul></li>
+
+<li>C-x C-x
+<ul class="org-ul">
+<li>exchange-point-and-mark</li>
+
+<li>Put the mark where point is now, and point where the
+mark is now.  This command works even when the mark is
+not active, and it reactivates the mark.</li>
+
+<li>If Transient Mark mode is on, a prefix ARG deactivates
+the mark if it is active, and otherwise avoids
+reactivating it.  If Transient Mark mode is off, a
+prefix ARG enables Transient Mark mode temporarily.</li>
+</ul></li>
+
+<li>C-x C-@ and C-x C-SPC
+
+<ul class="org-ul">
+<li>(pop-global-mark) Pop off global mark ring and jump to
+the top location.  The global mark ring is updated
+automatically</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd51997a" class="outline-2">
+<h2 id="orgd51997a"><span class="section-number-2">6.</span> Registers:</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-orgfa12326" class="outline-3">
+<h3 id="orgfa12326"><span class="section-number-3">6.1.</span> Save Positions in Registers:</h3>
+<div class="outline-text-3" id="text-6-1">
+<ul class="org-ul">
+<li>C-x r SPC
+<ul class="org-ul">
+<li>runs point-to-register</li>
+</ul></li>
+
+<li><p>
+C-x r j
+</p>
+<ul class="org-ul">
+<li>runs jump-to-register</li>
+</ul>
+<p>
+Type any character to specify a register when prompted.
+</p></li>
+
+<li>C-x r C-SPC</li>
+
+<li>C-x r C-@
+<ul class="org-ul">
+<li>(point-to-register REGISTER &amp;optional ARG)</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0b9a2b2" class="outline-2">
+<h2 id="org0b9a2b2"><span class="section-number-2">7.</span> Search:</h2>
+<div class="outline-text-2" id="text-7">
+<ul class="org-ul">
+<li>M-p
+<ul class="org-ul">
+<li>select PREVIOUS search string</li>
+</ul></li>
+<li>M-n
+<ul class="org-ul">
+<li>select NEXT search string</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgcab5096" class="outline-2">
+<h2 id="orgcab5096"><span class="section-number-2">8.</span> Help Menu:</h2>
+<div class="outline-text-2" id="text-8">
+<ul class="org-ul">
+<li>C-h i m
+<ul class="org-ul">
+<li>go to info and SELECT <b>m</b> for menu</li>
+</ul></li>
+
+<li>C-h a
+<ul class="org-ul">
+<li>Show commands (interactively callable functions) that
+match PATTERN.  PATTERN can be a word, a list of words
+(separated by spaces), or a regexp (using some regexp
+special characters).  If it is a word, search for
+matches for that word as a substring.  If it is a list
+of words, search for matches for any two (or more) of
+those words.</li>
+</ul></li>
+
+<li>C-x l
+<ul class="org-ul">
+<li>Report number of lines on current page, and how many are before or after point.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org5a6e805" class="outline-2">
+<h2 id="org5a6e805"><span class="section-number-2">9.</span> Bookmarks:</h2>
+<div class="outline-text-2" id="text-9">
+<ul class="org-ul">
+<li>C-x r m 	runs bookmark-set</li>
+<li>C-x r b 	runs bookmark-jump</li>
+<li>C-x r l 	list of your Bookmarks you've already save</li>
+<li>DELETE		go ot Bookmark and SELECT by pressing <code>d</code> than to delete press <code>x</code></li>
+</ul>
+
+<p>
+Note that some commands (especially ones which are liable to move you an an
+unknown or arbitrary distance from your original location) will automatically
+push to the mark ring so that you can use <code>C-u C-SPC</code> to return afterwards. This
+includes isearch, so after using C-s to go somewhere, you can easily jump back
+again.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgfddc5a3" class="outline-2">
+<h2 id="orgfddc5a3"><span class="section-number-2">10.</span> Exchange point and mark:</h2>
+<div class="outline-text-2" id="text-10">
+<ul class="org-ul">
+<li>C-x C-x runs exchange-point-and-mark which is very useful for jumping between
+ two locations. It also activates the mark/region,
+use C-SPC to
+ clear the highlighting.</li>
+
+<li>If you're taking advantage of register functionality in elisp, use some non-conflicting symbol for the name, rather than a char, so that you can't conflict with interactively-set registers (unless, of course, you want to do that).</li>
+
+<li>C-x r SPC r
+
+<ul class="org-ul">
+<li>Record the position of point and the current buffer in register r (point-to-register).</li>
+</ul></li>
+
+<li>C-x r j r
+
+<ul class="org-ul">
+<li>Jump to the position and buffer saved in register r
+(jump-to-register).</li>
+</ul></li>
+</ul>
+
+<p>
+Typing C-x r SPC (point-to-register), followed by a character r, saves both the position of point and the current buffer in register r. The register retains this information until you store something else in it.
+</p>
+
+<p>
+The command C-x r j r switches to the buffer recorded in register r, pushes a mark, and moves point to the recorded position. (The mark is not pushed if point was already at the recorded position, or in successive calls to the command.) The contents of the register are not changed, so you can jump to the saved position any number of times.
+</p>
+
+<p>
+If you use C-x r j to go to a saved position, but the buffer it was saved from has been killed, C-x r j tries to create the buffer again by visiting the same file. Of course, this works only for buffers that were visiting files.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge730720" class="outline-2">
+<h2 id="orge730720"><span class="section-number-2">11.</span> Keyboard Macros</h2>
+<div class="outline-text-2" id="text-11">
+<ul class="org-ul">
+<li>C-x (:      - Start recording key strokes.</li>
+
+<li>C-x ):        Stop recording key strokes and save recording as a replayable keyboard macro.</li>
+
+<li>C-x e:        Replay the keyboard macro. Type e after typing this once to play it again.</li>
+
+<li>C-a 	C-SPACE 	C-n		 M-w	 C-y	&#x2014;Duplicate a whole line</li>
+<li>CTRL-A	CTRL-K	 CTRL-K	 CTRL-Y	 CTRL-Y		&#x2014;Duplicate a whole line</li>
+
+<li>C-x C-e ;; execute current line elisp</li>
+<li>C-x s 	&#x2014;Save-some-buffer, giving the choice which buffer to save or not:</li>
+
+<li>M-a or M-e 			&#x2014;M-a runs the command backward-sentence And M-e runs the command forward-sentence.</li>
+
+<li>M-x eval-region ;; region</li>
+<li>M-x eval-buffer ;; whole buffer</li>
+<li>M-x load-file ~/.emacs.d/init.el</li>
+<li>M-x revert-buffer</li>
+</ul>
+
+<p>
+narrow-to-region (C-x n n) Then widen (C-x n w)
+</p>
+
+<p>
+;; You can also just move the point to the end of any sexp and press
+C-x C-e 	&#x2014;to execute just that sexp. ;; Usually it's not necessary to reload the whole file if you're just changing a line or two.
+</p>
+
+<p>
+M-: (load user-init-file)
+;; you type it in Eval: prompt (including the parentheses)
+;; user-init-file is a variable holding the ~/.emacs value (pointing to the configuration file path) by default
+;; (load) is shorter, older, and non-interactive version of (load-file); it is not an emacs command (to be typed in M-x) but a mere elisp function
+</p>
+
+<p>
+M-/ 	     - EXPAND ABBREVIATION - the command abbrev-expand, is an autoloaded interactive compiled Lisp function
+</p>
+
+<p>
+C-M-o
+Split line at point; text on the line after point becomes a new line indented to the same column that it now starts in (split-line).
+M-m
+Move (forward or back) to the first nonblank character on the current line (back-to-indentation).
+C-M-\
+Indent several lines to same column (indent-region).
+C-q TAB
+Insert a literal \T into your code somewhere.
+C-x TAB
+Shift block of lines rigidly right or left (indent-rigidly).
+M-i
+Indent from point to the next prespecified tab stop column (tab-to-tab-stop).
+M-x indent-relative
+Indent from point to under an indentation point in the previous line.
+</p>
+
+<p>
+C-5 C-x TAB  &#x2014;you can specify the number of spaces to indent by using a prefix argument
+</p>
+
+<p>
+C-x r t	     &#x2014;(M-x string-rectangle) This one inserts text at every line in the rectangle.
+</p>
+
+<p>
+%% Start by setting the mark at the beginning of the first line, and move your cursor to the first character of the last line you want to prefix:
+</p>
+
+<pre class="example" id="orgebbde90">
+*Hello
+There
+▮I am some code
+</pre>
+
+<p>
+%% Then use C-x r t, enter your prefix (I said) and press RET. This adds the text to each line in the rectangle:
+</p>
+
+<p>
+I said Hello
+I said There
+I said I am some code
+</p>
+
+<p>
+%% If you don't line up your cursor on the same column as your mark, it will overwrite that part of the rectangle:
+</p>
+
+<pre class="example" id="orge6de5d3">
+*Hello
+There
+I am▮ some code
+</pre>
+
+<p>
+%% with the same command results in:
+</p>
+
+<pre class="example" id="orgf375412">
+I said o
+I said e
+I said  some code
+</pre>
+
+<ul class="org-ul">
+<li>C-x r t       - string-rectangle (used to insert any arbitrary text (spaces included) in a selected region.)</li>
+</ul>
+
+<p>
+%% Let's say you have this block of text and you want to insert 5 spaces in front of all lines.
+</p>
+
+<p>
+abc
+def
+ghi
+</p>
+
+<ul class="org-ul">
+<li>C-x r t M-5 SPC RET   - That will give the below force indented text.</li>
+</ul>
+<pre class="example" id="org8509810">
+abc
+def
+ghi
+</pre>
+
+<p>
+%% for example, if you wanted a yellow bar 5 pixels wide in insert state and a
+purple-filled box in normal state, you could do the following:
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(setq evil-insert-state-cursor '((bar . 5) "yellow")
+evil-normal-state-cursor '(box "purple"))
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>IMHO the standard way is:
+<ol class="org-ol">
+<li>Go to the top of your buffer.</li>
+<li>Type C-M-% for query-replace-regexp.</li>
+<li>Input ^\s-+ as regular expression and RET. (See explanation below.)</li>
+<li>Leave the replacement string empty, i.e., press RET again.</li>
+<li>You are prompted by query-replace-regexp in the minibuffer.</li>
+<li>Press ! to perform all replacements at once.</li>
+</ol></li>
+</ul>
+
+<p>
+Explanation of the regular expression:
+</p>
+
+<ol class="org-ol">
+<li>The caret ^ stands for the beginning of line.</li>
+<li>The \s- stands for any character designated as space by the current modes syntax table.</li>
+<li>The + stands for one or more contiguous matches.</li>
+
+<li>C-x 4 f       - to find a file in another window.</li>
+
+<li>C-x 4 b       - to select a different buffer in another window.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org2d9443b" class="outline-2">
+<h2 id="org2d9443b"><span class="section-number-2">12.</span> Rename an open file in Emacs?</h2>
+<div class="outline-text-2" id="text-12">
+<p>
+Something like save-as, but the original one should go away.
+Yes, with dired mode, you can:
+</p>
+
+<ul class="org-ul">
+<li>C-x d			- to open dired</li>
+<li>RET 			- to select directory of current file</li>
+<li>C-x C-j 		- (dired-jump to the name of the current file, in Dired)</li>
+<li>R 				- to rename the file (or dired-do-rename).</li>
+<li>q 				- to go back to the (renamed) file buffer</li>
+
+<li>C-x C-w
+<ul class="org-ul">
+<li>"save as" feature of Emacs, that's for an open file</li>
+</ul></li>
+<li>C-x 5 2
+<ul class="org-ul">
+<li>to open a new frame</li>
+</ul></li>
+<li>C-x 5 f [title of your new frame]
+<ul class="org-ul">
+<li>open a frame on particular name of file.</li>
+</ul></li>
+<li>C-x 5 b
+<ul class="org-ul">
+<li>to move to a buffer and put it in a new frame.</li>
+</ul></li>
+<li>C-x 5 o
+<ul class="org-ul">
+<li>to go to another frame</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgc9dc3d4" class="outline-2">
+<h2 id="orgc9dc3d4"><span class="section-number-2">13.</span> Selecting words or sexps without moving the cursor</h2>
+<div class="outline-text-2" id="text-13">
+<ul class="org-ul">
+<li>C-M-SPC M-w       - This does not move the cursor.</li>
+
+<li>C-M-SPC C-M-SPC M-w - If you want to select the next two words after point.</li>
+
+<li>C-M-SPC C-w, or (better with) C-M-k - Killing next word or sexp.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga33025c" class="outline-2">
+<h2 id="orga33025c"><span class="section-number-2">14.</span> DELETE COMMANDS:</h2>
+<div class="outline-text-2" id="text-14">
+<ul class="org-ul">
+<li>SIFT-C-BS
+<ul class="org-ul">
+<li>Delete entire line the point is on</li>
+</ul></li>
+<li>C-0 C-k or C-u 0 C-k
+<ul class="org-ul">
+<li>Delete from point to beginning of line</li>
+</ul></li>
+
+<li>C-u BS
+<ul class="org-ul">
+<li>will delete 4 spaces backwards.</li>
+</ul></li>
+</ul>
+
+<p>
+Equivalent bindings would be:
+</p>
+
+<p>
+M-4 &lt;backspace&gt;
+C-4 &lt;backspace&gt;
+</p>
+
+<ul class="org-ul">
+<li>M-\
+<ul class="org-ul">
+<li>Delete all SPACES &amp; TABS around point (delete-horizontal-space).</li>
+</ul></li>
+
+<li>M-SPC
+<ul class="org-ul">
+<li>Deletes all spaces and tabs around point, leaving one space</li>
+</ul></li>
+
+<li>M-^
+<ul class="org-ul">
+<li>(delete-indentation) command for joining multiple lines into one line</li>
+</ul></li>
+
+<li>C-x C-o
+<ul class="org-ul">
+<li>get rid off all blank line around current line except one.</li>
+</ul></li>
+
+<li>M-x (delete-whitespace-rectangle)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgaa89234" class="outline-2">
+<h2 id="orgaa89234"><span class="section-number-2">15.</span> KILL COMMANDS:</h2>
+<div class="outline-text-2" id="text-15">
+<ul class="org-ul">
+<li>M-BS
+<ul class="org-ul">
+<li>WORD LEFT of cursor</li>
+</ul></li>
+
+<li>M-d
+<ul class="org-ul">
+<li>WORD RIGHT of cursor</li>
+</ul></li>
+
+<li>M-z CHAR
+<ul class="org-ul">
+<li>from cursor upto char</li>
+</ul></li>
+
+<li>C-k
+<ul class="org-ul">
+<li>from cursor to End of Line</li>
+</ul></li>
+
+<li>M-w
+<ul class="org-ul">
+<li>just to KILL RING</li>
+</ul></li>
+
+<li>C-w
+<ul class="org-ul">
+<li>REGION</li>
+</ul></li>
+
+<li>C-y
+<ul class="org-ul">
+<li>YANK LAST KILL</li>
+</ul></li>
+<li>C-t
+<ul class="org-ul">
+<li>Transpose two characters on either side of
+point and move point forward by one</li>
+</ul></li>
+<li>M-y
+<ul class="org-ul">
+<li>REPLACE YANKED with PREVIOUS KILL</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgdd9a167" class="outline-2">
+<h2 id="orgdd9a167"><span class="section-number-2">16.</span> REPEAT ANY COMMAND:</h2>
+<div class="outline-text-2" id="text-16">
+<ul class="org-ul">
+<li>C-x z</li>
+
+<li>C-u C-n C-x z z z z     - next-line CHAIN</li>
+
+<li>C-/ C-x z z z z         - UNDO-CHAIN</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org8849a49" class="outline-2">
+<h2 id="org8849a49"><span class="section-number-2">17.</span> SPELL CHECKING:</h2>
+<div class="outline-text-2" id="text-17">
+<ul class="org-ul">
+<li>M-$
+<ul class="org-ul">
+<li>ispell PROGRAM sati</li>
+</ul></li>
+<li>M-x flyspell-mode</li>
+</ul>
+
+<p>
+#+THEME
+</p>
+<ul class="org-ul">
+<li>M-x load-theme</li>
+<li>M-x disable-theme</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org82b0ccf" class="outline-2">
+<h2 id="org82b0ccf"><span class="section-number-2">18.</span> UNDO-REDO:</h2>
+<div class="outline-text-2" id="text-18">
+<ul class="org-ul">
+<li>C-/       - UNDO</li>
+
+<li>C-g C-/   - undo-redo 	REDO.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Likhon Barai</p>
+<p class="date">Created: 2022-10-23 Sun 19:21</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

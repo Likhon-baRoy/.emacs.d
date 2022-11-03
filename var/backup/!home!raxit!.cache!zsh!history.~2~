@@ -1,0 +1,94 @@
+curl -LO larbs.xyz/larbs.sh
+sudo sh larbs.sh
+localectl set-x11-keymap us,bd "" ,bangla grp:win_space_toggle
+localectl set-x11-keymap us,bd "" , grp:alt_space_toggle
+p -S noto-fonts
+nvim .config/shell/aliasrc
+nvim fonts.conf
+hostnamectl set-hostname art
+systemctl --user retsart pulseaudio
+scrot -d 3
+systemctl --user status pipewire pipewire-pulse pipewire-media-session
+systemctl --user status pipewire-media-session
+p -R wireplumber
+p -Rdd wireplumber
+p -S pipewire-media-session
+systemctl --user status pipewire-media-session
+p -R wireplumber
+systemctl --user enable --now pipewire-media-session\
+systemctl --user disable --now wireplumber
+systemctl --user enable --now pipewire-media-session
+systemctl --user status pipewire
+systemctl --user reload pipewire
+systemctl --user restart pipewire
+scrot -d 3
+arecord -l
+ffmpeg -f alsa -i hw:0 -t 10 output.wav
+v .cache/zsh/history
+wc .zprofile
+bc -lq
+yay install xampp
+wget https://sourceforge.net/projects/xampp/files/latest/download
+sudo chmod +x xampp-linux-x64-8.1.6-0-installer.run
+sudo ./xampp-linux-x64-8.1.6-0-installer.run
+sudo /opt/lampp/lampp restart
+p -S libxcrypt-compat
+sudo /opt/lampp/lampp start
+p -S zathura-pdf-mupdf
+
+test -d /opt/bitnami/mariadb && echo "MariaDB" || echo "MySQL"
+mysql -h 127.0.0.1 -P 3306 -u root -p <database>
+
+sudo umount /dev/sdb
+sudo fdisk -l
+sudo wipefs --all /dev/sdb
+sudo fdisk -l
+sudo cfdisk /dev/sdb
+sudo fdisk -l
+sha256sum -b garuda-dr460nized-linux-zen-220808.iso
+sudo fdisk -l
+sudo dd bs=4M if=/home/raxit/iso/garuda-dr460nized-linux-zen-220808.iso of=/dev/sdb status=progress && sync
+clear; len=45; for x in $(seq 1 $len); do y=$(seq -s - 1 $((x+1)) | tr -d [[:digit:]] | tr '-' '1'); printf "%$((len+1))s x %s = %s\n" $y $y "$(echo "$y * $y" | BC_LINE_LENGTH=0 bc)"; done
+
+yay -S ttf-fantasque-sans-mono
+p -Ss font
+v .cache/zsh/history
+ffmpeg -i 1.mp4 -qscale 0 1.mpg
+ffmpeg -i 2.mp4 -qscale 0 2.mpg
+cat 1.mpg 2.mpg | ffmpeg -f mpeg -i - -qscale 0 -vcodec mpeg4 output.mp4
+
+localectl list-x11-keymap-options | grep -i f12
+localectl list-x11-keymap-options | grep -i win
+localectl list-keymaps
+localectl list-keymaps | grep -i bd
+localectl status | grep -i x11 | awk '{print $4}'
+localectl status | grep -i x11
+setxkbmap -query | grep layout
+
+xkbcomp -xkb $DISPLAY xkbmap\
+cat xkbmap
+
+where dwm
+find -type f -name config.h
+
+xmodmap -pm
+xmodmap -pke > ~/.xmodmap.bak
+xmodmap .Xmodmap
+
+cd .local/src/dwm
+make
+sudo make install
+
+localectl status
+localectl list-keymaps
+
+localectl list-x11-keymap-options
+localectl set-x11-keymap us,bd '' ,probhat grp:lctrl_lwin_toggle
+xmodmap .Xmodmap
+localectl list-x11-keymap-options
+
+for file in *.vgz; do ffmpeg -i $file -q:a 0 ${file:r}.opus; done
+
+fc-cache -f -v
+r
+r

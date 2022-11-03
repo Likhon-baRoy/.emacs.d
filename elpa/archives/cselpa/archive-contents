@@ -1,0 +1,2 @@
+
+(1 (term-title . [(20220105 6) nil "Synchronize Emacs frame title with terminal title" single ((:commit . "0a891957d4a6e2afc4176b555fc790d4c5bacd05"))]) (term-keys . [(20220815 1706) ((emacs (24 3))) "Lossless keyboard input in a terminal emulator" tar ((:commit . "c6b01eed4c44ee45b8bbe7f2f2dee3b1f9119469") (:keywords "terminals") (:authors ("Vladimir Panteleev")) (:maintainer "Vladimir Panteleev") (:url . "https://github.com/CyberShadow/term-keys"))]))

@@ -1,0 +1,113 @@
+;;===================
+;; Azhar Ibn Mostafiz
+;;===================
+
+;;========== MELPA package manager ==========
+(require 'package)
+(add-to-list 'package-archives
+  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
+;; ========= Enable IDO mode ==========
+(setq ido-enable-flex-matching t)
+  (setq ido-everywhere t)
+  (ido-mode 1)
+
+;;========== Font size =========
+(set-face-attribute 'default nil :height 130)
+
+;;========== tramp stuff ===========
+(require 'tramp)
+(setq tramp-default-method "ssh")
+
+;;========== Pop Up ===========
+(add-to-list 'load-path "~/.emacs.d/plugins/popup-el/")
+
+
+;;========== Auto Complete ======
+(add-to-list 'load-path "~/.emacs.d/plugins/auto-complete/")
+(require 'auto-complete)
+(global-auto-complete-mode t)
+
+
+;;========== js2-mode ==========
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
+;;========== Web Mode =========
+(add-to-list 'load-path "~/.emacs.d/plugins/web-mode/")
+(require 'web-mode)
+ (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+ (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+ (add-to-list 'auto-mode-alist '("\\.jsp\\'" . web-mode))
+ (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+ (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+ (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+ (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+ (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+ (add-to-list 'auto-mode-alist '("\\.hjs?\\'" . web-mode))
+ (add-to-list 'auto-mode-alist '("\\.php$" . web-mode))
+ (add-to-list 'auto-mode-alist '("\\.inc$" . web-mode))
+
+
+;;========== Org Mode ==========
+(require 'org)
+(setq org-directory "~/aim_org/")
+(add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\|txt\\)$" . org-mode))
+;;
+;;
+(setq org-mobile-directory "~/aim_org/MobileOrg")
+;;
+;; this is the org file where the data captured in the mobile device will be
+;; pulled to your computer's org files. This file will live inside my org folder.
+;; this file should not be created, it will be created automatically by org-mode.
+(setq org-mobile-inbox-for-pull "~/aim_org/mobile-inbox.org")
+
+
+;;
+;; Standard key bindings
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
+
+;;org clocking
+(setq org-clock-persist 'history)
+     (org-clock-persistence-insinuate)
+
+;;M-x gtd to open gtd quickly
+(defun gtd ()
+   (interactive)
+   (find-file "~/aim_org/aim-gtd.org")
+ )
+
+;;Enable Org Capture
+(setq org-default-notes-file (concat org-directory "aim-notes.org"))
+     (define-key global-map "\C-cc" 'org-capture)
+
+;; Define Capture Template
+(setq org-capture-templates
+      '(("t" "Todo" entry (file+headline "~/aim_org/aim-gtd.org" "Tasks")
+             "* TODO %?\n  %i\n  %a")
+	("e" "Events" entry (file+headline "~/aim_org/aim-gtd.org" "Events")
+             "* APPT %?\n  %i\n  %a")
+	("p" "Projects" entry (file+headline "~/aim_org/aim-gtd.org" "Projects")
+             "* TODO %?\n  %i\n  %a")
+	("s" "Study" entry (file+headline "~/aim_org/aim-gtd.org" "Study")
+             "* TODO %?\n  %i\n  %a")
+	("w" "Writing" entry (file+headline "~/aim_org/aim-gtd.org" "Writing")
+             "* TODO %?\n  %i\n  %a")
+	("n" "Notes" entry (file+datetree "~/aim_org/aim-notes.org")
+             "* %?\nEntered on %U\n  %i\n  %a")
+        ("j" "Journal" entry (file+datetree "~/aim_org/aim-journal.org")
+             "* %?\nEntered on %U\n  %i\n  %a")))
+
+(setq org-agenda-files
+      (list "~/aim_org/aim-gtd.org"))
+
+
+;;========== Emacs MultiMedia System setup ==========
+(add-to-list 'load-path "~/.emacs.d/plugins/emms/lisp/")
+(require 'emms-setup)
+        (emms-standard)
+        (emms-default-players)
+
+;;========== Open a file on startup ==========
+(find-file "~/aim_org/habit.org")

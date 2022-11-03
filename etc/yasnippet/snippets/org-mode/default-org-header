@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: default org header
+# type: snippet
+# key: header
+# --
+## -*- mode: org -*-
+-+TITLE:      ${1:title}
+#+PRIORITIES: A C D
+#+STARTUP:    overview
+$0
