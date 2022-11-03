@@ -1,7 +1,0 @@
-            # -*- mode: snippet -*-
-            # name: org-reveal-speaker-notes
-            # key: <n
-            # --
-            #+BEGIN_NOTES
-            $1
-    #+END_NOTE  S

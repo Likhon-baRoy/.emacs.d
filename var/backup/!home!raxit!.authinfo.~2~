@@ -1,5 +1,0 @@
-machine smtp.gmail.com login likhonhere007 port 587 password likhon007lidan009
-machine imap.gmail.com login likhonhere007 port 993 password likhon007lidan009
-
-machine smtp.gmail.com login lidansuidan007 port 587 password lidan009likhon007
-machine imap.gmail.com login lidansuidan007 port 993 password lidan009likhon007
