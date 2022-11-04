@@ -1,20 +1,14 @@
-#+TITLE: MY Dream Emacs Configuration
-#+AUTHOR: Likhon Barai
+* Likhon's GNU Emacs Configuration
 [[https://www.gnu.org/licenses/gpl-3.0.txt][https://img.shields.io/badge/license-GPL_3-green.svg]]
 
 #+begin_quote
 “Precise language is not the problem.  Clear language is the problem.” ~ Richard Feynman
 #+end_quote
 
-Here's my Emacs setup that I use on the daily.
+This repository contains my personal configuration for =GNU Emacs= that I use on
+the daily and port around from system to system with me.
 
 The configuration depends on [[file:init.el][init.el]]  and [[file:early-init.el][early-init.el]] (sets up a few initial GUI settings), bootstraps [[https://github.com/jwiegley/use-package][use-package]]. and loads [[file:init.el][init.el]], which is where the majority of the configuration magic happens.
-
-* Likhon's GNU Emacs Configuration
-
-This repository contains my personal configuration for =GNU Emacs= that I use on
-the daily and port around from system to system with me.  This is the second
-repository I clone — after [[https://github.com/sergeyklay/dotfiles][my dotfiles]] — when settling in on a new system.
 
 This configuration uses default-style keybindings and known to work with GNU
 Emacs 27.1 and later.
