@@ -5,6 +5,8 @@
 “Precise language is not the problem.  Clear language is the problem.” ~ Richard Feynman
 #+end_quote
 
+Welcome to the /Emacs Of Dreams/. Wait no, I meant the *Emacs Operating System*.
+
 This repository contains my personal configuration for =GNU Emacs= that I use on
 the daily and port around from system to system with me.
 
