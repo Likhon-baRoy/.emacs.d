@@ -1,2 +1,43 @@
 #+TITLE: MY Dream Emacs Configuration
 #+AUTHOR: Likhon Barai
+[[https://www.gnu.org/licenses/gpl-3.0.txt][https://img.shields.io/badge/license-GPL_3-green.svg]]
+[[https://github.com/Likhon-baRoy/.emacs.d/actions][https://github.com/Likhon-baRoy/.emacs.d/workflows/build/badge.svg]]
+
+#+begin_quote
+“Precise language is not the problem.  Clear language is the problem.”
+                                                        ~ Richard Feynman
+#+end_quote
+
+Here's my Emacs setup that I use on the daily.
+
+The configuration depends on [[file:init.el][init.el]]  and [[file:early-init.el][early-init.el]] (sets up a few initial GUI settings), bootstraps [[https://github.com/jwiegley/use-package][use-package]]. and loads [[file:init.el][init.el]], which is where the majority of the configuration magic happens.
+
+* Likhon's GNU Emacs Configuration
+
+This repository contains my personal configuration for =GNU Emacs= that I use on
+the daily and port around from system to system with me.  This is the second
+repository I clone — after [[https://github.com/sergeyklay/dotfiles][my dotfiles]] — when settling in on a new system.
+
+This configuration uses default-style keybindings and known to work with GNU
+Emacs 27.1 and later.
+
+** Prerequisites
+
+This project relies on the following list of applications:
+
+- [[http://ctags.sourceforge.net][Exuberant Ctags (=ctags=)]]
+- [[https://github.com/sharkdp/fd][Fast and user-friendly alternative to find (=fd=)]]
+- [[https://www.gnu.org/software/global][GNU GLOBAL (=global=)]]
+- [[https://git-scm.com][Git (=git=)]]
+- [[https://www.gnupg.org][GnuPG (=gpg=)]]
+- [[https://hunspell.github.io][Hunspell (=hunspell=)]] with [[https://stackoverflow.com/a/9436234/1661465][dictionaries]]
+- [[https://www.gnu.org/software/idutils/][ID Utils (=mkid=, =lid=, =fid=, =fnid=, =xtokid=)]]
+- [[https://pandoc.org][Pandoc (=pandoc=)]]
+- [[https://www.passwordstore.org][Password Store (=pass=)]]
+- [[http://www.sbcl.org][Steel Bank Common Lisp (=sbcl=)]]
+- [[https://github.com/BurntSushi/ripgrep][ripgrep (=rg=)]]
+
+** License
+
+This project is open source software licensed under the [[https://github.com/sergeyklay/bnf-mode/blob/master/LICENSE][GNU General Public Licence version 3]].
+Copyright © 2019, 2020, Free Software Foundation, Inc.
