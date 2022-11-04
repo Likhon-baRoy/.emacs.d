@@ -5,7 +5,8 @@
 
 #+begin_quote
 “Precise language is not the problem.  Clear language is the problem.”
-                                                        ~ Richard Feynman
+                                                        
+ Richard Feynman
 #+end_quote
 
 Here's my Emacs setup that I use on the daily.
@@ -40,4 +41,5 @@ This project relies on the following list of applications:
 ** License
 
 This project is open source software licensed under the [[https://github.com/sergeyklay/bnf-mode/blob/master/LICENSE][GNU General Public Licence version 3]].
+
 Copyright © 2019, 2020, Free Software Foundation, Inc.
