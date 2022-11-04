@@ -37,9 +37,8 @@
 ;;; Code:
 
 ;; Defer garbage collection further back in the startup process
-(setq gc-cons-threshold most-positive-fixnum) ; 2^61 bytes
-;; (setq gc-cons-threshold most-positive-fixnum ; 2^61 bytes
-;;       gc-cons-percentage 0.6)
+(setq gc-cons-threshold most-positive-fixnum ; 2^61 bytes
+      gc-cons-percentage 0.6)
 
 ;; (set-frame-parameter nil 'fullscreen 'fullheight)
 ;; (setq package-enable-at-startup nil) ; Don't do it immediately
@@ -50,7 +49,6 @@
  inhibit-default-init t
  inhibit-startup-buffer-menu t      ; stop `list-buffers' from showing when opening multiple files.
  )
-
 
 ;; UnsetFNHA
 (defvar file-name-handler-alist-original file-name-handler-alist)
