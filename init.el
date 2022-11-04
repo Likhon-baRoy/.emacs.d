@@ -819,7 +819,7 @@ If it is at the beginning of the line it stays there."
 (save-place-mode 1)
 (show-paren-mode 1)         ; Highlight matching parenthesis
 (global-auto-revert-mode 1) ; Automatically revert a buffer when it changes on disk
-(fringe-mode '(8 . 0))      ; Enable fringe on the left for git-gutter-fringe+
+;; (fringe-mode '(8 . 0))      ; Enable fringe on the left for git-gutter-fringe+
 (global-subword-mode 1)     ; Iterate through CamelCase words
 (electric-pair-mode t)      ; Enable Matching delimeters
 (electric-indent-mode nil)  ; Auto indentation
@@ -1005,6 +1005,7 @@ If it is at the beginning of the line it stays there."
 ;; git submodule init
 ;; git submodule update
 
+(require 'cl)
 (require 'package)
 ;; Configure Package Manager
 (unless (bound-and-true-p package--initialized)
@@ -1423,29 +1424,37 @@ If it is at the beginning of the line it stays there."
          ("C--" . er/contract-region)
          ("C-(" . er/mark-outside-pairs)))
 ;; ───────────────────────────────── FLY-CHECK ─────────────────────────────────
+
+;; Explanation-Mark !
+;; (when window-system
+;;   (define-fringe-bitmap 'flycheck-fringe-bitmap-double-arrow
+;;     [0 24 24 24 24 24 24 0 0 24 24 0 0 0 0 0 0]))
+
+;; BIG BitMap-Arrow
+;; (when (fboundp 'define-fringe-bitmap)
+;;   (define-fringe-bitmap 'flycheck-fringe-bitmap-double-arrow
+;;     [0 0 0 0 0 4 12 28 60 124 252 124 60 28 12 4 0 0 0 0]))
+
 (use-package flycheck
-  :diminish
-  :hook
-  (prog-mode . flycheck-mode)
+  :hook (prog-mode . flycheck-mode)
+  :bind (("M-g M-j" . flycheck-next-error)
+         ("M-g M-k" . flycheck-previous-error)
+         ("M-g M-l" . flycheck-list-errors))
   :config
-  (setq flycheck-indication-mode 'right-fringe)
-  ;; Set fringe style
+  (setq flycheck-indication-mode 'right-fringe
+        flycheck-check-syntax-automatically '(save mode-enabled))
+  ;; Small BitMap-Arrow
   (when (fboundp 'define-fringe-bitmap)
     (define-fringe-bitmap 'flycheck-fringe-bitmap-double-arrow
       [16 48 112 240 112 48 16] nil nil 'center))
-
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
-
-  :bind
-  ((:map flycheck-error-list-mode-map
-	     ("q" . delete-window)
-	     ("j" . flycheck-error-list-next-error)
-	     ("k" . flycheck-error-list-previous-error)))
   :custom-face
   (flycheck-warning ((t (:underline (:color "#fabd2f" :style line :position line)))))
   (flycheck-error ((t (:underline (:color "#fb4934" :style line :position line)))))
   (flycheck-info ((t (:underline (:color "#83a598" :style line :position line))))))
+
+(use-package flycheck-popup-tip
+  :config
+  (add-hook 'flycheck-mode-hook 'flycheck-popup-tip-mode))
 
 (use-package flycheck-clang-tidy
   :after flycheck
@@ -1460,10 +1469,12 @@ If it is at the beginning of the line it stays there."
 
 ;; code folding
 (add-hook 'prog-mode-hook 'hs-mode-and-hide)
-;; (global-set-key (kbd "C-c h") 'hs-hide-all)
-;; (global-set-key (kbd "C-c s") 'hs-show-all)
-(global-set-key (kbd "C-<tab>") 'hs-toggle-hiding)  ; fold the current section
-(global-set-key (kbd "<backtab>") 'hs-hide-level)  ; fold the sub sections of the current section
+(global-set-key (kbd "C-c h") 'hs-hide-all)
+(global-set-key (kbd "C-c s") 'hs-show-all)
+(global-set-key (kbd "S-<backspace>") 'hs-hide-block)
+(global-set-key (kbd "C-<backspace>") 'hs-show-block)
+(global-set-key (kbd "<backtab>") 'hs-toggle-hiding) ; fold the current section
+(global-set-key (kbd "C-<tab>") 'hs-hide-level) ; fold the sub sections of the current section
 
 ;; Center text in the frame, looks nice ;)
 (use-package olivetti
@@ -1473,14 +1484,6 @@ If it is at the beginning of the line it stays there."
   :hook (Info-mode . olivetti-mode)
   :config
   (setq olivetti-body-width 130))
-
-;; ─────────────────────────────────── C/C++ ─────────────────────────────────── ;;
-;; (use-package flycheck-clang-analyzer
-;;   :config
-;;   (with-eval-after-load 'flycheck
-;;     (require 'flycheck-clang-analyzer)
-;;      (flycheck-clang-analyzer-setup)))
-
 ;; ──────────────────────────────────── SHELL ───────────────────────────────────
 (setq eshell-prompt-regexp "^[^#$\n]*[#$] "
       eshell-prompt-function
@@ -1553,9 +1556,9 @@ If it is at the beginning of the line it stays there."
                                   company-dabbrev-code))))
 
 (use-package company-shell
-  :config
-  (require 'company)
-  (add-hook 'shell-mode-hook 'shell-mode-company-init))
+:config
+(require 'company)
+(add-hook 'shell-mode-hook 'shell-mode-company-init))
 
 ;; Required for proportional font
 (use-package company-posframe
@@ -1606,7 +1609,6 @@ If it is at the beginning of the line it stays there."
 (add-hook 'emacs-startup-hook
           (lambda ()
             (setq file-name-handler-alist doom--file-name-handler-alist)))
-
 
 ;; InitPrivate
 ;; Load init-private.el if it exists
