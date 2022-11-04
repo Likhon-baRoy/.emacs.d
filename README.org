@@ -1,7 +1,6 @@
 #+TITLE: MY Dream Emacs Configuration
 #+AUTHOR: Likhon Barai
 [[https://www.gnu.org/licenses/gpl-3.0.txt][https://img.shields.io/badge/license-GPL_3-green.svg]]
-[[https://github.com/Likhon-baRoy/.emacs.d/actions][https://github.com/Likhon-baRoy/.emacs.d]]
 
 #+begin_quote
 “Precise language is not the problem.  Clear language is the problem.”                                                       
