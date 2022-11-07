@@ -67,13 +67,13 @@
 ;; Suppress the "package cl is deprecated" warning
 (setq byte-compile-warnings '(cl-functions))
 
+;; Suppress warnings and errors during asynchronous native compilation
+(setq native-comp-async-report-warnings-errors nil)
+
 ;; Resizing the Emacs frame can be a terribly expensive part of changing the
 ;; font. By inhibiting this, we easily halve startup times with fonts that are
 ;; larger than the system default.
 (setq frame-inhibit-implied-resize t)
-
-;; Suppress warnings and errors during asynchronous native compilation
-(setq native-comp-async-report-warnings-errors nil)
 
 ;; Prevent unwanted runtime builds in gccemacs (native-comp); packages are
 ;; compiled ahead-of-time when they are installed and site files are compiled
