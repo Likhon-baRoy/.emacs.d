@@ -17,6 +17,19 @@ Emacs 27.1 and later.
 
 ** Prerequisites
 
+*** All the icons
+
+- Lets add a package. A good one to start with is all-the-icons. This installs a bunch of *icons* and *fonts* - no more blank squares anywhere.
+
+This particular package has a one-time setup step - go ahead and execute now so you never have to worry about it again.
+
+Do the following after opening your Emacs:
+1. press =M-x=
+2. now type: =all-the-icons-install-fonts=
+3. press /<Return>/Enter/ key to install.
+
+You should be good to go!
+
 This project relies on the following list of applications:
 
 - [[http://ctags.sourceforge.net][Exuberant Ctags (=ctags=)]]
