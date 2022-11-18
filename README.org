@@ -2,8 +2,7 @@
 [[https://www.gnu.org/licenses/gpl-3.0.txt][https://img.shields.io/badge/license-GPL_3-green.svg]]
 
 #+begin_quote
-“An infinite number of monkeys typing into GNU emacs would never make a good program.”\\
-——— Linus Torvalds
+“An infinite number of monkeys typing into GNU emacs would never make a good program.”\\——— Linus Torvalds
 #+end_quote
 
 Welcome to the /Emacs Of Dreams/. Wait no, I meant the *Emacs Operating System*.
@@ -18,7 +17,7 @@ Emacs 27.1 and later.
 
 ** Prerequisites
 *** All the icons
-Lets add a package. A good one to start with is all-the-icons. This installs a bunch of *icons* and *fonts* - no more blank squares anywhere.
+Lets add a package. A good one to start with is *all-the-icons*. This installs a bunch of *icons* and *fonts* - no more blank squares anywhere.
 
 This particular package has a one-time setup step - go ahead and execute now so you never have to worry about it again.
 
