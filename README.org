@@ -3,6 +3,7 @@
 
 #+begin_quote
 “An infinite number of monkeys typing into GNU emacs would never make a good program.”
+
 ——— Linus Torvalds
 #+end_quote
 #+begin_quote
