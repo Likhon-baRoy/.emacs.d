@@ -4,10 +4,7 @@
 #+begin_quote
 “An infinite number of monkeys typing into GNU emacs would never make a good program.”
 
-                                                                     ——— Linus Torvalds
-#+end_quote
-#+begin_quote
-“Precise language is not the problem.  Clear language is the problem.” ~ Richard Feynman
+——— Linus Torvalds
 #+end_quote
 
 Welcome to the /Emacs Of Dreams/. Wait no, I meant the *Emacs Operating System*.
