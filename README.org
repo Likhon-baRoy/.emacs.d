@@ -133,21 +133,17 @@ Here's how to do it across all 3 major operating systems:
 There are [[https://askubuntu.com/questions/33774/how-do-i-remap-the-caps-lock-and-ctrl-keys][many ways]] to accomplish this in Linux, but the easiest (and most repeatable) I've found is to use [[https://wiki.archlinux.org/index.php/Xmodmap][xmodmap]].  First, create a file named =.Xmodmap= in your home folder and populate it like so:
 
 #+begin_src
-
 clear lock
 clear control
 keycode 66 = Control_L
 add control = Control_L
 add Lock = Control_R
-
 #+end_src
 
 This replaces CapsLock with control and also replaces the Ctrl key on the right side with CapsLock just in case you ever need to use it.  Most login systems (GDM, KDM, etc) will load this file when you log in so you might not need to do anything extra for it to take effect, just log out and log back in again.  If that doesn't seem to work, you can add this line to one of your startup files (=.xinitrc=, =.profile=, window manager configuration, etc):
 
 #+begin_src sh
-
 xmodmap ~/.Xmodmap
-
 #+end_src
 
 This beautifully written *Replace CapsLock with CTRL* section credits to [[https://github.com/daviwil/emacs-from-scratch/blob/master/README.org][Emacs From Scratch]]
