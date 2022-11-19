@@ -1,6 +1,8 @@
 * Likhon's GNU Emacs Configuration
 [[https://www.gnu.org/licenses/gpl-3.0.txt][https://img.shields.io/badge/license-GPL_3-green.svg]]
 [[https://GitHub.com/Likhon-baRoy/.emacs.d][https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg]]
+
+[[https://GitHub.com/Likhon-baRoy/][http://ForTheBadge.com/images/badges/built-with-swag.svg]]
 #+html: <p><img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/Likhon-baRoy/.emacs.d?style=for-the-badge"></p>
 #+begin_quote
 “An infinite number of monkeys typing into GNU emacs would never make a good program.”\\
@@ -53,5 +55,3 @@ Copyright © 2019, 2020, Free Software Foundation, Inc.
 * :dizzy: Ask me anything! ✨
 #+html: <a href="../../issues/new">:speech_balloon: <b>Ask a question</b></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="../../issues?q=is%3Aissue+is%3Aclosed+sort%3Aupdated-desc">:book: <b>Read questions</b></a>
 /I get questions by email, occasionally. This way anyone can read the answer!/
-
-[[https://GitHub.com/Likhon-baRoy/][http://ForTheBadge.com/images/badges/built-with-swag.svg]]
