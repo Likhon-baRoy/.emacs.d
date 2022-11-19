@@ -13,15 +13,15 @@
 
 * Table of Contents                                                     :TOC:
 - [[#about][About]]
+  - [[#about-readme][About README]]
 - [[#installation][Installation]]
   - [[#further-updates][Further Updates]]
   - [[#contribution][Contribution]]
   - [[#special-thanks][Special Thanks]]
 - [[#prerequisites][Prerequisites]]
-- [[#ask-me-anything!][Ask Me Anything]]
+- [[#:dizzy: Ask Me Anything! ✨][Ask Me Anything]]
 
-
-☯ About
+* About
 Emacs changes how you *think* about programming.
 
 Emacs is *totally introspectable*. You can always find out 'what code runs when I press this button?'.
@@ -48,8 +48,9 @@ Emacs doesn't have a monopoly on good ideas, and there are other great tools out
 
 This beautifully written *About EMACS* section credits to [[https://github.com/remacs/remacs][Remacs]].
 
-* About README
+** About README
 Welcome to the /Emacs Of Dreams/. Wait no, I meant the *Emacs Operating System*
+
 [[./image-dired/ss1.png]][[./image-dired/ss2.png]]
 [[./image-dired/ss3.png]][[./image-dired/ss4.png]]
 
