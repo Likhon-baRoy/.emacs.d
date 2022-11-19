@@ -52,9 +52,24 @@ This beautifully written *About EMACS* section credits to [[https://github.com/r
 
 ** About README
 Welcome to the /Emacs Of Dreams/. Wait no, I meant the *Emacs Operating System*
+/here are some screenshots.../
+/A dashboard on startup can clean my mind.😌/
+[[./image-dired/ss-1.png]
 
-[[./image-dired/ss1.png]][[./image-dired/ss2.png]]
-[[./image-dired/ss3.png]][[./image-dired/ss4.png]]
+/Center text in the frame, looks nice ;) and =flycheck= with BitMap-Arrow on the right-fringe 😎/
+[[./image-dired/ss-2.png]
+
+/default Transparent mode 👍🏻/
+[[./image-dired/ss-3.png]
+
+/File navigation with Speed-bar/
+[[./image-dired/ss-4.png]
+
+/Org-mode feel :D/
+[[./image-dired/ss-5.png]
+
+/Company-mode with yasnippet 🔥/
+[[./image-dired/ss-6.png]
 
 This repository contains my personal configuration for =GNU Emacs= that I use on
 the daily and port around from system to system with me.

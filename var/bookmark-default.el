@@ -7,9 +7,4 @@
  (front-context-string . "** TODO Testing ")
  (rear-context-string)
  (position . 9))
-("2"
- (filename . "~/.emacs.d/mu4e/.mbsyncrc")
- (front-context-string . "Path ~/Maildir/a")
- (rear-context-string . "cc2-gmail-local\n")
- (position . 3152))
-)
+ )
