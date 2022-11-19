@@ -11,7 +11,7 @@
 ——— Linus Torvalds
 #+end_quote
 
-* About
+☯ About
 Emacs changes how you *think* about programming.
 
 Emacs is *totally introspectable*. You can always find out 'what code runs when I press this button?'.
@@ -41,7 +41,7 @@ This beautifully written *About EMACS* section credits to [[ttps://github.com/re
 [[./image-dired/ss1.png]][[./image-dired/ss2.png]]
 [[./image-dired/ss3.png]][[./image-dired/ss4.png]]
 
-* Table of Contents                                                     :TOC:
+☯ Table of Contents                                                     :TOC:
 - [[#about][About]]
 - [[#installation][Installation]]
   - [[#further-updates][Further Updates]]
@@ -62,13 +62,13 @@ Emacs 27.1 and later.
 
 #+html: <p><img alt="GitHub repo size" align="right" src="https://img.shields.io/github/repo-size/Likhon-baRoy/.emacs.d?color=blue&logo=github&style=for-the-badge"></p>
 
-* Installation
+☯ Installation
 [[https://GitHub.com/Likhon-baRoy/][http://ForTheBadge.com/images/badges/built-with-swag.svg]]
 
 1. Install [[https://www.gnu.org/software/emacs/][GNU Emacs]].
 2. Delete =~/.emacs= or =~/.emacs.d=, if you already have it.
-3. Clone this repo to =HOME= or =~/= path using git and update all the submodules.
-   Run this snippets on your terminal:
+3. Clone this repo to =HOME= or =~/= path using git and update all the submodules.\\
+   /Run this snippets on your terminal:/
 #+begin_src
 cd ~
 git clone https://github.com/Likhon-baRoy/.emacs.d.git
@@ -79,18 +79,18 @@ cd.emacs.d
 6. In your favorite browser, Ctrl-f Prerequisite through this README and follow the Prerequisite instructions.
 7. Restart Emacs and Start using your *Dream Emacs*! :tada:
 
-** Further Updates
+*☯ Further Updates
 I will be updating My-EMACS from time to time, it is best to =git pull= once a while to stay up to date.
 
 Please also execute ~git submodule update --recursive --remote~ to sync with all the submodules.
 
-** Contribution
+*☯ Contribution
 If you spotted a bug or you have any suggestions, please fill in an issue. If you have something to fix, feel free to create a pull request.
 
-** Special Thanks
+*☯ Special Thanks
 Everyone starts somewhere, and I started here.
 
-* Prerequisites
+☯ Prerequisites
 *** All the icons
 Lets add a package. A good one to start with is *all-the-icons*. This installs a bunch of *icons* and *fonts* - no more blank squares anywhere.
 
@@ -117,7 +117,7 @@ Also this project relies on the following list of applications:
 - [[http://www.sbcl.org][Steel Bank Common Lisp (=sbcl=)]]
 - [[https://github.com/BurntSushi/ripgrep][ripgrep (=rg=)]]
 
-* :dizzy: Ask me anything! ✨
+☯ :dizzy: Ask Me Anything! ✨
 #+html: <a href="../../issues/new">:speech_balloon: <b>Ask a question</b></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="../../issues?q=is%3Aissue+is%3Aclosed+sort%3Aupdated-desc">:book: <b>Read questions</b></a>
 /I get questions by email, occasionally. This way anyone can read the answer!/
 
@@ -126,7 +126,7 @@ Also this project relies on the following list of applications:
 Anything means *anything*. Personal questions. Money. Work. Life. Code.
 Cooking. Traveling. Sports. Teaching. Pokémon. Whatever. :joy:
 
-** :scroll: License
+*☯ :scroll: License
 
 This project is open source software licensed under the [[https://github.com/sergeyklay/bnf-mode/blob/master/LICENSE][GNU General Public Licence version 3]].
 
