@@ -49,6 +49,7 @@ Also this project relies on the following list of applications:
 This project is open source software licensed under the [[https://github.com/sergeyklay/bnf-mode/blob/master/LICENSE][GNU General Public Licence version 3]].
 
 Copyright © 2019, 2020, Free Software Foundation, Inc.
+
 #+BEGIN_CENTER
 :dizzy: Ask me anything! :sparkles:
 #+END_CENTER
