@@ -1,7 +1,9 @@
 * Likhon's GNU Emacs Configuration
 [[https://www.gnu.org/licenses/gpl-3.0.txt][https://img.shields.io/badge/license-GPL_3-green.svg]]
+
 [[https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg]]
-[[GitHub repo size][https://badges.hiptest.com:/github/repo-size/Likhon-baRoy/.emacs.d?style=social]]
+
+#+html: <p><img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/Likhon-baRoy/.emacs.d?style=for-the-badge"></p>
 
 #+begin_quote
 “An infinite number of monkeys typing into GNU emacs would never make a good program.”\\
