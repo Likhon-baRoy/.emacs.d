@@ -21,7 +21,7 @@
 - [[#prerequisites][Prerequisites]]
 - [[#recommendation][Recommendation]]
   - [[#replace-capslock-with-ctrl][Replace CapsLock with CTRL]]
-- [[#:dizzy:-ask-me-anything!-✨][Ask Me Anything]]
+- [[#ask-me-anything][Ask Me Anything]]
 
 * About
 Emacs changes how you *think* about programming.
@@ -150,9 +150,9 @@ xmodmap ~/.Xmodmap
 
 #+end_src
 
-This beautifully written *About EMACS* section credits to [[https://github.com/daviwil/emacs-from-scratch/blob/master/README.org][Emacs From Scratch]]
+This beautifully written *Replace CapsLock with CTRL* section credits to [[https://github.com/daviwil/emacs-from-scratch/blob/master/README.org][Emacs From Scratch]]
 
-* :dizzy: Ask Me Anything! ✨
+* Ask Me Anything!
 #+html: <a href="../../issues/new">:speech_balloon: <b>Ask a question</b></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="../../issues?q=is%3Aissue+is%3Aclosed+sort%3Aupdated-desc">:book: <b>Read questions</b></a>
 /I get questions by email, occasionally. This way anyone can read the answer!/
 
