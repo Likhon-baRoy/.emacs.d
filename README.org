@@ -1,8 +1,8 @@
 * Likhon's GNU Emacs Configuration
 [[https://www.gnu.org/licenses/gpl-3.0.txt][https://img.shields.io/badge/license-GPL_3-green.svg]]
 [[https://github.com/Likhon-baRoy/.emacs.d][https://img.shields.io/github/repo-size/quickgrid/Code-Lab]]
+
 [[https://github.com/Likhon-baRoy/.emacs.d][https://img.shields.io/github/repo-size/Likhon-baRoy/.emacs.d?color=g&logo=github&style=flat-square]]
-[[https://github.com/torvalds/linux.git | perl -ne 'print $1 if m!([^/]+/[^/]+?)(?:\.git)?$!' | xargs -I{} curl -s -k https://api.github.com/repos/'{}' | grep size][]]
 
 #+begin_quote
 “An infinite number of monkeys typing into GNU emacs would never make a good program.”\\
