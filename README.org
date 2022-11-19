@@ -19,7 +19,9 @@
   - [[#contribution][Contribution]]
   - [[#special-thanks][Special Thanks]]
 - [[#prerequisites][Prerequisites]]
-- [[#:dizzy: Ask Me Anything! ✨][Ask Me Anything]]
+- [[#recommendation][Recommendation]]
+  - [[#replace-capslock-with-ctrl][Replace CapsLock with CTRL]]
+- [[#:dizzy:-ask-me-anything!-✨][Ask Me Anything]]
 
 * About
 Emacs changes how you *think* about programming.
@@ -119,6 +121,37 @@ Also this project relies on the following list of applications:
 - [[http://www.sbcl.org][Steel Bank Common Lisp (=sbcl=)]]
 - [[https://github.com/BurntSushi/ripgrep][ripgrep (=rg=)]]
 
+* Recommendations
+Here are some general recommendations on Emacs usage that you might find helpful:
+
+** Replace CapsLock with CTRL
+Most people don't use the CapsLock key (unless you like YELLING ON THE INTERNET) so you can use this simple fix to replace it with the CTRL to make your Emacs life easier.  Doing this will prevent you from having to bend your pinky down all day long to hit all those fabled Emacs keybindings, allowing you to keep your hands on the home row of the keyboard.
+
+Here's how to do it across all 3 major operating systems:
+
+*Linux X11*
+There are [[https://askubuntu.com/questions/33774/how-do-i-remap-the-caps-lock-and-ctrl-keys][many ways]] to accomplish this in Linux, but the easiest (and most repeatable) I've found is to use [[https://wiki.archlinux.org/index.php/Xmodmap][xmodmap]].  First, create a file named =.Xmodmap= in your home folder and populate it like so:
+
+#+begin_src
+
+clear lock
+clear control
+keycode 66 = Control_L
+add control = Control_L
+add Lock = Control_R
+
+#+end_src
+
+This replaces CapsLock with control and also replaces the Ctrl key on the right side with CapsLock just in case you ever need to use it.  Most login systems (GDM, KDM, etc) will load this file when you log in so you might not need to do anything extra for it to take effect, just log out and log back in again.  If that doesn't seem to work, you can add this line to one of your startup files (=.xinitrc=, =.profile=, window manager configuration, etc):
+
+#+begin_src sh
+
+xmodmap ~/.Xmodmap
+
+#+end_src
+
+This beautifully written *About EMACS* section credits to [[https://github.com/daviwil/emacs-from-scratch/blob/master/README.org][Emacs From Scratch]]
+
 * :dizzy: Ask Me Anything! ✨
 #+html: <a href="../../issues/new">:speech_balloon: <b>Ask a question</b></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="../../issues?q=is%3Aissue+is%3Aclosed+sort%3Aupdated-desc">:book: <b>Read questions</b></a>
 /I get questions by email, occasionally. This way anyone can read the answer!/
@@ -128,7 +161,7 @@ Also this project relies on the following list of applications:
 Anything means *anything*. Personal questions. Money. Work. Life. Code.
 Cooking. Traveling. Sports. Teaching. Pokémon. Whatever. :joy:
 
-** :scroll: License
+* :scroll: License
 
 This project is open source software licensed under the [[https://github.com/sergeyklay/bnf-mode/blob/master/LICENSE][GNU General Public Licence version 3]].
 
