@@ -11,7 +11,7 @@
 ——— Linus Torvalds
 #+end_quote
 
-Welcome to the /Emacs Of Dreams/. Wait no, I meant the /*Emacs Operating System*/
+Welcome to the /Emacs Of Dreams/. Wait no, I meant the */Emacs Operating System/*
 
 This repository contains my personal configuration for =GNU Emacs= that I use on
 the daily and port around from system to system with me.
@@ -21,7 +21,7 @@ The configuration depends on [[file:init.el][init.el]]  and [[file:early-init.el
 This configuration uses default-style keybindings and known to work with GNU
 Emacs 27.1 and later.
 
-#+html: <p><img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/Likhon-baRoy/.emacs.d?color=b&logo=github&style=for-the-badge"></p>
+#+html: <p><img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/Likhon-baRoy/.emacs.d?color=blue&logo=github&style=for-the-badge"></p>
 
 ** Prerequisites
 *** All the icons
