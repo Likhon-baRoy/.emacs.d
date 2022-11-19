@@ -19,6 +19,13 @@
   - [[#contribution][Contribution]]
   - [[#special-thanks][Special Thanks]]
 - [[#prerequisites][Prerequisites]]
+  - [[#user-information][User Information]]
+  - [[#install-packages][Install Packages]]
+- [[#user-guidance][User Guidance]]
+- [[#custom-configurations][Custom Configurations]]
+  - [[#custom-key-bindings][Custom key bindings]]
+  - [[#custom-functions][Custom functions]]
+  - [[#custom-input-methods][Custom input methods]]
 - [[#recommendation][Recommendation]]
   - [[#replace-capslock-with-ctrl][Replace CapsLock with CTRL]]
 - [[#ask-me-anything][Ask Me Anything]]
@@ -26,7 +33,7 @@
 * About
 Emacs changes how you *think* about programming.
 
-Emacs is *totally introspectable*. You can always find out 'what code runs when I press this button?'.
+Emacs is *totally introspectable*. You can always find out /what code runs when I press this button?/.
 
 Emacs is an *incremental programming environment*. There's no edit-compile-run cycle. There isn't even an edit-run cycle. You can execute snippets of code and gradually turn them into a finished project. There's no distinction between your editor and your interpreter.
 
@@ -51,10 +58,8 @@ Emacs doesn't have a monopoly on good ideas, and there are other great tools out
 This beautifully written *About EMACS* section credits to [[https://github.com/remacs/remacs][Remacs]].
 
 ** About README
-Welcome to the /Emacs Of Dreams/. Wait no, I meant the *Emacs Operating System*.
-
-/here are some screenshots.../
-
+Welcome to the /Emacs Of Dreams/. Wait no, I meant the *Emacs Operating System*. \\
+/here are some screenshots.../ \\
 /A dashboard on startup can clean my mind/.😌
 
 [[./image-dired/ss-1.png]]
@@ -92,7 +97,7 @@ Emacs 27.1 and later.
 [[https://GitHub.com/Likhon-baRoy/][http://ForTheBadge.com/images/badges/built-with-swag.svg]]
 
 1. Install [[https://www.gnu.org/software/emacs/][GNU Emacs]].
-2. Delete =~/.emacs= or =~/.emacs.d=, if you already have it.
+2. Move =~/.emacs= or =~/.emacs.d=, if you already have it.
 3. Clone this repo to =HOME= or =~/= path using git and update all the submodules.\\
    /Run this snippets on your terminal:/
 #+begin_src
@@ -101,8 +106,8 @@ git clone https://github.com/Likhon-baRoy/.emacs.d.git
 cd.emacs.d
 #+end_src
 4. Ensure a stable connection to Melpa Packages, then open Emacs.
-5. Enter =y= when prompted with =Auto-update packages now?=, wait for all packages to install. (Ignore the warnings on the first launch.)
-6. In your favorite browser, Ctrl-f Prerequisite through this README and follow the Prerequisite instructions.
+5. Enter =y= when prompted with =Auto-update packages now?=, wait for all packages to install. /(Ignore the warnings on the first launch.)/
+6. In your favorite browser, =Ctrl-f Prerequisite= through this README and follow the *Prerequisite* instructions.
 7. Restart Emacs and Start using your *Dream Emacs*! :tada:
 
 ** Further Updates
@@ -117,22 +122,21 @@ If you spotted a bug or you have any suggestions, please fill in an issue. If yo
 Everyone starts somewhere, and I started here.
 
 * Prerequisites
-*** All the icons
-Lets add a package. A good one to start with is *all-the-icons*. This installs a bunch of *icons* and *fonts* - no more blank squares anywhere.
 
-This particular package has a one-time setup step - go ahead and execute now so you never have to worry about it again.
+** User Information
+Please update this file your personal info.
+#+BEGIN_SRC emacs-lisp
+(setq user-full-name       "Likhon Barai"
+      user-login-name      "likhon"
+      user-real-login-name "raxit"
+      user-mail-address    "likhonhere007@gmail.com")
+#+END_SRC
 
-Do the following after opening your Emacs:
-1. press =M-x=
-2. now type: =all-the-icons-install-fonts=
-3. press /<Return>/Enter/ key to install.
-
-You should be good to go!
-
+** Install Packages
 Also this project relies on the following list of applications:
 
 - [[http://ctags.sourceforge.net][Exuberant Ctags (=ctags=)]]
-- [[https://github.com/sharkdp/fd][Fast and user-friendly alternative to find (=fd=)]]
+- [[https://www.jetbrains.com/lp/mono/][JetBrains Mono (=font=)]]
 - [[https://www.gnu.org/software/global][GNU GLOBAL (=global=)]]
 - [[https://git-scm.com][Git (=git=)]]
 - [[https://www.gnupg.org][GnuPG (=gpg=)]]
@@ -142,6 +146,117 @@ Also this project relies on the following list of applications:
 - [[https://www.passwordstore.org][Password Store (=pass=)]]
 - [[http://www.sbcl.org][Steel Bank Common Lisp (=sbcl=)]]
 - [[https://github.com/BurntSushi/ripgrep][ripgrep (=rg=)]]
+
+* User Guidance
+📝 *Note:* For beginners I'll using =Ctrl= as =C=, =Alt= as =M=, =Space= as =S= and =BackSpace= as =BS=. Because once you get familiar with this, it'll be more easier to understand. \\
+
+After installation process is done.  Whenever you open a files within Emacs, the whole file will be opened in folding mode.  Which you'll \ll obviously won't see until you find the shortcut key-binding.  There is a default feature for this which called =hs-mode= I just change some default key-bindings for more useful. \\
+*check this out:*
+#+begin_example
+C-c h (hide-all)
+C-c s (show-all)
+S-BS  (hide-block)
+C-BS  (show-block)
+S-TAB (toggle-hiding) - /fold the current section./
+C-TAB (hide-level) - /fold the sub sections of the current section./
+#+end_example
+
+* Custom Configurations
+Here is my some personal changes for *Emacs* which comes default with this configuration.
+** Custom key bindings
+
+#+BEGIN_SRC emacs-lisp
+;; Disable Ctrl-z.
+(global-unset-key "\^z")
+;; (global-set-key "\C-z" 'call-last-kbd-macro) ; call-last-kbd-macro frequently used key on a double key sequence (I think original is ^Xe)
+(global-set-key "\C-w" 'backward-kill-word)
+;; I use `C-h' for backspace in Emacs and move `help-command' elsewhere:
+(global-set-key "\^h" 'backward-delete-char)
+(define-key isearch-mode-map "\C-h" 'isearch-delete-char)
+(global-set-key (kbd "C-S-H") 'kill-whole-line)
+;; this lets us have long lines go off the side of the screen instead of hosing up the ascii art
+(global-set-key "\C-x\C-l" 'toggle-truncate-lines)
+(global-set-key "\C-c\C-d" "\C-a\C- \C-n\M-w\C-y")	; Duplicate a whole line
+(global-set-key (kbd "C-S-R") 'rename-file)
+(global-set-key "\C-cD" 'Delete-current-file)
+(global-set-key "\C-x\C-k" 'kill-region)
+(global-set-key "\C-c\C-k" 'kill-region)
+(global-set-key "\M-o"  'other-window)
+(global-set-key "\M-n"  'next-buffer)
+(global-set-key "\M-p"  'previous-buffer)
+(global-set-key (kbd "M-<tab>") 'company-complete-common-or-cycle)
+(global-set-key "\M-TAB"  'company-complete-common-or-cycle)
+(global-set-key (kbd "C-.") #'other-window)
+(global-set-key (kbd "C-,") #'prev-window)
+#+END_SRC
+
+** Custom functions
+
+#+BEGIN_SRC emacs-lisp
+;; Unfill paragraph
+;; Might be good. For instance for canceling all of the paragraph quickly or for commenting it away.
+(defun unfill-paragraph ()
+  "Convert a multi-line paragraph into a single line of text."
+  (interactive)
+  (let ((fill-column (point-max)))
+	(fill-paragraph nil)))
+;; Handy key definition
+(define-key global-map "\M-Q" 'unfill-paragraph)
+#+END_SRC
+
+- Now now, how much you like *transparency*?  With this config this method comes default. \\
+  you can *toggle* =on= / =off= *transparency* /using/ =C-c t=.
+
+#+BEGIN_SRC emacs-lisp
+;;________________________________________________________________
+;;    Transparent Emacs
+;;________________________________________________________________
+(set-frame-parameter (selected-frame) 'alpha '(85 . 50))
+(add-to-list 'default-frame-alist '(alpha . (85 . 50)))
+;; (set-frame-parameter (selected-frame) 'alpha '(<active> . <inactive>))
+;; (set-frame-parameter (selected-frame) 'alpha <both>)
+
+;; Use the following snippet after you’ve set the alpha as above to assign a toggle to “C-c t”:
+(defun toggle-transparency ()
+  "Crave for transparency!"
+  (interactive)
+  (let ((alpha (frame-parameter nil 'alpha)))
+    (set-frame-parameter
+     nil 'alpha
+     (if (eql (cond ((numberp alpha) alpha)
+                    ((numberp (cdr alpha)) (cdr alpha))
+                    ;; Also handle undocumented (<active> <inactive>) form.
+                    ((numberp (cadr alpha)) (cadr alpha)))
+              100)
+         '(85 . 50) '(100 . 100)))))
+(global-set-key (kbd "C-c t") 'toggle-transparency)
+#+END_SRC
+
+** Custom input methods
+
+Here's a input method for =Bengali= or =Bangla= language.  Which I used with =Probhat= key-layout.
+#+BEGIN_SRC emacs-lisp
+(setq default-input-method "bengali-probhat")
+(set-fontset-font "fontset-default" 'bengali (font-spec :family "Kalpurush" :size 16))
+
+(defun remove-quail-show-guidance ()
+  "Function for removing guidance."
+  nil)
+(defun remove-quail-completion ()
+  "Function for removing completion."
+  (quail-select-current))
+(defun bn-company-wordfreq ()
+  "Bangla auto-suggestion with company-wordfreq."
+  (interactive)
+  (advice-add 'quail-show-guidance :override #'remove-quail-show-guidance)
+  (advice-add 'quail-completion :override #'remove-quail-completion)
+  (setq ispell-local-dictionary "bengali")
+  (setq-local company-backends '(company-wordfreq))
+  (setq-local company-transformers nil))
+(add-hook 'text-mode-hook (lambda ()
+                            (setq-local company-backends '(company-wordfreq))
+                            (setq-local company-transformers nil)))
+#+END_SRC
 
 * Recommendations
 Here are some general recommendations on Emacs usage that you might find helpful:
