@@ -1,10 +1,7 @@
 * Likhon's GNU Emacs Configuration
-[[https://www.gnu.org/licenses/gpl-3.0.txt][https://img.shields.io/badge/license-GPL_3-green.svg?style=for-the-badge&logo=appveyor]]
+[[https://www.gnu.org/licenses/gpl-3.0.txt][https://img.shields.io/badge/license-GPL_3-green.svg?style=flat&logo=appveyor]]
 [[https://github.com/ellerbrock/open-source-badges/][https://badges.frapsoft.com/os/v1/open-source.png?v=103]]
 [[https://GitHub.com/Likhon-baRoy/][http://ForTheBadge.com/images/badges/built-with-swag.svg]]
-
-
-[[https://img.shields.io/github/repo-size/Likhon-baRoy/.emacs.d?style=for-the-badge]]
 
 #+begin_quote
 “An infinite number of monkeys typing into GNU emacs would never make a good program.”\\
