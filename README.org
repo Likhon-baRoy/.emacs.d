@@ -1,5 +1,64 @@
 * Likhon's GNU Emacs Configuration
 [[https://www.gnu.org/licenses/gpl-3.0.txt][https://img.shields.io/badge/license-GPL_3-green.svg]]
+
+[![Ask Me Anything !](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](https://GitHub.com/Naereen/ama)
+
+https://img.shields.io/github/repo-size/quickgrid/CodeLab
+[[https://github.com/Likhon-baRoy/.emacs.d][https://badges.hiptest.com:/github/repo-size/Likhon-baRoy/.emacs.d?style=social]]
+
+[[https://github.com/Likhon-baRoy/.emacs.d][https://img.shields.io/badge/repo-size/]]
+
+[[https://github.com/Likhon-baRoy/.emacs.d][https://img.shields.io/github/repo-size/Likhon-baRoy/.emacs.d?color=g&logo=github&style=flat-square]]
+
+#+begin_quote
+“An infinite number of monkeys typing into GNU emacs would never make a good program.”\\
+——— Linus Torvalds
+#+end_quote
+
+Welcome to the /Emacs Of Dreams/. Wait no, I meant the *Emacs Operating System*.
+
+This repository contains my personal configuration for =GNU Emacs= that I use on
+the daily and port around from system to system with me.
+
+The configuration depends on [[file:init.el][init.el]]  and [[file:early-init.el][early-init.el]] (sets up a few initial GUI settings), bootstraps [[https://github.com/jwiegley/use-package][use-package]]. and loads [[file:init.el][init.el]], which is where the majority of the configuration magic happens.
+
+This configuration uses default-style keybindings and known to work with GNU
+Emacs 27.1 and later.
+
+** Prerequisites
+*** All the icons
+Lets add a package. A good one to start with is *all-the-icons*. This installs a bunch of *icons* and *fonts* - no more blank squares anywhere.
+
+This particular package has a one-time setup step - go ahead and execute now so you never have to worry about it again.
+
+Do the following after opening your Emacs:
+1. press =M-x=
+2. now type: =all-the-icons-install-fonts=
+3. press /<Return>/Enter/ key to install.
+
+You should be good to go!
+
+Also this project relies on the following list of applications:
+
+- [[http://ctags.sourceforge.net][Exuberant Ctags (=ctags=)]]
+- [[https://github.com/sharkdp/fd][Fast and user-friendly alternative to find (=fd=)]]
+- [[https://www.gnu.org/software/global][GNU GLOBAL (=global=)]]
+- [[https://git-scm.com][Git (=git=)]]
+- [[https://www.gnupg.org][GnuPG (=gpg=)]]
+- [[https://hunspell.github.io][Hunspell (=hunspell=)]] with [[https://stackoverflow.com/a/9436234/1661465][dictionaries]]
+- [[https://www.gnu.org/software/idutils/][ID Utils (=mkid=, =lid=, =fid=, =fnid=, =xtokid=)]]
+- [[https://pandoc.org][Pandoc (=pandoc=)]]
+- [[https://www.passwordstore.org][Password Store (=pass=)]]
+- [[http://www.sbcl.org][Steel Bank Common Lisp (=sbcl=)]]
+- [[https://github.com/BurntSushi/ripgrep][ripgrep (=rg=)]]
+
+** License
+
+This project is open source software licensed under the [[https://github.com/sergeyklay/bnf-mode/blob/master/LICENSE][GNU General Public Licence version 3]].
+
+Copyright © 2019, 2020, Free Software Foundation, Inc.
+* Likhon's GNU Emacs Configuration
+[[https://www.gnu.org/licenses/gpl-3.0.txt][https://img.shields.io/badge/license-GPL_3-green.svg]]
 [[https://github.com/Likhon-baRoy/.emacs.d][https://badges.hiptest.com:/github/repo-size/Likhon-baRoy/.emacs.d?style=social]]
 
 [[https://github.com/Likhon-baRoy/.emacs.d][https://img.shields.io/badge/repo-size/]]
