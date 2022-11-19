@@ -3,7 +3,7 @@
 [[https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg]]
 #+html: <p><img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/Likhon-baRoy/.emacs.d?style=for-the-badge"></p>
 
-<a href="../../issues/new">:speech_balloon: Ask a question</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="../../issues?q=is%3Aissue+is%3Aclosed+sort%3Aupdated-desc">:book: Read questions</a>
+#+html: <a href="../../issues/new">:speech_balloon: Ask a question</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="../../issues?q=is%3Aissue+is%3Aclosed+sort%3Aupdated-desc">:book: Read questions</a>
 #+begin_quote
 “An infinite number of monkeys typing into GNU emacs would never make a good program.”\\
 ——— Linus Torvalds
