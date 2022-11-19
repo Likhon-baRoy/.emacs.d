@@ -1,1 +1,1 @@
-("~/.emacs.d/" "~/wrx/" "~/draco-emacs/" "~/arif.emacs.d/")
+("~/wrx/" "~/emacs/zoliky-emacs/" "~/" "~/emacs/draco-emacs/" "~/Downloads/.emacs.d/" "~/.emacs.d/" "~/Downloads/.emacs.d/.emacs.d/" "~/yt/.emacs.d/")

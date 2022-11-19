@@ -1,0 +1,1777 @@
+#+title:                 ef-themes: colorful and legible themes
+#+author:                Protesilaos Stavrou
+#+email:                 info@protesilaos.com
+#+language:              en
+#+options:               ':t toc:nil author:t email:t num:t
+#+startup:               content
+#+macro:                 stable-version 0.9.0
+#+macro:                 release-date 2022-10-28
+#+macro:                 development-version 0.10.0-dev
+#+export_file_name:      ef-themes.texi
+#+texinfo_filename:      ef-themes.info
+#+texinfo_dir_category:  Emacs misc features
+#+texinfo_dir_title:     Ef-Themes: (ef-themes)
+#+texinfo_dir_desc:      Colorful and legible themes
+#+texinfo_header:        @set MAINTAINERSITE @uref{https://protesilaos.com,maintainer webpage}
+#+texinfo_header:        @set MAINTAINER Protesilaos Stavrou
+#+texinfo_header:        @set MAINTAINEREMAIL @email{info@protesilaos.com}
+#+texinfo_header:        @set MAINTAINERCONTACT @uref{mailto:info@protesilaos.com,contact the maintainer}
+
+#+texinfo: @insertcopying
+
+This manual, written by Protesilaos Stavrou, describes the Emacs package
+called =ef-themes=, and provides every other piece of information
+pertinent to it.
+
+The documentation furnished herein corresponds to stable version
+{{{stable-version}}}, released on {{{release-date}}}.  Any reference to
+a newer feature which does not yet form part of the latest tagged
+commit, is explicitly marked as such.
+
+Current development target is {{{development-version}}}.
+
++ Package name (GNU ELPA): =ef-themes=
++ Official manual: <https://protesilaos.com/emacs/ef-themes>
++ Change log: <https://protesilaos.com/emacs/ef-themes-changelog>
++ Sample pictures: <https://protesilaos.com/emacs/ef-themes-pictures>
++ Git repo on SourceHut: <https://git.sr.ht/~protesilaos/ef-themes>
+  - Mirrors:
+    + GitHub: <https://github.com/protesilaos/ef-themes>
+    + GitLab: <https://gitlab.com/protesilaos/ef-themes>
++ Mailing list: <https://lists.sr.ht/~protesilaos/ef-themes>
++ Backronym: Extremely Fatigued of Themes Having Exaggerated Markings,
+  Embellishments, and Sparkles.
+
+If you are viewing the README.org version of this file, please note that
+the GNU ELPA machinery automatically generates an Info manual out of it.
+
+#+toc: headlines 8 insert TOC here, with eight headline levels
+
+* COPYING
+:PROPERTIES:
+:COPYING: t
+:CUSTOM_ID: h:1d213fed-b9a9-401c-9b5d-c7df602c2f63
+:END:
+
+Copyright (C) 2022  Free Software Foundation, Inc.
+
+#+begin_quote
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.3 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections, with the Front-Cover Texts being “A GNU Manual,” and
+with the Back-Cover Texts as in (a) below.  A copy of the license is
+included in the section entitled “GNU Free Documentation License.”
+
+(a) The FSF’s Back-Cover Text is: “You have the freedom to copy and
+modify this GNU manual.”
+#+end_quote
+
+* Installation
+:PROPERTIES:
+:CUSTOM_ID: h:dd9e06f2-eef0-4afe-8a12-b7af5d597108
+:END:
+#+cindex: Installation instructions
+
+** GNU ELPA package
+:PROPERTIES:
+:CUSTOM_ID: h:400d57a6-3a66-4ebf-b2e1-58a42237e0c2
+:END:
+
+The package is available as =ef-themes=.  Simply do:
+
+: M-x package-refresh-contents
+: M-x package-install
+
+And search for it.
+
+GNU ELPA provides the latest stable release.  Those who prefer to follow
+the development process in order to report bugs or suggest changes, can
+use the version of the package from the GNU-devel ELPA archive.  Read:
+https://protesilaos.com/codelog/2022-05-13-emacs-elpa-devel/.
+
+** Manual installation
+:PROPERTIES:
+:CUSTOM_ID: h:97fcd2cf-a80b-4a52-a8c7-40b65e563c70
+:END:
+
+Assuming your Emacs files are found in =~/.emacs.d/=, execute the
+following commands in a shell prompt:
+
+#+begin_src sh
+cd ~/.emacs.d
+
+# Create a directory for manually-installed packages
+mkdir manual-packages
+
+# Go to the new directory
+cd manual-packages
+
+# Clone this repo, naming it "ef-themes"
+git clone https://git.sr.ht/~protesilaos/ef-themes ef-themes
+#+end_src
+
+Finally, in your =init.el= (or equivalent) evaluate this:
+
+#+begin_src emacs-lisp
+;; Make Elisp files in that directory available to the user.
+(add-to-list 'load-path "~/.emacs.d/manual-packages/ef-themes")
+#+end_src
+
+Everything is in place to set up the package.
+
+* Sample configuration
+:PROPERTIES:
+:CUSTOM_ID: h:ac76ded0-af9b-4566-aff9-75142ef2d4ef
+:END:
+
+#+begin_src emacs-lisp
+(require 'ef-themes)
+
+;; If you like two specific themes and want to switch between them, you
+;; can specify them in `ef-themes-to-toggle' and then invoke the command
+;; `ef-themes-toggle'.  All the themes are included in the variable
+;; `ef-themes-collection'.
+(setq ef-themes-to-toggle '(ef-summer ef-winter))
+
+;; Make customisations that affect Emacs faces BEFORE loading a theme
+;; (any change needs a theme re-load to take effect).
+
+(setq ef-themes-headings ; read the manual's entry or the doc string
+      '((0 . (variable-pitch light 1.9))
+        (1 . (variable-pitch light 1.8))
+        (2 . (variable-pitch regular 1.7))
+        (3 . (variable-pitch regular 1.6))
+        (4 . (variable-pitch regular 1.5))
+        (5 . (variable-pitch 1.4)) ; absence of weight means `bold'
+        (6 . (variable-pitch 1.3))
+        (7 . (variable-pitch 1.2))
+        (t . (variable-pitch 1.1))))
+
+;; They are nil by default...
+(setq ef-themes-mixed-fonts t
+      ef-themes-variable-pitch-ui t)
+
+;; Disable all other themes to avoid awkward blending:
+(mapc #'disable-theme custom-enabled-themes)
+
+;; Load the theme of choice:
+(load-theme 'ef-summer :no-confirm)
+
+;; OR use this to load the theme which also calls `ef-themes-post-load-hook':
+(ef-themes-select 'ef-summer)
+
+;; The themes we provide are recorded in the `ef-themes-dark-themes',
+;; `ef-themes-light-themes'.
+
+;; We also provide these commands, but do not assign them to any key:
+;;
+;; - `ef-themes-toggle'
+;; - `ef-themes-select'
+;; - `ef-themes-load-random'
+;; - `ef-themes-preview-colors'
+;; - `ef-themes-preview-colors-current'
+#+end_src
+
+* Themes for red-green or blue-yellow color deficiency
+:PROPERTIES:
+:CUSTOM_ID: h:c8c3f312-692f-45d0-b490-78b501c99d41
+:END:
+
+Most items in the =ef-themes= collection are designed to use colors
+from many parts of the spectrum.  Those items generally are
+inappropriate for users with red-green or blue-yellow color deficiency
+(deuteranopia and tritanopia, respectively).  We do, nonetheless,
+provide light and dark themes that are optimized for such cases.  The
+names of the themes are:
+
+- ~ef-deuteranopia-dark~ and ~ef-deuteranopia-light~ for red-green
+  color deficiency;
+- ~ef-tritanopia-dark~ and ~ef-tritanopia-light~ for blue-yellow color
+  deficiency;
+
+[[#h:75d74aea-d17f-497f-a3b8-f0bf4c372de0][Loading a theme]].
+
+* Customization options
+:PROPERTIES:
+:CUSTOM_ID: h:db8ba158-22f6-49f7-b2f2-1c8162e690dd
+:END:
+
+The =ef-themes= provide a limited set of user options which tweak
+secondary aspects of the theme.  No option affects coloration or the
+overall character of each theme ([[#h:a6dd030c-6b6c-4992-83e8-3438b4607b51][Principles]]).
+
+All customizations need to be evaluated before loading a theme.  Any
+change thus requires a theme re-load ([[#h:a6dd030c-6b6c-4992-83e8-3438b4607b51][Loading a theme]]).
+
+** Toggle between two Ef themes
+:PROPERTIES:
+:CUSTOM_ID: h:a58b8e21-0f8f-4763-9b47-185bf7e10043
+:END:
+
+#+vindex: ef-themes-to-toggle
+#+findex: ef-themes-toggle
+The user option ~ef-themes-to-toggle~ expects two symbols that name
+items in the Ef themes collection.  The variable ~ef-themes-collection~
+includes a list with all relevant symbols.  The user can then switch
+between the two specified themes by invoking the ~ef-themes-toggle~
+command.
+
+If ~ef-themes-to-toggle~ does not specify two Ef themes, inform the user
+about it while prompting with completion for a theme among our
+collection (this is practically the same as the ~ef-themes-select~
+command).
+
+This command is in addition to the other ways of loading a theme, either
+with minibuffer completion or at random ([[#h:58345e8c-2bec-459c-872c-a85a29e9fe97][Commands to load an Ef theme]]).
+
+** Enable mixed fonts
+:PROPERTIES:
+:CUSTOM_ID: h:621d3bb9-5967-4f97-b253-7470bba9168c
+:END:
+
+#+vindex: ef-themes-mixed-fonts
+The user option ~ef-themes-mixed-fonts~ controls whether strictly
+spacing-sensitive constructs inherit from ~fixed-pitch~ (a monospaced
+font family).
+
+By default (a nil value for this user option) no face inherits from
+~fixed-pitch~: they all use the default font family, regardless of
+whether it is monospaced or not.
+
+When ~ef-themes-mixed-fonts~ is set to a non-nil value, faces such as
+Org tables, inline code, code blocks, and the like, are rendered in a
+monospaced font at all times.  The user can thus set their default font
+family to a proportionately spaced font without worrying about breaking
+the alignment of relevant elements, or if they simply prefer the
+aesthetics of mixed mono and proportionately spaced font families.
+
+A temporary switch to a proportionately spaced font (known in Emacs as
+~variable-pitch~) can be enabled in the current buffer with the
+activation of the built-in ~variable-pitch-mode~.
+
+To get consistent typography, the user may need to edit the font family
+of the ~fixed-pitch~ face.  The =fontaine= package on GNU ELPA (by
+Protesilaos) can be helpful in that regard.
+
+** UI typeface
+:PROPERTIES:
+:CUSTOM_ID: h:7c3d1057-c4a7-43b3-b91b-9887264d4072
+:END:
+
+#+vindex: ef-themes-variable-pitch-ui
+The user option ~ef-themes-variable-pitch-ui~ controls whether the
+elements of the User Interface (UI) use a proportionately spaced font.
+By default (a nil value), all UI elements use the default font family.
+When this user option is set to a non-nil value, all UI elements will
+inherit the face ~variable-pitch~ instead thus rendering them in a
+proportionately spaced font.
+
+In this context, the UI elements are:
+
+- ~header-line~
+- ~mode-line~ (active and inactive)
+- ~tab-bar-mode~
+- ~tab-line-mode~
+
+To get consistent typography, the user may need to edit the font family
+of the ~variable-pitch~ face.  The =fontaine= package on GNU ELPA (by
+Protesilaos) can be helpful in that regard.
+
+** Option for headings
+:PROPERTIES:
+:CUSTOM_ID: h:a7a02817-e324-43e9-a7d8-fde024530af6
+:END:
+
+#+vindex: ef-themes-headings
+The user option ~ef-themes-headings~ provides support for individual
+heading styles for levels 0 through 8.
+
+This is an alist that accepts a =(key . list-of-values)= combination.
+The key is either a number, representing the heading's level (0
+through 8) or =t=, which pertains to the fallback style.
+
+Level 0 is a special heading: it is used for what counts as a document
+title or equivalent, such as the =#+title= construct we find in Org
+files.  Levels 1-8 are regular headings.
+
+The list of values covers symbols that refer to properties, as described
+below.  Here is a complete sample, followed by a presentation of all
+available properties:
+
+#+begin_src emacs-lisp
+(setq ef-themes-headings
+      '((1 . (light variable-pitch 1.5))
+        (2 . (regular 1.3))
+        (3 . (1.1))
+        (t . (variable-pitch))))
+#+end_src
+
+By default (a =nil= value for this variable), all headings have a bold
+typographic weight, a font family that is the same as the ~default~ face
+(typically monospaced), and a height that is equal to the ~default~
+face's height.
+
+- A ~variable-pitch~ property changes the font family of the heading to
+  that of the ~variable-pitch~ face (normally a proportionately spaced
+  typeface).  Also check the =fontaine= package (by Protesilaos) for
+  tweaking fonts via faces.
+
+- The symbol of a weight attribute adjusts the font of the heading
+  accordingly, such as ~light~, ~semibold~, etc.  Valid symbols are
+  defined in the variable ~ef-themes-weights~.  The absence of a weight
+  means that bold will be used by virtue of inheriting the ~bold~ face.
+
+- A number, expressed as a floating point (e.g. 1.5), adjusts the height
+  of the heading to that many times the base font size.  The default
+  height is the same as 1.0, though it need not be explicitly stated.
+  Instead of a floating point, an acceptable value can be in the form of
+  a cons cell like =(height . FLOAT)= or =(height FLOAT)=, where =FLOAT=
+  is the given number.
+
+Combinations of any of those properties are expressed as a list, like in
+these examples:
+
+#+begin_src emacs-lisp
+(semibold)
+(variable-pitch semibold)
+(variable-pitch semibold 1.3)
+(variable-pitch semibold (height 1.3))   ; same as above
+(variable-pitch semibold (height . 1.3)) ; same as above
+#+end_src
+
+The order in which the properties are set is not significant.
+
+In user configuration files the form may look like this:
+
+#+begin_src emacs-lisp
+(setq ef-themes-headings
+      '((1 . (light variable-pitch 1.5))
+        (2 . (regular 1.3))
+        (3 . (1.1))
+        (t . (variable-pitch))))
+#+end_src
+
+When defining the styles per heading level, it is possible to
+pass a non-nil value (t) instead of a list of properties.  This
+will retain the original aesthetic for that level.  For example:
+
+#+begin_src emacs-lisp
+(setq ef-themes-headings
+      '((1 . t)           ; keep the default style
+        (2 . (variable-pitch 1.2))
+        (t . (variable-pitch)))) ; style for all other headings
+
+(setq ef-themes-headings
+      '((1 . (variable-pitch 1.6))
+        (2 . (1.3))
+        (t . t))) ; default style for all other levels
+#+end_src
+
+* Loading a theme
+:PROPERTIES:
+:CUSTOM_ID: h:75d74aea-d17f-497f-a3b8-f0bf4c372de0
+:END:
+
+Emacs can load and maintain enabled multiple themes at once.  This
+typically leads to awkward styling and weird combinations.  The theme
+looks broken and the designer's intent is misunderstood.  Before loading
+one of the =ef-themes=, the user is encouraged to disable all others:
+
+#+begin_src emacs-lisp
+(mapc #'disable-theme custom-enabled-themes)
+#+end_src
+
+Then load the theme of choice.  For example:
+
+#+begin_src emacs-lisp
+(load-theme 'ef-summer :no-confirm)
+#+end_src
+
+The =:no-confirm= is optional.  It simply skips the step where Emacs
+asks the user whether they are sure about loading the theme.
+
+Consider adding code like the above to the user configuration file, such
+as =init.el=.
+
+NOTE: If you plan on using the ~ef-themes-post-load-hook~, the above
+method will not work.  Instead, you need to load the theme from your
+init file with ~ef-themes-select~ ([[#h:58345e8c-2bec-459c-872c-a85a29e9fe97][Commands to load an Ef theme]]).  For
+example:
+
+#+begin_src emacs-lisp
+;; like `load-theme' but also call `ef-themes-post-load-hook'
+(ef-themes-select 'ef-summer)
+#+end_src
+
+* Commands to load an Ef theme
+:PROPERTIES:
+:CUSTOM_ID: h:58345e8c-2bec-459c-872c-a85a29e9fe97
+:END:
+
+#+vindex: ef-themes-post-load-hook
+The commands mentioned herein call ~ef-themes-post-load-hook~ at the
+end.  This is for advanced users who want to trigger some code after an
+Ef theme is loaded ([[#h:5b74bd9e-e7f2-46b3-af2e-7c45b2e69245][Use colors from the active Ef theme]]).  The same goes
+for ~ef-themes-toggle~ ([[#h:a58b8e21-0f8f-4763-9b47-185bf7e10043][Toggle between two Ef themes]]).
+
+[[#h:1dbea3c9-de9a-4bb4-b540-654bea70ba4d][A theme-agnostic hook for theme loading]].
+
+#+findex: ef-themes-select
+The themes can also be loaded interactively.  The command
+~ef-themes-select~ (call it with =M-x=) prompts with minibuffer
+completion for a theme among the collection of items we provide.  It
+then loads the selected theme.  Internally, ~ef-themes-select~ takes
+care to disable any other Ef theme, though it does not disable other
+themes.  This is by design to let users maintain theme blending when
+they want it.  Otherwise, the user is encouraged to disable all other
+themes and stick with the Ef themes:
+
+#+begin_src emacs-lisp
+(mapc #'disable-theme custom-enabled-themes)
+#+end_src
+
+The ~ef-themes-select~ command can also be called from the user's init
+file to load the theme of their choice ([[#h:75d74aea-d17f-497f-a3b8-f0bf4c372de0][Loading a theme]]).  For example:
+
+#+begin_src emacs-lisp
+;; like `load-theme' but also call `ef-themes-post-load-hook'
+(ef-themes-select 'ef-summer)
+#+end_src
+
+When ~ef-themes-select~ is called with a prefix argument (=C-u= by
+default), it first produces a minibuffer prompt to limit the choice to
+dark or light themes, and then shows only the relevant subset.
+
+#+findex: ef-themes-load-random
+The command ~ef-themes-load-random~ is for those who appreciate a bit of
+serendipity in their life.  When call interactively with =M-x= it loads
+a random theme from the Ef themes collection.  The selection excludes
+the current Ef theme.  Calling ~ef-themes-load-random~ with a prefix
+argument (=C-u= by default) makes the command limit the random selection
+to either light or dark themes.  The user is prompted at the minibuffer
+to pick among the two sets.
+
+The ~ef-themes-load-random~ can also be called from Lisp (e.g. from the
+=init.el= file):
+
+#+begin_src emacs-lisp
+(ef-themes-load-random)
+#+end_src
+
+This has the effect of loading an Ef theme at random, as described
+above.  It is also possible to limit the set with either of those:
+
+#+begin_src emacs-lisp
+;; Load a light Ef theme at random
+(ef-themes-load-random 'light)
+
+;; Load a dark Ef theme at random
+(ef-themes-load-random 'dark)
+#+end_src
+
+The author of the Ef themes likes to check with their operating system
+to determine if the desktop environment outside of Emacs is using a
+light/dark theme and then loads an appropriate Ef theme at random:
+
+#+begin_src emacs-lisp
+;; Check GNOME's gsettings database for the dark theme preference.  If
+;; it is enabled, we want to load a dark Ef theme at random.  Otherwise
+;; we load a random light theme.
+(if (string-match-p
+     "dark"
+     (shell-command-to-string "gsettings get org.gnome.desktop.interface color-scheme"))
+    (ef-themes-load-random 'dark)
+  (ef-themes-load-random 'light))
+#+end_src
+
+* Preview theme colors
+:PROPERTIES:
+:CUSTOM_ID: h:8dd67bf5-879e-46e5-b277-5bac141f53d1
+:END:
+
+#+findex: ef-themes-preview-colors
+The command ~ef-themes-preview-colors~ uses minibuffer completion to
+select an item from the Ef themes and then produces a buffer with
+previews of its color palette entries.  The buffer has a naming scheme
+which reflects the given choice, like =ef-summer-preview-colors= for the
+~ef-summer~ theme.
+
+#+findex: ef-themes-preview-colors-current
+The command ~ef-themes-preview-colors-current~ skips the minibuffer
+selection process and just produces a preview for the current Ef theme.
+
+* Use colors from the active Ef theme
+:PROPERTIES:
+:CUSTOM_ID: h:5b74bd9e-e7f2-46b3-af2e-7c45b2e69245
+:END:
+
+#+findex: ef-themes-with-colors
+Advanced users may want to call color variables from the palette of the
+active Ef theme.  The macro ~ef-themes-with-colors~ supplies those to
+any form called inside of it.  For example:
+
+#+begin_src emacs-lisp
+(ef-themes-with-colors
+  (list bg-main fg-main bg-mode-line cursor))
+;; => ("#fff2f3" "#5f456f" "#ffa4dc" "#cf0090")
+#+end_src
+
+The above return value is for =ef-summer= when that is the active Ef
+theme.  Switching to another theme and evaluating this code anew will
+give us the relevant results for that theme.  The same with =ef-winter=:
+
+#+begin_src emacs-lisp
+(ef-themes-with-colors
+  (list bg-main fg-main bg-mode-line cursor))
+;; => ("#0f0b15" "#b8c6d5" "#5f1f5f" "#ff6ff0")
+#+end_src
+
+[[#h:152326a3-9356-4158-8adb-83c42c2ef117][Do-It-Yourself customizations]].
+
+The palette of each Ef theme is considered stable.  No removals shall be
+made.  Though please note that some tweaks to individual hues or color
+mapping are still possible.  At any rate, we will not outright break any
+code that uses ~ef-themes-with-colors~.
+
+* Do-It-Yourself customizations
+:PROPERTIES:
+:CUSTOM_ID: h:152326a3-9356-4158-8adb-83c42c2ef117
+:END:
+
+This section documents how the user can further tweak the Ef themes to
+their liking.
+
+** The general approach to advanced DIY changes
+:PROPERTIES:
+:CUSTOM_ID: h:ec0adf54-c037-4c53-81b8-7eab2303794d
+:END:
+
+When the user wants to customize Emacs faces there are two
+considerations they need to make if they care about robustness:
+
+1. Do not hardcode color values, but instead use the relevant variables
+   from the Ef themes.
+2. Make the changes persist through theme changes between the Ef themes
+   collection.
+
+For point 1 we provide the ~ef-themes-with-colors~ macro, while for
+point 2 we have the ~ef-themes-post-load-hook~.
+
+[[#h:5b74bd9e-e7f2-46b3-af2e-7c45b2e69245][Use colors from the active Ef theme]].
+
+[[#h:58345e8c-2bec-459c-872c-a85a29e9fe97][Commands to load an Ef theme]].
+
+[[#h:1dbea3c9-de9a-4bb4-b540-654bea70ba4d][A theme-agnostic hook for theme loading]].
+
+We need to wrap our code in the ~ef-themes-with-colors~ and declare it
+as a function which we then add to the hook.  Here we show the general
+approach of putting those pieces together.
+
+To customize faces we use the built-in ~custom-set-faces~.  The value it
+accepts has the same syntax as that found in =ef-themes.el=,
+specifically the ~ef-themes-faces~ constant.  It thus is easy to copy
+lines from there and tweak them.  Let's pick a couple of font-lock faces
+(used in all programming modes, among others):
+
+#+begin_src emacs-lisp
+(defun my-ef-themes-custom-faces ()
+  "My customizations on top of the Ef themes.
+This function is added to the `ef-themes-post-load-hook'."
+  (ef-themes-with-colors
+    (custom-set-faces
+     ;; These are the default specifications
+     `(font-lock-comment-face ((,c :inherit italic :foreground ,comment)))
+     `(font-lock-variable-name-face ((,c :foreground ,variable))))))
+
+;; Using the hook lets our changes persist when we use the commands
+;; `ef-themes-toggle', `ef-themes-select', and `ef-themes-load-random'.
+(add-hook 'ef-themes-post-load-hook #'my-ef-themes-custom-faces)
+#+end_src
+
+Each item in the Ef themes collection has its own color mapping.  So the
+color value of the =comment= variable will differ from theme-to-theme.
+For the purpose of our demonstration, we make variables look like
+comments and comments like variables:
+
+#+begin_src emacs-lisp
+(defun my-ef-themes-custom-faces ()
+  "My customizations on top of the Ef themes.
+This function is added to the `ef-themes-post-load-hook'."
+  (ef-themes-with-colors
+    (custom-set-faces
+     `(font-lock-comment-face ((,c :foreground ,variable)))
+     `(font-lock-variable-name-face ((,c :inherit italic :foreground ,comment))))))
+
+;; Using the hook lets our changes persist when we use the commands
+;; `ef-themes-toggle', `ef-themes-select', and `ef-themes-load-random'.
+(add-hook 'ef-themes-post-load-hook #'my-ef-themes-custom-faces)
+#+end_src
+
+All changes take effect when a theme is loaded again.  As such, it is
+better to use ~ef-themes-select~ at startup so that the function added
+to the hook gets applied properly upon first load.  Like this:
+
+#+begin_src emacs-lisp
+(defun my-ef-themes-custom-faces ()
+  "My customizations on top of the Ef themes.
+This function is added to the `ef-themes-post-load-hook'."
+  (ef-themes-with-colors
+    (custom-set-faces
+     `(font-lock-comment-face ((,c :foreground ,variable)))
+     `(font-lock-variable-name-face ((,c :inherit italic :foreground ,comment))))))
+
+;; Using the hook lets our changes persist when we use the commands
+;; `ef-themes-toggle', `ef-themes-select', and `ef-themes-load-random'.
+(add-hook 'ef-themes-post-load-hook #'my-ef-themes-custom-faces)
+
+;; Load the theme and run `ef-themes-post-load-hook'
+(ef-themes-select 'ef-summer) ; Instead of (load-theme 'ef-summer :no-confirm)
+#+end_src
+
+Please contact us if you have specific questions about this mechanism.
+We are willing to help and shall provide comprehensive documentation
+where necessary.
+
+** A theme-agnostic hook for theme loading
+:PROPERTIES:
+:CUSTOM_ID: h:1dbea3c9-de9a-4bb4-b540-654bea70ba4d
+:END:
+
+The themes are designed with the intent to be useful to Emacs users of
+varying skill levels, from beginners to experts.  This means that we try
+to make things easier by not expecting anyone reading this document to
+be proficient in Emacs Lisp or programming in general.
+
+Such a case is with the use of the ~ef-themes-post-load-hook~, which is
+called after the evaluation of any of the commands we provide for
+loading a theme ([[#h:58345e8c-2bec-459c-872c-a85a29e9fe97][Commands to load an Ef theme]]).  We recommend using that
+hook for advanced customizations, because (1) we know for sure that it
+is available once the themes are loaded, and (2) anyone consulting this
+manual, especially the sections on enabling and loading the themes, will
+be in a good position to benefit from that hook.
+
+Advanced users who have a need to switch between the Ef themes and other
+items (e.g. my =modus-themes=) will find that such a hook does not meet
+their requirements: it only works with the Ef themes and only with the
+aforementioned functions.
+
+A theme-agnostic setup can be configured thus:
+
+#+begin_src emacs-lisp
+(defvar after-enable-theme-hook nil
+   "Normal hook run after enabling a theme.")
+
+(defun run-after-enable-theme-hook (&rest _args)
+   "Run `after-enable-theme-hook'."
+   (run-hooks 'after-enable-theme-hook))
+
+(advice-add 'enable-theme :after #'run-after-enable-theme-hook)
+#+end_src
+
+This creates the ~after-enable-theme-hook~ and makes it run after each
+call to ~enable-theme~, which means that it will work for all themes and
+also has the benefit that it does not depend on functions such as
+~ef-themes-select~ and the others mentioned in this manual.  The
+function ~enable-theme~ is called internally by ~load-theme~, so the
+hook works everywhere.
+
+In this document, we always mention ~ef-themes-post-load-hook~ though
+the user can replace it with ~after-enable-theme-hook~ should they need
+to.
+
+** Add support for hl-todo
+:PROPERTIES:
+:CUSTOM_ID: h:19c549dc-d13f-45c4-a727-3618591d5c4f
+:END:
+
+The =hl-todo= package provides the user option ~hl-todo-keyword-faces~:
+it specifies an association list of =(KEYWORD . COLOR-VALUE)= pairs.
+There are no faces, which the theme could style seamlessly.  As such, it
+rests on the user to specify appropriate color values.  This can be done
+either by hardcoding colors, which is inefficient, or by using the macro
+~ef-themes-with-colors~ ([[#h:ec0adf54-c037-4c53-81b8-7eab2303794d][The general approach to DIY changes]]).  Here we
+show the latter method.
+
+#+begin_src emacs-lisp
+(defun my-ef-themes-hl-todo-faces ()
+  "Configure `hl-todo-keyword-faces' with Ef themes colors.
+The exact color values are taken from the active Ef theme."
+  (ef-themes-with-colors
+    (setq hl-todo-keyword-faces
+          `(("HOLD" . ,yellow)
+            ("TODO" . ,red)
+            ("NEXT" . ,blue)
+            ("THEM" . ,magenta)
+            ("PROG" . ,cyan-warmer)
+            ("OKAY" . ,green-warmer)
+            ("DONT" . ,yellow-warmer)
+            ("FAIL" . ,red-warmer)
+            ("BUG" . ,red-warmer)
+            ("DONE" . ,green)
+            ("NOTE" . ,blue-warmer)
+            ("KLUDGE" . ,cyan)
+            ("HACK" . ,cyan)
+            ("TEMP" . ,red)
+            ("FIXME" . ,red-warmer)
+            ("XXX+" . ,red-warmer)
+            ("REVIEW" . ,red)
+            ("DEPRECATED" . ,yellow)))))
+
+(add-hook 'ef-themes-post-load-hook #'my-ef-themes-hl-todo-faces)
+#+end_src
+
+To find the names of the color variables, the user can rely on the
+commands for previewing the palette ([[#h:8dd67bf5-879e-46e5-b277-5bac141f53d1][Preview theme colors]]).
+
+** Make the mode line like the =modus-themes= default
+:PROPERTIES:
+:CUSTOM_ID: h:69ea8788-33b9-42f9-a4f1-92ee22074d2b
+:END:
+
+The Ef themes do not use a =:box= attribute for their mode lines, while
+the active one has an accented background.  Users may prefer the
+approach that my =modus-themes= follow by default, where both active and
+inactive mode lines use shades of gray and have a border around them.
+
+Try something like this, using the approach we have already explained
+about ~ef-themes-with-colors~ ([[#h:ec0adf54-c037-4c53-81b8-7eab2303794d][The general approach to DIY changes]]):
+
+#+begin_src emacs-lisp
+(defun my-ef-themes-mode-line ()
+  "Tweak the style of the mode lines."
+  (ef-themes-with-colors
+    (custom-set-faces
+     `(mode-line ((,c :background ,bg-active :foreground ,fg-main :box (:line-width 1 :color ,fg-dim))))
+     `(mode-line-inactive ((,c :box (:line-width 1 :color ,bg-active)))))))
+
+(add-hook 'ef-themes-post-load-hook #'my-ef-themes-mode-line)
+#+end_src
+
+If you want the active mode line to retain its accented background but
+also have a border around it, change this line from the above snippet:
+
+#+begin_src emacs-lisp
+(mode-line ((,c :background ,bg-active :foreground ,fg-main :box (:line-width 1 :color ,fg-dim))))
+#+end_src
+
+To this:
+
+#+begin_src emacs-lisp
+`(mode-line ((,c :background ,bg-mode-line :foreground ,fg-mode-line :box (:line-width 1 :color ,fg-dim))))
+#+end_src
+
+** Configure bold and italic faces
+:PROPERTIES:
+:CUSTOM_ID: h:8c0b05b7-5624-4051-844c-3c4882658782
+:END:
+#+cindex: Bold and italic fonts
+
+The Ef themes do not hardcode a ~:weight~ or ~:slant~ attribute in the
+faces they cover.  Instead, they configure the generic faces called
+~bold~ and ~italic~ to use the appropriate styles and then instruct all
+relevant faces that require emphasis to inherit from them.
+
+This practically means that users can change the particularities of what
+it means for a construct to be bold/italic, by tweaking the ~bold~ and
+~italic~ faces.  Cases where that can be useful include:
+
++ The default typeface does not have a variant with slanted glyphs
+  (e.g. Fira Mono/Code as of this writing on 2022-08-23), so the user
+  wants to add another family for the italics, such as Hack.
+
++ The typeface of choice provides a multitude of weights and the user
+  prefers the light one by default.  To prevent the bold weight from
+  being too heavy compared to the light one, they opt to make ~bold~ use a
+  semibold weight.
+
++ The typeface distinguishes between oblique and italic forms by
+  providing different font variants (the former are just slanted
+  versions of the upright forms, while the latter have distinguishing
+  features as well).  In this case, the user wants to specify the font
+  that applies to the ~italic~ face.
+
+To achieve those effects, one must first be sure that the fonts they use
+have support for those features.
+
+In this example, we set the default font family to Fira Code, while we
+choose to render italics in the Hack typeface (obviously one needs to
+pick fonts that work in tandem):
+
+#+begin_src emacs-lisp
+(set-face-attribute 'default nil :family "Fira Code" :height 110)
+(set-face-attribute 'italic nil :family "Hack")
+#+end_src
+
+And here we play with different weights, using Source Code Pro:
+
+#+begin_src emacs-lisp
+(set-face-attribute 'default nil :family "Source Code Pro" :height 110 :weight 'light)
+(set-face-attribute 'bold nil :weight 'semibold)
+#+end_src
+
+To reset the font family, one can use this:
+
+#+begin_src emacs-lisp
+(set-face-attribute 'italic nil :family 'unspecified)
+#+end_src
+
+Consider the =fontaine= package on GNU ELPA (by Protesilaos) which
+provides the means to configure font families via faces.
+
+** Tweak =org-modern= timestamps
+:PROPERTIES:
+:CUSTOM_ID: h:32e3b7b2-3b53-4ec2-bd4e-fa24235e447d
+:END:
+
+The =org-modern= package uses faces and text properties to make Org
+buffers more aesthetically pleasing.  It affects tables, timestamps,
+lists, headings, and more.
+
+In previous versions of the Ef themes, we mistakenly affected one of its
+faces: the ~org-modern-label~.  It changed the intended looks and
+prevented the user option ~org-modern-label-border~ from having its
+desired effect.  As such, we no longer override that face.
+
+Users who were used to the previous design and who generally do not
+configure the user options of =org-modern= may thus notice a change in
+how clocktables (or generally tables with timestamps) are aligned.  The
+simplest solution is to instruct the mode to not prettify timestamps, by
+setting the user option ~org-modern-timestamp~ to nil.  For example, by
+adding this to the init file:
+
+#+begin_src emacs-lisp
+(setq org-modern-timestamp nil)
+#+end_src
+
+Alignment in tables will also depend on the use of proportionately
+spaced fonts.  Enable the relevant option to work with those without any
+further trouble ([[#h:621d3bb9-5967-4f97-b253-7470bba9168c][Enable mixed fonts]]).
+
+For any further issues, you are welcome to ask for help.
+
+** Tweak goto-address-mode faces
+:PROPERTIES:
+:CUSTOM_ID: h:d42f726c-44e5-4dd6-b77e-e6ca0bab3189
+:END:
+
+The built-in ~goto-address-mode~ uses heuristics to identify URLs and
+email addresses in the current buffer.  It then applies a face to them
+to change their style.  Some packages, such as =notmuch=, use this
+minor-mode automatically.
+
+The faces are not declared with ~defface~, meaning that it is better
+that the theme does not modify them.  The user is thus encouraged to
+consider including this in their setup:
+
+#+begin_src emacs-lisp
+(setq goto-address-url-face 'link
+      goto-address-url-mouse-face 'highlight
+      goto-address-mail-face 'link
+      goto-address-mail-mouse-face 'highlight)
+#+end_src
+
+My personal preference is to set ~goto-address-mail-face~ to nil,
+because it otherwise adds too much visual noise to the buffer (email
+addresses stand out more, due to the use of the uncommon =@= caharacter
+but also because they are often enclosed in angled brackets).
+
+* Faces defined by the Ef themes
+:PROPERTIES:
+:CUSTOM_ID: h:34afcc9a-a5f1-4023-b01a-abf5b8a6199d
+:END:
+
+The themes define some faces to make it possible to achieve
+consistency between various groups of faces.  For example, all "marks
+for selection" use the ~ef-themes-mark-select~ face.  If, say, the
+user wants to edit this face to include an underline, the change will
+apply to lots of packages, like Dired, Trashed, Ibuffer.
+
+[[#h:152326a3-9356-4158-8adb-83c42c2ef117][Do-It-Yourself customizations]].
+
+All the faces defined by the themes:
+
++ ~ef-themes-fixed-pitch~
++ ~ef-themes-heading-0~
++ ~ef-themes-heading-1~
++ ~ef-themes-heading-2~
++ ~ef-themes-heading-3~
++ ~ef-themes-heading-4~
++ ~ef-themes-heading-5~
++ ~ef-themes-heading-6~
++ ~ef-themes-heading-7~
++ ~ef-themes-heading-8~
++ ~ef-themes-key-binding~
++ ~ef-themes-mark-delete~
++ ~ef-themes-mark-other~
++ ~ef-themes-mark-select~
++ ~ef-themes-ui-variable-pitch~
++ ~ef-themes-underline-error~
++ ~ef-themes-underline-info~
++ ~ef-themes-underline-warning~
+
+* Supported packages or face groups
+:PROPERTIES:
+:CUSTOM_ID: h:c8d80daf-d039-40c4-bb74-e7814a9b4c79
+:END:
+
+The =ef-themes= will only ever support a curated list of packages based
+on my judgement ([[#h:ea2eedd7-a473-4826-9b83-31bf3ac2c5f7][Packages that are hard to support]]).  Nevertheless, the
+list of explicitly or implicitly supported packages already covers
+everything most users need.
+
+** Explicitly supported packages or face groups
+:PROPERTIES:
+:CUSTOM_ID: h:8e87733c-9fc9-45cd-9b9e-97b11f4f6c05
+:END:
+
+- all basic faces
+- all-the-icons
+- all-the-icons-dired
+- all-the-icons-ibuffer
+- ansi-color
+- auctex
+- auto-dim-other-buffers
+- bongo
+- bookmark
+- calendar and diary
+- change-log and log-view (part of VC)
+- chart
+- company
+- compilation
+- completions
+- consult
+- corfu
+- custom (=M-x customize=)
+- denote
+- dictionary
+- diff-hl
+- diff-mode
+- dired
+- dired-subtree
+- diredfl
+- dirvish
+- display-fill-column-indicator-mode
+- doom-modeline
+- ediff
+- eldoc
+- elfeed
+- embark
+- epa
+- eshell
+- eww
+- flycheck
+- flymake
+- flyspell
+- font-lock
+- git-commit
+- git-rebase
+- gnus
+- hi-lock (=M-x highlight-regexp=)
+- ibuffer
+- image-dired
+- info
+- isearch, occur, query-replace
+- keycast
+- lin
+- line numbers (~display-line-numbers-mode~ and global variant)
+- magit
+- man
+- marginalia
+- markdown-mode
+- messages
+- mode-line
+- mu4e
+- neotree
+- notmuch
+- olivetti
+- orderless
+- org
+- org-habit
+- org-modern
+- outline-mode
+- outline-minor-faces
+- package (=M-x list-packages=)
+- pulsar
+- pulse
+- rainbow-delimiters
+- rcirc
+- recursion-indicator
+- regexp-builder (re-builder)
+- ruler-mode
+- selectrum
+- shell-script-mode (sh-mode)
+- show-paren-mode
+- shr
+- smerge
+- tab-bar-mode
+- tab-line-mode
+- tempel
+- term
+- textsec
+- transient
+- trashed
+- tty-menu
+- vc (=vc-dir.el=, =vc-hooks.el=)
+- vertico
+- wgrep
+- which-function-mode
+- whitespace-mode
+- widget
+- writegood-mode
+- woman
+
+** Implicitly supported packages or face groups
+:PROPERTIES:
+:CUSTOM_ID: h:7d1acc40-a2ce-4e6d-a230-35ddffc00690
+:END:
+
+Those are known to work with the Ef themes either because their colors
+are appropriate or because they inherit from basic faces which the
+themes already cover:
+
+- apropos
+- dim-autoload
+- flycheck
+- flymake
+- flyspell
+- hl-todo
+- icomplete
+- ido
+- multiple-cursors
+- paren-face
+- which-key
+- xref
+
+Note that "implicitly supported" does not mean that they always fit in
+perfectly.  If there are refinements we need to made, then we need to
+intervene ([[#h:8e87733c-9fc9-45cd-9b9e-97b11f4f6c05][Explicitly supported packages or face groups]]).
+
+** Packages that are hard to support
+:PROPERTIES:
+:CUSTOM_ID: h:ea2eedd7-a473-4826-9b83-31bf3ac2c5f7
+:END:
+
+These are difficult to support due to their (i) incompatibility with the
+design of the =ef-themes=, (ii) complexity or multiple points of entry,
+(iii) external dependencies, (iv) existence of better alternatives in my
+opinion, or (v) inconsiderate use of color out-of-the-box and implicit
+unwillingness to be good Emacs citizens:
+
+- avy :: its UI is prone to visual breakage and is hard to style
+  correctly.
+
+- calibredb :: has an external dependency that I don't use.
+
+- ctrlf :: use the built-in isearch or the ~consult-line~ command of
+  =consult=.
+
+- dired+ :: it is complex and makes inconsiderate use of color.
+
+- ein (Emacs IPython Notebook) :: external dependency that I don't use.
+
+- elfeed-goodies :: depends on =powerline=...
+
+- ement.el :: has an external dependency that I don't use.
+
+- helm :: it is complex and makes inconsiderate use of color.  Prefer
+  the =vertico=, =consult=, and =embark= packages.
+
+- info+ :: it is complex and makes inconsiderate use of color.
+
+- ivy/counsel/swiper :: use the =vertico=, =consult=, and =embark=
+  packages which are designed to be compatible with standard Emacs
+  mechanisms and are modular.
+
+- lsp-mode :: has external dependencies that I don't use.
+
+- powerline :: requires too many shades of background and generally
+  violates our expectation of how the mode-line is supposed to look by
+  placing the designated default background in unexpected places.
+
+- solaire :: in principle, it is incompatible with practically every
+  theme that is not designed around it.  Emacs does not distinguish
+  between "UI" and "syntax" buffers.
+
+- spaceline :: same as =powerline=.
+
+- sx :: has an external dependency that I don't use.
+
+- telega :: has an external dependency that I don't use (I don't even
+  have a smartphone).
+
+- telephone-line :: same as =powerline=.
+
+- treemacs :: it has too many dependencies and does too many things.
+
+- web-mode :: I don't use all those Web technologies and cannot test
+  this properly without support from an expert.  It also defines lots of
+  faces that hardcode color values for no good reason.
+
+The above list is non-exhaustive though you get the idea.
+
+* Principles
+:PROPERTIES:
+:CUSTOM_ID: h:a6dd030c-6b6c-4992-83e8-3438b4607b51
+:END:
+
++ No customization options that affect the coloration of individual
+  components!  Either you like them or you don't.  To change the
+  attributes of individual faces, it is better to do it in user-level
+  configurations ([[#h:152326a3-9356-4158-8adb-83c42c2ef117][Do-It-Yourself customizations]]).  Report the issue and
+  we can help with the relevant code.  Providing customizations that
+  refashion a wide set of themes is not maintainable.
+
++ Curated list of supported faces ([[#h:c8d80daf-d039-40c4-bb74-e7814a9b4c79][Supported packages or face groups]]).
+  I will only cover what I use and/or know is in a well-maintained
+  state.  Styling a package requires a lot of work as one must (i) know
+  how the package works, (ii) see all its interfaces in action, (iii)
+  make sure that the color combinations look consistent with the rest of
+  the theme.
+
++ Minimum contrast ratio of 4.5:1 against the main background (WCAG AA
+  standard).  Use my =modus-themes= package (also built into Emacs 28 or
+  higher) if you need top-class accessibility.
+
++ If two elements are functionally different, the theme must render this
+  fact conspicuous ([[#h:b59f315c-6d25-4225-b99b-c06594fa3bf0][Let Org tags inherit the heading color?]]).
+
++ Respect the decisions of the upstream package provider or, else, do
+  not make weird things with faces.  We only override the design choice
+  of a package if it is necessary.
+
++ When there is an inescapable trade-off between usability and
+  aesthetics, we will always opt for the former, without prejudice to
+  the aforementioned principles.
+
+** Minimal VS maximal scope
+:PROPERTIES:
+:CUSTOM_ID: h:fb219b87-ab95-401a-a742-a2fc451bf9f7
+:END:
+
+The =ef-themes= are meant to be minimal in scope, as opposed to my
+=modus-themes= whose accessibility requirements make them maximalist by
+necessity.  The =modus-themes= are such because:
+
+1. Accessibility is not a one-size-fits-all.  Customisation options are
+   necessary to empower users.
+2. Accessibility is as good as its weakest link.  If the user spends all
+   day using FOO package, it needs to be perfectly legible, otherwise
+   the whole theme fails to deliver on its promise.
+
+The =ef-themes= can afford to be minimal because they do not have such a
+lofty accessibility target.
+
+* FAQ
+:PROPERTIES:
+:CUSTOM_ID: h:a6d5c6f1-84c5-4d74-ba39-b5ccda05497a
+:END:
+
+** What does Ef mean?
+:PROPERTIES:
+:CUSTOM_ID: h:22a92ee8-eda6-4c29-b850-b2709a7239c0
+:END:
+
+"Ef" is a Greek word (ευ), commonly used as a prefix to denote
+something good, nice, and/or easy.  For example, eftopia (ευτοπία) is
+the opposite of dystopia (δυστοπία): a good place as opposed to a bad
+place.
+
+** Will you stop using the modus-themes?
+:PROPERTIES:
+:CUSTOM_ID: h:33c9b520-0af2-441c-a2e8-2945522feb3e
+:END:
+
+No.  For my workflow, accessibility is the most important quality.  The
+=modus-themes= will remain my default choice.
+
+** Then why develop the ef-themes?
+:PROPERTIES:
+:CUSTOM_ID: h:ca441ae7-2e18-4dd2-9f5d-e3b806456251
+:END:
+
+Because I think that users deserve "pretty" themes that (i) do make some
+considerations for legibility, and (ii) are not designed on a whimsy.
+
+The =ef-themes= are my answer to those who (i) like my =modus-themes=,
+(ii) want something with a bit more flair, and (iii) are fine with a
+bit more relaxed accessibility target.
+
+** Too many options, what should I do?
+:PROPERTIES:
+:CUSTOM_ID: h:3c0201ed-2c06-4981-a3a3-3d15bc4eec00
+:END:
+
+Take a deep breath, drink some water, get some fresh air, and take it
+one step at a time.  You don't have to try all the themes outright.
+For a light theme, go with =ef-light=; for a dark one use =ef-dark=.
+They have generic names exactly for this reason.  Then make the
+necessary tweaks to toggle between those two and don't worry anymore
+about the abundance of choice ([[#h:a58b8e21-0f8f-4763-9b47-185bf7e10043][Toggle between two Ef themes]]).  Good
+luck!
+
+** Let Org tags inherit the heading color?
+:PROPERTIES:
+:CUSTOM_ID: h:b59f315c-6d25-4225-b99b-c06594fa3bf0
+:END:
+
+Upstream Org defines tags in headings to have the same color as the rest
+of the heading's text.  However, tags are a distinct component of the
+heading as noted in the doc string of the ~org-get-heading~ function.
+Tags also are functionally different than the ordinary text of the
+heading: they are a clickable link/button.  It thus is a matter of
+usability to render this distinction clear at the visual level: I do not
+agree with upstream Org's design decision.
+
+Normally, we would style a link to have an underline.  However, this
+design does not look right in headings (as it doesn't look right in,
+e.g., the headings in a listing of emails or the unread items in the
+Elfeed list of entries).  We thus have to go with the next option, which
+is to use a distinct foreground color that differentiates the tag from
+its context, while accounting for theme-wide usability and consistency.
+
+The overarching principle is that when two things function differently,
+they have to look apart even if the difference is small.
+
+The assumption that tags are right-aligned (per Org's default behaviour)
+does not hold, as there exists a user option to disable this effect:
+~org-auto-align-tags~.  The author of the =ef-themes= uses this option
+because the way Org performs this alignment using literal spaces does
+not work properly with (i) proportionately spaced fonts, (ii) varying
+heading heights, (iii) different levels of indentation.  Realigning tags
+by inserting spaces also creates noise in version-controlled files,
+which is undesirable.
+
+** Add something like Nord or Zenburn?
+:PROPERTIES:
+:CUSTOM_ID: h:103def23-def7-48f9-b14b-4089e4e13242
+:END:
+
+In general, I am not against the idea of drawing inspiration from other
+themes.  Note though that every item in the =ef-themes= collection is
+designed from scratch to work in accordance with the principles of this
+project ([[#h:a6dd030c-6b6c-4992-83e8-3438b4607b51][Principles]]).
+
+Each palette is an original implementation.  The six basic hues of red,
+green, blue, yellow, magenta, cyan are implemented as quartets of a
+base, warmer, cooler, and faint variants.
+
+All themes have their own color mapping, which is conducted in
+accordance with the exact values of the aforementioned hues and their
+innate relations.
+
+Copying another project's palette is generally not possible or not
+desirable, not even if that is my =modus-themes= (they, too, have a
+different set of requirements).
+
+Furthermore, trying to mimic another theme generally is an exercise with
+prior constraints, as we are always labouring under the expectation of
+remaining faithful to the original.  This can lead to awkward
+compromises and sub-optimal choices, which make no sense for a project
+with opinionanted design principles.
+
+* Acknowledgements
+:PROPERTIES:
+:CUSTOM_ID: h:5d8753d2-cc10-44a7-9467-dcd62157718b
+:END:
+#+cindex: Contributors
+
+This project is meant to be a collective effort.  Every bit of help
+matters.
+
++ Author/maintainer :: Protesilaos Stavrou.
+
++ Contributions to code or the manual :: Alex Lu, Christopher League,
+  Philip Kaludercic.
+
++ Ideas and/or user feedback :: Alan Schmitt, Anthony Chavez, Daniel
+  Mendler, Federico Stilman, Iris Garcia, Jean-Philippe Gagné Guay,
+  Jonas Collberg, Spike-Leung, Steve Molitor, Summer Emacs, Sven
+  Seebeck, Zoltán Király.
+
+* GNU Free Documentation License
+:PROPERTIES:
+:CUSTOM_ID: h:a349a898-0068-4529-ab3b-167c1b7b8534
+:END:
+
+#+texinfo: @include doclicense.texi
+
+#+begin_export html
+<pre>
+
+                GNU Free Documentation License
+                 Version 1.3, 3 November 2008
+
+
+ Copyright (C) 2000, 2001, 2002, 2007, 2008 Free Software Foundation, Inc.
+     <https://fsf.org/>
+ Everyone is permitted to copy and distribute verbatim copies
+ of this license document, but changing it is not allowed.
+
+0. PREAMBLE
+
+The purpose of this License is to make a manual, textbook, or other
+functional and useful document "free" in the sense of freedom: to
+assure everyone the effective freedom to copy and redistribute it,
+with or without modifying it, either commercially or noncommercially.
+Secondarily, this License preserves for the author and publisher a way
+to get credit for their work, while not being considered responsible
+for modifications made by others.
+
+This License is a kind of "copyleft", which means that derivative
+works of the document must themselves be free in the same sense.  It
+complements the GNU General Public License, which is a copyleft
+license designed for free software.
+
+We have designed this License in order to use it for manuals for free
+software, because free software needs free documentation: a free
+program should come with manuals providing the same freedoms that the
+software does.  But this License is not limited to software manuals;
+it can be used for any textual work, regardless of subject matter or
+whether it is published as a printed book.  We recommend this License
+principally for works whose purpose is instruction or reference.
+
+
+1. APPLICABILITY AND DEFINITIONS
+
+This License applies to any manual or other work, in any medium, that
+contains a notice placed by the copyright holder saying it can be
+distributed under the terms of this License.  Such a notice grants a
+world-wide, royalty-free license, unlimited in duration, to use that
+work under the conditions stated herein.  The "Document", below,
+refers to any such manual or work.  Any member of the public is a
+licensee, and is addressed as "you".  You accept the license if you
+copy, modify or distribute the work in a way requiring permission
+under copyright law.
+
+A "Modified Version" of the Document means any work containing the
+Document or a portion of it, either copied verbatim, or with
+modifications and/or translated into another language.
+
+A "Secondary Section" is a named appendix or a front-matter section of
+the Document that deals exclusively with the relationship of the
+publishers or authors of the Document to the Document's overall
+subject (or to related matters) and contains nothing that could fall
+directly within that overall subject.  (Thus, if the Document is in
+part a textbook of mathematics, a Secondary Section may not explain
+any mathematics.)  The relationship could be a matter of historical
+connection with the subject or with related matters, or of legal,
+commercial, philosophical, ethical or political position regarding
+them.
+
+The "Invariant Sections" are certain Secondary Sections whose titles
+are designated, as being those of Invariant Sections, in the notice
+that says that the Document is released under this License.  If a
+section does not fit the above definition of Secondary then it is not
+allowed to be designated as Invariant.  The Document may contain zero
+Invariant Sections.  If the Document does not identify any Invariant
+Sections then there are none.
+
+The "Cover Texts" are certain short passages of text that are listed,
+as Front-Cover Texts or Back-Cover Texts, in the notice that says that
+the Document is released under this License.  A Front-Cover Text may
+be at most 5 words, and a Back-Cover Text may be at most 25 words.
+
+A "Transparent" copy of the Document means a machine-readable copy,
+represented in a format whose specification is available to the
+general public, that is suitable for revising the document
+straightforwardly with generic text editors or (for images composed of
+pixels) generic paint programs or (for drawings) some widely available
+drawing editor, and that is suitable for input to text formatters or
+for automatic translation to a variety of formats suitable for input
+to text formatters.  A copy made in an otherwise Transparent file
+format whose markup, or absence of markup, has been arranged to thwart
+or discourage subsequent modification by readers is not Transparent.
+An image format is not Transparent if used for any substantial amount
+of text.  A copy that is not "Transparent" is called "Opaque".
+
+Examples of suitable formats for Transparent copies include plain
+ASCII without markup, Texinfo input format, LaTeX input format, SGML
+or XML using a publicly available DTD, and standard-conforming simple
+HTML, PostScript or PDF designed for human modification.  Examples of
+transparent image formats include PNG, XCF and JPG.  Opaque formats
+include proprietary formats that can be read and edited only by
+proprietary word processors, SGML or XML for which the DTD and/or
+processing tools are not generally available, and the
+machine-generated HTML, PostScript or PDF produced by some word
+processors for output purposes only.
+
+The "Title Page" means, for a printed book, the title page itself,
+plus such following pages as are needed to hold, legibly, the material
+this License requires to appear in the title page.  For works in
+formats which do not have any title page as such, "Title Page" means
+the text near the most prominent appearance of the work's title,
+preceding the beginning of the body of the text.
+
+The "publisher" means any person or entity that distributes copies of
+the Document to the public.
+
+A section "Entitled XYZ" means a named subunit of the Document whose
+title either is precisely XYZ or contains XYZ in parentheses following
+text that translates XYZ in another language.  (Here XYZ stands for a
+specific section name mentioned below, such as "Acknowledgements",
+"Dedications", "Endorsements", or "History".)  To "Preserve the Title"
+of such a section when you modify the Document means that it remains a
+section "Entitled XYZ" according to this definition.
+
+The Document may include Warranty Disclaimers next to the notice which
+states that this License applies to the Document.  These Warranty
+Disclaimers are considered to be included by reference in this
+License, but only as regards disclaiming warranties: any other
+implication that these Warranty Disclaimers may have is void and has
+no effect on the meaning of this License.
+
+2. VERBATIM COPYING
+
+You may copy and distribute the Document in any medium, either
+commercially or noncommercially, provided that this License, the
+copyright notices, and the license notice saying this License applies
+to the Document are reproduced in all copies, and that you add no
+other conditions whatsoever to those of this License.  You may not use
+technical measures to obstruct or control the reading or further
+copying of the copies you make or distribute.  However, you may accept
+compensation in exchange for copies.  If you distribute a large enough
+number of copies you must also follow the conditions in section 3.
+
+You may also lend copies, under the same conditions stated above, and
+you may publicly display copies.
+
+
+3. COPYING IN QUANTITY
+
+If you publish printed copies (or copies in media that commonly have
+printed covers) of the Document, numbering more than 100, and the
+Document's license notice requires Cover Texts, you must enclose the
+copies in covers that carry, clearly and legibly, all these Cover
+Texts: Front-Cover Texts on the front cover, and Back-Cover Texts on
+the back cover.  Both covers must also clearly and legibly identify
+you as the publisher of these copies.  The front cover must present
+the full title with all words of the title equally prominent and
+visible.  You may add other material on the covers in addition.
+Copying with changes limited to the covers, as long as they preserve
+the title of the Document and satisfy these conditions, can be treated
+as verbatim copying in other respects.
+
+If the required texts for either cover are too voluminous to fit
+legibly, you should put the first ones listed (as many as fit
+reasonably) on the actual cover, and continue the rest onto adjacent
+pages.
+
+If you publish or distribute Opaque copies of the Document numbering
+more than 100, you must either include a machine-readable Transparent
+copy along with each Opaque copy, or state in or with each Opaque copy
+a computer-network location from which the general network-using
+public has access to download using public-standard network protocols
+a complete Transparent copy of the Document, free of added material.
+If you use the latter option, you must take reasonably prudent steps,
+when you begin distribution of Opaque copies in quantity, to ensure
+that this Transparent copy will remain thus accessible at the stated
+location until at least one year after the last time you distribute an
+Opaque copy (directly or through your agents or retailers) of that
+edition to the public.
+
+It is requested, but not required, that you contact the authors of the
+Document well before redistributing any large number of copies, to
+give them a chance to provide you with an updated version of the
+Document.
+
+
+4. MODIFICATIONS
+
+You may copy and distribute a Modified Version of the Document under
+the conditions of sections 2 and 3 above, provided that you release
+the Modified Version under precisely this License, with the Modified
+Version filling the role of the Document, thus licensing distribution
+and modification of the Modified Version to whoever possesses a copy
+of it.  In addition, you must do these things in the Modified Version:
+
+A. Use in the Title Page (and on the covers, if any) a title distinct
+   from that of the Document, and from those of previous versions
+   (which should, if there were any, be listed in the History section
+   of the Document).  You may use the same title as a previous version
+   if the original publisher of that version gives permission.
+B. List on the Title Page, as authors, one or more persons or entities
+   responsible for authorship of the modifications in the Modified
+   Version, together with at least five of the principal authors of the
+   Document (all of its principal authors, if it has fewer than five),
+   unless they release you from this requirement.
+C. State on the Title page the name of the publisher of the
+   Modified Version, as the publisher.
+D. Preserve all the copyright notices of the Document.
+E. Add an appropriate copyright notice for your modifications
+   adjacent to the other copyright notices.
+F. Include, immediately after the copyright notices, a license notice
+   giving the public permission to use the Modified Version under the
+   terms of this License, in the form shown in the Addendum below.
+G. Preserve in that license notice the full lists of Invariant Sections
+   and required Cover Texts given in the Document's license notice.
+H. Include an unaltered copy of this License.
+I. Preserve the section Entitled "History", Preserve its Title, and add
+   to it an item stating at least the title, year, new authors, and
+   publisher of the Modified Version as given on the Title Page.  If
+   there is no section Entitled "History" in the Document, create one
+   stating the title, year, authors, and publisher of the Document as
+   given on its Title Page, then add an item describing the Modified
+   Version as stated in the previous sentence.
+J. Preserve the network location, if any, given in the Document for
+   public access to a Transparent copy of the Document, and likewise
+   the network locations given in the Document for previous versions
+   it was based on.  These may be placed in the "History" section.
+   You may omit a network location for a work that was published at
+   least four years before the Document itself, or if the original
+   publisher of the version it refers to gives permission.
+K. For any section Entitled "Acknowledgements" or "Dedications",
+   Preserve the Title of the section, and preserve in the section all
+   the substance and tone of each of the contributor acknowledgements
+   and/or dedications given therein.
+L. Preserve all the Invariant Sections of the Document,
+   unaltered in their text and in their titles.  Section numbers
+   or the equivalent are not considered part of the section titles.
+M. Delete any section Entitled "Endorsements".  Such a section
+   may not be included in the Modified Version.
+N. Do not retitle any existing section to be Entitled "Endorsements"
+   or to conflict in title with any Invariant Section.
+O. Preserve any Warranty Disclaimers.
+
+If the Modified Version includes new front-matter sections or
+appendices that qualify as Secondary Sections and contain no material
+copied from the Document, you may at your option designate some or all
+of these sections as invariant.  To do this, add their titles to the
+list of Invariant Sections in the Modified Version's license notice.
+These titles must be distinct from any other section titles.
+
+You may add a section Entitled "Endorsements", provided it contains
+nothing but endorsements of your Modified Version by various
+parties--for example, statements of peer review or that the text has
+been approved by an organization as the authoritative definition of a
+standard.
+
+You may add a passage of up to five words as a Front-Cover Text, and a
+passage of up to 25 words as a Back-Cover Text, to the end of the list
+of Cover Texts in the Modified Version.  Only one passage of
+Front-Cover Text and one of Back-Cover Text may be added by (or
+through arrangements made by) any one entity.  If the Document already
+includes a cover text for the same cover, previously added by you or
+by arrangement made by the same entity you are acting on behalf of,
+you may not add another; but you may replace the old one, on explicit
+permission from the previous publisher that added the old one.
+
+The author(s) and publisher(s) of the Document do not by this License
+give permission to use their names for publicity for or to assert or
+imply endorsement of any Modified Version.
+
+
+5. COMBINING DOCUMENTS
+
+You may combine the Document with other documents released under this
+License, under the terms defined in section 4 above for modified
+versions, provided that you include in the combination all of the
+Invariant Sections of all of the original documents, unmodified, and
+list them all as Invariant Sections of your combined work in its
+license notice, and that you preserve all their Warranty Disclaimers.
+
+The combined work need only contain one copy of this License, and
+multiple identical Invariant Sections may be replaced with a single
+copy.  If there are multiple Invariant Sections with the same name but
+different contents, make the title of each such section unique by
+adding at the end of it, in parentheses, the name of the original
+author or publisher of that section if known, or else a unique number.
+Make the same adjustment to the section titles in the list of
+Invariant Sections in the license notice of the combined work.
+
+In the combination, you must combine any sections Entitled "History"
+in the various original documents, forming one section Entitled
+"History"; likewise combine any sections Entitled "Acknowledgements",
+and any sections Entitled "Dedications".  You must delete all sections
+Entitled "Endorsements".
+
+
+6. COLLECTIONS OF DOCUMENTS
+
+You may make a collection consisting of the Document and other
+documents released under this License, and replace the individual
+copies of this License in the various documents with a single copy
+that is included in the collection, provided that you follow the rules
+of this License for verbatim copying of each of the documents in all
+other respects.
+
+You may extract a single document from such a collection, and
+distribute it individually under this License, provided you insert a
+copy of this License into the extracted document, and follow this
+License in all other respects regarding verbatim copying of that
+document.
+
+
+7. AGGREGATION WITH INDEPENDENT WORKS
+
+A compilation of the Document or its derivatives with other separate
+and independent documents or works, in or on a volume of a storage or
+distribution medium, is called an "aggregate" if the copyright
+resulting from the compilation is not used to limit the legal rights
+of the compilation's users beyond what the individual works permit.
+When the Document is included in an aggregate, this License does not
+apply to the other works in the aggregate which are not themselves
+derivative works of the Document.
+
+If the Cover Text requirement of section 3 is applicable to these
+copies of the Document, then if the Document is less than one half of
+the entire aggregate, the Document's Cover Texts may be placed on
+covers that bracket the Document within the aggregate, or the
+electronic equivalent of covers if the Document is in electronic form.
+Otherwise they must appear on printed covers that bracket the whole
+aggregate.
+
+
+8. TRANSLATION
+
+Translation is considered a kind of modification, so you may
+distribute translations of the Document under the terms of section 4.
+Replacing Invariant Sections with translations requires special
+permission from their copyright holders, but you may include
+translations of some or all Invariant Sections in addition to the
+original versions of these Invariant Sections.  You may include a
+translation of this License, and all the license notices in the
+Document, and any Warranty Disclaimers, provided that you also include
+the original English version of this License and the original versions
+of those notices and disclaimers.  In case of a disagreement between
+the translation and the original version of this License or a notice
+or disclaimer, the original version will prevail.
+
+If a section in the Document is Entitled "Acknowledgements",
+"Dedications", or "History", the requirement (section 4) to Preserve
+its Title (section 1) will typically require changing the actual
+title.
+
+
+9. TERMINATION
+
+You may not copy, modify, sublicense, or distribute the Document
+except as expressly provided under this License.  Any attempt
+otherwise to copy, modify, sublicense, or distribute it is void, and
+will automatically terminate your rights under this License.
+
+However, if you cease all violation of this License, then your license
+from a particular copyright holder is reinstated (a) provisionally,
+unless and until the copyright holder explicitly and finally
+terminates your license, and (b) permanently, if the copyright holder
+fails to notify you of the violation by some reasonable means prior to
+60 days after the cessation.
+
+Moreover, your license from a particular copyright holder is
+reinstated permanently if the copyright holder notifies you of the
+violation by some reasonable means, this is the first time you have
+received notice of violation of this License (for any work) from that
+copyright holder, and you cure the violation prior to 30 days after
+your receipt of the notice.
+
+Termination of your rights under this section does not terminate the
+licenses of parties who have received copies or rights from you under
+this License.  If your rights have been terminated and not permanently
+reinstated, receipt of a copy of some or all of the same material does
+not give you any rights to use it.
+
+
+10. FUTURE REVISIONS OF THIS LICENSE
+
+The Free Software Foundation may publish new, revised versions of the
+GNU Free Documentation License from time to time.  Such new versions
+will be similar in spirit to the present version, but may differ in
+detail to address new problems or concerns.  See
+https://www.gnu.org/licenses/.
+
+Each version of the License is given a distinguishing version number.
+If the Document specifies that a particular numbered version of this
+License "or any later version" applies to it, you have the option of
+following the terms and conditions either of that specified version or
+of any later version that has been published (not as a draft) by the
+Free Software Foundation.  If the Document does not specify a version
+number of this License, you may choose any version ever published (not
+as a draft) by the Free Software Foundation.  If the Document
+specifies that a proxy can decide which future versions of this
+License can be used, that proxy's public statement of acceptance of a
+version permanently authorizes you to choose that version for the
+Document.
+
+11. RELICENSING
+
+"Massive Multiauthor Collaboration Site" (or "MMC Site") means any
+World Wide Web server that publishes copyrightable works and also
+provides prominent facilities for anybody to edit those works.  A
+public wiki that anybody can edit is an example of such a server.  A
+"Massive Multiauthor Collaboration" (or "MMC") contained in the site
+means any set of copyrightable works thus published on the MMC site.
+
+"CC-BY-SA" means the Creative Commons Attribution-Share Alike 3.0
+license published by Creative Commons Corporation, a not-for-profit
+corporation with a principal place of business in San Francisco,
+California, as well as future copyleft versions of that license
+published by that same organization.
+
+"Incorporate" means to publish or republish a Document, in whole or in
+part, as part of another Document.
+
+An MMC is "eligible for relicensing" if it is licensed under this
+License, and if all works that were first published under this License
+somewhere other than this MMC, and subsequently incorporated in whole or
+in part into the MMC, (1) had no cover texts or invariant sections, and
+(2) were thus incorporated prior to November 1, 2008.
+
+The operator of an MMC Site may republish an MMC contained in the site
+under CC-BY-SA on the same site at any time before August 1, 2009,
+provided the MMC is eligible for relicensing.
+
+
+ADDENDUM: How to use this License for your documents
+
+To use this License in a document you have written, include a copy of
+the License in the document and put the following copyright and
+license notices just after the title page:
+
+    Copyright (c)  YEAR  YOUR NAME.
+    Permission is granted to copy, distribute and/or modify this document
+    under the terms of the GNU Free Documentation License, Version 1.3
+    or any later version published by the Free Software Foundation;
+    with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+    A copy of the license is included in the section entitled "GNU
+    Free Documentation License".
+
+If you have Invariant Sections, Front-Cover Texts and Back-Cover Texts,
+replace the "with...Texts." line with this:
+
+    with the Invariant Sections being LIST THEIR TITLES, with the
+    Front-Cover Texts being LIST, and with the Back-Cover Texts being LIST.
+
+If you have Invariant Sections without Cover Texts, or some other
+combination of the three, merge those two alternatives to suit the
+situation.
+
+If your document contains nontrivial examples of program code, we
+recommend releasing these examples in parallel under your choice of
+free software license, such as the GNU General Public License,
+to permit their use in free software.
+</pre>
+#+end_export
+
+#+html: <!--
+
+* Indices
+:PROPERTIES:
+:CUSTOM_ID: h:3dbfeab5-bf86-4dfe-bf90-74061205b570
+:END:
+
+** Function index
+:PROPERTIES:
+:CUSTOM_ID: h:c3fa52c2-988f-40f2-84a8-07699a61867c
+:END:
+
+** Variable index
+:PROPERTIES:
+:CUSTOM_ID: h:02b12c7b-22e5-457b-8086-5bf7866db0de
+:END:
+
+** Concept index
+:PROPERTIES:
+:CUSTOM_ID: h:c68456c8-ec2b-4d16-93d2-f9fcb18b2fdd
+:END:
+
+#+html: -->

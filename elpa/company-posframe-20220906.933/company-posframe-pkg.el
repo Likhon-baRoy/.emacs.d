@@ -1,2 +1,0 @@
-;;; Generated package description from company-posframe.el  -*- no-byte-compile: t -*-
-(define-package "company-posframe" "20220906.933" "Use a posframe as company candidate menu" '((emacs "26.0") (company "0.9.0") (posframe "0.9.0")) :commit "b67ec1fa83229187fdf1d3dc5576f81a37a2b369" :authors '(("Clément Pit-Claudel, Feng Shu, Lars Andersen" . "expez@expez.com")) :maintainer '("Feng Shu" . "tumashu@163.com") :keywords '("abbrev" "convenience" "matching") :url "https://github.com/tumashu/company-posframe")

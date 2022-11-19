@@ -1,0 +1,2 @@
+;;; Generated package description from org-alert.el  -*- no-byte-compile: t -*-
+(define-package "org-alert" "20220721.1721" "Notify org deadlines via notify-send" '((org "9.0") (alert "1.2")) :commit "f1801e061722843329b95409957c7dbd5cc223e9" :authors '(("Stephen Pegoraro" . "spegoraro@tutive.com")) :maintainer '("Stephen Pegoraro" . "spegoraro@tutive.com") :keywords '("org" "org-mode" "notify" "notifications" "calendar") :url "https://github.com/spegoraro/org-alert")

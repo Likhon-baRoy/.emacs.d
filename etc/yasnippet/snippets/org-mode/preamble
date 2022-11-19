@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: preamble
+# key: pre
+# --
+#+TITLE: ${1:insert title}
+#+AUTHOR: ${1:insert author name}
+#+DATE: `(format-time-string "%Y-%m-%d")`
+
+* $0

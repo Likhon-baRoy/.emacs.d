@@ -1,0 +1,2 @@
+;;; Generated package description from company-shell.el  -*- no-byte-compile: t -*-
+(define-package "company-shell" "20221103.2107" "Company mode backend for shell functions" '((emacs "24.4") (company "0.8.12") (dash "2.12.0") (cl-lib "0.5")) :commit "e55b9000192f82e96fdc0f7ca1e8a868e67762a8" :authors '(("Alexander Miller" . "alexanderm@web.de")) :maintainer '("Alexander Miller" . "alexanderm@web.de") :keywords '("company" "shell" "auto-completion") :url "https://github.com/Alexander-Miller/company-shell")

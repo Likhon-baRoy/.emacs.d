@@ -1,5 +1,4 @@
 g++ hello.cpp 
-./a.out
 zsh
 zsh
 zsh
@@ -13,29 +12,23 @@ ls -l latex/
 ll latex
 ls -lh
 eshell-path-env
-ll
 e
 ff
 ff yt
 ff .bashrc 
 d yt/
 clear 1
-ll
 clear
 clear 1
 l
 l
-ll
 x
-cls
 date
 pwd
 x
 date
 uname -a
 fzf
-ll
-ll
 !
 !5
 !ls
@@ -51,27 +44,18 @@ uptime /emacs
 uptime emacs
 ps aux
 lf
-ranger
 zathura 
 smooth-scroll
 x
-ll
 l
 x
-ll
 x
-ls
-ll
 clear 1
 exit 1
 x
-ls
 rgrep
-ls
 x
-ls
 x
-ls
 lfub 
 lf
 vi
@@ -82,21 +66,116 @@ psaux
 ps 
 uptime -p
 x
-ls
 l
 x
-ls
 x
 mpv --vo=tct "https://youtube.com/watch?v=dQw4w9WgXcQ"
-ls
 cd wr
 g++ cpp-mode.cpp 
-./a.out
 cd wrx/
 x
 x
-exit
 cd wrx/
 bat problem1.cpp 
+x
+x
+x
+x
+uptime -p
+clear
+clear -c
+alias 
+ll Downloads/
+pwd
+basename 
+pwd
+x
+exit 0
+exit 1
+x
+pwd
+cd Downloads
+lfub
+htop
+r
+ranger
+ls
+pwd
+du -h
+ckls
+x
+x
+x
+cd \[Judas\]\ Steins\;Gate\ \(Season\ 1\ +\ OVA\ +\ Movie\)\ \[BD\ 1080p\]\[HEVC\ x265\ 10bit\]\[Dual-Audio\]\[Multi-Subs\]/
+cls
+cd Downloads/
+p -Syu
+du -h -k
+du -h
+df -
+df -h
+ls
+cpp-mode
+cls
+make cpp-mode.cpp 
+cpp-mode
+x
+ls
+cpp-mode
+./cpp-mode
+x
+cd wrx
+cls
+gcc sin.c 
+gcc sin.c -lm
+gcc sin.c -lm
+cls
+cls
+gcc sin.c -lm
+gcc sin.c -lm
+gcc sin.c -lm
+cls
+du -h
+g++ apple.cpp 
+g++ apple.cpp 
+g++ apple.cpp 
+g++ apple.cpp 
+g++ apple.cpp 
+a.out
+a.out 
+cls
+g++ apple.cpp 
+g++ apple.cpp 
+g++ apple.cpp 
+g++ apple.cpp 
+g++ apple.cpp 
+g++ apple.cpp 
+g++ apple.cpp 
+g++ apple.cpp 
+apple 
+./a.out
+cd
+mv cpp-mode.cpp wrx/
+cd wrx/
+g++ cpp-mode.cpp time
+time g++ cpp-mode.cpp 
+ll
+g++ apple.cpp
+x
+df -h
+df
+du -h
+cd
+du -h
+echo $SHELL 
+bash
+x
+exit
+cd 
+cd Downloads
+ffmpeg -ss 30 -t 3 -i dracula-playing-piano.mp4 \    -vf "fps=10,scale=320:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" \    -loop 0 output.gif
+ffmpeg -y -i dracula-playing-piano.mp4 -i palette.png -filter_complex "fps=30,scale=320:-1:flags=lanczos[x];[x][1:v]paletteuse" foo.gif
+ffmpeg -y -i dracula-playing-piano.mp4 -vf fps=30,scale=320:-1:flags=lanczos,palettegen palette.png
+ffmpeg -y -i dracula-playing-piano.mp4 -i palette.png -filter_complex "fps=30,scale=320:-1:flags=lanczos[x];[x][1:v]paletteuse" foo.gif
 x
 exit

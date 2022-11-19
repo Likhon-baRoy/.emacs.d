@@ -205,16 +205,6 @@
 		(:authors
 		 ("Chris Wanstrath" . "chris@ozmm.org"))
 		(:commit . "adfb7ae73d6ee2ef790c780dd3c967e62930e94a"))])
- (color-theme-tangotango .
-			 [(0 0 6)
-			  ((color-theme
-			    (6 6 1)))
-			  "Tango Palette color theme for Emacs." tar
-			  ((:url . "https://github.com/juba/color-theme-tangotango")
-			   (:keywords "tango" "palette" "color" "theme" "emacs")
-			   (:maintainer "Julien Barnier")
-			   (:authors
-			    ("Julien Barnier")))])
  (corfu-terminal .
 		 [(0 5)
 		  ((emacs
@@ -341,7 +331,7 @@
 		   ("Fanael Linithien" . "fanael4@gmail.com"))
 		  (:commit . "f80f63822ffae78de38dbe72cacaeb1aaa96c732"))])
  (editorconfig .
-	       [(0 9 0)
+	       [(0 9 1)
 		((cl-lib
 		  (0 5))
 		 (nadvice
@@ -353,7 +343,7 @@
 		 (:maintainer "EditorConfig Team" . "editorconfig@googlegroups.com")
 		 (:authors
 		  ("EditorConfig Team" . "editorconfig@googlegroups.com"))
-		 (:commit . "bcd377596fc0c5c315598adaa59fcd0455916f8d"))])
+		 (:commit . "3352e487809dda4a0366314e30c9efa431b61f79"))])
  (elixir-mode .
 	      [(2 4 0)
 	       ((emacs
@@ -558,11 +548,9 @@
 	       ("Matus Goljer" . "matus.goljer@gmail.com"))
 	      (:commit . "6f9172376af4d399c7853cbdfdd7425348a878f9"))])
  (geiser .
-	 [(0 27)
+	 [(0 28)
 	  ((emacs
 	    (25 1))
-	   (transient
-	    (0 3))
 	   (project
 	    (0 8 1)))
 	  "GNU Emacs and Scheme talk to each other" tar
@@ -571,7 +559,7 @@
 	   (:maintainer "Jose Antonio Ortega Ruiz" . "jao@gnu.org")
 	   (:authors
 	    ("Jose Antonio Ortega Ruiz" . "jao@gnu.org"))
-	   (:commit . "af81e4fb1088d9ccbd36dcd541e29eb2770e4d87"))])
+	   (:commit . "04dbdacfeca0190856abad859360da4bb873f9dd"))])
  (geiser-chez .
 	      [(0 17)
 	       ((emacs
@@ -634,18 +622,20 @@
 		   ("András Simonyi" . "andras.simonyi@gmail.com"))
 		  (:keywords "languages" "gauche" "scheme" "geiser"))])
  (geiser-guile .
-	       [(0 26 1)
+	       [(0 28 0)
 		((emacs
 		  (25 1))
+		 (transient
+		  (0 3))
 		 (geiser
-		  (0 26 1)))
-		"Guile's implementation of the geiser protocols" tar
+		  (0 28)))
+		"Guile and Geiser talk to each other" tar
 		((:url . "https://gitlab.com/emacs-geiser/guile")
 		 (:keywords "languages" "guile" "scheme" "geiser")
 		 (:maintainer "Jose Antonio Ortega Ruiz" . "jao@gnu.org")
 		 (:authors
 		  ("Jose Antonio Ortega Ruiz" . "jao@gnu.org"))
-		 (:commit . "e540e14db538ed0d116a188569413f5aadd79180"))])
+		 (:commit . "f5e82dc0f5a076335f201885a7edbefaa1ad435f"))])
  (geiser-kawa .
 	      [(0 0 1)
 	       ((emacs
@@ -818,9 +808,10 @@
 	      (:authors
 	       ("Natalie Weizenbaum")))])
  (haskell-mode .
-	       [(4 7 1)
+	       [(17 2)
 		nil "A Haskell editing mode" tar
 		((:url . "https://github.com/haskell/haskell-mode")
+		 (:keywords "faces" "files" "haskell")
 		 (:maintainer "1992      Simon Marlow")
 		 (:authors
 		  ("1992      Simon Marlow")
@@ -829,7 +820,7 @@
 		  ("2001-2002 Reuben Thomas (>=v1.4)")
 		  ("2003      Dave Love" . "fx@gnu.org")
 		  ("2016      Arthur Fayzrakhmanov"))
-		 (:keywords "faces" "files" "haskell"))])
+		 (:commit . "e72677668f5fc7cc148008e885a0f256e245dd43"))])
  (haskell-tng-mode .
 		   [(0 0 1)
 		    ((emacs
@@ -1583,13 +1574,14 @@
        ((:url . "https://github.com/joaotavora/sly")
 	(:keywords "languages" "lisp" "sly"))])
  (smartparens .
-	      [(4 7 1)
+	      [(1 11 0)
 	       nil "Automatic insertion, wrapping and paredit-like navigation with user defined pairs." tar
 	       ((:url . "https://github.com/Fuco1/smartparens")
+		(:keywords "abbrev" "convenience" "editing")
 		(:maintainer "Matus Goljer" . "matus.goljer@gmail.com")
 		(:authors
 		 ("Matus Goljer" . "matus.goljer@gmail.com"))
-		(:keywords "abbrev" "convenience" "editing"))])
+		(:commit . "4873352b5d0a1c5142658122de1b6950b8fe7e4d"))])
  (solarized-theme .
 		  [(1 3 0)
 		   ((emacs
@@ -1921,7 +1913,7 @@
 	      (:authors
 	       ("Le Wang")))])
  (xah-fly-keys .
-	       [(21 0 20221026102048)
+	       [(22 0 20221031102959)
 		((emacs
 		  (24 1)))
 		"ergonomic modal keybinding minor mode." tar
@@ -1930,7 +1922,7 @@
 		 (:maintainer "Xah Lee" . "xah@xahlee.org")
 		 (:authors
 		  ("Xah Lee ( http://xahlee.info/ )"))
-		 (:commit . "b963cb78eb8dd5bdb7bf419e7d667d4299d9960e"))])
+		 (:commit . "644dc9a4e254264560019578f8b84bc4523de8de"))])
  (xml-rpc .
 	  [(1 6 16)
 	   nil "An elisp implementation of clientside XML-RPC" tar

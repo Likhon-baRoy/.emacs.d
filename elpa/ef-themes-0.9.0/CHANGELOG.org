@@ -1,0 +1,2274 @@
+#+title: Change log of the Ef Themes
+#+author: Protesilaos Stavrou
+#+email: info@protesilaos.com
+#+options: ':nil toc:nil num:nil author:nil email:nil
+
+This document contains the release notes for each tagged commit on the
+project's main git repository: <https://git.sr.ht/~protesilaos/ef-themes>.
+
+The newest release is at the top.  For further details, please consult
+the manual: <https://protesilaos.com/emacs/ef-themes>.
+
+* Version 0.9.0 on 2022-10-28
+:PROPERTIES:
+:CUSTOM_ID: h:b5e83e34-9af3-41b6-a9a1-ab9b3555b2e9
+:END:
+
+** Introduced the 'ef-cherie' and 'ef-cyprus' themes
+:PROPERTIES:
+:CUSTOM_ID: h:877fc5ae-d48d-4f0c-80bf-248501f284eb
+:END:
+
+~ef-cherie~ is a dark theme with mostly pink, magenta, and gold
+colours.  ~ef-cyprus~ is a light theme characterised by green, yellow,
+teal, and red colours.
+
+Read the announcements, which also include screen shots:
+
++ <https://protesilaos.com/codelog/2022-10-25-ef-cherie/>.
++ <https://protesilaos.com/codelog/2022-10-24-ef-cyprus-theme/>.
+
+These themes bring the total number of the collection to 20, split
+into an equal number of light and dark themes.
+
+Note that some themes in the collection are designed as pairs.  Those
+have =-light= or =-dark= in their name.  The others are standalone.
+Regardless, the user can specify any two themes in the value of the
+user option ~ef-themes-to-toggle~ and then switch between them with
+the command ~ef-themes-toggle~.  Or just use the other available
+commands: ~ef-themes-select~ for minibuffer completion and the
+~ef-themes-load-random~ to load one from the collection (with a =C-u=
+prefix argument to limit the set to light or dark themes). The
+official manual explains more.
+
+Will there be more themes?  Time will tell.  Though I think that
+between those and the =modus-themes=, I have covered a very broad
+range of preferences and requirements for accessibility.
+
+** The 'ef-themes-select' optionally limits to light or dark
+:PROPERTIES:
+:CUSTOM_ID: h:caeb1c99-8890-4275-b812-45d5715d071b
+:END:
+
+The command ~ef-themes-select~ can now accept a prefix argument (=C-u=
+with the default key bindings).  It prompts for a selection between
+light or dark themes and then uses minibuffer completion that only
+includes the items of the given set.
+
+Inspect the value of the variables ~ef-themes-dark-themes~,
+~ef-themes-light-themes~ for what is included in each set.
+
+[ Note that the command ~ef-themes-load-random~ has the same behaviour
+  of limiting to a set when it reads a prefix argument. ]
+
+** The 'ef-themes-load-random' reports the theme it loaded
+:PROPERTIES:
+:CUSTOM_ID: h:308296a7-46f8-4524-8c62-9ad720f5fb3d
+:END:
+
+The command ~ef-themes-load-random~ has received a quality-of-life
+improvement to its functionality.  It now prints a message in the echo
+area that includes the name of the theme it loaded.  The user can
+review echo area messages by invoking the ~view-echo-area-messages~
+command, which is bound to =C-h e= by default.
+
+This change makes it easier for the user to remember a theme they
+liked.
+
+Thanks to Federico Stilman for sharing with me the idea of reporting
+the name of the randomly loaded theme.  This information is shared
+with permission, as it was done via a private channel.
+
+** Stylistic refinements
+:PROPERTIES:
+:CUSTOM_ID: h:a9155853-90c1-40a6-8d20-5756cbcdda8f
+:END:
+
++ All themes have palette entries for colour-coded underlines.  Those
+  are used by packages like =flymake= and =flyspell= to highlight
+  errors and warnings.  All dark Ef themes had a bit too intense
+  colours applied to those constructs.  These have now been toned down
+  in order to avoid potential distractions.  They still perform their
+  intended function, without drawing too much attention to themselves.
+
++ Almost all themes have a slightly more pronounced =border= colour.
+  This is used to underline links and to draw the vertical line that
+  separates Emacs windows (among others).  It still is a subtle grey,
+  though it works better than before.
+
++ The =warning= mapping of many themes has been revised to be a more
+  neutral yellow (I define hues as triplets of neutral, warmer,
+  colder).  The previous style was a warmer shade of yellow, which
+  brought it closer to red.  This, in turn, had the unintended effect
+  of making the Org agenda potentially confusing.
+
++ The =mail-3= mapping of some themes has been tweaked to better stand
+  out in its context, without prejudice to the overall character of
+  its theme.  This colour is used by email clients that leverage the
+  built-in =message.el= library (such as Gnus, Mu4e, Notmuch).  In
+  short, if you edit messages with deeply nested quotes, you will have
+  an easier time telling apart those inner levels.
+
+** Support for packages, face groups, or faces
+:PROPERTIES:
+:CUSTOM_ID: h:37e5dd08-ba21-4847-b14d-5aea9046168e
+:END:
+
++ auto-dim-other-buffers :: Added support for this package.  It
+  applies a grey background to inactive windows.
++ consult-separator :: This is the border that divides previews of
+  registers when the user evaluates the following form and then
+  invokes C-x r i: ~(advice-add #'register-preview :override
+  #'consult-register-window)~
++ embark-collect-zebra-highlight :: The default value of this face is
+  technically okay, though it is a neutral grey which does not look
+  right with some of the Ef themes.
++ flycheck :: Added support for this package and covered all its
+  faces.  It looks like ~flymake~ as it leverages the same set of
+  colour-coding that the themes define.
++ flymake :: Expanded support to its fringe indicators.  Those are
+  bitmaps that bring attention to in-buffer colour-coded underlines.
+  They use an appropriate colour coding, like errors being red
+  (depending on the theme---see the deuteranopia and tritanopia
+  implementations).
++ help-key-binding :: This face is now rendered in ~fixed-pitch~
+  (monospaced font) when the user option ~ef-themes-mixed-fonts~ is
+  non-nil.  This user option basically makes spacing-sensitive
+  constructs retain their mono spacing, while all the rest can use a
+  proportionately spaced font (e.g. enable ~variable-pitch-mode~ in
+  Org buffers to see the effect---changes to theme user options
+  require a theme reload).
++ ibuffer :: Added support for this built-in package.  Its marks look
+  the same as those of Dired.
++ image-dired :: Expanded support to two new faces it has for the
+  ~header-line~.  Those are part of Emacs 29.
++ mm-command-output :: This is a built-in face we encounter on
+  occasion in Gnus buffers.
++ olivetti :: Made its ~olivetti-fringe~ face invisible.  We do not
+  want to see the fringes when we enter ~olivetti-mode~ (it centres
+  the contents of the buffer).  Note that the Ef themes do not have
+  visible fringes, anyway, though a user may tweak the ~fringe~ face
+  in their local setup.
++ org-agenda-current-time :: Made this face use the main foreground
+  colour.  It applies to the line that shows the current time in
+  today's Org agend time grid.  The previous mapping to =variable= was
+  giving us decent results, though this was a matter of serendipity:
+  there is a chance that a theme maps an inappropriate colour to
+  =variable= (e.g. red, which will interfere with deadlines).  This
+  new design is just as legible, while it has the upside of reducing
+  colouration where it is not needed, letting other elements get the
+  attention they deserve.
++ trashed :: Added support for this package.  It marks lines like
+  Dired and follows the same stylistic patterns.  Unlike Dired, it has
+  an extra "mark" type (select, delete, restore), which uses
+  appropriate colouration.
++ tty-menu :: This is the set of faces that are used in a text
+  terminal when the ~menu-bar-mode~ is enabled and the user interacts
+  with it via the command ~menu-bar-open~.  Note, however, that the Ef
+  themes are meant to be used either in a graphical Emacs frame or in
+  a text terminal with very good support for colour reproduction.
+  The themes do not look good in a generic terminal.
++ writegood-mode :: Added support for this package.  Its style is
+  consistent with ~flyspell~ as it uses the same colour-coding scheme.
+
+** Faces defined by the Ef themes
+:PROPERTIES:
+:CUSTOM_ID: h:3ade9d4b-858d-4e28-85c4-0cddf046f4ce
+:END:
+
+The themes define some faces to make it possible to achieve
+consistency between various groups of faces.  For example, all "marks
+for selection" use the ~ef-themes-mark-select~ face.  If, say, the
+user wants to edit this face to include an underline, the change will
+apply to lots of packages, like Dired, Trashed, Ibuffer.
+
+All the faces defined by the themes:
+
++ ~ef-themes-fixed-pitch~
++ ~ef-themes-heading-0~
++ ~ef-themes-heading-1~
++ ~ef-themes-heading-2~
++ ~ef-themes-heading-3~
++ ~ef-themes-heading-4~
++ ~ef-themes-heading-5~
++ ~ef-themes-heading-6~
++ ~ef-themes-heading-7~
++ ~ef-themes-heading-8~
++ ~ef-themes-key-binding~
++ ~ef-themes-mark-delete~
++ ~ef-themes-mark-other~
++ ~ef-themes-mark-select~
++ ~ef-themes-ui-variable-pitch~
++ ~ef-themes-underline-error~
++ ~ef-themes-underline-info~
++ ~ef-themes-underline-warning~
+
+* Version 0.8.0 on 2022-10-17
+:PROPERTIES:
+:CUSTOM_ID: h:e28b77ae-7f78-426a-97f6-eb880130b223
+:END:
+
+** Introduced themes for tritanopia
+:PROPERTIES:
+:CUSTOM_ID: h:2ddca7b3-92d7-4bb8-a0f4-03e41d8bdfd6
+:END:
+
+The ~ef-tritanopia-dark~ and ~ef-tritanopia-light~ are optimised to
+use red and cyan hues consistently throughout all interfaces.  This
+means that users with blue-yellow colour deficiency or blindness are
+empowered to use Emacs without compromising on usability.
+
+Read the announcement:
+<https://protesilaos.com/codelog/2022-10-11-ef-themes-tritanopia/>.
+
+These two themes complement what I already provide for users with
+red-green colour deficiency (deuteranopia): ~ef-deuteranopia-dark~,
+~ef-deuteranopia-light~.  Together with the rest of the set (and my
+=modus-themes=), they cover a broad spectrum of preferences and needs
+for legibility.
+
+The deuteranopia or tritanopia themes can be used by anyone, simply on
+the basis of their aesthetics: they look fine and work well (when I
+develop a theme, I use it full-time).
+
+Pictures of all =ef-themes=:
+<https://protesilaos.com/emacs/ef-themes-pictures>.
+
+** Bespoke colours for underlines
+:PROPERTIES:
+:CUSTOM_ID: h:31a6d165-5ee7-4f9d-bbb6-d27c9bb82e52
+:END:
+
+Each theme has a new subset of colours which are optimised for
+colour-coded underlines.  Think about spell checking and code linting.
+These colours are specific to each theme's requirements so that, for
+example, deueteranopia does not use red and green, while tritanopia
+does not rely on yellow and blue.
+
+** Support for new packages or face groups
+:PROPERTIES:
+:CUSTOM_ID: h:4864aa6c-eb9b-4600-8b5e-6533a000b140
+:END:
+
++ corfu
++ hi-lock (=M-x highlight-regexp=)
++ flymake
++ flyspell
++ neotree
+
+** Tweaks to already supported faces
+:PROPERTIES:
+:CUSTOM_ID: h:7853e95c-6346-448d-bfad-1b1c00e87625
+:END:
+
++ The tagging operations of =notmuch= which underline added tags and
+  strike through deleted ones, now use the new colours for underlines.
+  The effect is small, but still constitutes an improvement.
+
++ The background colour of the =company= popup is a bit lighter than
+  before.  This helps the foreground colours be easier to discern.  It
+  also makes it look consistent with =corfu=.
+
+** Use our communication channels
+:PROPERTIES:
+:CUSTOM_ID: h:886e8ac8-0f60-4e69-b07a-31273e570e88
+:END:
+
+This is not a "change log" per se, but it is worth mentioning.  A few
+days ago I was informed of a post on Reddit asking something related
+to my themes.  Please understand that I cannot go around the Internet
+hoping to provide tech support.  Each project of mine has a mailing
+list and two (!) mirrors on GitHub and GitLab.  All are actively
+maintained and supported.  In addition, you are always welcome to
+email me directly.  I reply in a timely fashion and in full (check the
+mailing lists and issue trackers, if you have any doubt).  What I will
+not do is go searching for you on random websites.
+
+* Version 0.7.0 on 2022-10-08
+:PROPERTIES:
+:CUSTOM_ID: h:447f35cd-f741-43e7-b4f3-100d95df9013
+:END:
+
+** Introduced the ~ef-bio~ and ~ef-frost~ themes
+:PROPERTIES:
+:CUSTOM_ID: h:b2731515-50d0-4502-8d63-1c99a3474bfc
+:END:
+
+These two new themes bring the total count to 16.
+
++ ~ef-bio~ is a dark theme with green, teal, blue, and purple colours.
+  Read the announcement, which also includes screen shots:
+  <https://protesilaos.com/codelog/2022-10-02-ef-themes-bio-theme/>.
+
++ ~ef-frost~ is a light theme with blue, cyan, teal, and purple
+  colours.  Check the announcement on my website (with screenshots):
+  <https://protesilaos.com/codelog/2022-10-03-ef-themes-frost-theme/>.
+
+You may have noticed that some themes in this collection have a
+=-dark= or =-light= suffix in their name.  This means that they are
+stylistically close to each other (NOT identical colour mappings
+though).  For example the ~ef-trio-dark~ and ~ef-trio-light~ follow
+the same idea of using three main hues across almost all interfaces
+(magenta, blue, teal).  Whereas all other themes are designed to stand
+on their own and have no obvious counterpart.  Nevertheless, one can
+pick whichever two themes they prefer to switch between.  Refer to the
+user option ~ef-themes-to-toggle~ and then invoke the command
+~ef-themes-toggle~.  Else use the command ~ef-themes-load-random~,
+optionally with a prefix argument (=C-u=) to limit the choice to dark
+or light themes.
+
+Thanks to Sven Seebeck for reminding me to register the ~ef-frost~ as
+part of the collection.  I forgot to do it the day I published the
+theme.  This information is shared with permission, as it was done via
+a private channel.
+
+** General refinements
+:PROPERTIES:
+:CUSTOM_ID: h:2093bc64-1d42-472a-86ba-1de71a5316f2
+:END:
+
++ Changed the dates in ~org-agenda~ buffers to use the same style as
+  headings level 1 instead of 3.  This ensures that they are always
+  sufficiently distinct from the title of the agenda structure (there
+  can be many titles for those who use block agendas).  In the agenda,
+  the block titles use the equivalent of the Org =#+title= construct,
+  i.e. heading level 0.
+
+  The style of all heading levels is subject to the user option
+  ~ef-themes-headings~: it affects their height, weight, and whether
+  they have a proportionately spaced font, on a per-level basis.
+
++ Tweaked the background colour which is used by Org (among others) to
+  highlight the calculated date in its relevant prompts or when
+  rescheduling an item in the agenda.  The changes are subtle in most
+  cases, with the intent to make the colour fit better with the rest
+  of the theme.
+
+  This background is also used to highlight in its original context an
+  Org source block that is shown in its own buffer following the use
+  of =C-c '= (~org-edit-special~).
+
++ Adjusted the style of the filter that is used in the header of Org
+  agenda searches.  It now always complements the rest of the text on
+  that line.  To understand what I am referring to, do =M-x
+  org-agenda=, then type =s=, and search for, say, =TODO=.  In the
+  resulting buffer, the header reads: =Search words: TODO=.  The final
+  part is this filter.
+
++ Changed the applicable colours of ~org-agenda-clocking~ to use a
+  combination of yellow foreground and yellow-tinted background.  This
+  face is used to highlight in the agenda the currently clocked in
+  task.  The element is easier to spot, without being too intense.
+
++ Reduced the overall colouration in the ~vc-dir~ buffer.  It should
+  now look appropriate across all the Ef themes, while remaining
+  usable.
+
++ Aligned the style of the ~gnus-summary-low-unread~ face with that of
+  all the other "low" scoring messages to use italicised fonts (by
+  inheriting from the ~italic~ face).
+
++ Added support for the ~log-edit-headers-separator~ (which I added to
+  Emacs 29) and ~child-frame-border~ (Emacs 28) faces.  They basically
+  add an appropriately coloured border in relevant contexts.
+
++ Removed the background colour from the ~line-number-major-tick~,
+  ~line-number-minor-tick~ faces.  These are used by the
+  ~display-line-numbers-mode~ with something like:
+  
+  #+begin_src emacs-lisp
+  (setq display-line-numbers-major-tick 20
+        display-line-numbers-minor-tick 5)
+  #+end_src
+
++ Wrote a Do-It-Yourself guide to make the style of the mode lines
+  emulate the default of my =modus-themes=: shades of grey with a
+  border around them.
+
++ Answered a frequently asked question about the availability of too
+  many options.  In short: pick ~ef-light~ and/or ~ef-dark~ and take
+  it slow.
+
++ Finally, the most important entry in the list thus far...  The new
+  backronym for EF THEMES is: Extremely Fatigued of Themes Having
+  Exaggerated Markings, Embellishments, and Sparkles. 🙃
+
+** Changed the email colours of the ~ef-trio-dark~, ~ef-trio-light~
+:PROPERTIES:
+:CUSTOM_ID: h:da03e5c1-b8b5-43f9-803e-210785d58bc8
+:END:
+
+These are two themes that were introduced in the previous version of
+the project (=0.6.0=).  In =message.el= buffers, which are used by
+Gnus, Mu4e, and Notmuch, the quote levels now have colour combinations
+that are closer in spirit to the rest of the theme's aesthetic.
+
+The "trio" themes use magenta, blue, and teal hues.  The previous
+design prioritised teal, which broke the established patterns.  It was
+not terrible per se, but it did not feel right when switching through
+the various contexts.
+
+[ If you think that something "does not feel right" in a given theme,
+  please let me know.  I make mistakes and there is always scope for
+  refinements or even the creation of a new theme. ]
+
+** Intensified the diff colours of ~ef-spring~
+:PROPERTIES:
+:CUSTOM_ID: h:e7a19fde-0073-4f38-8650-d2658d8789d5
+:END:
+
+The greens, in particular, were too subtle and could be missed against
+the green-tinted light background of the theme.  The new colour values
+are consistent with the overall character of the theme, while
+improving on the usability of the relevant interfaces.
+
+** Revised the "rainbow" colours for ~ef-winter~
+:PROPERTIES:
+:CUSTOM_ID: h:5ae96878-8f85-429d-a092-0b09f929df66
+:END:
+
+Each theme's palette has a subset of colour mappings that apply to
+constructs such as Org headings.  For ~ef-winter~, those were somewhat
+inconsistent with the theme's character, in that they had certain hues
+or sequences thereof that stood out more than they should.  The new
+design has more harmonious colour combinations.
+
+** Changes to ~ef-deuteranopia-dark~, ~ef-deuteranopia-light~
+:PROPERTIES:
+:CUSTOM_ID: h:21468fe2-2b80-43e1-9f83-7eb3ed41c690
+:END:
+
++ Revised the subset of each theme's palette that applies to graphs or
+  related.  These are much better than before, in that they account
+  for red-green colour deficiency, but they will never be perfect in
+  practice because whatever mode displays graphs needs to be designed
+  from the outset with deuteranopia in mind.  For example, the
+  ~org-habit~ graph is BY DESIGN unsuitable for colour blindness
+  because of the colour coding it introduces combined with the way it
+  displays its information. We cannot fix that at the theme level.
+
++ Tweaked the colour of the backgrounds used in ~dired~ marked items,
+  ~org-modern~ TODO or DONE keywords, and related.  These backgrounds
+  now stand out a bit more, while retaining their original character.
+
+** Miscellaneous
+:PROPERTIES:
+:CUSTOM_ID: h:5c4fef35-f306-4f9d-95ec-6722d684b0fe
+:END:
+
+There are lots of other fine tweaks to individual themes and the
+manual.  If you think something is missing or does not look right,
+please let me know.
+
+Lastly, I copy an excerpt of a discussion on the emacs-devel mailing
+list with the participation of Philip Kaludercic.  It is about my
+plans with the =ef-themes= and how maintainable the project is:
+<https://lists.gnu.org/archive/html/emacs-devel/2022-10/msg00060.html>.
+
+#+begin_example message
+From: Protesilaos Stavrou <info@protesilaos.com>
+To: Philip Kaludercic <philipk@posteo.net>, emacs-devel@gnu.org
+Subject: Re: [elpa] externals/ef-themes b6fc326946: Add ef-bio theme
+Date: Sun, 02 Oct 2022 15:18:28 +0300
+
+> From: Philip Kaludercic <philipk@posteo.net>
+> Date: Sun,  2 Oct 2022 11:50:52 +0000
+>
+> ELPA Syncer <elpasync@gnu.org> writes:
+>
+>> branch: externals/ef-themes
+>> commit b6fc32694646c65adbf1ed6d3d7bfddf55e16273
+>> Author: Protesilaos Stavrou <info@protesilaos.com>
+>> Commit: Protesilaos Stavrou <info@protesilaos.com>
+>>
+>>     Add ef-bio theme
+>>     
+>>     Read the announcement, which also includes screen shots:
+>>     <https://protesilaos.com/codelog/2022-10-02-ef-themes-bio-theme/>.
+>>     
+>>     Enjoy your new theme :)
+>
+> Out of curiosity, what is your long-term plan for ef-themes?  Do you
+> plan to add more and more variations, or is there some upper bound you
+> plan to approach?  It seems to me that maintenance will become more and
+> more difficult, and it would be a shame to see the nice themes
+> abandoned, because of it becoming infeasible to properly test all the
+> changes.
+
+This is why the principle is to not add customisation options that
+introduce colour permutations (e.g. change the intensity of the
+'region').  Those will indeed make the project unmaintainable.
+
+Without customisation options, the maintenance is manageable.  It is
+basically limited to the occasional tweak to the supported faces.
+Granted, now I am still iterating on the individual colour palettes
+because we have not yet reached version 1.0.0 (maybe before the end of
+the year).
+
+The supported packages are also curated.  Unlike the modus-themes, not
+every package is meant to be covered.
+
+In terms of total number of themes, I started working on another light
+theme to bring the total number to 16.  I will probably finalise it
+tonight or tomorrow.  Then I MIGHT develop two more themes specifically
+for tritanopia (blue-yellow colour deficiency), which will be the final
+ones.
+
+> Also, do you think that splitting up the theme into multiple packages
+> would be a good idea?
+
+I am not against it per se, if there is some practical reason to do it
+(e.g. to bundle two of the themes with some other project).  Though now
+I feel it is easier to keep them all in one package.
+#+end_example
+
+I don't know if the possible tritanopia-optimised themes will be "the
+final ones", as there may be scope for more entries.  But this is the
+idea for the time being.
+* Version 0.6.0 on 2022-09-23
+:PROPERTIES:
+:CUSTOM_ID: h:42f955b9-60a1-4a91-a050-913cb75c37c3
+:END:
+
+** New tri-chrome themes
+:PROPERTIES:
+:CUSTOM_ID: h:060dee0b-f18a-4ea4-84f0-8b30ae13ed12
+:END:
+
+The collection now includes two themes which apply shades of magenta,
+blue, and teal in most contexts.  They are named ~ef-trio-dark~ and
+~ef-trio-light~.  I think some of you will like their aesthetics.
+
+The announcement includes screenshots (and it also links to the page
+with all the pictures of the themes):
+<https://protesilaos.com/codelog/2022-09-16-ef-themes-trio/>.
+
+As part of the development, I initially forgot to register the "trio"
+themes as part of the collection.  Thanks to Sven Seebeck for informing
+me about it.  (This is shared with permission, as it was done via a
+private channel.)
+
+** Changes to faces or face groups
+:PROPERTIES:
+:CUSTOM_ID: h:91711f5b-b14c-4840-97fc-ca91b221a265
+:END:
+
++ Removed the override for the ~org-modern-label~ face.  We used to
+  affect its properties, which had the unintended effect of breaking the
+  functionality of the user option ~org-modern-label-border~.  Users of
+  the =org-modern= package may thus notice a difference in the effective
+  typography that ~org-modern-mode~ produces.
+
+  For the alignment of tables with timestamps (e.g. clocktables), it is
+  recommended to set the user option ~org-modern-timestamp~ to nil.  The
+  manual covers this information in the section titled "Tweak
+  =org-modern= timestamps".
+
+  Users who still need help with this are welcome to contact me in
+  private or via the development channels of the Ef themes (mailing list
+  or GitHub/GitLab mirrors).
+
+  Thanks to Daniel Mendler (the =org-modern= developer) for explaining
+  the technicalities and correcting errors I made in the previous
+  version of that entry in the manual:
+  <https://github.com/protesilaos/ef-themes/commit/79bb1436f2fd8ab07e850c247c5616490f619f52>.
+
++ Refined the backgrounds of regexp groupings.  Commands such as
+  ~re-builder~ and ~isearch-forward-regexp~ apply distinct colours to
+  matching regexp groups.  Those are now optimised to stand out more
+  when seen side-by-side.
+
+  Part of this work involved a thorough review of the applicable hues
+  used by the ~ef-deuteranopia-dark~ and ~ef-deuteranopia-light~ (the
+  two themes which are designed for users with red-green colour
+  deficiency).  The announcement on my website shows screenshots,
+  including those which simulate deuteranopia:
+  <https://protesilaos.com/codelog/2022-09-18-ef-themes-deuteranopia-regexp/>.
+
++ Added support for ~display-fill-column-indicator-mode~.  Thanks to
+  Daniel Mendler for informing me about it (this is shared with
+  permission, as it was done via a private channel).
+
++ Covered two faces that are available on Emacs 29 (current development
+  target) for Version Control: ~vc-git-log-edit-summary-max-warning~,
+  and ~vc-git-log-edit-summary-target-warning~.
+
+** Making use of ~ef-themes-select~ in init files
+:PROPERTIES:
+:CUSTOM_ID: h:2d404dd7-5064-4ead-96b9-db4e1fb4e914
+:END:
+
+The manual includes improved language on how to use the function
+~ef-themes-select~ in user init files.  This is for users who need to
+leverage the ~ef-themes-post-load-hook~ at startup (using that hook is
+also explained in the manual).  Basically, one loads a theme in their
+init file with something like:
+
+#+begin_src emacs-lisp
+;; like `load-theme' but also call `ef-themes-post-load-hook'
+(ef-themes-select 'ef-summer)
+#+end_src
+
+** Miscellaneous refinements
+:PROPERTIES:
+:CUSTOM_ID: h:c295fd76-473f-4de9-bba8-babc2b97564e
+:END:
+
++ Simplified how the variable ~ef-themes-collection~ gets its value.
+  Thanks to Philip Kaludercic for suggesting the use of ~seq-union~ over
+  at the emacs-devel mailing list:
+  <https://lists.gnu.org/archive/html/emacs-devel/2022-09/msg01053.html>.
+
+  I could not use ~seq-union~ because it introduces a dependency on
+  Emacs 28, whereas we support Emacs 27.  I went with ~append~ instead.
+
++ Ensured that the background colour of matching delimiters in
+  ~show-paren-mode~ is no longer red-tinted.  We thus avoid the
+  potential problem of mistaking those highlights for errors of some
+  sort.  This affects the themes ~ef-autumn, ~ef-light~, and ~ef-night~.
+
++ Recorded the colour distance and colour contrast between the base
+  background values across all themes.  The data is incorporated in the
+  file =contrast-ratios.org=, which is part of the Git repository and is
+  basically intended for my own use as part of this project's
+  development (though you are welcome to consult it).
+
+** What you do not see but still need to know about
+:PROPERTIES:
+:CUSTOM_ID: h:444d811f-fff8-4bbd-8c0c-6da270de0a70
+:END:
+
+I worked on two major changes but refrained from implementing them in
+this version.  Whether I will do so in the future remains to be
+determined.  The first is an option to apply "intense" colouration to
+the ~region~ face.  The second pertains to a review of the base
+backgrounds across all dark themes in order to improve their contrast
+relative to the main background.
+
+The following sections delve into the specifics.  To cut the long story
+short: changing colours is not trivial work.
+
+*** Considerations for the "intense" region
+:PROPERTIES:
+:CUSTOM_ID: h:0e1981df-ae21-45b3-b254-ed01c9c5c183
+:END:
+
+The following patch is deceptively simple.  It defines some new colour
+values, adds a tiny function, and a user option.  Why not add this to
+the themes, then?  The reason is that colours are never that simple.
+Any new value for the region must (i) work with ~hl-line-mode~, (ii)
+respect the highlights of ~show-paren-mode~, (iii) complement or
+otherwise not interfere with isearch and its lazy highlights or any
+other search utility that can extend the active region highlight, (iv)
+keep the cursor visible, and (v) remain thematically consistent with the
+rest of the theme.  Running those checks for 14 themes is no mean feat
+and there is always the chance that the new colours will still have a
+negative effect in places that are not expected.  Furthermore, there is
+no guarantee that the number of Ef themes will stay at 14 (I have some
+more ideas, yes).
+
+It is for such reasons that one of the principles of this project is to
+NOT offer customisation options that influence colours.  They do not
+scale and will make things unmaintainable.
+
+#+begin_src diff
+From 30506843a9692c6539de79d819b63f328dbb5638 Mon Sep 17 00:00:00 2001
+Message-Id: <30506843a9692c6539de79d819b63f328dbb5638.1663662345.git.info@protesilaos.com>
+From: Protesilaos Stavrou <info@protesilaos.com>
+Date: Tue, 20 Sep 2022 11:25:15 +0300
+Subject: [PATCH] Add user option for intense region
+
+---
+ ef-autumn-theme.el             |  1 +
+ ef-dark-theme.el               |  1 +
+ ef-day-theme.el                |  1 +
+ ef-deuteranopia-dark-theme.el  |  1 +
+ ef-deuteranopia-light-theme.el |  1 +
+ ef-duo-dark-theme.el           |  1 +
+ ef-duo-light-theme.el          |  1 +
+ ef-light-theme.el              |  1 +
+ ef-night-theme.el              |  1 +
+ ef-spring-theme.el             |  1 +
+ ef-summer-theme.el             |  1 +
+ ef-themes.el                   | 20 +++++++++++++++++++-
+ ef-trio-dark-theme.el          |  1 +
+ ef-trio-light-theme.el         |  1 +
+ ef-winter-theme.el             |  1 +
+ 15 files changed, 33 insertions(+), 1 deletion(-)
+
+diff --git a/ef-autumn-theme.el b/ef-autumn-theme.el
+index e4b6e02..cd18137 100644
+--- a/ef-autumn-theme.el
++++ b/ef-autumn-theme.el
+@@ -127,6 +127,7 @@ (eval-and-compile
+       (bg-hover-alt  "#6f345a")
+       (bg-hl-line    "#302a3a")
+       (bg-region     "#3f1020")
++      (bg-region-intense "#3f5030")
+       (bg-paren      "#7f2d40")
+       (bg-err        "#361400") ; check with err
+       (bg-warning    "#332800") ; check with warning
+diff --git a/ef-dark-theme.el b/ef-dark-theme.el
+index 2377178..3ff49aa 100644
+--- a/ef-dark-theme.el
++++ b/ef-dark-theme.el
+@@ -127,6 +127,7 @@ (eval-and-compile
+       (bg-hover-alt  "#551f5a")
+       (bg-hl-line    "#002435")
+       (bg-region     "#25164a")
++      (bg-region-intense "#4f3f3f")
+       (bg-paren      "#20577a")
+       (bg-err        "#330d09") ; check with err
+       (bg-warning    "#332600") ; check with warning
+diff --git a/ef-day-theme.el b/ef-day-theme.el
+index c27fd63..7faecb9 100644
+--- a/ef-day-theme.el
++++ b/ef-day-theme.el
+@@ -127,6 +127,7 @@ (eval-and-compile
+       (bg-hover-alt  "#febcaf")
+       (bg-hl-line    "#f9e2b2")
+       (bg-region     "#f0d2df")
++      (bg-region-intense "#d2aaaf")
+       (bg-paren      "#8fcfdf")
+       (bg-err        "#ffddee") ; check with err
+       (bg-warning    "#ffe0aa") ; check with warning
+diff --git a/ef-deuteranopia-dark-theme.el b/ef-deuteranopia-dark-theme.el
+index 084b11c..816019a 100644
+--- a/ef-deuteranopia-dark-theme.el
++++ b/ef-deuteranopia-dark-theme.el
+@@ -130,6 +130,7 @@ (eval-and-compile
+       (bg-hover-alt  "#003a7f")
+       (bg-hl-line    "#2e2e1b")
+       (bg-region     "#202d3f")
++      (bg-region-intense "#50557f")
+       (bg-paren      "#0f4f9a")
+       (bg-err        "#232d09") ; check with err
+       (bg-warning    "#332600") ; check with warning
+diff --git a/ef-deuteranopia-light-theme.el b/ef-deuteranopia-light-theme.el
+index 06d091a..fac544f 100644
+--- a/ef-deuteranopia-light-theme.el
++++ b/ef-deuteranopia-light-theme.el
+@@ -130,6 +130,7 @@ (eval-and-compile
+       (bg-hover-alt  "#afafff")
+       (bg-hl-line    "#f3e0d5")
+       (bg-region     "#dadadf")
++      (bg-region-intense "#bbaacf")
+       (bg-paren      "#8fc0cf")
+       (bg-err        "#f0e0aa") ; check with err
+       (bg-warning    "#ffe0aa") ; check with warning
+diff --git a/ef-duo-dark-theme.el b/ef-duo-dark-theme.el
+index bbb25be..148c668 100644
+--- a/ef-duo-dark-theme.el
++++ b/ef-duo-dark-theme.el
+@@ -130,6 +130,7 @@ (eval-and-compile
+       (bg-hover-alt  "#265f4a")
+       (bg-hl-line    "#301a4f")
+       (bg-region     "#042a50")
++      (bg-region-intense "#4f423f")
+       (bg-paren      "#2f608e")
+       (bg-err        "#330d09") ; check with err
+       (bg-warning    "#332600") ; check with warning
+diff --git a/ef-duo-light-theme.el b/ef-duo-light-theme.el
+index 423f803..ceaba92 100644
+--- a/ef-duo-light-theme.el
++++ b/ef-duo-light-theme.el
+@@ -131,6 +131,7 @@ (eval-and-compile
+       (bg-hover-alt  "#aaeccf")
+       (bg-hl-line    "#f9e8c0")
+       (bg-region     "#caeafa")
++      (bg-region-intense "#d0a99f")
+       (bg-paren      "#afbfef")
+       (bg-err        "#ffdfe6") ; check with err
+       (bg-warning    "#ffe5ba") ; check with warning
+diff --git a/ef-light-theme.el b/ef-light-theme.el
+index 8cf425a..8389dba 100644
+--- a/ef-light-theme.el
++++ b/ef-light-theme.el
+@@ -127,6 +127,7 @@ (eval-and-compile
+       (bg-hover-alt  "#b4cfff")
+       (bg-hl-line    "#e4efd8")
+       (bg-region     "#bfefff")
++      (bg-region-intense "#c0c0ef")
+       (bg-paren      "#efa09f")
+       (bg-err        "#ffd5ea") ; check with err
+       (bg-warning    "#ffeabb") ; check with warning
+diff --git a/ef-night-theme.el b/ef-night-theme.el
+index f54689c..f17330c 100644
+--- a/ef-night-theme.el
++++ b/ef-night-theme.el
+@@ -127,6 +127,7 @@ (eval-and-compile
+       (bg-hover-alt  "#664f4a")
+       (bg-hl-line    "#002255")
+       (bg-region     "#222f40")
++      (bg-region-intense "#2f4b4f")
+       (bg-paren      "#703350")
+       (bg-err        "#331419") ; check with err
+       (bg-warning    "#332613") ; check with warning
+diff --git a/ef-spring-theme.el b/ef-spring-theme.el
+index 63927a2..3c77ebc 100644
+--- a/ef-spring-theme.el
++++ b/ef-spring-theme.el
+@@ -127,6 +127,7 @@ (eval-and-compile
+       (bg-hover-alt  "#feb5ff")
+       (bg-hl-line    "#f9e0e5")
+       (bg-region     "#d0e6ff")
++      (bg-region-intense "#cabaef")
+       (bg-paren      "#7fddd0")
+       (bg-err        "#ffe8e0") ; check with err
+       (bg-warning    "#ffecba") ; check with warning
+diff --git a/ef-summer-theme.el b/ef-summer-theme.el
+index f8d6a7a..664046d 100644
+--- a/ef-summer-theme.el
++++ b/ef-summer-theme.el
+@@ -127,6 +127,7 @@ (eval-and-compile
+       (bg-hover-alt  "#aaeccf")
+       (bg-hl-line    "#ffd6e5")
+       (bg-region     "#eecfff")
++      (bg-region-intense "#e0b29f")
+       (bg-paren      "#9fc0ef")
+       (bg-err        "#ffd0e6") ; check with err
+       (bg-warning    "#ffe5ba") ; check with warning
+diff --git a/ef-themes.el b/ef-themes.el
+index 53ae1c6..8eb90dc 100644
+--- a/ef-themes.el
++++ b/ef-themes.el
+@@ -230,6 +230,18 @@ (defcustom ef-themes-variable-pitch-ui nil
+   :type 'boolean
+   :link '(info-link "(ef-themes) UI typeface"))
+
++(defcustom ef-themes-intense-region nil
++  "When non-nil, make the `region' more intense.
++Increase the overall coloration of the `region' background and
++make it override any foreground colors within its boundaries.
++
++If nil (the default), use a more subtle background for the region
++and refrain from overriding foregrounds."
++  :group 'ef-themes
++  :package-version '(ef-themes . "0.6.0")
++  :type 'boolean
++  :link '(info-link "(ef-themes) Intense region"))
++
+ ;;; Helpers for user options
+
+ (defun ef-themes--fixed-pitch ()
+@@ -242,6 +254,12 @@ (defun ef-themes--variable-pitch-ui ()
+   (when ef-themes-variable-pitch-ui
+     (list :inherit 'variable-pitch)))
+
++(defun ef-themes--region (bg bg-intense fg-intense)
++  "Conditional application of `ef-themes-intense-region'."
++  (if ef-themes-intense-region
++      (list :background bg-intense :foreground fg-intense)
++    (list :background bg)))
++
+ (defun ef-themes--key-cdr (key alist)
+   "Get cdr of KEY in ALIST."
+   (cdr (assoc key alist)))
+@@ -535,7 +553,7 @@ ;;;;; absolute essentials
+     `(cursor ((,c :background ,cursor)))
+     `(default ((,c :background ,bg-main :foreground ,fg-main)))
+     `(italic ((,c :slant italic)))
+-    `(region ((,c :background ,bg-region)))
++    `(region ((,c ,@(ef-themes--region bg-region bg-region-intense fg-intense))))
+     `(vertical-border ((,c :foreground ,border)))
+ ;;;;; all other basic faces
+     `(button ((,c :foreground ,link :underline ,border)))
+diff --git a/ef-trio-dark-theme.el b/ef-trio-dark-theme.el
+index 0a1b5f4..76df54e 100644
+--- a/ef-trio-dark-theme.el
++++ b/ef-trio-dark-theme.el
+@@ -127,6 +127,7 @@ (eval-and-compile
+       (bg-hover-alt  "#551f5a")
+       (bg-hl-line    "#34223f")
+       (bg-region     "#16304f")
++      (bg-region-intense "#514438")
+       (bg-paren      "#2f605e")
+       (bg-err        "#300f06") ; check with err
+       (bg-warning    "#332910") ; check with warning
+diff --git a/ef-trio-light-theme.el b/ef-trio-light-theme.el
+index 015188d..37fb6ae 100644
+--- a/ef-trio-light-theme.el
++++ b/ef-trio-light-theme.el
+@@ -127,6 +127,7 @@ (eval-and-compile
+       (bg-hover-alt  "#b4cfff")
+       (bg-hl-line    "#cfe6ff")
+       (bg-region     "#eed0ff")
++      (bg-region-intense "#d2b6ff")
+       (bg-paren      "#dfadaf")
+       (bg-err        "#ffdfe6") ; check with err
+       (bg-warning    "#ffe5bf") ; check with warning
+diff --git a/ef-winter-theme.el b/ef-winter-theme.el
+index e552471..b68275b 100644
+--- a/ef-winter-theme.el
++++ b/ef-winter-theme.el
+@@ -127,6 +127,7 @@ (eval-and-compile
+       (bg-hover-alt  "#600f5a")
+       (bg-hl-line    "#003045")
+       (bg-region     "#342464")
++      (bg-region-intense "#54363f")
+       (bg-paren      "#2f608e")
+       (bg-err        "#330d06") ; check with err
+       (bg-warning    "#332610") ; check with warning
+--
+2.37.3
+#+end_src
+
+*** Revising the dark backgrounds
+:PROPERTIES:
+:CUSTOM_ID: h:379f696f-3a8a-4454-974f-686a483b65f2
+:END:
+
+As with the "intense" region, any change to the base backgrounds has
+far-reaching implications.  The following patch is, again, a matter of
+making small tweaks to colours values whose effect is far greater than
+what meets the eye.  I mean, what can possibly go wrong by changing the
+colour =#1a1a1a= to =#232323=, right?  This marginal adjustment
+requires, among others, that we also adjust (i) the foregrounds in
+header lines, (ii) the background colours of added and removed lines in
+Magit focused diff hunks as well as the backgrounds of word-wise, aka
+"refined", diff highlights, (iii) the foregrounds of inactive mode
+lines, (iv) the legibility of inactive tabs in ~tab-bar-mode~,
+~tab-line-mode~, (v) the legibility of elements such as the
+=#+begin_src= line in Org buffers, and probably many others.  A change
+to one background necessarily needs a change to all others.
+
+This topic is discussed with Alan Schmitt who has one monitor that does
+not reproduce black properly:
+<https://lists.sr.ht/~protesilaos/ef-themes/%3C87leqe2tji.fsf%40m4x.org%3E>.
+
+My suggestion is to calibrate hardware, if possible, such as by relying
+on those resources:
+
+1. <http://www.lagom.nl/lcd-test/black.php>
+2. <http://www.lagom.nl/lcd-test/white.php>
+
+[ Yes, I once did spend 8 hours calibrating my monitor.  It was crazy. ]
+
+#+begin_src diff
+From 35f3ee6b9c5a8f15615be1ef75e58c8b27e3b633 Mon Sep 17 00:00:00 2001
+Message-Id: <35f3ee6b9c5a8f15615be1ef75e58c8b27e3b633.1663904476.git.info@protesilaos.com>
+From: Protesilaos Stavrou <info@protesilaos.com>
+Date: Fri, 23 Sep 2022 06:07:12 +0300
+Subject: [PATCH] Revise base backgrounds in all dark themes (DRAFT)
+
+---
+ contrast-ratios.org           | 420 +++++++++++++++++-----------------
+ ef-autumn-theme.el            |   8 +-
+ ef-dark-theme.el              |   8 +-
+ ef-deuteranopia-dark-theme.el |   8 +-
+ ef-duo-dark-theme.el          |   8 +-
+ ef-night-theme.el             |   8 +-
+ ef-trio-dark-theme.el         |   8 +-
+ ef-winter-theme.el            |   8 +-
+ 8 files changed, 238 insertions(+), 238 deletions(-)
+
+diff --git a/contrast-ratios.org b/contrast-ratios.org
+index 0860495..bef9817 100644
+--- a/contrast-ratios.org
++++ b/contrast-ratios.org
+@@ -47,35 +47,35 @@ ** Base colours
+ :CUSTOM_ID: h:85f29c2d-ae5c-4bb8-94bf-ac43543c8539
+ :END:
+
+-| Name           |         | #0f0e06 | #1f1b19 | #36322f | #14130a |
++| Name           |         | #0f0e06 | #262422 | #342e2a | #17150f |
+ |----------------+---------+---------+---------+---------+---------|
+-| fg-main        | #cfbcba |   10.64 |    9.40 |    6.99 |   10.25 |
+-| fg-dim         | #887c8a |    4.88 |    4.31 |    3.20 |    4.70 |
+-| fg-alt         | #70a89f |    7.18 |    6.34 |    4.71 |    6.91 |
+-| red            | #ef656a |    6.21 |    5.48 |    4.07 |    5.98 |
+-| red-warmer     | #f26f25 |    6.52 |    5.76 |    4.28 |    6.28 |
+-| red-cooler     | #f07f7f |    7.41 |    6.55 |    4.86 |    7.14 |
+-| red-faint      | #d08f72 |    7.23 |    6.39 |    4.75 |    6.97 |
+-| green          | #2fa526 |    6.02 |    5.31 |    3.95 |    5.79 |
+-| green-warmer   | #64aa0f |    6.72 |    5.94 |    4.41 |    6.47 |
+-| green-cooler   | #00b066 |    6.82 |    6.02 |    4.47 |    6.57 |
+-| green-faint    | #5f9f6f |    6.15 |    5.43 |    4.04 |    5.92 |
+-| yellow         | #c48702 |    6.28 |    5.54 |    4.12 |    6.04 |
+-| yellow-warmer  | #d0730f |    5.66 |    5.00 |    3.71 |    5.45 |
+-| yellow-cooler  | #df8f6f |    7.64 |    6.75 |    5.02 |    7.36 |
+-| yellow-faint   | #cf9f7f |    8.21 |    7.26 |    5.39 |    7.91 |
+-| blue           | #379cf6 |    6.68 |    5.90 |    4.38 |    6.43 |
+-| blue-warmer    | #6a88ff |    6.06 |    5.35 |    3.98 |    5.84 |
+-| blue-cooler    | #029fff |    6.82 |    6.03 |    4.48 |    6.57 |
+-| blue-faint     | #6a84af |    5.10 |    4.50 |    3.34 |    4.91 |
+-| magenta        | #d570af |    6.23 |    5.50 |    4.09 |    6.00 |
+-| magenta-warmer | #e580ea |    7.93 |    7.00 |    5.20 |    7.64 |
+-| magenta-cooler | #af8aff |    7.28 |    6.43 |    4.78 |    7.01 |
+-| magenta-faint  | #c590af |    7.35 |    6.49 |    4.83 |    7.08 |
+-| cyan           | #4fb0cf |    7.78 |    6.87 |    5.10 |    7.49 |
+-| cyan-warmer    | #6fafff |    8.52 |    7.53 |    5.59 |    8.21 |
+-| cyan-cooler    | #3dbbb0 |    8.23 |    7.27 |    5.40 |    7.92 |
+-| cyan-faint     | #82a0af |    7.00 |    6.18 |    4.59 |    6.74 |
++| fg-main        | #cfbcba |   10.64 |    8.51 |    7.36 |   10.04 |
++| fg-dim         | #887c8a |    4.88 |    3.90 |    3.37 |    4.60 |
++| fg-alt         | #70a89f |    7.18 |    5.74 |    4.96 |    6.77 |
++| red            | #ef656a |    6.21 |    4.96 |    4.29 |    5.86 |
++| red-warmer     | #f26f25 |    6.52 |    5.21 |    4.51 |    6.15 |
++| red-cooler     | #f07f7f |    7.41 |    5.93 |    5.12 |    6.99 |
++| red-faint      | #d08f72 |    7.23 |    5.78 |    5.00 |    6.83 |
++| green          | #2fa526 |    6.02 |    4.81 |    4.16 |    5.68 |
++| green-warmer   | #64aa0f |    6.72 |    5.38 |    4.65 |    6.34 |
++| green-cooler   | #00b066 |    6.82 |    5.45 |    4.71 |    6.43 |
++| green-faint    | #5f9f6f |    6.15 |    4.92 |    4.25 |    5.80 |
++| yellow         | #c48702 |    6.28 |    5.02 |    4.34 |    5.92 |
++| yellow-warmer  | #d0730f |    5.66 |    4.52 |    3.91 |    5.34 |
++| yellow-cooler  | #df8f6f |    7.64 |    6.11 |    5.28 |    7.21 |
++| yellow-faint   | #cf9f7f |    8.21 |    6.57 |    5.68 |    7.75 |
++| blue           | #379cf6 |    6.68 |    5.34 |    4.62 |    6.30 |
++| blue-warmer    | #6a88ff |    6.06 |    4.84 |    4.19 |    5.72 |
++| blue-cooler    | #029fff |    6.82 |    5.45 |    4.72 |    6.44 |
++| blue-faint     | #6a84af |    5.10 |    4.07 |    3.52 |    4.81 |
++| magenta        | #d570af |    6.23 |    4.98 |    4.31 |    5.88 |
++| magenta-warmer | #e580ea |    7.93 |    6.34 |    5.48 |    7.48 |
++| magenta-cooler | #af8aff |    7.28 |    5.82 |    5.03 |    6.87 |
++| magenta-faint  | #c590af |    7.35 |    5.88 |    5.08 |    6.94 |
++| cyan           | #4fb0cf |    7.78 |    6.22 |    5.38 |    7.34 |
++| cyan-warmer    | #6fafff |    8.52 |    6.81 |    5.89 |    8.04 |
++| cyan-cooler    | #3dbbb0 |    8.23 |    6.58 |    5.69 |    7.76 |
++| cyan-faint     | #82a0af |    7.00 |    5.59 |    4.84 |    6.60 |
+ #+TBLFM: $3='(Λ $2 @1$3);%.2f :: $4='(Λ $2 @1$4);%.2f :: $5='(Λ $2 @1$5);%.2f :: $6='(Λ $2 @1$6);%.2f
+
+ ** Special colours against the modeline
+@@ -95,8 +95,8 @@ ** Distance and contrast between main backgrounds
+ # bg-main / bg-dim, bg-main / bg-alt
+ | #0f0e06 | distance | contrast |
+ |---------+----------+----------|
+-| #1f1b19 |     2279 |     1.13 |
+-| #36322f |    13351 |     1.52 |
++| #262422 |     5361 |     1.25 |
++| #342e2a |    10815 |     1.45 |
+ #+TBLFM: $2='(Δ $1 @1$1) :: $3='(Λ $1 @1$1);%.2f
+
+ * ef-dark
+@@ -109,35 +109,35 @@ ** Base colours
+ :CUSTOM_ID: h:bdc5d5b7-4d1a-4e3d-8333-01a96164f4d8
+ :END:
+
+-| Name           |         | #000000 | #1a1a1a | #2b2b2b | #0c0c0c |
++| Name           |         | #000000 | #232323 | #2e2e2e | #101010 |
+ |----------------+---------+---------+---------+---------+---------|
+-| fg-main        | #d0d0d0 |   13.62 |   11.28 |    9.18 |   12.68 |
+-| fg-dim         | #807f9f |    5.45 |    4.52 |    3.68 |    5.08 |
+-| fg-alt         | #89afef |    9.44 |    7.83 |    6.37 |    8.80 |
+-| red            | #ef6560 |    6.70 |    5.55 |    4.52 |    6.24 |
+-| red-warmer     | #f47360 |    7.47 |    6.19 |    5.04 |    6.96 |
+-| red-cooler     | #ff5a7a |    7.00 |    5.80 |    4.72 |    6.52 |
+-| red-faint      | #d56f72 |    6.35 |    5.26 |    4.28 |    5.91 |
+-| green          | #0faa26 |    6.80 |    5.63 |    4.58 |    6.33 |
+-| green-warmer   | #6aad0f |    7.60 |    6.30 |    5.12 |    7.08 |
+-| green-cooler   | #00a692 |    6.87 |    5.69 |    4.63 |    6.40 |
+-| green-faint    | #61a06c |    6.75 |    5.60 |    4.55 |    6.29 |
+-| yellow         | #c48032 |    6.48 |    5.37 |    4.37 |    6.04 |
+-| yellow-warmer  | #d1843f |    7.08 |    5.87 |    4.78 |    6.60 |
+-| yellow-cooler  | #df8f5a |    8.21 |    6.81 |    5.54 |    7.65 |
+-| yellow-faint   | #cf9f8f |    9.01 |    7.47 |    6.07 |    8.39 |
+-| blue           | #3f95f6 |    6.84 |    5.67 |    4.61 |    6.37 |
+-| blue-warmer    | #6a9fff |    8.02 |    6.64 |    5.40 |    7.47 |
+-| blue-cooler    | #029fff |    7.41 |    6.14 |    4.99 |    6.90 |
+-| blue-faint     | #7a94df |    7.13 |    5.91 |    4.81 |    6.64 |
+-| magenta        | #d369af |    6.41 |    5.31 |    4.32 |    5.97 |
+-| magenta-warmer | #e580ea |    8.61 |    7.13 |    5.80 |    8.02 |
+-| magenta-cooler | #af85ff |    7.62 |    6.32 |    5.14 |    7.10 |
+-| magenta-faint  | #c57faf |    7.03 |    5.83 |    4.74 |    6.55 |
+-| cyan           | #4fbaef |    9.60 |    7.96 |    6.47 |    8.94 |
+-| cyan-warmer    | #6fafff |    9.25 |    7.67 |    6.24 |    8.62 |
+-| cyan-cooler    | #1dbfcf |    9.41 |    7.80 |    6.34 |    8.76 |
+-| cyan-faint     | #8aa0df |    8.17 |    6.77 |    5.51 |    7.61 |
++| fg-main        | #d0d0d0 |   13.62 |   10.19 |    8.80 |   12.34 |
++| fg-dim         | #807f9f |    5.45 |    4.08 |    3.53 |    4.94 |
++| fg-alt         | #89afef |    9.44 |    7.07 |    6.11 |    8.56 |
++| red            | #ef6560 |    6.70 |    5.01 |    4.33 |    6.07 |
++| red-warmer     | #f47360 |    7.47 |    5.59 |    4.83 |    6.77 |
++| red-cooler     | #ff5a7a |    7.00 |    5.24 |    4.52 |    6.34 |
++| red-faint      | #d56f72 |    6.35 |    4.75 |    4.10 |    5.75 |
++| green          | #0faa26 |    6.80 |    5.09 |    4.40 |    6.16 |
++| green-warmer   | #6aad0f |    7.60 |    5.69 |    4.91 |    6.88 |
++| green-cooler   | #00a692 |    6.87 |    5.14 |    4.44 |    6.22 |
++| green-faint    | #61a06c |    6.75 |    5.05 |    4.37 |    6.12 |
++| yellow         | #c48032 |    6.48 |    4.85 |    4.19 |    5.87 |
++| yellow-warmer  | #d1843f |    7.08 |    5.30 |    4.58 |    6.42 |
++| yellow-cooler  | #df8f5a |    8.21 |    6.15 |    5.31 |    7.44 |
++| yellow-faint   | #cf9f8f |    9.01 |    6.74 |    5.83 |    8.16 |
++| blue           | #3f95f6 |    6.84 |    5.12 |    4.42 |    6.20 |
++| blue-warmer    | #6a9fff |    8.02 |    6.00 |    5.18 |    7.26 |
++| blue-cooler    | #029fff |    7.41 |    5.54 |    4.79 |    6.71 |
++| blue-faint     | #7a94df |    7.13 |    5.34 |    4.61 |    6.46 |
++| magenta        | #d369af |    6.41 |    4.80 |    4.14 |    5.81 |
++| magenta-warmer | #e580ea |    8.61 |    6.44 |    5.57 |    7.80 |
++| magenta-cooler | #af85ff |    7.62 |    5.70 |    4.93 |    6.91 |
++| magenta-faint  | #c57faf |    7.03 |    5.26 |    4.55 |    6.37 |
++| cyan           | #4fbaef |    9.60 |    7.19 |    6.21 |    8.70 |
++| cyan-warmer    | #6fafff |    9.25 |    6.92 |    5.98 |    8.38 |
++| cyan-cooler    | #1dbfcf |    9.41 |    7.04 |    6.08 |    8.52 |
++| cyan-faint     | #8aa0df |    8.17 |    6.12 |    5.29 |    7.41 |
+ #+TBLFM: $3='(Λ $2 @1$3);%.2f :: $4='(Λ $2 @1$4);%.2f :: $5='(Λ $2 @1$5);%.2f :: $6='(Λ $2 @1$6);%.2f
+
+ ** Special colours against the modeline
+@@ -157,8 +157,8 @@ ** Distance and contrast between main backgrounds
+ # bg-main / bg-dim, bg-main / bg-alt
+ | #000000 | distance | contrast |
+ |---------+----------+----------|
+-| #1a1a1a |     6131 |     1.21 |
+-| #2b2b2b |    16771 |     1.48 |
++| #232323 |    11111 |     1.34 |
++| #2e2e2e |    19193 |     1.55 |
+ #+TBLFM: $2='(Δ $1 @1$1) :: $3='(Λ $1 @1$1);%.2f
+
+ * ef-day
+@@ -237,35 +237,35 @@ ** Base colours
+ yellows.  We just define the entire palette to make it work with the
+ overall design of the project.
+
+-| Name           |         | #000a1f | #0f1c2d | #19263a | #071225 |
++| Name           |         | #000a1f | #1a2332 | #2c2c3f | #101625 |
+ |----------------+---------+---------+---------+---------+---------|
+-| fg-main        | #ddddee |   14.72 |   12.78 |   11.34 |   13.95 |
+-| fg-dim         | #7f8797 |    5.47 |    4.75 |    4.21 |    5.18 |
+-| fg-alt         | #90afef |    9.00 |    7.81 |    6.93 |    8.52 |
+-| red            | #cf8560 |    6.75 |    5.86 |    5.20 |    6.40 |
+-| red-warmer     | #e47360 |    6.51 |    5.65 |    5.02 |    6.17 |
+-| red-cooler     | #cf7a7a |    6.32 |    5.49 |    4.87 |    5.99 |
+-| red-faint      | #b57f82 |    5.95 |    5.16 |    4.58 |    5.63 |
+-| green          | #3faa26 |    6.57 |    5.71 |    5.07 |    6.23 |
+-| green-warmer   | #7aad0f |    7.35 |    6.38 |    5.66 |    6.96 |
+-| green-cooler   | #3fa672 |    6.50 |    5.64 |    5.01 |    6.16 |
+-| green-faint    | #61a06c |    6.35 |    5.52 |    4.89 |    6.02 |
+-| yellow         | #aa9f32 |    7.26 |    6.30 |    5.59 |    6.87 |
+-| yellow-warmer  | #cfaf00 |    9.20 |    7.99 |    7.09 |    8.72 |
+-| yellow-cooler  | #bfaf7a |    9.06 |    7.86 |    6.98 |    8.58 |
+-| yellow-faint   | #af9a6a |    7.20 |    6.25 |    5.55 |    6.82 |
+-| blue           | #3f90f0 |    6.07 |    5.28 |    4.68 |    5.76 |
+-| blue-warmer    | #6a9fff |    7.54 |    6.55 |    5.81 |    7.14 |
+-| blue-cooler    | #009fff |    6.96 |    6.05 |    5.37 |    6.60 |
+-| blue-faint     | #7a94df |    6.71 |    5.82 |    5.17 |    6.35 |
+-| magenta        | #b379bf |    6.02 |    5.23 |    4.64 |    5.71 |
+-| magenta-warmer | #af80ea |    6.68 |    5.80 |    5.15 |    6.33 |
+-| magenta-cooler | #9f95ff |    7.73 |    6.71 |    5.96 |    7.32 |
+-| magenta-faint  | #c59fcf |    8.69 |    7.54 |    6.69 |    8.23 |
+-| cyan           | #5faaef |    7.98 |    6.93 |    6.15 |    7.56 |
+-| cyan-warmer    | #7fafff |    8.91 |    7.74 |    6.87 |    8.45 |
+-| cyan-cooler    | #0db0ff |    8.16 |    7.08 |    6.28 |    7.73 |
+-| cyan-faint     | #8aa0df |    7.69 |    6.68 |    5.92 |    7.28 |
++| fg-main        | #ddddee |   14.72 |   11.76 |   10.17 |   13.45 |
++| fg-dim         | #7f8797 |    5.47 |    4.37 |    3.78 |    5.00 |
++| fg-alt         | #90afef |    9.00 |    7.19 |    6.21 |    8.22 |
++| red            | #cf8560 |    6.75 |    5.39 |    4.66 |    6.17 |
++| red-warmer     | #e47360 |    6.51 |    5.20 |    4.50 |    5.95 |
++| red-cooler     | #cf7a7a |    6.32 |    5.05 |    4.36 |    5.77 |
++| red-faint      | #b57f82 |    5.95 |    4.75 |    4.11 |    5.43 |
++| green          | #3faa26 |    6.57 |    5.25 |    4.54 |    6.01 |
++| green-warmer   | #7aad0f |    7.35 |    5.87 |    5.08 |    6.71 |
++| green-cooler   | #3fa672 |    6.50 |    5.19 |    4.49 |    5.94 |
++| green-faint    | #61a06c |    6.35 |    5.08 |    4.39 |    5.80 |
++| yellow         | #aa9f32 |    7.26 |    5.80 |    5.01 |    6.63 |
++| yellow-warmer  | #cfaf00 |    9.20 |    7.36 |    6.36 |    8.41 |
++| yellow-cooler  | #bfaf7a |    9.06 |    7.24 |    6.26 |    8.28 |
++| yellow-faint   | #af9a6a |    7.20 |    5.75 |    4.97 |    6.58 |
++| blue           | #3f90f0 |    6.07 |    4.85 |    4.20 |    5.55 |
++| blue-warmer    | #6a9fff |    7.54 |    6.03 |    5.21 |    6.89 |
++| blue-cooler    | #009fff |    6.96 |    5.56 |    4.81 |    6.36 |
++| blue-faint     | #7a94df |    6.71 |    5.36 |    4.63 |    6.13 |
++| magenta        | #b379bf |    6.02 |    4.81 |    4.16 |    5.50 |
++| magenta-warmer | #af80ea |    6.68 |    5.34 |    4.61 |    6.10 |
++| magenta-cooler | #9f95ff |    7.73 |    6.18 |    5.34 |    7.06 |
++| magenta-faint  | #c59fcf |    8.69 |    6.94 |    6.00 |    7.94 |
++| cyan           | #5faaef |    7.98 |    6.38 |    5.51 |    7.29 |
++| cyan-warmer    | #7fafff |    8.91 |    7.12 |    6.16 |    8.15 |
++| cyan-cooler    | #0db0ff |    8.16 |    6.52 |    5.63 |    7.45 |
++| cyan-faint     | #8aa0df |    7.69 |    6.14 |    5.31 |    7.03 |
+ #+TBLFM: $3='(Λ $2 @1$3);%.2f :: $4='(Λ $2 @1$4);%.2f :: $5='(Λ $2 @1$5);%.2f :: $6='(Λ $2 @1$6);%.2f
+
+ ** Special colours against the modeline
+@@ -285,8 +285,8 @@ ** Distance and contrast between main backgrounds
+ # bg-main / bg-dim, bg-main / bg-alt
+ | #000a1f | distance | contrast |
+ |---------+----------+----------|
+-| #0f1c2d |     2353 |     1.15 |
+-| #19263a |     6619 |     1.30 |
++| #1a2332 |     4989 |     1.25 |
++| #2c2c3f |    11737 |     1.45 |
+ #+TBLFM: $2='(Δ $1 @1$1) :: $3='(Λ $1 @1$1);%.2f
+
+ * ef-deuteranopia-light
+@@ -372,35 +372,35 @@ ** Base colours
+ blue/cyan and yellow hues.  We just define the entire palette to make it
+ work with the overall design of the project.
+
+-| Name           |         | #070019 | #1c1926 | #262230 | #140e1c |
++| Name           |         | #070019 | #211c2b | #2c2836 | #181322 |
+ |----------------+---------+---------+---------+---------+---------|
+-| fg-main        | #d0d0d0 |   13.31 |   11.19 |   10.06 |   12.27 |
+-| fg-dim         | #857f8f |    5.31 |    4.46 |    4.01 |    4.89 |
+-| fg-alt         | #89afef |    9.23 |    7.76 |    6.97 |    8.51 |
+-| red            | #ef656a |    6.59 |    5.54 |    4.98 |    6.08 |
+-| red-warmer     | #f47360 |    7.30 |    6.14 |    5.52 |    6.73 |
+-| red-cooler     | #ef798f |    7.63 |    6.41 |    5.76 |    7.03 |
+-| red-faint      | #d08f72 |    7.68 |    6.46 |    5.80 |    7.08 |
+-| green          | #1fa526 |    6.32 |    5.32 |    4.78 |    5.83 |
+-| green-warmer   | #50a22f |    6.40 |    5.38 |    4.84 |    5.90 |
+-| green-cooler   | #00b982 |    8.08 |    6.79 |    6.10 |    7.45 |
+-| green-faint    | #61a06c |    6.60 |    5.55 |    4.99 |    6.09 |
+-| yellow         | #c48702 |    6.66 |    5.60 |    5.03 |    6.14 |
+-| yellow-warmer  | #d0730f |    6.00 |    5.05 |    4.54 |    5.54 |
+-| yellow-cooler  | #df805f |    7.22 |    6.08 |    5.46 |    6.66 |
+-| yellow-faint   | #9f8f6a |    6.46 |    5.44 |    4.88 |    5.96 |
+-| blue           | #379cf6 |    7.09 |    5.96 |    5.35 |    6.53 |
+-| blue-warmer    | #6f80ff |    6.07 |    5.10 |    4.58 |    5.60 |
+-| blue-cooler    | #029fff |    7.24 |    6.09 |    5.47 |    6.68 |
+-| blue-faint     | #8a9fdf |    7.92 |    6.66 |    5.99 |    7.31 |
+-| magenta        | #d369af |    6.26 |    5.27 |    4.73 |    5.78 |
+-| magenta-warmer | #e580ea |    8.41 |    7.08 |    6.36 |    7.76 |
+-| magenta-cooler | #af85ff |    7.45 |    6.27 |    5.63 |    6.87 |
+-| magenta-faint  | #c57faf |    6.87 |    5.78 |    5.19 |    6.34 |
+-| cyan           | #5faaef |    8.29 |    6.97 |    6.27 |    7.65 |
+-| cyan-warmer    | #7fafff |    9.26 |    7.79 |    7.00 |    8.54 |
+-| cyan-cooler    | #0dafdf |    8.03 |    6.75 |    6.07 |    7.41 |
+-| cyan-faint     | #8aa0df |    7.99 |    6.72 |    6.04 |    7.37 |
++| fg-main        | #d0d0d0 |   13.31 |   10.76 |    9.30 |   11.79 |
++| fg-dim         | #857f8f |    5.31 |    4.29 |    3.71 |    4.70 |
++| fg-alt         | #89afef |    9.23 |    7.46 |    6.45 |    8.17 |
++| red            | #ef656a |    6.59 |    5.33 |    4.60 |    5.83 |
++| red-warmer     | #f47360 |    7.30 |    5.90 |    5.10 |    6.47 |
++| red-cooler     | #ef798f |    7.63 |    6.16 |    5.33 |    6.75 |
++| red-faint      | #d08f72 |    7.68 |    6.21 |    5.37 |    6.80 |
++| green          | #1fa526 |    6.32 |    5.11 |    4.42 |    5.60 |
++| green-warmer   | #50a22f |    6.40 |    5.18 |    4.47 |    5.67 |
++| green-cooler   | #00b982 |    8.08 |    6.53 |    5.64 |    7.15 |
++| green-faint    | #61a06c |    6.60 |    5.34 |    4.61 |    5.85 |
++| yellow         | #c48702 |    6.66 |    5.38 |    4.65 |    5.90 |
++| yellow-warmer  | #d0730f |    6.00 |    4.85 |    4.20 |    5.32 |
++| yellow-cooler  | #df805f |    7.22 |    5.84 |    5.05 |    6.40 |
++| yellow-faint   | #9f8f6a |    6.46 |    5.22 |    4.52 |    5.72 |
++| blue           | #379cf6 |    7.09 |    5.73 |    4.95 |    6.28 |
++| blue-warmer    | #6f80ff |    6.07 |    4.90 |    4.24 |    5.37 |
++| blue-cooler    | #029fff |    7.24 |    5.85 |    5.06 |    6.41 |
++| blue-faint     | #8a9fdf |    7.92 |    6.40 |    5.54 |    7.02 |
++| magenta        | #d369af |    6.26 |    5.06 |    4.38 |    5.55 |
++| magenta-warmer | #e580ea |    8.41 |    6.80 |    5.88 |    7.45 |
++| magenta-cooler | #af85ff |    7.45 |    6.02 |    5.21 |    6.60 |
++| magenta-faint  | #c57faf |    6.87 |    5.55 |    4.80 |    6.09 |
++| cyan           | #5faaef |    8.29 |    6.70 |    5.79 |    7.34 |
++| cyan-warmer    | #7fafff |    9.26 |    7.49 |    6.47 |    8.21 |
++| cyan-cooler    | #0dafdf |    8.03 |    6.49 |    5.61 |    7.11 |
++| cyan-faint     | #8aa0df |    7.99 |    6.46 |    5.58 |    7.08 |
+ #+TBLFM: $3='(Λ $2 @1$3);%.2f :: $4='(Λ $2 @1$4);%.2f :: $5='(Λ $2 @1$5);%.2f :: $6='(Λ $2 @1$6);%.2f
+
+ ** Special colours against the modeline
+@@ -420,8 +420,8 @@ ** Distance and contrast between main backgrounds
+ # bg-main / bg-dim, bg-main / bg-alt
+ | #070019 | distance | contrast |
+ |---------+----------+----------|
+-| #1c1926 |     3938 |     1.19 |
+-| #262230 |     8235 |     1.32 |
++| #211c2b |     5530 |     1.24 |
++| #2c2836 |    11805 |     1.43 |
+ #+TBLFM: $2='(Δ $1 @1$1) :: $3='(Λ $1 @1$1);%.2f
+
+ * ef-duo-light
+@@ -562,35 +562,35 @@ ** Base colours
+ :CUSTOM_ID: h:2e0d0312-3984-48d8-9adc-1d132c1ab651
+ :END:
+
+-| Name           |         | #000e17 | #0f1b29 | #1a2a2f | #0f121f |
++| Name           |         | #000e17 | #18242f | #262e36 | #121522 |
+ |----------------+---------+---------+---------+---------+---------|
+-| fg-main        | #afbcbf |   10.02 |    8.91 |    7.60 |    9.56 |
+-| fg-dim         | #70819f |    4.96 |    4.41 |    3.76 |    4.73 |
+-| fg-alt         | #b0a0a0 |    7.80 |    6.93 |    5.92 |    7.44 |
+-| red            | #ef656a |    6.27 |    5.57 |    4.76 |    5.98 |
+-| red-warmer     | #f47360 |    6.95 |    6.18 |    5.27 |    6.63 |
+-| red-cooler     | #ef798f |    7.26 |    6.45 |    5.51 |    6.92 |
+-| red-faint      | #d56f72 |    5.90 |    5.25 |    4.48 |    5.63 |
+-| green          | #1fa526 |    6.02 |    5.35 |    4.57 |    5.74 |
+-| green-warmer   | #50a22f |    6.09 |    5.42 |    4.63 |    5.81 |
+-| green-cooler   | #00b672 |    7.38 |    6.56 |    5.60 |    7.04 |
+-| green-faint    | #61a06c |    6.28 |    5.59 |    4.77 |    5.99 |
+-| yellow         | #c48502 |    6.23 |    5.54 |    4.73 |    5.95 |
+-| yellow-warmer  | #e6832f |    7.12 |    6.33 |    5.40 |    6.79 |
+-| yellow-cooler  | #df8f6f |    7.72 |    6.86 |    5.86 |    7.36 |
+-| yellow-faint   | #cf9f7f |    8.30 |    7.38 |    6.30 |    7.92 |
+-| blue           | #379cf6 |    6.74 |    6.00 |    5.12 |    6.43 |
+-| blue-warmer    | #6a88ff |    6.12 |    5.44 |    4.65 |    5.84 |
+-| blue-cooler    | #029fff |    6.89 |    6.13 |    5.23 |    6.57 |
+-| blue-faint     | #7a94df |    6.63 |    5.90 |    5.03 |    6.33 |
+-| magenta        | #d570af |    6.29 |    5.60 |    4.78 |    6.01 |
+-| magenta-warmer | #e580ea |    8.01 |    7.12 |    6.08 |    7.64 |
+-| magenta-cooler | #af8aff |    7.35 |    6.54 |    5.58 |    7.01 |
+-| magenta-faint  | #c59faf |    8.33 |    7.40 |    6.32 |    7.95 |
+-| cyan           | #4fb0cf |    7.85 |    6.98 |    5.96 |    7.49 |
+-| cyan-warmer    | #6fafff |    8.60 |    7.65 |    6.53 |    8.21 |
+-| cyan-cooler    | #3dc0b0 |    8.71 |    7.75 |    6.61 |    8.31 |
+-| cyan-faint     | #92b4df |    9.13 |    8.12 |    6.93 |    8.71 |
++| fg-main        | #afbcbf |   10.02 |    8.08 |    7.05 |    9.31 |
++| fg-dim         | #70819f |    4.96 |    4.00 |    3.49 |    4.61 |
++| fg-alt         | #b0a0a0 |    7.80 |    6.29 |    5.49 |    7.25 |
++| red            | #ef656a |    6.27 |    5.06 |    4.42 |    5.83 |
++| red-warmer     | #f47360 |    6.95 |    5.61 |    4.89 |    6.46 |
++| red-cooler     | #ef798f |    7.26 |    5.86 |    5.11 |    6.75 |
++| red-faint      | #d56f72 |    5.90 |    4.76 |    4.16 |    5.49 |
++| green          | #1fa526 |    6.02 |    4.86 |    4.24 |    5.60 |
++| green-warmer   | #50a22f |    6.09 |    4.92 |    4.29 |    5.67 |
++| green-cooler   | #00b672 |    7.38 |    5.96 |    5.20 |    6.86 |
++| green-faint    | #61a06c |    6.28 |    5.07 |    4.42 |    5.84 |
++| yellow         | #c48502 |    6.23 |    5.03 |    4.39 |    5.80 |
++| yellow-warmer  | #e6832f |    7.12 |    5.74 |    5.01 |    6.62 |
++| yellow-cooler  | #df8f6f |    7.72 |    6.23 |    5.43 |    7.18 |
++| yellow-faint   | #cf9f7f |    8.30 |    6.69 |    5.84 |    7.71 |
++| blue           | #379cf6 |    6.74 |    5.44 |    4.75 |    6.27 |
++| blue-warmer    | #6a88ff |    6.12 |    4.94 |    4.31 |    5.69 |
++| blue-cooler    | #029fff |    6.89 |    5.56 |    4.85 |    6.41 |
++| blue-faint     | #7a94df |    6.63 |    5.35 |    4.67 |    6.17 |
++| magenta        | #d570af |    6.29 |    5.08 |    4.43 |    5.85 |
++| magenta-warmer | #e580ea |    8.01 |    6.46 |    5.64 |    7.45 |
++| magenta-cooler | #af8aff |    7.35 |    5.93 |    5.18 |    6.84 |
++| magenta-faint  | #c59faf |    8.33 |    6.72 |    5.86 |    7.74 |
++| cyan           | #4fb0cf |    7.85 |    6.34 |    5.53 |    7.30 |
++| cyan-warmer    | #6fafff |    8.60 |    6.94 |    6.06 |    8.00 |
++| cyan-cooler    | #3dc0b0 |    8.71 |    7.03 |    6.14 |    8.10 |
++| cyan-faint     | #92b4df |    9.13 |    7.37 |    6.43 |    8.49 |
+ #+TBLFM: $3='(Λ $2 @1$3);%.2f :: $4='(Λ $2 @1$4);%.2f :: $5='(Λ $2 @1$5);%.2f :: $6='(Λ $2 @1$6);%.2f
+
+ ** Special colours against the modeline
+@@ -610,8 +610,8 @@ ** Distance and contrast between main backgrounds
+ # bg-main / bg-dim, bg-main / bg-alt
+ | #000e17 | distance | contrast |
+ |---------+----------+----------|
+-| #0f1b29 |     2111 |     1.12 |
+-| #1a2a2f |     6269 |     1.32 |
++| #18242f |     4853 |     1.24 |
++| #262e36 |     9980 |     1.42 |
+ #+TBLFM: $2='(Δ $1 @1$1) :: $3='(Λ $1 @1$1);%.2f
+
+ * ef-spring
+@@ -748,35 +748,35 @@ ** Base colours
+ :CUSTOM_ID: h:db8a51f5-a28f-422c-a046-b44bc0fdfb24
+ :END:
+
+-| Name           |         | #160f0f | #251a23 | #33252d | #1c1416 |
++| Name           |         | #160f0f | #2b2328 | #3a2b35 | #1f171a |
+ |----------------+---------+---------+---------+---------+---------|
+-| fg-main        | #d8cfd5 |   12.44 |   11.04 |    9.57 |   11.89 |
+-| fg-dim         | #908890 |    5.51 |    4.89 |    4.23 |    5.26 |
+-| fg-alt         | #afdacf |   12.40 |   11.00 |    9.53 |   11.85 |
+-| red            | #f48359 |    7.43 |    6.59 |    5.71 |    7.09 |
+-| red-warmer     | #ff7560 |    7.18 |    6.37 |    5.52 |    6.86 |
+-| red-cooler     | #ff85aa |    8.28 |    7.35 |    6.37 |    7.91 |
+-| red-faint      | #e47f72 |    6.83 |    6.06 |    5.25 |    6.53 |
+-| green          | #60b444 |    7.31 |    6.48 |    5.62 |    6.98 |
+-| green-warmer   | #a0c27f |    9.48 |    8.41 |    7.29 |    9.06 |
+-| green-cooler   | #60bf88 |    8.39 |    7.44 |    6.45 |    8.01 |
+-| green-faint    | #61a06c |    6.09 |    5.40 |    4.68 |    5.82 |
+-| yellow         | #d4a052 |    8.07 |    7.16 |    6.20 |    7.71 |
+-| yellow-warmer  | #ef926f |    8.12 |    7.21 |    6.24 |    7.76 |
+-| yellow-cooler  | #ef9680 |    8.42 |    7.47 |    6.47 |    8.05 |
+-| yellow-faint   | #c7a07f |    7.90 |    7.01 |    6.07 |    7.55 |
+-| blue           | #7fa5f6 |    7.77 |    6.89 |    5.97 |    7.42 |
+-| blue-warmer    | #8895ff |    7.02 |    6.23 |    5.40 |    6.71 |
+-| blue-cooler    | #72afff |    8.38 |    7.43 |    6.44 |    8.00 |
+-| blue-faint     | #7a94df |    6.43 |    5.70 |    4.94 |    6.14 |
+-| magenta        | #d37faf |    6.69 |    5.94 |    5.14 |    6.39 |
+-| magenta-warmer | #e772df |    7.09 |    6.29 |    5.45 |    6.78 |
+-| magenta-cooler | #a698ef |    7.54 |    6.68 |    5.79 |    7.20 |
+-| magenta-faint  | #c9addf |    9.49 |    8.42 |    7.29 |    9.07 |
+-| cyan           | #8fbaff |    9.59 |    8.50 |    7.37 |    9.16 |
+-| cyan-warmer    | #9ac2ff |   10.40 |    9.22 |    7.99 |    9.93 |
+-| cyan-cooler    | #8fcfdf |   10.96 |    9.72 |    8.42 |   10.47 |
+-| cyan-faint     | #8ac0ef |    9.80 |    8.69 |    7.53 |    9.36 |
++| fg-main        | #d8cfd5 |   12.44 |   10.05 |    8.76 |   11.55 |
++| fg-dim         | #908890 |    5.51 |    4.45 |    3.87 |    5.11 |
++| fg-alt         | #afdacf |   12.40 |   10.01 |    8.72 |   11.50 |
++| red            | #f48359 |    7.43 |    6.00 |    5.22 |    6.89 |
++| red-warmer     | #ff7560 |    7.18 |    5.80 |    5.05 |    6.66 |
++| red-cooler     | #ff85aa |    8.28 |    6.69 |    5.83 |    7.68 |
++| red-faint      | #e47f72 |    6.83 |    5.52 |    4.81 |    6.34 |
++| green          | #60b444 |    7.31 |    5.90 |    5.14 |    6.78 |
++| green-warmer   | #a0c27f |    9.48 |    7.66 |    6.67 |    8.80 |
++| green-cooler   | #60bf88 |    8.39 |    6.77 |    5.90 |    7.78 |
++| green-faint    | #61a06c |    6.09 |    4.92 |    4.28 |    5.65 |
++| yellow         | #d4a052 |    8.07 |    6.51 |    5.68 |    7.48 |
++| yellow-warmer  | #ef926f |    8.12 |    6.56 |    5.71 |    7.54 |
++| yellow-cooler  | #ef9680 |    8.42 |    6.80 |    5.93 |    7.81 |
++| yellow-faint   | #c7a07f |    7.90 |    6.38 |    5.56 |    7.33 |
++| blue           | #7fa5f6 |    7.77 |    6.27 |    5.46 |    7.20 |
++| blue-warmer    | #8895ff |    7.02 |    5.67 |    4.94 |    6.51 |
++| blue-cooler    | #72afff |    8.38 |    6.76 |    5.89 |    7.77 |
++| blue-faint     | #7a94df |    6.43 |    5.19 |    4.52 |    5.96 |
++| magenta        | #d37faf |    6.69 |    5.40 |    4.71 |    6.21 |
++| magenta-warmer | #e772df |    7.09 |    5.73 |    4.99 |    6.58 |
++| magenta-cooler | #a698ef |    7.54 |    6.08 |    5.30 |    6.99 |
++| magenta-faint  | #c9addf |    9.49 |    7.66 |    6.68 |    8.80 |
++| cyan           | #8fbaff |    9.59 |    7.74 |    6.74 |    8.89 |
++| cyan-warmer    | #9ac2ff |   10.40 |    8.40 |    7.31 |    9.65 |
++| cyan-cooler    | #8fcfdf |   10.96 |    8.85 |    7.71 |   10.17 |
++| cyan-faint     | #8ac0ef |    9.80 |    7.91 |    6.89 |    9.09 |
+ #+TBLFM: $3='(Λ $2 @1$3);%.2f :: $4='(Λ $2 @1$4);%.2f :: $5='(Λ $2 @1$5);%.2f :: $6='(Λ $2 @1$6);%.2f
+
+ ** Special colours against the modeline
+@@ -796,8 +796,8 @@ ** Distance and contrast between main backgrounds
+ # bg-main / bg-dim, bg-main / bg-alt
+ | #160f0f | distance | contrast |
+ |---------+----------+----------|
+-| #251a23 |     2130 |     1.13 |
+-| #33252d |     6358 |     1.30 |
++| #2b2328 |     4367 |     1.24 |
++| #3a2b35 |    10115 |     1.42 |
+ #+TBLFM: $2='(Δ $1 @1$1) :: $3='(Λ $1 @1$1);%.2f
+
+ * ef-trio-light
+@@ -872,35 +872,35 @@ ** Base colours
+ :CUSTOM_ID: h:76e0b621-7872-4597-8bdc-6c007e43aff5
+ :END:
+
+-| Name           |         | #0f0b15 | #161926 | #202234 | #14121a |
++| Name           |         | #0f0b15 | #1d2030 | #292b3d | #18151d |
+ |----------------+---------+---------+---------+---------+---------|
+-| fg-main        | #b8c6d5 |   11.19 |   10.05 |    9.01 |   10.68 |
+-| fg-dim         | #807c9f |    4.91 |    4.41 |    3.96 |    4.69 |
+-| fg-alt         | #bf8f8f |    6.99 |    6.28 |    5.63 |    6.67 |
+-| red            | #f47359 |    6.90 |    6.20 |    5.56 |    6.58 |
+-| red-warmer     | #ef6560 |    6.21 |    5.58 |    5.00 |    5.92 |
+-| red-cooler     | #ff6a7a |    7.04 |    6.32 |    5.67 |    6.71 |
+-| red-faint      | #d56f72 |    5.88 |    5.28 |    4.74 |    5.61 |
+-| green          | #29a444 |    6.01 |    5.40 |    4.84 |    5.74 |
+-| green-warmer   | #6aad0f |    7.04 |    6.32 |    5.67 |    6.72 |
+-| green-cooler   | #00a392 |    6.17 |    5.54 |    4.97 |    5.88 |
+-| green-faint    | #61a06c |    6.26 |    5.62 |    5.04 |    5.97 |
+-| yellow         | #c48052 |    6.08 |    5.46 |    4.89 |    5.80 |
+-| yellow-warmer  | #d1803f |    6.37 |    5.72 |    5.13 |    6.07 |
+-| yellow-cooler  | #df8a88 |    7.53 |    6.77 |    6.07 |    7.19 |
+-| yellow-faint   | #c0a38a |    8.20 |    7.37 |    6.60 |    7.82 |
+-| blue           | #3f95f6 |    6.34 |    5.70 |    5.11 |    6.05 |
+-| blue-warmer    | #6a9fff |    7.43 |    6.67 |    5.98 |    7.09 |
+-| blue-cooler    | #029fff |    6.86 |    6.17 |    5.53 |    6.55 |
+-| blue-faint     | #7a94df |    6.61 |    5.94 |    5.32 |    6.30 |
+-| magenta        | #d369af |    5.94 |    5.34 |    4.78 |    5.67 |
+-| magenta-warmer | #e580e0 |    7.87 |    7.07 |    6.34 |    7.51 |
+-| magenta-cooler | #af85ea |    6.83 |    6.13 |    5.50 |    6.51 |
+-| magenta-faint  | #c57faf |    6.51 |    5.85 |    5.25 |    6.21 |
+-| cyan           | #4fbaef |    8.90 |    7.99 |    7.17 |    8.49 |
+-| cyan-warmer    | #6fafdf |    8.22 |    7.39 |    6.62 |    7.84 |
+-| cyan-cooler    | #35afbf |    7.45 |    6.69 |    6.00 |    7.10 |
+-| cyan-faint     | #8aa0df |    7.58 |    6.81 |    6.10 |    7.23 |
++| fg-main        | #b8c6d5 |   11.19 |    9.28 |    8.01 |   10.38 |
++| fg-dim         | #807c9f |    4.91 |    4.07 |    3.52 |    4.56 |
++| fg-alt         | #bf8f8f |    6.99 |    5.79 |    5.00 |    6.48 |
++| red            | #f47359 |    6.90 |    5.72 |    4.94 |    6.40 |
++| red-warmer     | #ef6560 |    6.21 |    5.15 |    4.45 |    5.76 |
++| red-cooler     | #ff6a7a |    7.04 |    5.84 |    5.04 |    6.53 |
++| red-faint      | #d56f72 |    5.88 |    4.88 |    4.21 |    5.45 |
++| green          | #29a444 |    6.01 |    4.98 |    4.30 |    5.57 |
++| green-warmer   | #6aad0f |    7.04 |    5.84 |    5.04 |    6.53 |
++| green-cooler   | #00a392 |    6.17 |    5.11 |    4.41 |    5.72 |
++| green-faint    | #61a06c |    6.26 |    5.19 |    4.48 |    5.80 |
++| yellow         | #c48052 |    6.08 |    5.04 |    4.35 |    5.63 |
++| yellow-warmer  | #d1803f |    6.37 |    5.28 |    4.56 |    5.90 |
++| yellow-cooler  | #df8a88 |    7.53 |    6.25 |    5.39 |    6.98 |
++| yellow-faint   | #c0a38a |    8.20 |    6.80 |    5.87 |    7.60 |
++| blue           | #3f95f6 |    6.34 |    5.26 |    4.54 |    5.88 |
++| blue-warmer    | #6a9fff |    7.43 |    6.16 |    5.32 |    6.89 |
++| blue-cooler    | #029fff |    6.86 |    5.69 |    4.91 |    6.36 |
++| blue-faint     | #7a94df |    6.61 |    5.48 |    4.73 |    6.13 |
++| magenta        | #d369af |    5.94 |    4.92 |    4.25 |    5.51 |
++| magenta-warmer | #e580e0 |    7.87 |    6.53 |    5.64 |    7.30 |
++| magenta-cooler | #af85ea |    6.83 |    5.66 |    4.89 |    6.33 |
++| magenta-faint  | #c57faf |    6.51 |    5.40 |    4.66 |    6.04 |
++| cyan           | #4fbaef |    8.90 |    7.38 |    6.37 |    8.25 |
++| cyan-warmer    | #6fafdf |    8.22 |    6.82 |    5.89 |    7.62 |
++| cyan-cooler    | #35afbf |    7.45 |    6.17 |    5.33 |    6.90 |
++| cyan-faint     | #8aa0df |    7.58 |    6.28 |    5.42 |    7.02 |
+ #+TBLFM: $3='(Λ $2 @1$3);%.2f :: $4='(Λ $2 @1$4);%.2f :: $5='(Λ $2 @1$5);%.2f :: $6='(Λ $2 @1$6);%.2f
+
+ ** Special colours against the modeline
+@@ -920,6 +920,6 @@ ** Distance and contrast between main backgrounds
+ # bg-main / bg-dim, bg-main / bg-alt
+ | #0f0b15 | distance | contrast |
+ |---------+----------+----------|
+-| #161926 |     1745 |     1.11 |
+-| #202234 |     5558 |     1.24 |
++| #1d2030 |     4330 |     1.21 |
++| #292b3d |    10225 |     1.40 |
+ #+TBLFM: $2='(Δ $1 @1$1) :: $3='(Λ $1 @1$1);%.2f
+diff --git a/ef-autumn-theme.el b/ef-autumn-theme.el
+index e4b6e02..e82e363 100644
+--- a/ef-autumn-theme.el
++++ b/ef-autumn-theme.el
+@@ -43,13 +43,13 @@ (eval-and-compile
+     '(;; Basic tones
+       (bg-main     "#0f0e06")
+       (fg-main     "#cfbcba")
+-      (bg-dim      "#1f1b19")
++      (bg-dim      "#262422")
+       (fg-dim      "#887c8a")
+-      (bg-alt      "#36322f")
++      (bg-alt      "#342e2a")
+       (fg-alt      "#70a89f")
+
+-      (bg-active   "#46423f")
+-      (bg-inactive "#14130a")
++      (bg-active   "#443e3a")
++      (bg-inactive "#17150f")
+
+       ;; Basic hues for foreground values
+       (red             "#ef656a")
+diff --git a/ef-dark-theme.el b/ef-dark-theme.el
+index 15c85a8..043553b 100644
+--- a/ef-dark-theme.el
++++ b/ef-dark-theme.el
+@@ -43,13 +43,13 @@ (eval-and-compile
+     '(;; Basic tones
+       (bg-main     "#000000")
+       (fg-main     "#d0d0d0")
+-      (bg-dim      "#1a1a1a")
++      (bg-dim      "#232323")
+       (fg-dim      "#857f8f")
+-      (bg-alt      "#2b2b2b")
++      (bg-alt      "#2e2e2e")
+       (fg-alt      "#89afef")
+
+-      (bg-active   "#3b3b3b")
+-      (bg-inactive "#0c0c0c")
++      (bg-active   "#3d3d3d")
++      (bg-inactive "#101010")
+
+       ;; Basic hues for foreground values
+       (red             "#ef6560")
+diff --git a/ef-deuteranopia-dark-theme.el b/ef-deuteranopia-dark-theme.el
+index 084b11c..238d696 100644
+--- a/ef-deuteranopia-dark-theme.el
++++ b/ef-deuteranopia-dark-theme.el
+@@ -46,13 +46,13 @@ (eval-and-compile
+     '(;; Basic tones
+       (bg-main     "#000a1f")
+       (fg-main     "#ddddee")
+-      (bg-dim      "#0f1c2d")
++      (bg-dim      "#1a2332")
+       (fg-dim      "#7f8797")
+-      (bg-alt      "#19263a")
++      (bg-alt      "#2c2c3f")
+       (fg-alt      "#90afef")
+
+-      (bg-active   "#30354f")
+-      (bg-inactive "#071225")
++      (bg-active   "#3c3c4f")
++      (bg-inactive "#101625")
+
+       ;; Basic hues for foreground values
+       (red             "#cf8560")
+diff --git a/ef-duo-dark-theme.el b/ef-duo-dark-theme.el
+index bbb25be..fcda486 100644
+--- a/ef-duo-dark-theme.el
++++ b/ef-duo-dark-theme.el
+@@ -46,13 +46,13 @@ (eval-and-compile
+     '(;; Basic tones
+       (bg-main     "#070019")
+       (fg-main     "#d0d0d0")
+-      (bg-dim      "#1c1926")
++      (bg-dim      "#211c2b")
+       (fg-dim      "#857f8f")
+-      (bg-alt      "#262230")
++      (bg-alt      "#2c2836")
+       (fg-alt      "#89afef")
+
+-      (bg-active   "#363240")
+-      (bg-inactive "#140e1c")
++      (bg-active   "#3c3846")
++      (bg-inactive "#181322")
+
+       ;; Basic hues for foreground values
+       (red             "#ef656a")
+diff --git a/ef-night-theme.el b/ef-night-theme.el
+index f54689c..91a98b6 100644
+--- a/ef-night-theme.el
++++ b/ef-night-theme.el
+@@ -43,13 +43,13 @@ (eval-and-compile
+     '(;; Basic tones
+       (bg-main     "#000e17")
+       (fg-main     "#afbcbf")
+-      (bg-dim      "#0f1b29")
++      (bg-dim      "#18242f")
+       (fg-dim      "#70819f")
+-      (bg-alt      "#1a2a2f")
++      (bg-alt      "#262e36")
+       (fg-alt      "#b0a0a0")
+
+-      (bg-active   "#28353f")
+-      (bg-inactive "#0f121f")
++      (bg-active   "#363e46")
++      (bg-inactive "#121522")
+
+       ;; Basic hues for foreground values
+       (red             "#ef656a")
+diff --git a/ef-trio-dark-theme.el b/ef-trio-dark-theme.el
+index aaa4eba..8e00d68 100644
+--- a/ef-trio-dark-theme.el
++++ b/ef-trio-dark-theme.el
+@@ -43,13 +43,13 @@ (eval-and-compile
+     '(;; Basic tones
+       (bg-main      "#160f0f")
+       (fg-main      "#d8cfd5")
+-      (bg-dim       "#251a23")
++      (bg-dim       "#2b2328")
+       (fg-dim       "#908890")
+-      (bg-alt       "#33252d")
++      (bg-alt       "#3a2b35")
+       (fg-alt       "#afdacf")
+
+-      (bg-active    "#43353d")
+-      (bg-inactive  "#1c1416")
++      (bg-active    "#4a3b45")
++      (bg-inactive  "#1f171a")
+
+       ;; Basic hues for foreground values
+       (red             "#f48359")
+diff --git a/ef-winter-theme.el b/ef-winter-theme.el
+index e552471..02451c5 100644
+--- a/ef-winter-theme.el
++++ b/ef-winter-theme.el
+@@ -43,13 +43,13 @@ (eval-and-compile
+     '(;; Basic tones
+       (bg-main      "#0f0b15")
+       (fg-main      "#b8c6d5")
+-      (bg-dim       "#161926")
++      (bg-dim       "#1d2030")
+       (fg-dim       "#807c9f")
+-      (bg-alt       "#202234")
++      (bg-alt       "#292b3d")
+       (fg-alt       "#bf8f8f")
+
+-      (bg-active    "#353554")
+-      (bg-inactive  "#14121a")
++      (bg-active    "#393b4d")
++      (bg-inactive  "#18151d")
+
+       ;; Basic hues for foreground values
+       (red             "#f47359")
+--
+2.37.3
+#+end_src
+
+* Version 0.5.0 on 2022-09-11
+:PROPERTIES:
+:CUSTOM_ID: h:d0d24c93-7954-4c52-b5a2-79089b53c767
+:END:
+
+** New duo-chrome themes
+:PROPERTIES:
+:CUSTOM_ID: h:dfdea23c-8d89-4461-8668-04a317fb498d
+:END:
+
+The collection now includes two items which apply shades of blue and
+yellow in most interfaces.  The themes are named ~ef-duo-dark~ and
+~ef-duo-light~.
+
+Read the announcement:
+<https://protesilaos.com/codelog/2022-09-06-ef-themes-duo/>.
+
+View all image samples:
+<https://protesilaos.com/emacs/ef-themes-pictures>.
+
+The choice of blue and yellow is largely stylistic: it is not done to
+accommodate users with red-green colour deficiency.  For that case, the
+Ef themes provide ~ef-deuteranopia-dark~ and ~ef-deuteranopia-light~.
+
+** Bespoke accent colours for the mode line
+:PROPERTIES:
+:CUSTOM_ID: h:db9d8e1d-d33c-46a5-b41c-8bbb19e0b8af
+:END:
+
+Each theme now includes a subset of foreground values optimised for use
+against the active mode line's background.  The active mode line's
+background is accented, meaning that we cannot use colours that are
+otherwise decent against the main background.
+
+These new entries are meant to style warnings, errors, and other
+notifications that appear on the mode line.  They empower us to extend
+support for packages that make use of such colour-coding (more further
+below).
+
+** "Subtle" accented backgrounds
+:PROPERTIES:
+:CUSTOM_ID: h:1935e028-10ea-4a3f-adb5-a755c1ddfe2b
+:END:
+
+Each theme's palette now contains six accented backgrounds that are not
+very intense.  These are used by packages that need to (i) highlight a
+line or region, (ii) preserve a modicum of legibility without overriding
+existing foreground values (more below about new packages).
+
+** Refined the colour of prompts, where necessary
+:PROPERTIES:
+:CUSTOM_ID: h:5a1f7bde-658a-4240-bab8-92cb8e5327b0
+:END:
+
+Each theme's palette now includes a dedicated =prompt= mapping.  This
+gives us full control over what colour we use for prompts.  In some
+themes the prompt will look the same as before, though I made a few
+changes to have stylistic consistency in each theme.  Specifically:
+
+| Theme                 | Old prompt   | New prompt     |
+|-----------------------+--------------+----------------|
+| ef-deuteranopia-dark  | cyan-warmer  | yellow         |
+| ef-deuteranopia-light | cyan         | blue           |
+| ef-duo-dark           | green-cooler | yellow         |
+| ef-duo-light          | green-cooler | blue           |
+| ef-spring             | blue         | green          |
+| ef-summer             | cyan-cooler  | magenta-warmer |
+| ef-winter             | green-cooler | magenta-warmer |
+
+In short: we don't want prompts to look blue/green all the time.  Some
+themes have a different character.
+
+** Newly supported packages
+:PROPERTIES:
+:CUSTOM_ID: h:197a98a6-96d3-47ca-935d-6736d3836211
+:END:
+
+In general, if a package does not look right, it is not supported by the
+Ef themes.  What we have for this release:
+
++ auctex :: Thanks to Philip Kaludercic for providing the sample file
+  that let me view the relevant faces, as well as for helping me
+  correct some mistakes of mine:
+  <https://lists.sr.ht/~protesilaos/ef-themes/%3C87h71t97hl.fsf%40posteo.net%3E>.
+
++ company :: Thanks to Alan Schmitt for reminding me about it:
+  <https://lists.sr.ht/~protesilaos/ef-themes/%3C87pmgjw3j9.fsf%40m4x.org%3E>.
+
++ dirvish :: Thanks to Alex Lu (=dirvish= developer) for the
+  contribution.  This was done in pull request 14 at the GitHub mirror:
+  <https://github.com/protesilaos/ef-themes/pull/14>.  The change is
+  below the ~15 line threshold and thus does not require copyright
+  assignment to the Free Software Foundation.
+
++ doom-modeline :: Expanded support for almost all the faces it
+  provides.  The only exception is some debugging-related indicators
+  that I do not know how to trigger (contact me, if you encounter them).
+  This support is made possible by the new accented foregrounds that are
+  designed specifically for the mode line.
+
++ gnus :: Expanded support for all the faces it defines.  I had used
+  Gnus for several months before and am familiar with its interfaces.
+  Though I never made use of its scoring system.  I think the relevant
+  faces look okay, though please let me know if we can refine them
+  further.
+
++ image-dired :: This is made possible by the new "subtle" coloured
+  backgrounds that I added to each theme.
+
++ lin (my package) :: Made possible by the new subtle backgrounds.
+
++ pulsar (my package) :: Same as above.
+
++ pulse :: Same.
+
++ recursion-indicator :: Same
+
++ selectrum :: Made it look like the already supported =vertico=.
+
++ tempel :: Same as =lin= and friends.
+
+** Refinements to existing faces
+:PROPERTIES:
+:CUSTOM_ID: h:83fa9e74-0460-49b0-a123-15767d07f806
+:END:
+
++ Lots of small tweaks affect mode line indicators, per the new
+  foreground colours I introduced.  Expect to see a bit more colour in
+  the mode line when using =magit=, compilation buffers, appointment
+  reminders, keyboard macros, Org agenda filters, and more.
+
++ All the =rcirc= faces have been revised in the interest of thematic
+  consistency.
+
+  - Rcirc uses the new foregrounds for the mode line, where relevant.
+
+  - Indicators that track/highlight the user's nick use the same
+    paradigm.
+
+  - IRC server messages look like comments in code buffers.
+
+  Thanks to Philip Kaludercic for telling me about the downsides of
+  using the ~italic~ in the ~rcirc-nick-in-message-full-line~ face:
+  <https://lists.sr.ht/~protesilaos/ef-themes/%3C87edwphahl.fsf%40posteo.net%3E>.
+
+  Please note that I am not a regular/experienced IRC user.  If there
+  are improvements to be made, I am happy to implement them but will
+  likely need your help (I will ask the relevant questions).
+
+** New fallback behaviour for ~ef-themes-toggle~
+:PROPERTIES:
+:CUSTOM_ID: h:3399f33c-3d1b-4d18-b50f-8d2f0838aa54
+:END:
+
+The command ~ef-themes-toggle~ will switch between two themes specified
+in the user option ~ef-themes-to-toggle~.  For example:
+
+#+begin_src emacs-lisp
+;; Toggle between `ef-summer' and `ef-winter' using `ef-themes-toggle'.
+(setq ef-themes-to-toggle '(ef-summer ef-winter))
+#+end_src
+
+By default, ~ef-themes-to-toggle~ is nil. In the past, this meant that
+~ef-themes-toggle~ would do nothing out-of-the-box.  To improve the
+initial user experience, the command will now fall back to minibuffer
+completion to load a theme if ~ef-themes-to-toggle~ does not have the
+expected value.  The completion candidates are the items of the Ef
+themes collection.  This fallback behaviour is essentially the same as
+what the user gets by invoking the ~ef-themes-select~ command.
+
+When ~ef-themes-to-toggle~ is set properly, the corresponding command
+will perform the switch, as intended.
+
+This is based on the discussion with Philip Kaludercic about revising
+the ~ef-themes-toggle~ command to have a more Do-What-I-Mean behaviour:
+<https://lists.sr.ht/~protesilaos/ef-themes/%3C878rmwfs0e.fsf%40posteo.net%3E>.
+
+** Improved how ~ef-themes-load-random~ picks subsets
+:PROPERTIES:
+:CUSTOM_ID: h:4407d5a6-b837-4168-88b2-f7b175978122
+:END:
+
+The ~ef-themes-load-random~ command accepts a prefix argument (=C-u=, by
+default): it prompts the user for a =dark= or =light= subset out of the
+collection.  Once that is selected, the command loads a theme at random.
+
+Before, the prompt was using minibuffer completion, but this has now
+changed to a ~read-multiple-choice~ function, meaning that =d= selects
+=dark= and =l= selects =light=.  Basically, we skip possible extra key
+presses.
+
+Thanks to Philip Kaludercic for the patch:
+<https://lists.sr.ht/~protesilaos/ef-themes/patches/35089>.
+
+** Internal changes
+:PROPERTIES:
+:CUSTOM_ID: h:b9156099-0bcd-4974-9cdf-ada73d5745ce
+:END:
+
++ Fixed the initial colors' list in the ~ef-themes-with-colors~ macro.
+  Thanks to Steve Molitor for telling me that the previous design would
+  not work if ~ef-light~ was not loaded.  This was done in issue 11 at
+  the GitHub mirror:
+  <https://github.com/protesilaos/ef-themes/issues/11>.
+
++ Simplified the helper function ~ef-themes--current-theme~.  Thanks to
+  Jonas Collberg for the feedback in issue 12 over at the GitHub mirror:
+  <https://github.com/protesilaos/ef-themes/issues/12>.  Also thanks to
+  Jonas for the subsequent patch in pull request 13:
+  <https://github.com/protesilaos/ef-themes/pull/13>.  The change is
+  below the ~15 line threshold and thus does not require copyright
+  assignment to the Free Software Foundation.
+
++ Refined the colour mapping of some themes to improve overall
+  aesthetics and/or usability, without deviating from the theme's
+  established character.  For example, in the ~ef-dark~ I adjusted the
+  mappings for dates, links, and names.  This helps distinguish all
+  elements, while retaining the overall looks of the design.  Some
+  contexts where that is relevant:
+
+  - Notmuch search buffers
+  - Magit commit log
+  - Org clocktables
+  - Org documents with links, to-do, etc.
+
+  I will not cover all such technicalities.  Please consult the Git
+  commit log.  If, however, some new combination of colours feels
+  awkward, you are welcome to tell me about it.
+
++ Made improvements to the manual and implemented other internal
+  changes.
+
+* Version 0.4.0 on 2022-08-29
+:PROPERTIES:
+:CUSTOM_ID: h:cc22cc5a-d787-4335-abf0-aa45cef92721
+:END:
+
+** New deuteranopia-friendly themes
+:PROPERTIES:
+:CUSTOM_ID: h:f94f8637-73c8-4e43-bc70-c17c42e76ad6
+:END:
+
+Designed two bespoke themes for users with red-green colour deficiency
+or blindness (deuteranopia).  They rely on blue and yellow hues.  Their
+names are:
+
++ ~ef-deuteranopia-dark~
++ ~ef-deuteranopia-light~
+
+Announcement with sample pictures:
+<https://protesilaos.com/codelog/2022-08-19-ef-themes-deuteranopia/>.
+
+** User options
+:PROPERTIES:
+:CUSTOM_ID: h:3dc43b00-843b-4827-b7cd-f381de619433
+:END:
+
++ Introduced the variable ~ef-themes-mixed-fonts~.  When it is set to a
+  non-nil (=t=) value, it makes spacing-sensitive elements use a
+  monospaced font.  For example, Org tables and code blocks will always
+  look properly aligned.  This is useful for those who either use a
+  proportionately spaced font as their default or enable the built-in
+  ~variable-pitch-mode~.
+
++ Implemented the variable ~ef-themes-variable-pitch-ui~.  When it is
+  set to a non-nil (=t=) value, it renders the mode-line, tab-bar-mode,
+  and tab-line-mode in a proportionately spaced font.
+
+User options must be set before the theme is loaded.  If an option
+changes, its value will be read upon a theme re-load.
+
+For font configurations, refer to my =fontaine= package.
+
+** Newly supported packages
+:PROPERTIES:
+:CUSTOM_ID: h:c1d351ca-1802-44b1-b43f-f9d5f7ba95d9
+:END:
+
+Built into Emacs:
+
++ eww
++ shell-script-mode (sh-mode)
++ shr
+
+External packages:
+
++ consult
++ embark
+
+** Refinements to faces
+:PROPERTIES:
+:CUSTOM_ID: h:582dea7b-454a-4500-871b-4ec45e875274
+:END:
+
++ Fixed the scaling of current line of ~display-line-numbers-mode~ when
+  ~text-scale-adjust~ was invoked.  Basically I forgot to include the
+  ~line-number~ face, while all others were covered.  Thanks to Anthony
+  Chavez for the feedback in issue 7 over at the GitHub mirror:
+  <https://github.com/protesilaos/denote/issues/7>.
+
++ Covered all faces that define group titles in completion contexts.
+  These are headings which are used by various commands, such as
+  ~consult-buffer~, ~consult-imenu~, and ~consult-grep~.  As they denote
+  a group name, we apply the =name= colour mapping (the hue differs for
+  each theme).  And since they are titles, we inherit from ~bold~ to
+  make them look like headings.  Thanks to Summer Emacs for the feedback
+  which amounted to:
+
+  1. Treating group titles as headings.
+  2. Using a more consistent colour theme-wide.
+
++ Revised the ~compilation-info~ face from a colour-coded "success" face
+  to a value that is consistent with the semantics of its application in
+  file names or related (as seen in the emacs.git repository).  For
+  example, file names in Grep or Xref buffers will now look like they
+  belong to the theme, whereas before they were predominantly green,
+  even when that did not make sense.  This point is connected to the
+  above, such as in workflows that go from the minibuffer to a Grep
+  buffer (e.g. with the use of the =embark= package).
+
++ Toned down the vertical border between windows by explicitly
+  supporting the ~vertical-border~ face.  The previous design would use
+  the main foreground which generally led to a disproportionately
+  intense result.
+
++ Adjusted all spacing-sensitive faces to accommodate the user option
+  ~ef-themes-mixed-fonts~, as noted above.  Also thanks to Christopher
+  League for spotting that I had missed the ~line-number~ face and for
+  providing the relevant patch (I do the same in the =modus-themes=):
+  https://lists.sr.ht/~protesilaos/ef-themes/%3C871qt2x4wi.fsf%40nita.mail-host-address-is-not-set%3E
+
+  The patch is well below the ~15 line threshold and thus does not
+  require copyright assignment to the Free Software Foundation.
+
++ Enforced mono spacing for the ~org-indent~ face.  This is essential
+  for ~org-indent-mode~ to align entries correctly.  Thanks to Steve
+  Molitor for reporting this in the issue 9 over at the GitHub mirror:
+  <https://github.com/protesilaos/ef-themes/issues/9>.  Steve tested a
+  sample file with ~modus-vivendi~ and got the desired results.  It
+  reminded me how I handle this face in the =modus-themes=.
+
++ Added explicit support for the ~bold~ and ~italic~ faces.  The default
+  definition of ~italic~ has conditionality which we do not want, such
+  as drawing an underline if the font does not have italics (e.g. Fira
+  Code).  Styling it at the theme level prevents that from happening:
+  the font without italics will simply use the upright/roman glyphs.
+  Adding ~bold~ is just for clarity.  Its default definition is fine.
+
++ Made the tabs of the built-in ~tab-bar-mode~ and ~tab-line-mode~ stand
+  out more.  The difference between the current tab and the rest was too
+  subtle.  Depending on the lighting conditions, their respective
+  backgrounds were indistinguishable.  Thanks to Summer Emacs for
+  reporting this issue and for helping me decide on the final design.
+
++ Applied tinted backgrounds to values and arguments in transient.el
+  buffers (e.g. Magit).  They now stand out better.
+
+** Documentation
+:PROPERTIES:
+:CUSTOM_ID: h:5549f628-390d-478c-b8d3-a0b068f3f1e0
+:END:
+
++ Created a page with screenshots of all the Ef themes:
+  <https://protesilaos.com/emacs/ef-themes-pictures>.
+
++ Answered the Frequently Asked Question of letting Org tags inherit the
+  foreground colour of the heading they belong to.  The gist (though
+  note that the entry also mentions the option for the non-alignment of
+  tags):
+
+  #+begin_quote
+  Upstream Org defines tags in headings to have the same color as the rest
+  of the heading's text.  However, tags are a distinct component of the
+  heading as noted in the doc string of the ~org-get-heading~ function.
+  Tags also are functionally different than the ordinary text of the
+  heading: they are a clickable link/button.  It thus is a matter of
+  usability to render this distinction clear at the visual level: I do not
+  agree with upstream Org's design decision.
+  #+end_quote
+
++ Addressed another Frequently Asked Question on whether we can have
+  Ef-style themes inspired by the Nord or Zenburn themes.  The short
+  version is that this is technically difficult and undesirable.  Each
+  palette in the Ef themes collection is original and is designed around
+  the normative and aesthetic principles of this project.
+
++ Wrote an entire section on Do-It-Yourself customisations.  These
+  generally are for advanced users, though the manual provides concrete
+  examples of using the ~ef-themes-with-colors~ macro in tandem with the
+  ~ef-themes-post-load-hook~.
+
++ Elaborated on the list of packages that I will most likely NOT support
+  in the Ef themes.  The reasons vary though.  Quote:
+
+  #+begin_quote
+  These are difficult to support due to their (i) incompatibility with
+  the design of the =ef-themes=, (ii) complexity or multiple points of
+  entry, (iii) external dependencies, (iv) existence of better
+  alternatives in my opinion, or (v) inconsiderate use of color
+  out-of-the-box and implicit unwillingness to be good Emacs citizens
+  #+end_quote
+
+  If a certain package does not look right, then it is not supported
+  (yet).
+
+The manual can be read from Emacs, if the =ef-themes= package is
+installed.  Evaluate:
+
+#+begin_src emacs-lisp
+(info "(ef-themes) Top")
+#+end_src
+
+Else visit: <https://protesilaos.com/emacs/ef-themes>.
+
+** Internal refinements
+:PROPERTIES:
+:CUSTOM_ID: h:4013a8aa-d2ff-45a1-95db-edd140e31cb1
+:END:
+
++ Recalibrated diff colours or the context of diff buffers, especially
+  in Magit, to improve usability.
+
++ Adjusted or otherwise tweaked the hues that apply to key bindings and
+  links in order to reinforce the stylistic consistency of each theme.
+
++ Introduced a yellow-tinted background which is used in various
+  contexts that (i) should be styled with a coloured background but (ii)
+  should not be colour-coded as either red or green/blue.
+
++ Made the ~ef-themes-with-colors~ macro always reify the current Ef
+  theme's palette.  This macro is for advanced users.  Its utility is
+  documented in the themes' manual.
+
++ Fixed how themes become "known" at startup.  Before, they were not
+  registered correctly for immediate use with the ~ef-themes-select~
+  command.  Thanks to Jean-Philippe Gagné Guay for the feedback in issue
+  6 over at the GitHub mirror: <https://github.com/protesilaos/denote/issues/6>.
+
++ Tweaked some face attributes to work with Emacs 27.
+
++ Tinkered with the colour mapping or precise values of practically all
+  the themes.  Better consult the Git log for the minutiae.  I think the
+  identity of each theme is largely defined, though there may still be
+  tweaks to be done here and there until we eventually reach version
+  =1.0.0=.
+
+* Version 0.3.0 on 2022-08-20
+:PROPERTIES:
+:CUSTOM_ID: h:f91c2c29-cc5b-4cf3-a322-f3a286a17e8c
+:END:
+
+** User-facing changes
+:PROPERTIES:
+:CUSTOM_ID: h:691f108f-7a92-47a9-a3a3-89c31916d8c8
+:END:
+
++ Revised the minimum Emacs version of the =ef-themes= package.  It now
+  depends on Emacs 27.1 instead of Emacs 28.1.  Relevant internal
+  adjustments were made, some of which are courtesy of Philip
+  Kaludercic: <https://lists.sr.ht/~protesilaos/ef-themes/patches/34787>.
+
+  [ Philip has assigned copyright to the Free Software Foundation.  This
+    is necessary for all non-trivial patches. ]
+
++ Added two new themes to the collection which are designed for users
+  with red-green colour deficiency/blindness (deuteranopia).  In simple
+  terms, their effective palette consists of blue, yellow, and the base
+  tones.  The themes are named descriptively: ~ef-deuteranopia-dark~ and
+  ~ef-deuteranopia-light~.  Announcement with screenshots:
+  <https://protesilaos.com/codelog/2022-08-19-ef-themes-deuteranopia/>.
+
++ Reconsidered the principle of what kind of user options are
+  acceptable.  Those which affect colours directly will never be a part
+  of the project.  Others are subject to consideration with a preference
+  for simplicity.  Detailed documentation to do-it-yourself will still
+  be preferred over user options.
+
++ Implemented the ~ef-themes-headings~ user option which provides the
+  mechanism to change the weight and height of each heading level, as
+  well as set it to ~variable-pitch~ (i.e. a proportionately spaced
+  font).  The doc string of that variable or the relevant entry in the
+  manual explain the particularities and provided code samples.
+
+  To accommodate this variable, the default style of all headings has
+  been revised to remove the added height they once had.  Users who
+  preferred the previous style must add the following to their
+  configuration BEFORE the code that actually loads the theme (e.g. a
+  ~load-theme~ call):
+
+  #+begin_src emacs-lisp
+  ;; Restore height of each heading level to its previous value.
+  (setq ef-themes-headings
+        '((0 . (1.9))
+          (1 . (1.8))
+          (2 . (1.7))
+          (3 . (1.6))
+          (4 . (1.5))
+          (5 . (1.4))
+          (6 . (1.3))
+          (7 . (1.2))
+          (t . (1.1))))
+
+  ;; First set the above configuration, then load the theme (changes to
+  ;; user options require a theme re-load).
+  (load-theme 'ef-summer :no-confirm)
+  #+end_src
+
++ Introduced the command ~ef-themes-toggle~ and the companion user
+  option ~ef-themes-to-toggle~.  To use the command, one must first set
+  their two preferred Ef themes, such as with this:
+
+  #+begin_src emacs-lisp
+  (setq ef-themes-to-toggle '(ef-summer ef-winter))
+  #+end_src
+
+  The names of all the themes are included in the ~ef-themes-collection~
+  variable.  Though recall that the commands ~ef-themes-select~ and
+  ~ef-themes-load-random~ still use the entire collection (read their
+  doc strings or consult the manual).
+
++ Fixed how themes are made available at startup.  Before, there was a
+  mistake to how items were registered as "known" and were thus not
+  recognised by our commands, even though the standard ~load-theme~
+  worked as expected.  Thanks to Iris Garcia for reporting the problem
+  in issue 2 on the GitHub mirror:
+  <https://github.com/protesilaos/ef-themes/issues/2>.  It was
+  propagated to users as version 0.2.1 of the =ef-themes=.
+
++ Added support for these packages:
+
+  - chart
+  - doom-modeline (tentative)
+  - info
+  - org-habit
+  - rcirc
+  - smerge
+
+  Thanks to Spike-Leung for reminding me about ~org-habit~ in issue 5
+  over at the GitHub mirror:
+  <https://github.com/protesilaos/ef-themes/issues/5>.
+
+  [ Remember that if a package looks awfully out of place, it is not
+    support (yet). ]
+
++ Expanded and/or clarified the manual, including an answer to the
+  question of what "Ef" means:
+
+  #+begin_quote
+  "Ef" is a Greek word (ευ), commonly used as a prefix to denote that
+  something is good, nice, and/or easy.  For example, eftopia (ευτοπία)
+  is the opposite of dystopia (δυστοπία): a good place as opposed to a
+  bad place.
+  #+end_quote
+
++ Helped Adam Sherwood figure out why zsh-autosuggestions did not look
+  right.  In short: this has nothing to do with Emacs.  Try to avoid
+  termcolor{0,7,8,15} as a default.  Prefer the remaining nominal accent
+  colours, as every theme is more likely to work with those, whereas,
+  say, termcolor0 ("black") will not be legible with dark themes.  This
+  was done in issue 3 on the GitHub mirror:
+  <https://github.com/protesilaos/ef-themes/issues/3>.
+
+** Internal refinements
+:PROPERTIES:
+:CUSTOM_ID: h:bf3fcbee-9057-497a-8258-2ef8029a3459
+:END:
+
++ Recalibrated lots of colour values and mappings across several themes.
+  The changes are small and help with the internal consistency of each
+  theme.  Consult the Git commit log for the minutiae.
+
++ The internal faces for headings are now done with a ~dotimes~ call on
+  ~custom-declare-face~ instead of a bespoke macro.  Thanks to Philip
+  Kaludercic for the patch:
+  <https://lists.sr.ht/~protesilaos/ef-themes/patches/34791>.
+
++ Applied ~file-equal-p~ for the registration of the themes in the
+  relevant path.  Doing so is generally more resilient than ~equal~ and
+  might avoid an unexpected edge case in the future.  Thanks to Philip
+  Kaludercic for the patch:
+  <https://lists.sr.ht/~protesilaos/ef-themes/patches/34789>.
+
++ Opted for ={if,when}-let*= over ={if,when}-let=.  The former do not
+  support the obsolete single-binding syntax, and make clear that both
+  macros operate more like ~let*~ than ~let~ by evaluating and binding
+  variables sequentially.  Thanks to Philip Kaludercic for the patch:
+  <https://lists.sr.ht/~protesilaos/ef-themes/patches/34787>.
+
+** Acknowledgement for the first version of the project
+:PROPERTIES:
+:CUSTOM_ID: h:f7b55da3-a848-463c-ab71-aa044ee7a8dd
+:END:
+
+Thanks to user Summer Emacs whose feedback helped define the identity of
+the ~ef-summer~ theme.  Summer's comments pertained to the need to
+increase the occurence of yellow as the theme used to be predominantly
+magenta and purple.  I thus implemented the revised colour mapping and
+made the relevant adjustments.  Without Summer's comments, ~ef-summer~
+wouldn't have been as pretty.
+
+* Version 0.2.0 on 2022-08-18
+:PROPERTIES:
+:CUSTOM_ID: h:1e875631-853a-4bd1-9a33-ff4e51fe7614
+:END:
+
+[ Added after the fact on 2022-08-20 ]
+
+No release notes were produced at the time.  This version included
+various stylistic refinements and added commands for (i) loading a theme
+and (ii) previewing a theme's colour palette.
+
+The commands which load a theme call the =ef-themes-post-load-hook=.
+Advanced and/or do-it-yourself users may have a use for it.  The manual
+will eventually provide specific code samples.
+
+* Version 0.1.0 on 2022-08-17
+:PROPERTIES:
+:CUSTOM_ID: h:fb284e98-ec9c-434d-9e9a-1773300d2fb6
+:END:
+
+[ Added after the fact on 2022-08-20 ]
+
+There were no release notes for it.  It established the foundations of
+the project: the main macros, the character of each theme, etc.  Check
+the Git commit log for more.

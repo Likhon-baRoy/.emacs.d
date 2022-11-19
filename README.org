@@ -2,7 +2,7 @@
 #+AUTHOR: Likhon Barai
 #+EMAIL:  likhonhere007@gmail.com
 #+DATE:   2022 Nov 19
-#+TAGS:
+#+TAGS:   emacs
 
 [[https://www.gnu.org/licenses/gpl-3.0.txt][https://img.shields.io/badge/license-GPL_3-green.svg?style=flat&logo=appveyor]]
 [[https://github.com/ellerbrock/open-source-badges/][https://badges.frapsoft.com/os/v1/open-source.png?v=103]]
@@ -10,6 +10,45 @@
 “An infinite number of monkeys typing into GNU emacs would never make a good program.”\\
 ——— Linus Torvalds
 #+end_quote
+
+☯ About
+Emacs changes how you *think* about programming.
+
+Emacs is **totally introspectable**. You can always find out 'what code runs when I press this button?'.
+
+Emacs is an **incremental programming environment**. There's no edit-compile-run cycle. There isn't even an edit-run cycle. You can execute snippets of code and gradually turn them into a finished project. There's no distinction between your editor and your interpreter.
+
+Emacs is a **mutable environment**. You can set variables, tweak functions with advice, or redefine entire functions. Nothing is off-limits.
+
+Emacs provides **functionality without applications**. Rather than separate applications, functionality is all integrated into your Emacs instance. Amazingly, this works. Ever wanted to use the same snippet tool for writing C++ classes as well as emails?
+
+Emacs is full of **incredible software concepts that haven't hit the mainstream yet**. For example:
+
+-   Many platforms have a single item clipboard. Emacs has an **infinite clipboard**.
+-   If you undo a change, and then continue editing, you can't redo the original change. Emacs allows **undoing to any historical state**, even allowing tree-based exploration of history.
+-   Emacs supports a **reverse variable search**: you can find variables with a given value.
+-   You can perform **structural editing** of code, allowing you to make changes without breaking syntax. This works for lisps (paredit) and non-lisps (smartparens).
+-   Many applications use a modal GUI: for example, you can't do other edits during a find-and-replace operation. Emacs provides **recursive editing** that allow you to suspend what you're currently doing, perform other edits, then continue the original task.
+
+Emacs has a **documentation culture**. Emacs includes a usage manual, a lisp programming manual, pervasive docstrings and even an interactive tutorial.
+
+Emacs has a **broad ecosystem**. If you want to edit code in a niche language, there's probably an Emacs package for it.
+
+Emacs doesn't have a monopoly on good ideas, and there are other great tools out there. Nonetheless, we believe the [[https://i.stack.imgur.com/7Cu9Z.jpg][Emacs learning curve]] pays off.
+
+This beautifully written **About EMACS** section credits to [[ttps://github.com/remacs/remacs][Remacs]].
+
+[[./image-dired/ss1.png]][[./image-dired/ss2.png]]
+[[./image-dired/ss3.png]][[./image-dired/ss4.png]]
+
+☯ Table of Contents                                                     :TOC:
+- [[#about][About]]
+- [[#installation][Installation]]
+  - [[#further-updates][Further Updates]]
+  - [[#contribution][Contribution]]
+  - [[#special-thanks][Special Thanks]]
+- [[#prerequisites][Prerequisites]]
+- [[#ask-me-anything][Ask Me Anything]]
 
 Welcome to the /Emacs Of Dreams/. Wait no, I meant the *Emacs Operating System*
 
@@ -23,7 +62,35 @@ Emacs 27.1 and later.
 
 #+html: <p><img alt="GitHub repo size" align="right" src="https://img.shields.io/github/repo-size/Likhon-baRoy/.emacs.d?color=blue&logo=github&style=for-the-badge"></p>
 
-** Prerequisites
+☯ Installation
+[[https://GitHub.com/Likhon-baRoy/][http://ForTheBadge.com/images/badges/built-with-swag.svg]]
+
+1. Install [[https://www.gnu.org/software/emacs/][GNU Emacs]].
+2. Delete =~/.emacs= or =~/.emacs.d=, if you already have it.
+3. Clone this repo to =HOME= or =~/= path using git and update all the submodules.
+   Run this snippets on your terminal:
+#+begin_src
+cd ~
+git clone https://github.com/Likhon-baRoy/.emacs.d.git
+cd.emacs.d
+#+end_src
+4. Ensure a stable connection to Melpa Packages, then open Emacs.
+5. Enter =y= when prompted with =Auto-update packages now?=, wait for all packages to install. (Ignore the warnings on the first launch.)
+6. In your favorite browser, Ctrl-f Prerequisite through this README and follow the Prerequisite instructions.
+7. Restart Emacs and Start using! :tada:
+
+** Further Updates
+I will be updating My-EMACS from time to time, it is best to =git pull= once a while to stay up to date.
+
+Please also execute ~git submodule update --recursive --remote~ to sync with all the submodules.
+
+** Contribution
+If you spotted a bug or you have any suggestions, please fill in an issue. If you have something to fix, feel free to create a pull request.
+
+** Special Thanks
+Everyone starts somewhere, and I started here.
+
+* Prerequisites
 *** All the icons
 Lets add a package. A good one to start with is *all-the-icons*. This installs a bunch of *icons* and *fonts* - no more blank squares anywhere.
 
@@ -49,15 +116,6 @@ Also this project relies on the following list of applications:
 - [[https://www.passwordstore.org][Password Store (=pass=)]]
 - [[http://www.sbcl.org][Steel Bank Common Lisp (=sbcl=)]]
 - [[https://github.com/BurntSushi/ripgrep][ripgrep (=rg=)]]
-
-* Installing
-[[https://GitHub.com/Likhon-baRoy/][http://ForTheBadge.com/images/badges/built-with-swag.svg]]
-
-1. Close Emacs.
-2. Delete =~/.emacs= or =~/.emacs.d=, if you already have it.
-3. Run ~git clone https://github.com/Likhon-baRoy/.emacs.d.git~
-4. Open Emacs, it will download all the packages. (Ignore the warnings on the first launch.)
-5. Start using it! :tada:
 
 * :dizzy: Ask me anything! ✨
 #+html: <a href="../../issues/new">:speech_balloon: <b>Ask a question</b></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="../../issues?q=is%3Aissue+is%3Aclosed+sort%3Aupdated-desc">:book: <b>Read questions</b></a>
