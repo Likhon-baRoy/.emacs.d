@@ -1,8 +1,13 @@
+#+TITLE:  Z-Macs (obviously Emacs :smirk-cat:)
+#+AUTHOR: Likhon Barai
+#+EMAIL:  likhonhere007@gmail.com
+#+DATE:   2022 Nov 19
+#+TAGS:
+
+
 * Likhon's GNU Emacs Configuration
 [[https://www.gnu.org/licenses/gpl-3.0.txt][https://img.shields.io/badge/license-GPL_3-green.svg?style=flat&logo=appveyor]]
 [[https://github.com/ellerbrock/open-source-badges/][https://badges.frapsoft.com/os/v1/open-source.png?v=103]]
-[[https://GitHub.com/Likhon-baRoy/][http://ForTheBadge.com/images/badges/built-with-swag.svg]]
-
 #+begin_quote
 “An infinite number of monkeys typing into GNU emacs would never make a good program.”\\
 ——— Linus Torvalds
@@ -47,14 +52,26 @@ Also this project relies on the following list of applications:
 - [[http://www.sbcl.org][Steel Bank Common Lisp (=sbcl=)]]
 - [[https://github.com/BurntSushi/ripgrep][ripgrep (=rg=)]]
 
-** License
+* Installing
+[[https://GitHub.com/Likhon-baRoy/][http://ForTheBadge.com/images/badges/built-with-swag.svg]]
 
-This project is open source software licensed under the [[https://github.com/sergeyklay/bnf-mode/blob/master/LICENSE][GNU General Public Licence version 3]].
-
-Copyright © 2019, 2020, Free Software Foundation, Inc.
+1. Close Emacs.
+2. Delete =~/.emacs= or =~/.emacs.d=, if you already have it.
+3. Run ~git clone https://github.com/Likhon-baRoy/.emacs.d.git~
+4. Open Emacs, it will download all the packages. (Ignore the warnings on the first launch.)
+5. Start using it! :tada:
 
 * :dizzy: Ask me anything! ✨
 #+html: <a href="../../issues/new">:speech_balloon: <b>Ask a question</b></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="../../issues?q=is%3Aissue+is%3Aclosed+sort%3Aupdated-desc">:book: <b>Read questions</b></a>
 /I get questions by email, occasionally. This way anyone can read the answer!/
 
 [[https://GitHub.com/Likhon-baRoy/.emacs.d][https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg]]
+
+Anything means *anything*. Personal questions. Money. Work. Life. Code.
+Cooking. Traveling. Sports. Teaching. Pokémon. Whatever. :joy:
+
+** License
+
+This project is open source software licensed under the [[https://github.com/sergeyklay/bnf-mode/blob/master/LICENSE][GNU General Public Licence version 3]].
+
+Copyright © 2019, 2020, Free Software Foundation, Inc.
