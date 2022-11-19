@@ -49,6 +49,8 @@ Also this project relies on the following list of applications:
 This project is open source software licensed under the [[https://github.com/sergeyklay/bnf-mode/blob/master/LICENSE][GNU General Public Licence version 3]].
 
 Copyright © 2019, 2020, Free Software Foundation, Inc.
-
+#+BEGIN_CENTER
+:dizzy: Ask me anything! :sparkles:
+#+END_CENTER
 #+html: <a href="../../issues/new">:speech_balloon: Ask a question</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="../../issues?q=is%3Aissue+is%3Aclosed+sort%3Aupdated-desc">:book: Read questions</a>
 /I get questions by email, occasionally. This way anyone can read the answer!/
