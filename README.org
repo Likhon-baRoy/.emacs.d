@@ -68,7 +68,7 @@ Also this project relies on the following list of applications:
 Anything means *anything*. Personal questions. Money. Work. Life. Code.
 Cooking. Traveling. Sports. Teaching. Pokémon. Whatever. :joy:
 
-** License
+** :scroll: License
 
 This project is open source software licensed under the [[https://github.com/sergeyklay/bnf-mode/blob/master/LICENSE][GNU General Public Licence version 3]].
 
