@@ -51,16 +51,15 @@ Emacs doesn't have a monopoly on good ideas, and there are other great tools out
 This beautifully written *About EMACS* section credits to [[https://github.com/remacs/remacs][Remacs]].
 
 ** About README
-Welcome to the /Emacs Of Dreams/. Wait no, I meant the *Emacs Operating System*
-/here are some screenshots.../
-/A dashboard on startup can clean my mind/.😌
+Welcome to the /Emacs Of Dreams/. Wait no, I meant the *Emacs Operating System*.
 
+/here are some screenshots.../
+
+/A dashboard on startup can clean my mind/.😌
 
 [[./image-dired/ss-1.png]]
 
 /Center text in the frame, looks nice ;) and =flycheck= with BitMap-Arrow on the right-fringe/ 😎
-
-
 [[./image-dired/ss-2.png]]
 
 /default Transparent mod/ 👍🏻
@@ -73,11 +72,9 @@ Welcome to the /Emacs Of Dreams/. Wait no, I meant the *Emacs Operating System*
 
 /feel the Org-mode/ :D
 
-
 [[./image-dired/ss-5.png]]
 
 /Company-mode with yasnippet/ 🔥
-
 
 [[./image-dired/ss-6.png]]
 
