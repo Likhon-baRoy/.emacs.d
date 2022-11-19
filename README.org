@@ -1,7 +1,7 @@
 * Likhon's GNU Emacs Configuration
 [[https://www.gnu.org/licenses/gpl-3.0.txt][https://img.shields.io/badge/license-GPL_3-green.svg]]
-
-[[https://github.com/Likhon-baRoy/.emacs.d][https://img.shields.io/badge/repo-size]]
+https://badges.hiptest.com:/github/repo-size/Likhon-baRoy/.emacs.d?style=social
+[[https://github.com/Likhon-baRoy/.emacs.d][https://img.shields.io/badge/repo-size/]]
 
 [[https://github.com/Likhon-baRoy/.emacs.d][https://img.shields.io/github/repo-size/Likhon-baRoy/.emacs.d?color=g&logo=github&style=flat-square]]
 
