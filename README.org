@@ -54,4 +54,4 @@ Copyright © 2019, 2020, Free Software Foundation, Inc.
 #+html: <a href="../../issues/new">:speech_balloon: <b>Ask a question</b></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="../../issues?q=is%3Aissue+is%3Aclosed+sort%3Aupdated-desc">:book: <b>Read questions</b></a>
 /I get questions by email, occasionally. This way anyone can read the answer!/
 
-[[ForTheBadge built-with-swag][http://ForTheBadge.com/images/badges/built-with-swag.svg][https://GitHub.com/Naereen/]]
+[[http://ForTheBadge.com/images/badges/built-with-swag.svg][https://GitHub.com/Likhon-baRoy/]]
