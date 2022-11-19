@@ -54,7 +54,7 @@ This beautifully written *About EMACS* section credits to [[https://github.com/r
 Welcome to the /Emacs Of Dreams/. Wait no, I meant the *Emacs Operating System*
 /here are some screenshots.../
 /A dashboard on startup can clean my mind.😌/
-[[./image-dired/ss-1.png]
+[[./image-dired/ss-1.png]]
 
 /Center text in the frame, looks nice ;) and =flycheck= with BitMap-Arrow on the right-fringe 😎/
 [[./image-dired/ss-2.png]]
