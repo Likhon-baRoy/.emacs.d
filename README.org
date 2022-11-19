@@ -36,7 +36,7 @@ Emacs has a *broad ecosystem*. If you want to edit code in a niche language, the
 
 Emacs doesn't have a monopoly on good ideas, and there are other great tools out there. Nonetheless, we believe the [[https://i.stack.imgur.com/7Cu9Z.jpg][Emacs learning curve]] pays off.
 
-This beautifully written *About EMACS* section credits to [[ttps://github.com/remacs/remacs][Remacs]].
+This beautifully written *About EMACS* section credits to [[https://github.com/remacs/remacs][Remacs]].
 
 [[./image-dired/ss1.png]][[./image-dired/ss2.png]]
 [[./image-dired/ss3.png]][[./image-dired/ss4.png]]
