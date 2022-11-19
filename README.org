@@ -50,6 +50,6 @@ This project is open source software licensed under the [[https://github.com/ser
 
 Copyright © 2019, 2020, Free Software Foundation, Inc.
 
-* :dizzy: Ask me anything! :sparkles:
+* :dizzy: Ask me anything! ✨
 #+html: <a href="../../issues/new">:speech_balloon: Ask a question</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="../../issues?q=is%3Aissue+is%3Aclosed+sort%3Aupdated-desc">:book: Read questions</a>
 /I get questions by email, occasionally. This way anyone can read the answer!/
