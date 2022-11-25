@@ -36,7 +36,7 @@
  ;; If there is more than one, they won't work right.
  '(org-agenda-files nil)
  '(package-selected-packages
-   '(ef-themes ligature goto-chg yasnippet-snippets windswap which-key use-package uniquify-files undo-tree try solaire-mode rainbow-delimiters projectile org-mime org-bullets openwith olivetti no-littering modern-cpp-font-lock minions magit ivy-rich ivy-prescient ivy-posframe ivy-hydra ivy-avy git-gutter gcmh flycheck-popup-tip flycheck-clang-tidy expand-region emojify emmet-mode doom-themes doom-modeline diminish delight dashboard counsel company-wordfreq company-statistics company-shell company-rtags company-quickhelp company-posframe company-dict company-c-headers company-box benchmark-init beacon auto-package-update all-the-icons alert aggressive-indent add-hooks)))
+   '(ace-window ligature goto-chg yasnippet-snippets windswap which-key use-package uniquify-files undo-tree try solaire-mode rainbow-delimiters projectile org-mime org-bullets openwith olivetti no-littering modern-cpp-font-lock minions magit ivy-rich ivy-prescient ivy-posframe ivy-hydra ivy-avy git-gutter gcmh flycheck-popup-tip flycheck-clang-tidy expand-region emojify emmet-mode doom-themes doom-modeline diminish delight dashboard counsel company-wordfreq company-statistics company-shell company-rtags company-quickhelp company-posframe company-dict company-c-headers company-box benchmark-init beacon auto-package-update all-the-icons alert aggressive-indent add-hooks)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

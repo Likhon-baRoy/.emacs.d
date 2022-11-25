@@ -1,9 +1,29 @@
 alias cls clear 1
-alias l ls -la
+alias la ls -lah
+alias ll ls -lh
 alias d dired $1
+alias sudo *sudo $*
+alias vim find-file $*
 alias ff find-file $1
-alias ll ls -AFGhl --color=always $1
 alias e find-file-other-window $1
-alias gd magit-diff-unstaged
-alias gds magit-diff-staged
+alias ag ag --vimgrep --color $*
+
+alias g git $*
+alias gP git push $*
+alias gbr git branch $*
+alias gco git checkout $*
+alias gd git diff --color $*
+alias gl git log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+alias gl2 git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n'' %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+alias gp git pull $*
+alias grb git rebase $*
+alias grh git reset --hard
+alias gs git stash
+alias gsc git svn dcommit
+alias gsp git stash pop
+alias gsr git svn rebase
+alias gst git status
+
+alias mgd magit-diff-unstaged
+alias mgds magit-diff-staged
 alias gg git log --color --graph --oneline --abbrev-commit --decorate --all --date=short --pretty=format:"%C(cyan)%h %C(yellow)%ad %C(bold green)%d %C(reset)%s"

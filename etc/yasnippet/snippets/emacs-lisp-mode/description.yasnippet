@@ -1,0 +1,51 @@
+# -*- mode: snippet -*-
+# name: description-for-elisp
+# key: eldes
+# --
+;;; `(file-name-nondirectory (buffer-file-name))` --- Tweaks for $1 configurations -*- lexical-binding: t -*-
+;;; Created on: `(format-time-string "%Y %b %d")`
+
+;; Copyright (C) 2021-2022 Likhon Sapiens <likhonhere007@gmail.com>
+
+;; Author: Likhon Sapiens <likhonhere007@gmail.com>
+;; URL: https://github.com/Likhon-baRoy/.emacs.d
+;; Version: 0.1.0
+;; Package-Requires: ((emacs "28.1"))
+
+;; This file is NOT part of GNU Emacs.
+
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+;;
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+;;; Commentary:
+;;
+;; This covers my tweaks for Org that are meant for use in my
+;; Emacs setup: https://github.com/Likhon-baRoy/.emacs.d.
+;;
+;; Remember that every piece of Elisp that I write is for my own
+;; educational and recreational purposes.  I am not a programmer and I
+;; do not recommend that you copy any of this if you are not certain of
+;; what it does.
+
+;;; Code:
+
+
+$0
+
+;;; Finish up
+(provide '`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; `(file-name-nondirectory (buffer-file-name))` ends here
+;; Local Variables:
+;; byte-compile-warnings: (not free-vars)
+;; End:

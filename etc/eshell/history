@@ -94,12 +94,10 @@ exit 0
 exit 1
 x
 pwd
-cd Downloads
 lfub
 htop
 r
 ranger
-ls
 pwd
 du -h
 ckls
@@ -107,34 +105,26 @@ x
 x
 x
 cd \[Judas\]\ Steins\;Gate\ \(Season\ 1\ +\ OVA\ +\ Movie\)\ \[BD\ 1080p\]\[HEVC\ x265\ 10bit\]\[Dual-Audio\]\[Multi-Subs\]/
-cls
 cd Downloads/
 p -Syu
 du -h -k
 du -h
 df -
 df -h
-ls
 cpp-mode
-cls
 make cpp-mode.cpp 
 cpp-mode
 x
-ls
 cpp-mode
 ./cpp-mode
 x
 cd wrx
-cls
 gcc sin.c 
 gcc sin.c -lm
 gcc sin.c -lm
-cls
-cls
 gcc sin.c -lm
 gcc sin.c -lm
 gcc sin.c -lm
-cls
 du -h
 g++ apple.cpp 
 g++ apple.cpp 
@@ -143,7 +133,6 @@ g++ apple.cpp
 g++ apple.cpp 
 a.out
 a.out 
-cls
 g++ apple.cpp 
 g++ apple.cpp 
 g++ apple.cpp 
@@ -154,28 +143,45 @@ g++ apple.cpp
 g++ apple.cpp 
 apple 
 ./a.out
-cd
 mv cpp-mode.cpp wrx/
 cd wrx/
 g++ cpp-mode.cpp time
 time g++ cpp-mode.cpp 
-ll
 g++ apple.cpp
 x
 df -h
 df
 du -h
-cd
 du -h
 echo $SHELL 
 bash
 x
-exit
 cd 
-cd Downloads
 ffmpeg -ss 30 -t 3 -i dracula-playing-piano.mp4 \    -vf "fps=10,scale=320:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" \    -loop 0 output.gif
 ffmpeg -y -i dracula-playing-piano.mp4 -i palette.png -filter_complex "fps=30,scale=320:-1:flags=lanczos[x];[x][1:v]paletteuse" foo.gif
 ffmpeg -y -i dracula-playing-piano.mp4 -vf fps=30,scale=320:-1:flags=lanczos,palettegen palette.png
 ffmpeg -y -i dracula-playing-piano.mp4 -i palette.png -filter_complex "fps=30,scale=320:-1:flags=lanczos[x];[x][1:v]paletteuse" foo.gif
 x
+x
+exitr
+gg
+gl
+gg
+gl
+gl2
+mgd
+ag
+x
+x
+clear
+cls
+x
+ll
+cd Downloads/
+cd
+cd Downloads
+x
+x
 exit
+la
+ls
