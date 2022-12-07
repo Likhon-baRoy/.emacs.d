@@ -7,7 +7,7 @@
 [[https://www.gnu.org/licenses/gpl-3.0.txt][https://img.shields.io/badge/license-GPL_3-green.svg?style=flat&logo=appveyor]]
 [[https://github.com/ellerbrock/open-source-badges/][https://badges.frapsoft.com/os/v1/open-source.png?v=103]]
 #+begin_quote
-“An infinite number of monkeys typing into GNU emacs would never make a good program.”\\
+An infinite number of monkeys typing into GNU Emacs would never make a good program.\\
 ——— Linus Torvalds
 #+end_quote
 
@@ -63,7 +63,7 @@ Welcome to the /Emacs Of Dreams/. Wait no, I meant the *Emacs Operating System*.
 This repository contains my personal configuration for *GNU Emacs* that I use on
 the daily and port around from system to system with me.
 
-The configuration depends on [[file:init.el][init.el]]  and [[file:early-init.el][early-init.el]] (sets up a few initial GUI settings), bootstraps [[https://github.com/jwiegley/use-package][use-package]]. and loads [[file:init.el][init.el]], which is where the majority of the configuration magic happens.
+The configuration depends on [[file:init.el][init.el]], [[https://github.com/Likhon-baRoy/.emacs.d/tree/main/my-lisp][my-lisp]](dir) and [[file:early-init.el][early-init.el]] (sets up a few initial GUI settings), bootstraps [[https://github.com/jwiegley/use-package][use-package]]. and loads [[file:init.el][init.el]], which is where the majority of the configuration magic happens.
 
 This is an Emacs distribution that aims to enhance the default Emacs experience. It alters a lot of the default settings, bundles of additional packages and adds its own core library to the mix. The final product offers an easy to use Emacs configuration for Emacs newcomers and lots of additional power for Emacs power users.
 
@@ -125,6 +125,15 @@ If you spotted a bug or you have any suggestions, please fill in an issue. If yo
 
 ** Special Thanks
 Everyone starts somewhere, and I started here.
+My heart whelming *Thanks* 🙏🏽 to you guy's 💜, who put all their effort always makes *Emacs* go one-step further.
+
+- *Uncle Dev* ([[https://github.com/daedreth/UncleDavesEmacs#readme][GitHub]], [[https://www.youtube.com/watch?v=d6iY_1aMzeg&list=PLX2044Ew-UVVv31a0-Qn3dA6Sd_-NyA1n][YouTube]])
+- *Mike Zamansky* ([[https://github.com/zamansky/emacs.dz#readme][GitHub]], [[https://www.youtube.com/watch?v=49kBWM3RQQ8&list=PL9KxKa8NpFxIcNQa9js7dQQIHc81b0-Xg][YouTube]], [[https://cestlaz.github.io/posts/using-emacs-1-setup/][Website]])
+- *Mingde* (Matthew) *Zeng* ([[https://github.com/MatthewZMD/.emacs.d#readme][GitHub]])
+- *System Crafters* ([[https://www.youtube.com/@SystemCrafters/playlists][YouTube]], [[https://systemcrafters.cc/][Website]], [[https://config.daviwil.com/emacs][Website]])
+- *Protesilaos Stavrou* ([[https://github.com/protesilaos/dotfiles/tree/master/emacs/.emacs.d][GitHub]], [[https://www.youtube.com/@protesilaos/playlists][YouTube]], [[https://protesilaos.com/emacs/dotemacs][Website]])
+
+And many other people from the *Internet World*.
 
 * Prerequisites
 
@@ -140,20 +149,21 @@ Please update this file your personal info.
 ** Install Packages
 Also this project relies on the following list of applications:
 
-- [[http://ctags.sourceforge.net][Exuberant Ctags (=ctags=)]]
-- [[https://www.jetbrains.com/lp/mono/][JetBrains Mono (=font=)]]
+- [[http://ctags.sourceforge.net][Exuberant Ctags]] (=ctags=)
+- Install [[https://cmake.org/install/][cmake]], [[https://clang.llvm.org/get_started.html][clang]], [[https://clang.llvm.org/get_started.html][llvm]], [[http://www.gdbtutorial.com/tutorial/how-install-gdb][gdb]] for programming purpose
+- Install [[https://www.jetbrains.com/lp/mono/][JetBrains Mono]] (=font=)
+- Install [[https://github.com/googlefonts/noto-emoji][emoji font]] (*Noto Emoji* & =noto-cjk=, /for all the fonts imaginable/) for Linux
+- Install [[https://github.com/domtronn/all-the-icons.el][all-the-icons]] fonts: =M-x all-the-icons-install-fonts=
 - [[https://www.gnu.org/software/global][GNU GLOBAL (=global=)]]
 - [[https://git-scm.com][Git (=git=)]]
 - [[https://www.gnupg.org][GnuPG (=gpg=)]]
 - [[https://hunspell.github.io][Hunspell (=hunspell=)]] with [[https://stackoverflow.com/a/9436234/1661465][dictionaries]]
 - [[https://www.gnu.org/software/idutils/][ID Utils (=mkid=, =lid=, =fid=, =fnid=, =xtokid=)]]
-- [[https://pandoc.org][Pandoc (=pandoc=)]]
 - [[https://www.passwordstore.org][Password Store (=pass=)]]
-- [[http://www.sbcl.org][Steel Bank Common Lisp (=sbcl=)]]
 - [[https://github.com/BurntSushi/ripgrep][ripgrep (=rg=)]]
 
 * User Guidance
-📝 *Note:* For beginners I'll be using =Ctrl= as =C=, =Alt= as =M=, =Space= as =S= and =BackSpace= as =BS=. \\
+📝 *Note:* (/for beginners/) I'll be using =Ctrl= as =C=, =Alt= as =M=, =Space= as =S= and =BackSpace= as =BS=. \\
 
 After installation process is done.  Whenever you open a files within Emacs, the whole file will be opened in folding mode.  Which you'll obviously won't see until you find the shortcut key-binding.  There is a default feature for this which called *hs-minor-mode* I just change some default key-bindings for more useful. \\
 
@@ -163,12 +173,12 @@ C-c h (hide-all)
 C-c s (show-all)
 S-BS  (hide-block)
 C-BS  (show-block)
-S-TAB (toggle-hiding) - fold the current section.
-C-TAB (hide-level) - fold the sub sections of the current section.
+C-TAB (toggle-hiding) - fold the current section.
+S-TAB (hide-level) - fold the sub sections of the current section.
 #+end_example
 
 * Custom Configurations
-Here is my some personal changes for *Emacs* which comes default with this configuration.
+Here is my some personal changes for *Emacs* which comes default with this configuration. Checkout full documentation of *Keybindings* in [[https://github.com/Likhon-baRoy/org-notes/blob/main/emacs_user-manual.org][Emacs user-manual]].
 ** Custom key bindings
 
 #+BEGIN_SRC emacs-lisp
@@ -304,4 +314,4 @@ Cooking. Traveling. Sports. Teaching. Pokémon. Whatever. :joy:
 
 This project is open source software licensed under the [[https://github.com/sergeyklay/bnf-mode/blob/master/LICENSE][GNU General Public Licence version 3]].
 
-Copyright © 2019, 2020, Free Software Foundation, Inc.
+Copyright © 2020, 2022, Free Software Foundation, Inc.

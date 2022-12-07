@@ -38,12 +38,12 @@
 
 ;; ──────────────────────────────── COMPANY-MODE ───────────────────────────────
 (use-package company-box
+  :delight
   :hook (company-mode . company-box-mode))
 ;; (set-face-background 'company-box--apply-color "#555555")
 (use-package company
-  :diminish company-mode
-  :hook
-  (after-init . global-company-mode)
+  :delight " Ⱞ"
+  :hook (after-init . global-company-mode)
   :bind
   (:map company-active-map
         ("C-h"        . nil)
@@ -150,7 +150,7 @@
   (company-statistics-mode))
 
 (use-package yasnippet
-  :delight yas-minor-mode " υ"
+  :delight yas-minor-mode " ¥" ; "ǂ"
   :custom (yas-snippet-dirs '("~/.emacs.d/etc/yasnippet/snippets"))
   :commands yas-reload-all
   :hook ((prog-mode minibuffer-inactive-mode org-mode) . yas-minor-mode)

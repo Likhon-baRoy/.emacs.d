@@ -42,6 +42,28 @@
   (interactive)
   (load-file (expand-file-name "~/.emacs.d/init.el")))
 
+;; ─────────────────────── Focus on newly created windows ──────────────────────
+
+;; (switch-to-buffer (other-buffer (current-buffer) t))
+(defun switcheroo ()
+  "Switch to the most recent other buffer, even if it's visible in another window."
+  (interactive)
+  (switch-to-buffer (other-buffer (current-buffer) t)))
+
+(defun split-and-follow-horizontally ()
+  (interactive)
+  (split-window-below)
+  (balance-windows)
+  (other-window 1)
+  (switcheroo))
+
+(defun split-and-follow-vertically ()
+  (interactive)
+  (split-window-right)
+  (balance-windows)
+  (other-window 1)
+  (switcheroo))
+
 ;; ──────────────────────────────── Switch Theme ───────────────────────────────
 (defun switch-theme (theme)
   "Disable any currently active themes and load THEME."
@@ -94,9 +116,11 @@
                   ("#+end_src" . ?)
                   ("#+begin_example" . ?)
                   ("#+end_example" . ?)
+                  ("#+begin_quote" . ?❝)
+                  ("#+end_quote" . ?―) ; ❟ ❠
                   ("#+header:" . ?)
                   ("#+name:" . ?﮸)
-                  ("#+title:" . "")
+                  ("#+title:" . "◈")
                   ("#+results:" . ?)
                   ("#+call:" . ?)
                   (":properties:" . ?)
@@ -105,7 +129,7 @@
 
 
 (defun add-pretty-lambda ()
-  "Make some word or string show as pretty Unicode symbols.  See https://unicodelookup.com for more."
+  "Make some word or string show as pretty Unicode symbols.  See `https://unicodelookup.com' for more."
   (setq prettify-symbols-alist
         '(("lambda" . 955)
           ("delta" . 120517)
@@ -156,16 +180,16 @@
       (progn
         (insert comment-start)
         (when (equal comment-start ";")
-          (insert comment-start))
-        (insert " ")
-        (dotimes (_ space-on-each-side) (insert comment-char))
-        (when (> comment-length 0) (insert " "))
-        (insert comment)
-        (when (> comment-length 0) (insert " "))
-        (dotimes (_ (if (= (% comment-length 2) 0)
-                        (- space-on-each-side 1)
-                      space-on-each-side))
-          (insert comment-char))))))
+        (insert comment-start))
+                  (insert " ")
+                  (dotimes (_ space-on-each-side) (insert comment-char))
+                  (when (> comment-length 0) (insert " "))
+                  (insert comment)
+                  (when (> comment-length 0) (insert " "))
+                  (dotimes (_ (if (= (% comment-length 2) 0)
+                                  (- space-on-each-side 1)
+                                space-on-each-side))
+                    (insert comment-char))))))
 
 ;; ─────────────────────────────────── CURSOR ──────────────────────────────────
 (set-mouse-color "white")

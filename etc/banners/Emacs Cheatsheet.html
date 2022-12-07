@@ -1,0 +1,344 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<title>Emacs Cheatsheet</title>
+</head>
+<body>
+<h1>Emacs Cheatsheet</h1>
+
+<pre>DOCUMENT KEY
+C
+	The control key.
+M
+	The "meta" key.  This key does not exist on most modern keyboards.  To simulate, this is usually mapped
+	to pressing (and releasing) the Esc key once.  It is sometimes also mapped to the Alt key.
+
+C-&lt;key&gt;
+	Hold the control key, and press &lt;key&gt;.
+
+M-&lt;key&gt;
+	Press the Esc key once, and press &lt;key&gt;.
+
+
+
+BUFFER LAYOUT AND NAVIGATION
+C-x b
+	  select another buffer
+C-x C-b
+	  list all buffers
+C-x k
+	  close buffer
+C-x 0
+	  close this window (when split)
+C-x 1
+	  go back to one buffer on screen
+C-x 2
+	  split screen horizantally (two windows)
+C-x 3
+	  split screen vertically (two windows)
+C-x o
+	  switch cursor to other buffer
+C-M-v
+	  scroll other window
+C-l
+	  Clear screen and redisplay, scrolling the selected window to center point vertically within it (recenter).
+C-x ^
+	  grow buffer taller
+M-x shrink-window
+	  shrink window shorter
+C-x {
+	  shrink window narrower
+C-x }
+	  grow window wider
+C-l
+	  redraw screen
+
+
+FILES AND BUFFERS
+C-x C-f
+	  read a file into a buffer
+C-x C-s
+	  save current buffer back to file
+C-x i
+	  insert contents of file into current buffer
+C-x C-w
+	  write buffer to specified file
+C-x C-c
+	  exit emacs
+
+
+TEXT EDITING
+C-k
+	  erases to end of line. If line is blank, the line itself is erased.
+C-g
+	  aborts a partially typed command.
+C-x u
+	  undo last change to buffer.
+C-w
+	  cut marked region
+M-w
+	  copy marked region
+C-y
+	  paste region
+M-x indent-region
+	  indents selected region
+M-| <enter> wc -w <enter>
+	  Word count region
+
+
+
+EDITOR APPEARANCE
+C-x C-+
+	  Increase font size in buffer.
+
+C-x C--
+	  Decrease font size in buffer.
+
+
+EDITOR BEHAVIOR
+M-x set-variable RET c-basic-offset RET x RET
+	  adjust tab width to x (c-basic-offset for c mode)
+
+
+
+CASE CHANGE
+M-u
+uppercase word from cursor
+M-l
+	  lowercase word from cursor
+M-c
+	  capitalize word
+C-x C-u
+	  uppercase region
+C-x C-l
+	  lowercase region
+
+
+
+MARKING
+C-@ or C-SPACE
+	  set mark
+M-@
+	  set mark ARG words away
+M-h
+	  mark paragraph
+C-x C-p
+	  mark page
+C-M-h
+	  mark function
+C-x h
+	  mark buffer
+
+
+SPELLING
+M-$
+	  check spelling of word, offers suggestions
+M-x flyspell-mode
+	  enable/disable Flyspell mode (highlights misspelled words)
+M-x flyspell-prog-mode
+	  enable/disable Flyspell mode for comments and strings
+M-/
+	  completes partial word from cursor position
+M-<tab>
+	corrects misspelled word under cursor (in Flyspell mode)
+M-x ispell
+	spellcheck the active region or the current buffer
+M-x ispell-buffer
+M-x ispell-region
+M-x ispell-string
+M-x ispell-word
+	starts ispell for the specified region
+
+	check and correct spelling of each word in the region
+M-x ispell-kill-ispell
+	kill aspell or ispell
+M-x spell-buffer
+M-x spell-region
+M-x spell-string
+M-x spell-word
+	simplified spellchecks, no suggestions, corrections by hand only
+
+
+ISPELL
+x
+	quit spellchecking in ispell, moves cursor back to starting position
+<space>
+  skips current word while spellchecking
+r word <return>
+	replaces current word while spellchecking
+?
+	display other options
+a
+	accept spelling for all buffers for this session
+i
+	accept spelling and add to dictionary
+q
+	quit
+X
+	halt at current location (will restart from there later)
+
+
+
+SEARCHING AND REPLACING
+C-s
+	search forward
+C-r
+	search backward
+M-x count-matches
+	Prints the number of occurrences of a regular expression.
+M-x replace-string
+	will prompt for string to search and replace, unconditionally replaces all occurances
+
+
+DELETING
+C-d
+	delete the character at the point
+&lt;DEL&gt;
+  delete the character before the point (i.e., backspace)
+M-x kill-sentence
+  Kills the sentence from the point of the cursor
+M-d
+  Delete word from cursor
+C-k
+  Deletes previous sentence
+
+
+NAVIGATION
+C-a
+  move to beginning of line
+C-e
+  move to end of line
+M-a
+  backward a sentence
+M-e
+  forward a sentence
+M-}
+  forward a paragraph
+M-{
+  backward a paragraph
+C-v
+  move down a screen
+M-v
+  move up a screen
+M-&lt;
+	 move to beginning of the buffer
+M-&gt;
+	move to end of buffer
+C-p
+	move up one line (useful if cursor keys do not work) (p for previous)
+C-n
+	move down one line (n for next)
+C-f
+	move right one character (f for forward)
+C-b
+	move back one character (b for back)
+M-b
+	left one word
+M-F
+	right one word
+C-l
+	cursor in the middle of the screen
+C-U x C-N
+	advance x lines
+C-x w
+	display the line number where the cursor is located
+M-d goto-line <return> x <return>
+	goto line number x
+
+
+PROGRAMMING
+make -k
+	 compile using makefile
+M-x comment-region
+	comments region of code
+M-;
+	comment current line
+
+
+
+PROGRAMMING LANGUAGES
+M-x prolog-mode
+	Switch to Prolog language mode (default for ".pl" is Perl mode).
+
+
+
+SHELLS
+M-x shell
+	opens shell buffer within emacs
+M-!
+	execute shell command
+M-|
+	run shell command on region
+C-u M-|
+	filter region through shell command
+
+
+HTML
+C-c C-t
+	interactively specify html tag and attributes
+C-c C-f
+	skip across balanced tag group
+
+LaTeX
+C-c C-c
+	Compile using LaTeX. Note: Add the following hook
+	(setq latex-run-command "pdflatex")
+	to your .emacs file to default to pdflatex.
+
+
+Version Control (VC)
+Note
+	At the time of writing VC works with Arch, Bazaar, CVS, Git
+	Mercurial, Monotone, RCS, SCCS/CSSC, and Subversion.
+
+
+M-x vc-register
+	Commits (with message) current file.
+
+M-x vc-diff
+	diff with previous commit.
+
+
+
+
+RECOVERY
+M-x recover-session
+	recover session from backup in the event of crash
+
+
+
+MISCELLANEOUS (I.E., BEING COUNTERPRODUCTIVE WITH YOUR TEXT EDITOR)
+M-x tetris
+	Does exactly what the name implies.  You can also play pong, snake, and solitaire.
+
+M-x doctor
+	Starts Eliza, the built-in psychotherapist.
+
+M-x hanoi
+	Allows you to watch the problem of the "Towers of Hanoi" solved recursively in the browser. Allows for a numerical argument that specifies the puzzle size.
+
+M-x animate
+	Should only be ran on your birthday.
+
+M-x blackbox
+	A 5x5 puzzle.
+
+M-x decipher
+	Cryptanalysis
+
+M-x dunnet
+	An adventure game.
+
+M-x life
+	Conway's "Game of Life" life simulation.
+
+M-x zone
+	Scrambles your editor when it goes idle.
+
+</return></return></return></space></tab></enter></enter></pre>
+
+<address>
+<a href="mailto:jguerin@utm.edu">Joshua T. Guerin</a>
+</address>
+
+
+</body></html>

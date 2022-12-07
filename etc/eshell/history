@@ -174,7 +174,6 @@ ag
 x
 x
 clear
-cls
 x
 ll
 cd Downloads/
@@ -185,3 +184,17 @@ x
 exit
 la
 ls
+g++ apple.cpp 
+a.out
+./a.out
+gdb core a.out 
+g++ -g apple.cpp 
+gdb core a.out 
+./a.out
+gdb core a.out 
+g++ apple.cpp 
+./a.out
+cls
+ls
+sudo packman -Syyu
+sudo pacman -Syyu

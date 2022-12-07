@@ -106,8 +106,10 @@ If you experience stuttering, increase this.")
 (setq package-user-dir (expand-file-name "elpa" user-emacs-directory)
       package-archives
       '(("gnu"   . "https://elpa.gnu.org/packages/")
+        ("melpa-stable" . "https://stable.melpa.org/packages/")
         ("melpa" . "https://melpa.org/packages/")
-        ("cselpa" . "https://elpa.thecybershadow.net/packages/")
+        ("org" . "https://orgmode.org/elpa/")
+        ;; ("cselpa" . "https://elpa.thecybershadow.net/packages/")
         ;; ("melpa-cn" . "http://mirrors.cloud.tencent.com/elpa/melpa/")
         ;; ("gnu-cn"   . "http://mirrors.cloud.tencent.com/elpa/gnu/")
         ))
@@ -166,7 +168,7 @@ If you experience stuttering, increase this.")
    gcmh-idle-delay 'auto ; default is 15s
    gcmh-auto-idle-delay-factor 10
    gcmh-high-cons-threshold (* 16 1024 1024)) ; 16mb
-  )
+  :delight " Ⓖ")
 
 ;; ──────────────────────────── Startup Performance ────────────────────────────
 ;; make startup faster by reducing the frequency of garbage collection and then use a hook to measure Emacs startup time.
@@ -229,14 +231,19 @@ If you experience stuttering, increase this.")
 (setq ibuffer-default-sorting-mode 'recency)
 ;; ───────────────────────────────── FLY-SPELL ─────────────────────────────────
 (use-package flyspell
+  :bind (:map flyspell-mode-map
+              ("C-;"        . nil)
+              ("M-<f7>" . flyspell-buffer)
+              ("<f7>" . flyspell-word)
+              ("C-<f7>" . flyspell-auto-correct-word)
+              ("C-<f12>" . flyspell-auto-correct-previous-word))
+  :init (progn (dolist (hook '(org-mode-hook text-mode-hook message-mode-hook))
+                 (add-hook hook 'turn-on-flyspell))
+               (add-hook 'prog-mode-hook 'flyspell-prog-mode))
   :config
   (setq ispell-program-name "hunspell" ; Requires Hunspell
         ispell-default-dictionary "en_GB")
-  :hook (org-mode . flyspell-mode)
-  :bind (("M-<f7>" . flyspell-buffer)
-         ("<f7>" . flyspell-word)
-         ("C-<f7>" . flyspell-auto-correct-word)
-         ("C-<f12>" . flyspell-auto-correct-previous-word)))
+  :delight " ⓢ")
 ;; ────────────────────────────────── WEB-MODE ─────────────────────────────────
 (use-package emmet-mode
   :after (web-mode css-mode scss-mode)
@@ -268,26 +275,22 @@ If you experience stuttering, increase this.")
     (write-file custom-file)))
 
 (when (file-exists-p custom-file)
-  (load custom-file))
-;; (load custom-file 'noerror 'nomessage)
-
-;; https://emacs.metaphoric.dev/#org21aec79
-;; Whenever the base core.org file is updated, all the custom user settings are
-;; wiped out.
-;; To prevent this, the user may define permanent settings in the
-;; config.org file.
-
-;; (setq-default userconfig-file (expand-file-name "config.el" user-emacs-directory))
-;; (when (file-exists-p userconfig-file)
-;;   (load userconfig-file))
+  (load custom-file 'noerror 'nomessage))
 
 ;; Load custom themes
 (add-to-list 'custom-theme-load-path (expand-file-name "etc/themes/" user-emacs-directory))
 
+;; ─────────────────────────────────── Emoji ───────────────────────────────────
+;; Set up emoji rendering, requires installation of the Noto Emoji font for Linux.
+;; Default Windows emoji font
+(when (member "Segoe UI Emoji" (font-family-list))
+  (set-fontset-font t 'symbol (font-spec :family "Segoe UI Emoji") nil 'prepend)
+  (set-fontset-font "fontset-default" '(#xFE00 . #xFE0F) "Segoe UI Emoji"))
+
 ;; Linux emoji font
-(when (member "Apple Color Emoji" (font-family-list))
-  (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") nil 'prepend)
-  (set-fontset-font "fontset-default" '(#xFE00 . #xFE0F) "Apple Color Emoji"))
+(when (member "Noto Color Emoji" (font-family-list))
+  (set-fontset-font t 'symbol (font-spec :family "Noto Color Emoji") nil 'prepend)
+  (set-fontset-font "fontset-default" '(#xFE00 . #xFE0F) "Noto Color Emoji"))
 ;;________________________________________________________________
 ;;    Editing Related
 ;;________________________________________________________________
@@ -509,14 +512,18 @@ If you experience stuttering, increase this.")
   (auto-package-update-hide-results t)
   :config
   (auto-package-update-maybe))
-;; Diminish a feature that removes certain minor-modes from mode-line.
-(use-package diminish)
 
-;; Font lock of special Dash variables (it, acc, etc.). Comes default with Emacs.
-(global-dash-fontify-mode)
-
+;; a feature that removes certain minor-modes from mode-line.
 (use-package delight
   :delight)
+(delight '((abbrev-mode " Abv" abbrev)
+           (smart-tab-mode " \\t" smart-tab)
+           (eldoc-mode nil "eldoc")
+           (rainbow-mode)
+           (overwrite-mode " Ov" t)
+           (emacs-lisp-mode "Elisp" :major)))
+;; Font lock of special Dash variables (it, acc, etc.). Comes default with Emacs.
+(global-dash-fontify-mode)
 
 ;; Benchmark startup
 ;; benchmark-init records startup time by package so we can debug. It only records things after it’s initialised, so put as early in config as possible.
@@ -554,9 +561,9 @@ If you experience stuttering, increase this.")
   (dashboard-center-content t)
   (dashboard-set-file-icons t)
   (dashboard-set-heading-icons t)
-  (dashboard-image-banner-max-height 150)
-  (dashboard-banner-logo-title "[Ποσειδον 🔱 εδιτορ]")
-  (dashboard-startup-banner (concat user-emacs-directory "logos/emacs_and_pen.png"))
+  (dashboard-image-banner-max-height 250)
+  (dashboard-banner-logo-title "[Π Ο Σ Ε Ι Δ Ο Ν 🔱 Ε Δ Ι Τ Ο Ρ]") ; [Ποσειδον 🔱 εδιτορ]
+  (dashboard-startup-banner (concat user-emacs-directory "etc/banners/emacs_pen.png"))
   :config
   (dashboard-setup-startup-hook)
   (setq dashboard-footer-icon (all-the-icons-octicon "calendar"
@@ -572,16 +579,16 @@ If you experience stuttering, increase this.")
             (lambda (&rest _) (browse-url "https://github.com/Likhon-baRoy/.emacs.d")) nil "" " |")
            (,(all-the-icons-faicon "refresh" :height 1.1 :v-adjust 0.0)
             "Update"
-            "Update Megumacs"
-            (lambda (&rest _) (update-packages)) warning "" " |")
+            "Update Zmacs"
+            (lambda (&rest _) (auto-package-update-maybe)) warning "" " |")
            (,(all-the-icons-faicon "flag" :height 1.1 :v-adjust 0.0) nil
             "Report a BUG"
-            (lambda (&rest _) (browse-url "https://github.com/b-coimbra/.emacs.d/issues/new")) error "" ""))
+            (lambda (&rest _) (browse-url "https://github.com/Likhon-baRoy/.emacs.d/issues/new")) error "" ""))
           ;; line 2
-          ((,(all-the-icons-octicon "mark-github" :height 1.1 :v-adjust 0.0)
-            "AlienFriend"
-            "Browse Alien Page"
-            (lambda (&rest _) (browse-url "https://github.com/b-coimbra/.emacs.d")) nil "" ""))
+          ;; ((,(all-the-icons-octicon "mark-github" :height 1.1 :v-adjust 0.0)
+          ;;   "AlienFriend"
+          ;;   "Browse Alien Page"
+          ;;   (lambda (&rest _) (browse-url "https://github.com/b-coimbra/.emacs.d")) nil "" ""))
           ;; Empty line
           (("" "\n" "" nil nil "" ""))
 
@@ -616,6 +623,8 @@ If you experience stuttering, increase this.")
         ("M-g g" . 'avy-goto-line)
         ("M-g e" . 'avy-goto-word-0)
         ("M-g w" . 'avy-goto-word-1)
+        ("M-g l" . 'avy-move-line)
+        ("M-g M-r" . 'avy-move-region)
         ("C-c C-j" . 'avy-resume))
   :config
   (setq avy-ignored-modes '(image-mode doc-view-mode pdf-view-mode exwm-mode))
@@ -657,7 +666,7 @@ If you experience stuttering, increase this.")
   :delight)
 
 (use-package git-gutter
-  :diminish
+  :delight
   :hook ((prog-mode org-mode) . git-gutter-mode )
   ;;✘
   :config
@@ -669,6 +678,7 @@ If you experience stuttering, increase this.")
   (set-face-foreground 'git-gutter:deleted "Red"))
 
 (use-package which-key
+  :delight
   :init (which-key-mode)
   (setq which-key-sort-order 'which-key-key-order-alpha
         which-key-idle 0.5
@@ -684,14 +694,14 @@ If you experience stuttering, increase this.")
   :config
   (set-face-attribute
    'aw-leading-char-face nil
-   :foreground "deep sky blue"
+   ;; :foreground "deep sky blue"
    :weight 'bold
    :height 3.0)
   (setq aw-keys '(?a ?s ?d ?f ?j ?k ?l ?o)))
 
 ;; Allow tree-semantics for undo operations.
 (use-package undo-tree
-  :diminish undo-tree-mode
+  :delight
   :bind ("C-x u" . undo-tree-visualize)
   :hook (org-mode . undo-tree-mode) ;; For some reason, I need this. FIXME.
   :init (global-undo-tree-mode)
@@ -755,7 +765,8 @@ If you experience stuttering, increase this.")
 
 (use-package beacon
   :init (beacon-mode t)
-  (setq beacon-color "#50D050"))
+  (setq beacon-color "#50D050")
+  :delight)
 
 (use-package emojify
   :config (if (display-graphic-p)
@@ -766,17 +777,17 @@ If you experience stuttering, increase this.")
 
 (use-package alert
   :commands alert
-  :config
-  (setq alert-default-style 'notifications))
+  :config (setq alert-default-style 'notifications)
+  :delight)
 
 (use-package rainbow-delimiters
-  :config
-  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+  :config (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+  :delight)
 
 (use-package solaire-mode
   :custom (solaire-mode-remap-fringe t)
-  :config
-  (solaire-global-mode +1))
+  :config (solaire-global-mode +1)
+  :delight)
 
 (setq custom-safe-themes t)
 (use-package doom-themes
@@ -800,12 +811,14 @@ If you experience stuttering, increase this.")
   (doom-themes-org-config))
 ;; ───────────────────────────────── MODE-LINE ─────────────────────────────────
 ;; When displaying the time with display-time-mode, I don’t care about the load average.
-;; (setq display-time-default-load-average nil)
-;; (display-time-mode)
-;; (setq display-time-format "%l:%M%P (%a) %e %b ♪") ; %D for date format
-;; (setq battery-mode-line-format "[%b%p%% %t]")
+(size-indication-mode)
 ;; (display-battery-mode)
-;; (size-indication-mode)
+;; (display-time-mode)
+;; (setq display-time-24hr-format t)
+;; (setq display-time-default-load-average nil)
+;; (setq battery-mode-line-format "[%b%p%% %t]")
+;; (setq display-time-format "%H:%M - %d %B %Y")
+;; (setq display-time-format "%l:%M%P (%a)%e %b ♪") ; %D for date format
 
 (cond ((aorst/font-installed-p "JetBrainsMono")
        (set-face-attribute 'default nil :font "JetBrainsMono 10"))
@@ -875,7 +888,8 @@ If you experience stuttering, increase this.")
            char/ligature-re)))
 
 (use-package minions
-  :hook (doom-modeline-mode . minions-mode))
+  :hook (doom-modeline-mode . minions-mode)
+  :delight " 𝛁")
 
 (use-package doom-modeline
   :init (doom-modeline-mode)
@@ -911,15 +925,18 @@ If you experience stuttering, increase this.")
   (ivy-truncate-lines t)
   (ivy-wrap t)
   (ivy-use-selectable-prompt t)
-  (ivy-count-format "[%d/%d] ")
+  (ivy-count-format "【%d/%d】")
   (enable-recursive-minibuffers t)
   ;; By default, all ivy prompts start with `^'. Disable that.
   (ivy-initial-inputs-alist nil)
   :delight)
+
 (use-package ivy-avy
   :after ivy)
+
 (use-package ivy-hydra
   :after ivy)
+
 (use-package ivy-rich
   :doc "Have additional information in empty space of ivy buffers."
   :after ivy
@@ -947,14 +964,16 @@ If you experience stuttering, increase this.")
           (counsel-rg . ivy-display-function-fallback)
           (t . ivy-posframe-display-at-frame-center)))
   (ivy-posframe-mode t)
-  :delight)
+  :delight " Ⓥ")
 
 ;; Prescient sorts and filters candidate lists for avy/counsel.
-(use-package prescient)
+(use-package prescient
+  :delight)
+
 (use-package ivy-prescient
   :after ivy
-  :config
-  (ivy-prescient-mode t))
+  :config (ivy-prescient-mode t)
+  :delight)
 
 (use-package swiper
   :doc "A better search"
@@ -995,6 +1014,8 @@ If you experience stuttering, increase this.")
   :delight)
 
 (use-package projectile
+  :delight '(:eval (concat " [" projectile-project-name "]"))
+  :pin melpa-stable
   :custom
   (projectile-enable-caching t)
   (projectile-completion-system 'ivy)
@@ -1033,7 +1054,8 @@ If you experience stuttering, increase this.")
   :custom-face
   (flycheck-warning ((t (:underline (:color "#fabd2f" :style line :position line)))))
   (flycheck-error ((t (:underline (:color "#fb4934" :style line :position line)))))
-  (flycheck-info ((t (:underline (:color "#83a598" :style line :position line))))))
+  (flycheck-info ((t (:underline (:color "#83a598" :style line :position line)))))
+  :delight " ∰") ; "Ⓢ"
 
 (use-package flycheck-popup-tip
   :config
@@ -1046,7 +1068,8 @@ If you experience stuttering, increase this.")
 ;;   (flycheck-mode . flycheck-clang-tidy-setup))
 
 ;; syntax highlight of the latest C++ language.
-(use-package modern-cpp-font-lock)
+(use-package modern-cpp-font-lock
+  :delight)
 (add-hook 'c++-mode-hook #'modern-c++-font-lock-mode)
 
 ;; Center text in the frame, looks nice ;)
@@ -1061,14 +1084,25 @@ If you experience stuttering, increase this.")
          (elfeed-show-mode  . olivetti-mode)
          (mu4e-compose-mode . olivetti-mode))
   :custom
-  (olivetti-body-width 80))
+  (olivetti-body-width 80)
+  :delight " ⊛") ; "Ⓐ" "⊗"
 
 ;; Required for proportional font
 (use-package company-posframe
-  :config
-  (company-posframe-mode t))
+  :config (company-posframe-mode t)
+  :delight)
 
-(use-package company-wordfreq)
+(use-package company-wordfreq
+  :delight " 𝛄")
+
+(use-package fancy-battery
+  :config
+  (setq fancy-battery-show-percentage t)
+  (setq battery-update-interval 15)
+  (if window-system
+      (fancy-battery-mode)
+    (display-battery-mode)))
+
 ;; ──────────────────────────────── Basic Utils ────────────────────────────────
 (add-function :after after-focus-change-function (lambda () (unless (frame-focus-state) (save-some-buffers t)))) ; Garbage collection on focus-out, Emacs should feel snappier
 (add-hook 'before-save-hook 'delete-trailing-whitespace) ;Remove trailing whitespace on save

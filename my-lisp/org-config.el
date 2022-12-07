@@ -41,6 +41,7 @@
 
 (use-package org
   :after org
+  ;; :delight " ⓔ"
   :config (setq org-ellipsis " ▾") ;; ↴, ▼, ▶, ⤵, ▾
   (org-indent-mode)
   (variable-pitch-mode 1)
@@ -86,7 +87,7 @@
   :after org
   :hook (org-mode . org-bullets-mode)
   :custom
-  (org-bullets-bullet-list '("☯" "✿" "✚" "◉" "❀"))) ; '("◉" "○" "●" "○" "●" "○" "●")))
+  (org-bullets-bullet-list '("◉" "✿" "✚" "✸" "❀" "○"))) ; "●" "▷" "🞛" "◈"
 (use-package org-alert
   :defer t
   :after org
@@ -122,8 +123,8 @@
 (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
 
 ;; (setq-default prettify-symbols-alist
-;;               '(("#+begin_src" . "ϰ")
-;;                 ("#+end_src" . "ϰ")))
+;;               '(("#+begin_quote" . "ϰ")
+;;                 ("#+end_quote" . "ϰ")))
 
 ;; Exported html should have no default style. I can style it myself:
 (setq org-html-head-include-default-style nil

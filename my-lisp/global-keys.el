@@ -153,6 +153,10 @@
 ;; (bind-key "A-K"               'previous-buffer)
 
 ;; ;;; Windows
+(bind-key "C-,"               'prev-window)
+(bind-key "C-."               'other-window)
+(bind-key "C-x 3"             'split-and-follow-vertically)
+(bind-key "C-x 2"             'split-and-follow-horizontally)
 ;; (bind-key "M-o"               'other-window)
 
 ;; (bind-key "C-^"               'enlarge-window)
@@ -174,14 +178,11 @@
 ;; (bind-key "C-A--"             'bury-buffer)
 ;; (bind-key "C-x 9"             'kill-buffer-and-window)
 ;; (bind-key "C-x C-9"           'kill-buffer-and-window)
-(bind-key "C-."                  'other-window)
-(bind-key "C-,"                  'prev-window)
 
 ;; (bind-key "C-'"               'winner-undo-redo)
 ;; (bind-key "C-c C-;"           'winner-undo-redo)
 ;; (bind-key "C-S-<iso-lefttab>" 'other-window-previous)
 ;; (bind-key "C-S-<tab>"         'other-window-previous)
-;; (bind-key "C-x C-o"           'other-window)
 ;; (bind-key "C-x C-d"           'dired-other-window)
 
 ;; ;;; Frames
@@ -189,8 +190,6 @@
 ;; (bind-key "C-x C-;"           'delete-frame)
 
 ;; ;;; Fonts
-;; (bind-key "A-+"               'text-scale-increase)
-;; (bind-key "A-_"               'text-scale-decrease)
 ;; (bind-key "A-="               'text-scale-increase)
 ;; (bind-key "A--"               'text-scale-decrease)
 ;; (bind-key "A-C-="             'text-scale-set)
@@ -212,7 +211,6 @@
 ;; ;;; Help Documentation
 ;; (bind-key "C-h A-v"           'apropos-value)
 ;; (bind-key "C-x v C-h"         'describe-prefix-bindings)
-;; (bind-key "A-a"               'manual-entry)
 ;; (bind-key "A-m"               'manual-entry)
 
 ;; ;;; Shell
@@ -287,13 +285,13 @@
 ;; ;;; Emojis
 (bind-key "M-<f1>"            'emojify-insert-emoji)
 
-
 ;; ;;; Misc
 (bind-key "M-<f12>"           'proced)
-(bind-key "\C-c\C-t"          'switch-theme)
+(bind-key "C-c T"             'switch-theme)
 (bind-key "C-c t"             'toggle-transparency)
 (bind-key "C-c ;"             'comment-pretty)
 (bind-key "C-a"               'smarter-move-beginning-of-line)
+(bind-key "C-<f5>"            'menu-bar--display-line-numbers-mode-relative)
 
 
 ;; (bind-key "C-r" 'counsel-minibuffer-history)
