@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# contributor: Xah Lee (XahLee.org)
-# name: kbd
-# key: kbd
-# --
-(kbd "$0")

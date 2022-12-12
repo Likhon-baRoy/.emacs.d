@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: array
-# key: array
-# --
-array[${1:length}, ${2:type}]$0

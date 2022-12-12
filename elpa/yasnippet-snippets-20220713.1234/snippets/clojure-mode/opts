@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# key: opts
-# name: opts
-# --
-{:keys [$1]$>
- :or {$2}$>
- :as $3}$>

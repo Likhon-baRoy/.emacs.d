@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: main
-# key: main
-# --
-main(List<String> args) {
-  $0
-}

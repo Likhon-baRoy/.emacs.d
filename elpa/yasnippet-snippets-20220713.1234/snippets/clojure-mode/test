@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: test
-# key: test
-# --
-(deftest $1
-  (is (= $2))$>
-  $0)$>

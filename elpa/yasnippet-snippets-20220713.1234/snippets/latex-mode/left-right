@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: left and right
-# key: lr
-# --
-\left( $0 \right)

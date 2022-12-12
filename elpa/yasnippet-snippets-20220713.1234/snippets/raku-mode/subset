@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: subset
-# key: subset
-# --
-subset ${1:name} of ${2:(Type)} where { $_ $0}

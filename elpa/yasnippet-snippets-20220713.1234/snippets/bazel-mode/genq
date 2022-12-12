@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: genquery
-# key: genq
-# --
-genquery(
-    name = "$0",
-    expression = "$1",
-    scope = "$2"
-)

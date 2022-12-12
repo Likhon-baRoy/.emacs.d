@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: google_compute_region_instance_group
-# key: goog_compute_region_instance_group
-# --
-
-data "google_compute_region_instance_group" "${1:name}" {
-  name = "${2:instance_group_name}"
-}
-

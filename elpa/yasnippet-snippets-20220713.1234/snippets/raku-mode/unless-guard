@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: unless guard
-# key: ung
-# --
-$0 unless ${1:condition};

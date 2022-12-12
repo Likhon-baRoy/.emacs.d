@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: for ... in ... : ...
-# key: for
-# group : control structure
-# --
-for ${var} in ${collection}:
-    $0

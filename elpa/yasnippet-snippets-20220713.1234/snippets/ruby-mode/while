@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: while ... end
-# group : control structure
-# --
-while ${condition}
-  $0
-end

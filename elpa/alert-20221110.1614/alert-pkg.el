@@ -1,2 +1,0 @@
-;;; Generated package description from alert.el  -*- no-byte-compile: t -*-
-(define-package "alert" "20221110.1614" "Growl-style notification system for Emacs" '((gntp "0.1") (log4e "0.3.0") (cl-lib "0.5")) :commit "730184b7923a65241fdff695485a3ad432caf201" :authors '(("John Wiegley" . "jwiegley@gmail.com")) :maintainer '("John Wiegley" . "jwiegley@gmail.com") :keywords '("notification" "emacs" "message") :url "https://github.com/jwiegley/alert")

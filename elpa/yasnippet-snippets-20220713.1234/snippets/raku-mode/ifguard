@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: if guard
-# key: ifg
-# --
-$0 if ${1:condition};

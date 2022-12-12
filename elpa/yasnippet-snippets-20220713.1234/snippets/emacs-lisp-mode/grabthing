@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: grab word under cursor
-# key: grabthing
-# contributor : Xah Lee
-# --
-(setq $0 (thing-at-point 'symbol))

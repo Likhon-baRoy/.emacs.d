@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: for ... in ...; ... end
-# key: forin
-# group : control structure
-# --
-for ${1:element} in ${2:collection}
-  $0
-end

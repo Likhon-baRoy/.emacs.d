@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: when ... end
-# key: when
-# group : control structure
-# --
-when ${condition}
-  $0
-end

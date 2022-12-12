@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: ... if ...
-# key: xif
-# --
-${1:expression} if ${2:condition}

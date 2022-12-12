@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: from
-# key: from
-# --
-from ${1:module} import ${2:field}

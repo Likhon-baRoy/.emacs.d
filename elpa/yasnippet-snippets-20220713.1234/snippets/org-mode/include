@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: include
-# key: <i
-# --
-#+include: $0

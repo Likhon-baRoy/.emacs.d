@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: assertRaisesWith
-# key: arw
-# --
-with self.assertRaises(${1:Exception}):
-    $0

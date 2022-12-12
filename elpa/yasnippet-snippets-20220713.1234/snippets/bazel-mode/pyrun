@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: py_runtime
-# key: pyrun
-# --
-py_runtime(
-    name = "$0",
-    files = "$1",
-    interpreter = "$2"
-)

@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: example
-# key: <e
-# --
-#+begin_example
-$0
-#+end_example

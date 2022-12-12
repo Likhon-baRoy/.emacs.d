@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Proc.new { |...| ... }
-# key: proc
-# contributor: Valery Zajkov
-# --
-Proc.new { |${1:argument}| $0 }

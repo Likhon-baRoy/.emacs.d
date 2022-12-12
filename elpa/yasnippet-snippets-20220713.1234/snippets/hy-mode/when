@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: when
-# key: when
-# binding: direct-keybinding
-# --
-(when ${1:condition}
-  $0)

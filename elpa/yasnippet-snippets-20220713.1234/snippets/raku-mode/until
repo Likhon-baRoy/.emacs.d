@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: until
-# key: until
-# --
-until ${1:condition} {
-
-}

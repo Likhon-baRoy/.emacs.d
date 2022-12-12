@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: uml
-# key: uml
-# contributor : Robert O'Connor
-# --
-#+begin_uml
-$1
-#+end_uml

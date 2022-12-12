@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: s
-# key: s
-# binding: direct-keybinding
-# --
-(setv $0)

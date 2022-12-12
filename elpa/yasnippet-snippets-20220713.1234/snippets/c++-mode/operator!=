@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: operator!=
-# key: !=
-# group: operator overloading
-# --
-bool ${1:Name}::operator!=(const $1 &other) const
-{
-    return !(*this == other);
-}

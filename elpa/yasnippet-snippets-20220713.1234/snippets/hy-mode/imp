@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: import
-# key: import
-# binding: direct-keybinding
-# --
-(import [${1:module-name} [${2:exposing}]])

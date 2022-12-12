@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: signal
-# key: signal
-# --
-signal ${1:Names}: ${2:Type};

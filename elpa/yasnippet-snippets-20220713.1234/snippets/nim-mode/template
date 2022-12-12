@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: template
-# key: template
-# --
-template ${1:name}(${2:arguments}): ${3:return type} =
-  $0

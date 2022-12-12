@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: select { |...| ... }
-# group : collections
-# --
-select { |${1:element}| $0 }

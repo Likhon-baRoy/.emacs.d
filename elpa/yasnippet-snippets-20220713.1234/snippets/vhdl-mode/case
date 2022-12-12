@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: case
-# key: case
-# --
-case ${1:cond} is
-    when ${2:Value} =>
-        $0
-
-end case;

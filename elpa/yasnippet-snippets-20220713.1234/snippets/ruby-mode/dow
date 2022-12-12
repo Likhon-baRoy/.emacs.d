@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: downto(...) { |n| ... }
-# group : control structure
-# --
-downto(${0}) { |${n}|
-  $0
-}

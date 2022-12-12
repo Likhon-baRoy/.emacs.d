@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: reject { |...| ... }
-# key: reject
-# group : collections
-# --
-reject { |${1:element}| $0 }

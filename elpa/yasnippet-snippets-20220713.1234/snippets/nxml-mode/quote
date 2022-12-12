@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# contributor : Anders Bach Nielsen <abachn@abachn.net>
-# name: <blockquote>...</blockquote>
-# --
-<blockquote>
-  $1
-</blockquote>

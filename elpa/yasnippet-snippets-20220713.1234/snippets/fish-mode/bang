@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: bang
-# key: !
-# --
-#!/usr/bin/env fish
-$0

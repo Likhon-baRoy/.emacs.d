@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: -record(...,{...}).
-# --
--record($1,{$2}).
-$0

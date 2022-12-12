@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# key: form
-# name: form
-# --
-<form method="$1" action="$2">
-  $0
-</form>

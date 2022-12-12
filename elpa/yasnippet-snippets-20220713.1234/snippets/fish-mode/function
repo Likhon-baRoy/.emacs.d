@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: function
-# key: function
-# --
-function ${1:name}
-    $0
-end

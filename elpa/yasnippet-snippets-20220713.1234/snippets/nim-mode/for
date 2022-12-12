@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: for
-# key: for
-# --
-for ${1:index} in ${2:sequence}:
-  $0

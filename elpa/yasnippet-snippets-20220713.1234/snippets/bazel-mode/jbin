@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: java_binary
-# key: jbin
-# --
-java_binary(
-    name = "$0",
-    srcs = "$1",
-    deps = "$2"
-)

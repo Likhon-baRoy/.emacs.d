@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: whileg
-# key: whileg
-# --
-$0 while ${1:condition};

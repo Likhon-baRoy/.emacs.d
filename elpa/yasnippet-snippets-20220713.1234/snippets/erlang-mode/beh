@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: -behaviour(...).
-# --
--behaviour(${1:gen_server}).
-$0

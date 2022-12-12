@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: strstr
-# key: strstr
-# --
-strstr(${1:string}, ${2:string});

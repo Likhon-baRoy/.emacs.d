@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: google_project_data
-# key: goog_project_data
-# --
-
-data "google_project" "project" {}
-

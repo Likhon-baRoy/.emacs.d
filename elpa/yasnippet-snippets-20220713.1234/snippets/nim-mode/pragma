@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: pr
-# key: pr
-# --
-{.${1:name}.}

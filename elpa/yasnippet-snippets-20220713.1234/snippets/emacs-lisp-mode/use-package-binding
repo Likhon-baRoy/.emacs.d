@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# contributor: Daniel Hitzel
-# name: use-package binding
-# key: upb
-# --
-:bind ("${1:binding}" . ${2:function-name})

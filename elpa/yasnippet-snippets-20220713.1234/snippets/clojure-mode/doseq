@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: doseq
-# key: doseq
-# --
-(doseq [$1 $2]
-  $3)$>
-$0

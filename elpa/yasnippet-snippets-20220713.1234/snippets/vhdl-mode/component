@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: component
-# key: comp
-# --
-component ${1:Name}
-  $0
-end component;

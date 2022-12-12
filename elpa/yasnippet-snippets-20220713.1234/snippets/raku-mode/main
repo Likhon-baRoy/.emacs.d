@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: main
-# key: main
-# --
-sub MAIN${2:(${3:args})} {
-  $0
-}

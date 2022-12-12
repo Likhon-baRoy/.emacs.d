@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: video
-# key: <vi
-# --
-
-[[${1:link of the video}][file:${2:link of the image}]

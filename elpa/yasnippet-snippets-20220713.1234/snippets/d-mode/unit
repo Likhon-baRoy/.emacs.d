@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: unittest { … }
-# key: unittest
-# --
-@("${1:test name}") unittest
-{
-	$0
-}

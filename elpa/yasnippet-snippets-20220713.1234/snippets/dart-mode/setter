@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: setter
-# key: set
-# --
-${1:Type} _${2:Name};
-set $2($1 $2) => _$2 = $2;

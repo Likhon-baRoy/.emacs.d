@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: German single quotes
-# key: gq
-# --
-\glq{}$0\grq{}

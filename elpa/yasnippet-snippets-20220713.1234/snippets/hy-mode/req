@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: req
-# key: req
-# binding: direct-keybinding
-# --
-(req [${1:module-name} [${2:exposing}]])

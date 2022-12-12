@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: try ... of ... catch after end
-# --
-try $1 of
-    $0
-catch
-after
-end

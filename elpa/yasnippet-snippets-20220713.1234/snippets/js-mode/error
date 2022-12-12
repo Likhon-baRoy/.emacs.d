@@ -1,5 +1,0 @@
-# -*- mode: snippet; require-final-newline: nil -*-
-# name: new error
-# key: err
-# --
-new Error(${1:message});

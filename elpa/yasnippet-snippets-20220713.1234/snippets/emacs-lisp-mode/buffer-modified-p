@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# contributor: Xah Lee (XahLee.org)
-# name: buffer-modified-p
-# key: buffer-modified-p
-# key: bmp
-# --
-(buffer-modified-p $0)

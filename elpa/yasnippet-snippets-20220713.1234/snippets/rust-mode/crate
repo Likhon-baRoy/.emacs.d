@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: extern crate
-# key: ec
-# --
-extern crate ${1:name};

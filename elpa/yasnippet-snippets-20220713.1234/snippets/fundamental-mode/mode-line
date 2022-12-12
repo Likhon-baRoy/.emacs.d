@@ -1,5 +1,0 @@
-# name: Mode line
-# key: -*-
-# contributor : Daniel Hornung <d.hornung@indiscale.com>
-# --
-# -*- mode:${1:conf}; -*-

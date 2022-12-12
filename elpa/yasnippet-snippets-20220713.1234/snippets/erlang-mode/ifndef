@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: -ifndef(...). ... -endif.
-# --
--ifndef($1).
-$0
--endif.
