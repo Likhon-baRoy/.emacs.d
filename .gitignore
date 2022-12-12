@@ -32,7 +32,7 @@ flycheck_*.el
 /etc/eshell/lastdir
 
 # elpa packages
-#/elpa/
+/elpa/
 
 # Compiled
 *.elc

@@ -291,7 +291,7 @@
 (bind-key "C-c t"             'toggle-transparency)
 (bind-key "C-c ;"             'comment-pretty)
 (bind-key "C-a"               'smarter-move-beginning-of-line)
-(bind-key "C-<f5>"            'menu-bar--display-line-numbers-mode-relative)
+(bind-key "C-<f5>"            'global-display-line-numbers-mode)
 
 
 ;; (bind-key "C-r" 'counsel-minibuffer-history)

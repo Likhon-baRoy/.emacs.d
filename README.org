@@ -4,8 +4,18 @@
 #+DATE:   2022 Nov 19
 #+TAGS:   emacs
 
+#+html: <p><img alt="GPLv3 Software" align="right" src="https://www.gnu.org/graphics/gplv3-with-text-136x68.png"></p>
 [[https://www.gnu.org/licenses/gpl-3.0.txt][https://img.shields.io/badge/license-GPL_3-green.svg?style=flat&logo=appveyor]]
 [[https://github.com/ellerbrock/open-source-badges/][https://badges.frapsoft.com/os/v1/open-source.png?v=103]]
+[[https://img.shields.io/github/forks/Likhon-baRoy/.emacs.d.svg?style=flat]]
+[[https://img.shields.io/github/stars/Likhon-baRoy/.emacs.d.svg?style=flat]]
+[[https://img.shields.io/github/commit-activity/m/Likhon-baRoy/.emacs.d.svg?style=flat]]
+[[https://img.shields.io/tokei/lines/github/Likhon-baRoy/.emacs.d.svg?style=flat]]
+
+[[https://img.shields.io/badge/arch-yes-success.svg?logo=archlinux&style=flat-square]]
+[[https://img.shields.io/badge/macos-yes-success.svg?logo=apple&style=flat-square]]
+[[https://img.shields.io/badge/windows-untested-important.svg?logo=windows&style=flat-square]]
+
 #+begin_quote
 An infinite number of monkeys typing into GNU Emacs would never make a good program.\\
 ——— Linus Torvalds
@@ -15,6 +25,7 @@ An infinite number of monkeys typing into GNU Emacs would never make a good prog
 - [[#about][About]]
   - [[#about-readme][About README]]
 - [[#screenshots][Screenshots]]
+- [[#how-to-use-this-configuration][How to Use This Configuration]]
 - [[#installation][Installation]]
   - [[#further-updates][Further Updates]]
   - [[#contribution][Contribution]]
@@ -60,44 +71,44 @@ This beautifully written *About EMACS* section credits to [[https://github.com/r
 
 ** About README
 Welcome to the /Emacs Of Dreams/. Wait no, I meant the *Emacs Operating System*. \\
-This repository contains my personal configuration for *GNU Emacs* that I use on
-the daily and port around from system to system with me.
+This repository contains my personal configuration for *GNU Emacs* that I use on the daily and port around from system to system with me. This is an example of a fully custom Emacs configuration that you can use as inspiration when building your own!
 
 The configuration depends on [[file:init.el][init.el]], [[https://github.com/Likhon-baRoy/.emacs.d/tree/main/my-lisp][my-lisp]](dir) and [[file:early-init.el][early-init.el]] (sets up a few initial GUI settings), bootstraps [[https://github.com/jwiegley/use-package][use-package]]. and loads [[file:init.el][init.el]], which is where the majority of the configuration magic happens.
 
 This is an Emacs distribution that aims to enhance the default Emacs experience. It alters a lot of the default settings, bundles of additional packages and adds its own core library to the mix. The final product offers an easy to use Emacs configuration for Emacs newcomers and lots of additional power for Emacs power users.
 
-It's able to run on /Windows/, /GNU Linux/ and /macOS/. It is compatible *ONLY with GNU Emacs 26.1 and above*. In general you're advised to always run with the latest stable release - currently *28.2*.
+It's able to run on *GNU/Linux*, *macOS* and *Windows*. It is compatible ONLY with *GNU Emacs 27.1* and *Above*. In general you're advised to always run with the latest stable release - currently *28.2*.
 
 * Screenshots
-/Here are some demo.../ \\
+Here are some demo... \\
 
 /A dashboard on startup can clean my mind/.😌
-
-[[./image-dired/ss-1.png]]
+[[./screenshots/ss-1.png]]
 
 /Center text in the frame, looks nice ;) and =flycheck= with BitMap-Arrow on the right-fringe/ 😎
-
-[[./image-dired/ss-2.png]]
+[[./screenshots/ss-2.png]]
 
 /default Transparent mod/ 👍🏻
-
-[[./image-dired/ss-3.png]]
+[[./screenshots/ss-3.png]]
 
 /File navigation with Speed-bar./
-
-[[./image-dired/ss-4.png]]
+[[./screenshots/ss-4.png]]
 
 /feel the Org-mode/ :D
-
-[[./image-dired/ss-5.png]]
+[[./screenshots/ss-5.png]]
 
 /Company-mode with yasnippet/ 🔥
-
-[[./image-dired/ss-6.png]]
+[[./screenshots/ss-6.png]]
 
 
 #+html: <p><img alt="GitHub repo size" align="right" src="https://img.shields.io/github/repo-size/Likhon-baRoy/.emacs.d?color=blue&logo=github&style=for-the-badge"></p>
+
+* How to Use This Configuration
+
+This repo is meant to be a companion to the Emacs From Scratch video series, serving as an example of a custom configuration build on top of vanilla Emacs. I give instructions below for how to set it up to try it out, but it isn’t meant to be used as your main configuration! My goal here is to provide a working configuration that you can take inspiration from (and copy from directly).
+
+Just keep in mind that this repo isn’t set up to be used directly as your own configuration! Copy the code to your own dotfiles repository and have fun :)
+
 * Installation
 [[https://GitHub.com/Likhon-baRoy/][http://ForTheBadge.com/images/badges/built-with-swag.svg]]
 
@@ -163,7 +174,10 @@ Also this project relies on the following list of applications:
 - [[https://github.com/BurntSushi/ripgrep][ripgrep (=rg=)]]
 
 * User Guidance
+
 📝 *Note:* (/for beginners/) I'll be using =Ctrl= as =C=, =Alt= as =M=, =Space= as =S= and =BackSpace= as =BS=. \\
+
++ You must wanna see this documentation 👉🏽 [[https://github.com/Likhon-baRoy/org-notes/blob/main/Emacs/emacs_user-manual.org][Emacs-user-manual]].
 
 After installation process is done.  Whenever you open a files within Emacs, the whole file will be opened in folding mode.  Which you'll obviously won't see until you find the shortcut key-binding.  There is a default feature for this which called *hs-minor-mode* I just change some default key-bindings for more useful. \\
 
@@ -178,7 +192,7 @@ S-TAB (hide-level) - fold the sub sections of the current section.
 #+end_example
 
 * Custom Configurations
-Here is my some personal changes for *Emacs* which comes default with this configuration. Checkout full documentation of *Keybindings* in [[https://github.com/Likhon-baRoy/org-notes/blob/main/emacs_user-manual.org][Emacs user-manual]].
+Here is my some personal changes for *Emacs* which comes default with this configuration.
 ** Custom key bindings
 
 #+BEGIN_SRC emacs-lisp

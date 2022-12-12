@@ -6,7 +6,7 @@
 ;; Author: Likhon Sapins <likhonhere007@gmail.com>
 ;; URL: https://github.com/Likhon-baRoy/.emacs.d
 ;; Version: 0.1.0
-;; Package-Requires: ((emacs "28.1"))
+;; Package-Requires: ((Emacs "28.1"))
 
 ;; This file is NOT part of GNU Emacs.
 
@@ -39,11 +39,13 @@
 ;; ──────────────────────────────── COMPANY-MODE ───────────────────────────────
 (use-package company-box
   :delight
+  :after company
   :hook (company-mode . company-box-mode))
 ;; (set-face-background 'company-box--apply-color "#555555")
 (use-package company
   :delight " Ⱞ"
-  :hook (after-init . global-company-mode)
+  :commands company-mode
+  :hook (prog-mode text-mode)
   :bind
   (:map company-active-map
         ("C-h"        . nil)
@@ -123,8 +125,10 @@
 ;; Use TAB key to cycle through suggestions.(`tng' means 'TAB and go')
 ;; (company-tng-configure-default)
 
-(use-package company-rtags)
-(use-package company-c-headers)
+(use-package company-rtags
+  :after company)
+(use-package company-c-headers
+  :after company)
 
 ;; Delete duplicates from company popups
 (setq-local company-transformers '(delete-dups)
@@ -150,13 +154,18 @@
   (company-statistics-mode))
 
 (use-package yasnippet
+  :after company
   :delight yas-minor-mode " ¥" ; "ǂ"
   :custom (yas-snippet-dirs '("~/.emacs.d/etc/yasnippet/snippets"))
   :commands yas-reload-all
   :hook ((prog-mode minibuffer-inactive-mode org-mode) . yas-minor-mode)
-  :config (yas-global-mode))
+  :config
+  ;; enalbe nested snippet expansion
+  (setq yas-triggers-in-field t)
+  (yas-global-mode))
 
 (use-package yasnippet-snippets
+  :delight
   :after yasnippet
   :custom (yasnippet-snippets-dirs '("~/.emacs.d/etc/yasnippet/snippets"))
   :config (yasnippet-snippets-initialize))
