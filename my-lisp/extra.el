@@ -117,7 +117,7 @@
                   ("#+begin_example" . ?)
                   ("#+end_example" . ?)
                   ("#+begin_quote" . ?❝)
-                  ("#+end_quote" . ?―) ; ❟ ❠
+                  ("#+end_quote" . ?❠) ; ❟ ―
                   ("#+header:" . ?)
                   ("#+name:" . ?﮸)
                   ("#+title:" . "◈")

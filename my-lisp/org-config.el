@@ -42,7 +42,9 @@
 (use-package org
   :after org
   ;; :delight " ⓔ"
-  :config (setq org-ellipsis " ▾") ;; ↴, ▼, ▶, ⤵, ▾
+  :config
+  (global-set-key (kbd "C-c a") 'org-agenda)
+  (setq org-ellipsis " ▾") ;; ↴, ▼, ▶, ⤵, ▾
   (org-indent-mode)
   (variable-pitch-mode 1)
   (auto-fill-mode 0)

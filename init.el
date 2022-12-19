@@ -7,7 +7,7 @@
 ;; Created: Thu Oct 29 10:15:28 2022 (-0400)
 ;; Version: 0.1
 ;; URL: https://github.com/Likhon-baRoy/.emacs.d
-;; Keywords: Z-MACS .emacs.d init
+;; Keywords: Zmacs .emacs.d init
 ;; Compatibility: emacs-version >= 28.2
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -317,49 +317,6 @@ If you experience stuttering, increase this.")
 ;; (set-face-attribute 'region nil :background "#666" :foreground "#ffffff")	; Change the HIGHLIGHT COLOR for SELECTED TEXT
 ;; (set-face-attribute 'highlight nil :foreground 'unspecified)
 
-;;________________________________________________________________
-;;    Fonts Setting
-;;________________________________________________________________
-(global-font-lock-mode 1)               ; Use font-lock everywhere.
-(setq font-lock-maximum-decoration t)   ; We have CPU to spare; highlight all syntax categories.
-
-(setq default-input-method "bengali-probhat")
-(set-fontset-font "fontset-default" 'bengali (font-spec :family "Kalpurush" :size 16))
-
-(defun remove-quail-show-guidance ()
-  "Function for removing guidance."
-  nil)
-(defun remove-quail-completion ()
-  "Function for removing completion."
-  (quail-select-current))
-(defun bn-company-wordfreq ()
-  "Bangla auto-suggestion with company-wordfreq."
-  (interactive)
-  (advice-add 'quail-show-guidance :override #'remove-quail-show-guidance)
-  (advice-add 'quail-completion :override #'remove-quail-completion)
-  (setq ispell-local-dictionary "bengali")
-  (setq-local company-backends '(company-wordfreq))
-  (setq-local company-transformers nil))
-(add-hook 'text-mode-hook (lambda ()
-                            (setq-local company-backends '(company-wordfreq))
-                            (setq-local company-transformers nil)))
-
-;; (set-face-attribute 'default nil
-;; 		            :font "Fantasque Sans Mono" ; "JetBrains Mono"
-;; 		            :weight 'light
-;; 		            :height (cond ((string-equal system-type "gnu/linux") 110)
-;; 				                  ((string-equal system-type "darwin") 130)))
-;; (set-face-attribute 'font-lock-comment-face nil :family "Cantarell" :slant 'italic :height 92)
-;; (set-face-attribute 'font-lock-function-name-face nil :foreground "cyan" :slant 'italic :weight 'medium)
-;; (set-face-attribute 'font-lock-variable-name-face nil :weight 'bold)
-;; (set-face-attribute 'font-lock-keyword-face nil :weight 'bold)
-
-;; (set-face-attribute 'font-lock-comment-face nil :foreground "#5B6268" :slant 'italic)
-;; (set-face-attribute 'font-lock-function-name-face nil :foreground "#c678dd" :slant 'italic :weight 'bold)
-;; (set-face-attribute 'font-lock-variable-name-face nil :foreground "#dcaeea" :weight 'bold)
-
-;; (set-frame-font "Comic Mono-10.5" nil t) ; "Monaco-9" "Fantasque Sans Mono-10.5" "Source Code Pro-10" "Fira Code-10"
-
 ;; ──────────────────────── General But Better Defaults ────────────────────────
 (setq-default
  ad-redefinition-action 'accept     ; Silence warnings for redefinition.
@@ -403,7 +360,7 @@ If you experience stuttering, increase this.")
 (show-paren-mode 1)         ; Highlight matching parenthesis.
 (global-auto-revert-mode 1) ; Automatically revert buffer when it changes on disk.
 ;; space around the windows
-(set-fringe-style '(8 . 8))
+;; (set-fringe-style '(8 . 8))
 ;; (fringe-mode '(8 . 0))      ; Enable fringe on the left for git-gutter-fringe+.
 (global-subword-mode 1)     ; Iterate through CamelCase words.
 (electric-pair-mode t)      ; Enable Matching delimeters.
@@ -628,6 +585,14 @@ If you experience stuttering, increase this.")
 ;; (which-key-prefix-prefix "+")
 ;; (which-key-setup-side-window-right))
 
+(use-package helpful
+  :doc "Helpful improves the built-in Emacs help system by providing more contextual information."
+  :bind
+  ([remap describe-key]      . helpful-key)
+  ([remap describe-command]  . helpful-command)
+  ([remap describe-variable] . helpful-variable)
+  ([remap describe-function] . helpful-callable))
+
 (use-package ace-window
   :bind ("C-x o" . ace-window)
   :config
@@ -741,6 +706,23 @@ If you experience stuttering, increase this.")
 ;; (setq battery-mode-line-format "[%b%p%% %t]")
 ;; (setq display-time-format "%H:%M - %d %B %Y")
 ;; (setq display-time-format "%l:%M%P (%a)%e %b ♪") ; %D for date format
+
+;; ─────────────────────────────────── Fonts ───────────────────────────────────
+(global-font-lock-mode 1)               ; Use font-lock everywhere.
+(setq font-lock-maximum-decoration t)   ; We have CPU to spare; highlight all syntax categories.
+
+;; (set-face-attribute 'default nil
+;; 		            :font "Fantasque Sans Mono"
+;; 		            :weight 'light
+;; 		            :height (cond ((string-equal system-type "gnu/linux") 110)
+;; 				                  ((string-equal system-type "darwin") 130)))
+
+;; (set-face-attribute 'font-lock-comment-face nil :family "Cantarell" :foreground "#5B6268" :slant 'italic :height 92)
+;; (set-face-attribute 'font-lock-function-name-face nil :foreground "#c678dd" :slant 'italic :weight 'medium) ; 'normal
+;; (set-face-attribute 'font-lock-variable-name-face nil :foreground "#dcaeea" :weight 'bold)
+;; (set-face-attribute 'font-lock-keyword-face nil :weight 'bold)
+
+;; (set-frame-font "Comic Mono-10.5" nil t) ; "Monaco-9" "Fantasque Sans Mono-10.5" "Source Code Pro-10" "Fira Code-10"
 
 (cond ((aorst/font-installed-p "JetBrainsMono")
        (set-face-attribute 'default nil :font "JetBrainsMono 10"))
@@ -877,8 +859,8 @@ If you experience stuttering, increase this.")
          ("C-x C-f" . counsel-find-file)
 		 ("<f1> f" . counsel-describe-function)
 		 ("<f1> v" . counsel-describe-variable)
-		 ("<f1> l" . counsel-load-library)
-		 ("<f1> L" . counsel-find-library)
+		 ;; ("<f1> l" . counsel-load-library)
+		 ;; ("<f1> L" . counsel-find-library)
 		 ("<f2> i" . counsel-info-lookup-symbol)
 		 ("<f2> j" . counsel-set-variable)
 		 ("<f2> u" . counsel-unicode-char))
@@ -911,7 +893,7 @@ If you experience stuttering, increase this.")
 
 ;; history for ivy completion, it sometimes makes ivy really slow, so maybe remove the cache file every once in a while
 (use-package ivy-prescient
-  :after ivy
+  :after counsel
   :config (ivy-prescient-mode t)
   :delight)
 
@@ -1012,14 +994,6 @@ If you experience stuttering, increase this.")
   :custom
   (olivetti-body-width 80)
   :delight " ⊛") ; "Ⓐ" "⊗"
-
-;; Required for proportional font
-(use-package company-posframe
-  :config (company-posframe-mode t)
-  :delight)
-
-(use-package company-wordfreq
-  :delight " 𝛄")
 
 (use-package fancy-battery
   :config

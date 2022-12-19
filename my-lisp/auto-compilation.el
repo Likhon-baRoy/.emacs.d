@@ -1,4 +1,4 @@
-;;; auto-compilation.el --- Tweaks for company and yasnippet -*- lexical-binding: t -*-
+;;; auto-compilation.el --- settings for company and yasnippet -*- lexical-binding: t -*-
 ;;; Created on: 25 November 2022
 
 ;; Copyright (C) 2021-2022 Likhon Sapins <likhonhere007@gmail.com>
@@ -152,6 +152,11 @@
   :after company
   :config
   (company-statistics-mode))
+
+;; Required for proportional font
+(use-package company-posframe
+  :config (company-posframe-mode t)
+  :delight)
 
 (use-package yasnippet
   :after company

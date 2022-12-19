@@ -37,7 +37,11 @@ An infinite number of monkeys typing into GNU Emacs would never make a good prog
 - [[#custom-configurations][Custom Configurations]]
   - [[#custom-key-bindings][Custom key bindings]]
   - [[#custom-functions][Custom functions]]
-  - [[#custom-input-methods][Custom input methods]]
+- [[#optional][Optional]]
+  - [[#setup-bangla-language-environment][Setup Bangla Language Environment]]
+    - [[#requirements][Requirements]]
+    - [[#settings][Settings]]
+    - [[#workflow][Workflow]]
 - [[#recommendation][Recommendation]]
   - [[#replace-capslock-with-ctrl][Replace CapsLock with CTRL]]
 - [[#ask-me-anything][Ask Me Anything]]
@@ -160,18 +164,15 @@ Please update this file your personal info.
 ** Install Packages
 Also this project relies on the following list of applications:
 
-- [[http://ctags.sourceforge.net][Exuberant Ctags]] (=ctags=)
-- Install [[https://cmake.org/install/][cmake]], [[https://clang.llvm.org/get_started.html][clang]], [[https://clang.llvm.org/get_started.html][llvm]], [[http://www.gdbtutorial.com/tutorial/how-install-gdb][gdb]] for programming purpose
-- Install [[https://www.jetbrains.com/lp/mono/][JetBrains Mono]] (=font=)
-- Install [[https://github.com/googlefonts/noto-emoji][emoji font]] (*Noto Emoji* & =noto-cjk=, /for all the fonts imaginable/) for Linux
-- Install [[https://github.com/domtronn/all-the-icons.el][all-the-icons]] fonts: =M-x all-the-icons-install-fonts=
-- [[https://www.gnu.org/software/global][GNU GLOBAL (=global=)]]
 - [[https://git-scm.com][Git (=git=)]]
 - [[https://www.gnupg.org][GnuPG (=gpg=)]]
+- [[https://www.gnu.org/software/global][GNU GLOBAL (=global=)]]
+- [[http://ctags.sourceforge.net][Exuberant Ctags]] (=ctags=)
+- Install [[https://www.jetbrains.com/lp/mono/][JetBrains Mono]], [[https://fonts.google.com/specimen/Cantarell][Cantarell]] (=font=)
+- Install [[https://cmake.org/install/][cmake]], [[https://clang.llvm.org/get_started.html][clang]], [[https://clang.llvm.org/get_started.html][llvm]], [[http://www.gdbtutorial.com/tutorial/how-install-gdb][gdb]] for programming purpose
+- Install [[https://github.com/domtronn/all-the-icons.el][all-the-icons]] fonts if already not installed, =M-x all-the-icons-install-fonts=
+- Install [[https://github.com/googlefonts/noto-emoji][emoji font]] (*Noto Emoji* & =noto-cjk=, /for all the fonts imaginable/) for *Linux*
 - [[https://hunspell.github.io][Hunspell (=hunspell=)]] with [[https://stackoverflow.com/a/9436234/1661465][dictionaries]]
-- [[https://www.gnu.org/software/idutils/][ID Utils (=mkid=, =lid=, =fid=, =fnid=, =xtokid=)]]
-- [[https://www.passwordstore.org][Password Store (=pass=)]]
-- [[https://github.com/BurntSushi/ripgrep][ripgrep (=rg=)]]
 
 * User Guidance
 
@@ -262,32 +263,56 @@ Here is my some personal changes for *Emacs* which comes default with this confi
 (global-set-key (kbd "C-c t") 'toggle-transparency)
 #+END_SRC
 
-** Custom input methods
 
-Here's a input method for =Bengali= or =Bangla= language.  Which I used with =Probhat= key-layout.
+* Optional
+** Setup Bangla Language Environment
+Writing in Bangla using *company-wordfreq*.
+
+*** Requirements
+- Install Bangla font [[https://www.freebanglafont.com/download.php?id=656][Kalpurush]]
+
+*** Settings
+You can put this configuration code to you =init.el= file or make an extra separate file and put it in =~/.emacs.d/my-lisp/= directory then Emacs will autoload this file from there.
+
+set your keyboard default layout to =Probhat= key-layout.
 #+BEGIN_SRC emacs-lisp
-(setq default-input-method "bengali-probhat")
-(set-fontset-font "fontset-default" 'bengali (font-spec :family "Kalpurush" :size 16))
-
-(defun remove-quail-show-guidance ()
-  "Function for removing guidance."
-  nil)
-(defun remove-quail-completion ()
-  "Function for removing completion."
-  (quail-select-current))
-(defun bn-company-wordfreq ()
-  "Bangla auto-suggestion with company-wordfreq."
-  (interactive)
-  (advice-add 'quail-show-guidance :override #'remove-quail-show-guidance)
-  (advice-add 'quail-completion :override #'remove-quail-completion)
-  (setq ispell-local-dictionary "bengali")
-  (setq-local company-backends '(company-wordfreq))
-  (setq-local company-transformers nil))
-(add-hook 'text-mode-hook (lambda ()
-                            (setq-local company-backends '(company-wordfreq))
-                            (setq-local company-transformers nil)))
+  (setq default-input-method "bengali-probhat")
+  (set-fontset-font "fontset-default" 'bengali (font-spec :family "Kalpurush" :size 16))
 #+END_SRC
 
+Install the following package for auto suggestions of Bangla word.
+#+BEGIN_SRC emacs-lisp
+  (use-package company-wordfreq
+    :delight " 𝛄")
+#+END_SRC
+
+We need to the set up the following in the local buffer. This can be done by invoking an interactive function as below.
+#+BEGIN_SRC emacs-lisp
+  (defun remove-quail-show-guidance ()
+    nil)
+  (defun remove-quail-completion ()
+    (quail-select-current))
+  (defun bn-company-wordfreq ()
+    (interactive)
+    (advice-add 'quail-show-guidance :override #'remove-quail-show-guidance)
+    (advice-add 'quail-completion :override #'remove-quail-completion)
+    (setq ispell-local-dictionary "bengali_439")
+    (setq-local company-backends '(company-wordfreq))
+    (setq-local company-transformers nil))
+#+END_SRC
+
+And let's hook them into Text buffer-mode.
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'text-mode-hook (lambda ()
+                              (setq-local company-backends '(company-wordfreq))
+                              (setq-local company-transformers nil)))
+#+END_SRC
+/for more information visit this link here:/ [[https://mdarifshaikh.com/2021/05/27/typing-bangla-in-emacs.html][Typing Bangla in emacs]]
+
+*** Workflow
+- Change the input-method using =C-\=
+- Enable =company-wordfreq= and other changes for a nice experience using =M-x bn-company-wordfreq=
+Now you can enjoy your *Bangla/Bengali* lang workflow :D
 * Recommendations
 Here are some general recommendations on Emacs usage that you might find helpful:
 

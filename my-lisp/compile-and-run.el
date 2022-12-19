@@ -47,11 +47,11 @@
   (other-window 1)
   (goto-char (point-max)))
 
-(defun exit-after-compile-hook (cur-buffer msg)
-  "When nil: Don't kill the window.  0: Affect visible and iconified frames."
-  (when (y-or-n-p "Quit window? ")
-    (quit-window nil (get-buffer-window cur-buffer 0))))
-(add-hook 'compilation-finish-functions #'exit-after-compile-hook)
+;; (defun exit-after-compile-hook (cur-buffer msg)
+;;   "When nil: Don't kill the window.  0: Affect visible and iconified frames."
+;;   (when (y-or-n-p "Quit window? ")
+;;     (quit-window nil (get-buffer-window cur-buffer 0))))
+;; (add-hook 'compilation-finish-functions #'exit-after-compile-hook)
 
 (with-eval-after-load "cc-mode" (define-key c++-mode-map [f5] #'compile-and-run))
 
