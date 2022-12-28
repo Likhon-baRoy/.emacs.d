@@ -36,8 +36,7 @@
 ;;; Code:
 
 
-(use-package bind-key
-  :ensure t)
+(require 'bind-key)
 
 (defun dired-timesort (filename &optional wildcards)
   (let ((dired-listing-switches "-lhat"))

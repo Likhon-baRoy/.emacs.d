@@ -2,7 +2,10 @@
 #+AUTHOR: Likhon Barai
 #+EMAIL:  likhonhere007@gmail.com
 #+DATE:   2022 Nov 19
+#+LANGUAGE: en
+#+STARTUP: overview
 #+TAGS:   emacs
+#+DESCRIPTION: My Emacs config diaries!
 
 #+html: <p><img alt="GPLv3 Software" align="right" src="https://www.gnu.org/graphics/gplv3-with-text-136x68.png"></p>
 [[https://www.gnu.org/licenses/gpl-3.0.txt][https://img.shields.io/badge/license-GPL_3-green.svg?style=flat&logo=appveyor]]
@@ -27,6 +30,8 @@ An infinite number of monkeys typing into GNU Emacs would never make a good prog
 - [[#screenshots][Screenshots]]
 - [[#how-to-use-this-configuration][How to Use This Configuration]]
 - [[#installation][Installation]]
+  - [[#why-this-config][Why this Config?]]
+  - [[#troubleshooting][Troubleshooting]]
   - [[#further-updates][Further Updates]]
   - [[#contribution][Contribution]]
   - [[#special-thanks][Special Thanks]]
@@ -74,8 +79,11 @@ Emacs doesn't have a monopoly on good ideas, and there are other great tools out
 This beautifully written *About EMACS* section credits to [[https://github.com/remacs/remacs][Remacs]].
 
 ** About README
-Welcome to the /Emacs Of Dreams/. Wait no, I meant the *Emacs Operating System*. \\
+
+Welcome to the /Emacs Of Dream/. Wait no, I meant the *Emacs Operating System*. \\
 This repository contains my personal configuration for *GNU Emacs* that I use on the daily and port around from system to system with me. This is an example of a fully custom Emacs configuration that you can use as inspiration when building your own!
+
+Customization began with *single-file* =~/.emacs= with few settings and some random *snippets*. Didn't took long to become monster. It loved to *cherry-picked* 🍒 packages literally form anywhere, I was like why don't you *apt-get*.
 
 The configuration depends on [[file:init.el][init.el]], [[https://github.com/Likhon-baRoy/.emacs.d/tree/main/my-lisp][my-lisp]](dir) and [[file:early-init.el][early-init.el]] (sets up a few initial GUI settings), bootstraps [[https://github.com/jwiegley/use-package][use-package]]. and loads [[file:init.el][init.el]], which is where the majority of the configuration magic happens.
 
@@ -87,23 +95,29 @@ It's able to run on *GNU/Linux*, *macOS* and *Windows*. It is compatible ONLY wi
 Here are some demo... \\
 
 /A dashboard on startup can clean my mind/.😌
+#+BEGIN_CENTER
 [[./screenshots/ss-1.png]]
-
+#+END_CENTER
 /Center text in the frame, looks nice ;) and =flycheck= with BitMap-Arrow on the right-fringe/ 😎
+#+BEGIN_CENTER
 [[./screenshots/ss-2.png]]
-
-/default Transparent mod/ 👍🏻
+#+END_CENTER
+/default Transparent mode/ 👍🏻
+#+BEGIN_CENTER
 [[./screenshots/ss-3.png]]
-
+#+END_CENTER
 /File navigation with Speed-bar./
+#+BEGIN_CENTER
 [[./screenshots/ss-4.png]]
-
+#+END_CENTER
 /feel the Org-mode/ :D
+#+BEGIN_CENTER
 [[./screenshots/ss-5.png]]
-
+#+END_CENTER
 /Company-mode with yasnippet/ 🔥
+#+BEGIN_CENTER
 [[./screenshots/ss-6.png]]
-
+#+END_CENTER
 
 #+html: <p><img alt="GitHub repo size" align="right" src="https://img.shields.io/github/repo-size/Likhon-baRoy/.emacs.d?color=blue&logo=github&style=for-the-badge"></p>
 
@@ -116,19 +130,86 @@ Just keep in mind that this repo isn’t set up to be used directly as your own 
 * Installation
 [[https://GitHub.com/Likhon-baRoy/][http://ForTheBadge.com/images/badges/built-with-swag.svg]]
 
+🧨 *DISCLAIMER:* 🐒 MAKE SURE YOU HAVE THE BACKUP ⚠ AUTHOR will
+   _not_ be _responsible_ for the 🔥 _harm_ 🔥 cause by using this
+   configuration.
+
+   Oh! you wanna use my config! its super duper +easy+ ! may be in
+   future I'm still +trying+ avoiding make the installer (literally
+   don't know how) and just trying to get by my work.
+
 1. Install [[https://www.gnu.org/software/emacs/][GNU Emacs]].
 2. Move =~/.emacs= or =~/.emacs.d=, if you already have it.
 3. Clone this repo to =HOME= or =~/= path using git and update all the submodules.\\
    /Run this snippets on your terminal:/
-#+begin_src
-cd ~
-git clone https://github.com/Likhon-baRoy/.emacs.d.git
-cd.emacs.d
+#+begin_src sh
+  cd ~
+  git clone https://github.com/Likhon-baRoy/.emacs.d.git
+  cd.emacs.d
 #+end_src
 4. Ensure a stable connection to Melpa Packages, then open Emacs.
 5. Enter =y= when prompted with =Auto-update packages now?=, wait for all packages to install. /(Ignore the warnings on the first launch.)/
 6. In your favorite browser, =Ctrl-f Prerequisite= through this README and follow the *Prerequisite* instructions.
 7. Restart Emacs and Start using your *Dream Emacs*! :tada:
+
+** Why this Config?
+
+   There is absolutely no reason for you to use this config, it would
+   be like first time 🏊 swimmer, who mostly likely drown with
+   unnecessary amount of effort. Although I'm great at underwater so
+   to say some what athletic *underachievers*.
+
+   Time 🕥 and time 🕝 again I learned *elisp* just to forget with
+   endless pondering and compromises, without ✍ jotting things down,
+   it would have been impossible to configure. May be this started for
+   maintenance, now its more of rants taking over the configuration! 😎
+
+   If you ask, would I have started with other's config? I would
+   definitely say *YES*. But you should *understand* all-in-one
+   package 📦 or distribution is like bringing gun 🔫 to the fist 👊
+   fight. You might end up using less than 5 % of the *bloat*. And if
+   you want to change or fix something it big 😫 pain to pealing
+   layers after layers to find the actual root cause. Yet you might
+   want to try these first
+
+   - [[https://github.com/hlissner/doom-emacs][Doom Emacs]]
+   - [[https://github.com/syl20bnr/spacemacs][Spacemacs]]
+   - [[https://github.com/seagle0128/.emacs.d][Centaur Emacs]]
+   - [[https://github.com/ergoemacs/ergoemacs-mode][ergoemacs-mode]]
+   - [[https://github.com/rdallasgray/graphene][Graphene]]
+   - [[https://github.com/magnars/.emacs.d][magnars emacs.d]]
+   - [[https://github.com/bodil/ohai-emacs][ohai-emacs]]
+   - [[https://github.com/bbatsov/prelude][Prelude]]
+   - [[https://github.com/raxod502/radian][Radian]]
+   - [[https://github.com/purcell/emacs.d][purcell emacs.d]]
+
+   And there configurations too.
+
+   - [[https://github.com/mattduck/dotfiles/blob/master/emacs.d.symlink/init.org][mattduck]]
+   - [[https://github.com/DiegoVicen/my-emacs][DiegoVicen]]
+   - [[https://github.com/stardiviner/emacs.d][stardiviner]]
+   - [[https://github.com/MatthewZMD/.emacs.d][M-EMACS]]
+   - [[https://github.com/farlado/dotemacs][Farlado’s Illiterate GNU Emacs]]
+   - [[https://blog.sumtypeofway.com/posts/emacs-config.html][Emacs is Agar for Brain Worms]]
+   - [[https://config.daviwil.com/emacs][David Wilson's config]]
+   - [[https://github.com/rougier/dotemacs/blob/master/dotemacs.org][rougier]]
+   - [[https://github.com/novoid/dot-emacs/blob/master/config.org][novoid]]
+
+** Troubleshooting
+
+   While troubleshooting I go though these procedure (may not be in
+   same ordering)
+
+   - hate myself when it happens
+   - *REMOVE* the damn plugin and *GET BACK TO WORK*
+   - *throw* ERROR MSG at google and try *catching* relevant pages
+   - may be waste few hrs with random *trials*
+   - set debug variable
+
+     #+BEGIN_SRC emacs-lisp :tangle no
+       (setq debug-on-error 1)
+       (setq debug-on-quit t)  ;; C-g
+     #+END_SRC
 
 ** Further Updates
 I will be updating My-EMACS from time to time, it is best to =git pull= once a while to stay up to date.
@@ -142,22 +223,23 @@ If you spotted a bug or you have any suggestions, please fill in an issue. If yo
 Everyone starts somewhere, and I started here.
 My heart whelming *Thanks* 🙏🏽 to you guy's 💜, who put all their effort always makes *Emacs* go one-step further.
 
-- *Uncle Dev* ([[https://github.com/daedreth/UncleDavesEmacs#readme][GitHub]], [[https://www.youtube.com/watch?v=d6iY_1aMzeg&list=PLX2044Ew-UVVv31a0-Qn3dA6Sd_-NyA1n][YouTube]])
+- *UncleDave* ([[https://github.com/daedreth/UncleDavesEmacs#readme][GitHub]], [[https://www.youtube.com/watch?v=d6iY_1aMzeg&list=PLX2044Ew-UVVv31a0-Qn3dA6Sd_-NyA1n][YouTube]])
+- *Howard Abrams* ([[https://github.com/howardabrams/dot-files][GitHub]], [[https://www.youtube.com/@howardabrams1/featured][YouTube]])
 - *Mike Zamansky* ([[https://github.com/zamansky/emacs.dz#readme][GitHub]], [[https://www.youtube.com/watch?v=49kBWM3RQQ8&list=PL9KxKa8NpFxIcNQa9js7dQQIHc81b0-Xg][YouTube]], [[https://cestlaz.github.io/posts/using-emacs-1-setup/][Website]])
 - *Mingde* (Matthew) *Zeng* ([[https://github.com/MatthewZMD/.emacs.d#readme][GitHub]])
-- *System Crafters* ([[https://www.youtube.com/@SystemCrafters/playlists][YouTube]], [[https://systemcrafters.cc/][Website]], [[https://config.daviwil.com/emacs][Website]])
+- *System Crafters* (Daviwil) ([[https://github.com/daviwil][GitHub]], [[https://www.youtube.com/@SystemCrafters/playlists][YouTube]], [[https://systemcrafters.cc/][Website]](systemcrafters), [[https://config.daviwil.com/emacs][Website]](daviwil's))
 - *Protesilaos Stavrou* ([[https://github.com/protesilaos/dotfiles/tree/master/emacs/.emacs.d][GitHub]], [[https://www.youtube.com/@protesilaos/playlists][YouTube]], [[https://protesilaos.com/emacs/dotemacs][Website]])
 
 And many other people from the *Internet World*.
+[[https://github.com/emacs-tw/awesome-emacs][Awesome Emacs]] has a good list of packages and themes to check out.
 
 * Prerequisites
-
 ** User Information
 Please update this file your personal info.
 #+BEGIN_SRC emacs-lisp
-(setq user-full-name       "Likhon Barai"
-      user-login-name      "likhon"
-      user-real-login-name "raxit"
+(setq user-full-name       "Your Name"
+      user-login-name      "Login_Name"
+      user-real-login-name "Real_Login_Name"
       user-mail-address    "likhonhere007@gmail.com")
 #+END_SRC
 
@@ -168,7 +250,7 @@ Also this project relies on the following list of applications:
 - [[https://www.gnupg.org][GnuPG (=gpg=)]]
 - [[https://www.gnu.org/software/global][GNU GLOBAL (=global=)]]
 - [[http://ctags.sourceforge.net][Exuberant Ctags]] (=ctags=)
-- Install [[https://www.jetbrains.com/lp/mono/][JetBrains Mono]], [[https://fonts.google.com/specimen/Cantarell][Cantarell]] (=font=)
+- Install [[https://www.jetbrains.com/lp/mono/][JetBrains Mono]], [[https://typeof.net/Iosevka/][Iosevka Aile]] (=font=)
 - Install [[https://cmake.org/install/][cmake]], [[https://clang.llvm.org/get_started.html][clang]], [[https://clang.llvm.org/get_started.html][llvm]], [[http://www.gdbtutorial.com/tutorial/how-install-gdb][gdb]] for programming purpose
 - Install [[https://github.com/domtronn/all-the-icons.el][all-the-icons]] fonts if already not installed, =M-x all-the-icons-install-fonts=
 - Install [[https://github.com/googlefonts/noto-emoji][emoji font]] (*Noto Emoji* & =noto-cjk=, /for all the fonts imaginable/) for *Linux*
@@ -176,7 +258,7 @@ Also this project relies on the following list of applications:
 
 * User Guidance
 
-📝 *Note:* (/for beginners/) I'll be using =Ctrl= as =C=, =Alt= as =M=, =Space= as =S= and =BackSpace= as =BS=. \\
+📝 *Note:* (/for beginners/) I'll be using =Ctrl= as =C=, =Alt= as =M=, =Shift= as =S=, =Space= as =SPC= and =BackSpace= as =BS=. \\
 
 + You must wanna see this documentation 👉🏽 [[https://github.com/Likhon-baRoy/org-notes/blob/main/Emacs/emacs_user-manual.org][Emacs-user-manual]].
 
@@ -184,12 +266,12 @@ After installation process is done.  Whenever you open a files within Emacs, the
 
 *check this out:*
 #+begin_example
-C-c h (hide-all)
-C-c s (show-all)
-S-BS  (hide-block)
-C-BS  (show-block)
-C-TAB (toggle-hiding) - fold the current section.
-S-TAB (hide-level) - fold the sub sections of the current section.
+  C-c h (hide-all)
+  C-c s (show-all)
+  S-BS  (hide-block)
+  C-BS  (show-block)
+  C-TAB (toggle-hiding) - fold the current section.
+  S-TAB (hide-level) - fold the sub sections of the current section.
 #+end_example
 
 * Custom Configurations
@@ -197,72 +279,85 @@ Here is my some personal changes for *Emacs* which comes default with this confi
 ** Custom key bindings
 
 #+BEGIN_SRC emacs-lisp
-;; Disable Ctrl-z.
-(global-unset-key "\^z")
-;; (global-set-key "\C-z" 'call-last-kbd-macro) ; call-last-kbd-macro frequently used key on a double key sequence (I think original is ^Xe)
-(global-set-key "\C-w" 'backward-kill-word)
-;; I use `C-h' for backspace in Emacs and move `help-command' elsewhere:
-(global-set-key "\^h" 'backward-delete-char)
-(define-key isearch-mode-map "\C-h" 'isearch-delete-char)
-(global-set-key (kbd "C-S-H") 'kill-whole-line)
-;; this lets us have long lines go off the side of the screen instead of hosing up the ascii art
-(global-set-key "\C-x\C-l" 'toggle-truncate-lines)
-(global-set-key "\C-c\C-d" "\C-a\C- \C-n\M-w\C-y")	; Duplicate a whole line
-(global-set-key (kbd "C-S-R") 'rename-file)
-(global-set-key "\C-cD" 'Delete-current-file)
-(global-set-key "\C-x\C-k" 'kill-region)
-(global-set-key "\C-c\C-k" 'kill-region)
-(global-set-key "\M-o"  'other-window)
-(global-set-key "\M-n"  'next-buffer)
-(global-set-key "\M-p"  'previous-buffer)
-(global-set-key (kbd "M-<tab>") 'company-complete-common-or-cycle)
-(global-set-key "\M-TAB"  'company-complete-common-or-cycle)
-(global-set-key (kbd "C-.") #'other-window)
-(global-set-key (kbd "C-,") #'prev-window)
+  ;;; this is confusion
+  (global-unset-key (kbd "C-z")) ; unbind (suspend-frame)
+
+  ;; normal undo and redo
+  (global-set-key (kbd "C-z") 'undo-only)
+  (global-set-key (kbd "C-S-z") 'undo-tree-redo)
+  ;; ;;; Shell
+  (global-set-key (kbd "C-!")   'eshell-here) ; see this function in `shell.el'
+
+  (global-set-key "\C-w" 'backward-kill-word)
+
+  ;; I use `C-h' for backspace in Emacs and move `help-command' elsewhere:
+  (global-set-key "\^h" 'backward-delete-char)
+  (define-key isearch-mode-map "\C-h" 'isearch-delete-char)
+  (global-set-key (kbd "C-S-H") 'kill-whole-line)
+
+  ;; long lines go-off the side of the screen instead of hosing up the ascii art
+  (global-set-key "\C-x\C-l" 'toggle-truncate-lines)
+  ;; Rename File
+  (global-set-key (kbd "C-S-R") 'rename-file)
+  ;; Delete current file
+  (global-set-key "\C-cD" 'Delete-current-file)
+  ;; kill selected region
+  (global-set-key "\C-x\C-k" 'kill-region)
+  (global-set-key "\C-c\C-k" 'kill-region)
+  ;; Duplicate a whole line
+  (global-set-key "\C-c\C-d" "\C-a\C- \C-n\M-w\C-y")
+  ;; Buffer
+  (global-set-key "\M-n"  'next-buffer)
+  (global-set-key "\M-p"  'previous-buffer)
+  ;; Window
+  (global-set-key "\M-o"  'other-window) ; use with `ace-window'
+  (global-set-key (kbd "C-.") #'other-window)
+  (global-set-key (kbd "C-,") #'prev-window)
+  ;; auto-complete
+  (global-set-key "\M-TAB"  'company-complete-common-or-cycle)
 #+END_SRC
 
 ** Custom functions
 
 #+BEGIN_SRC emacs-lisp
-;; Unfill paragraph
-;; Might be good. For instance for canceling all of the paragraph quickly or for commenting it away.
-(defun unfill-paragraph ()
-  "Convert a multi-line paragraph into a single line of text."
-  (interactive)
-  (let ((fill-column (point-max)))
-	(fill-paragraph nil)))
-;; Handy key definition
-(define-key global-map "\M-Q" 'unfill-paragraph)
+  ;; Unfill paragraph
+  ;; Might be good. For instance for canceling all of the paragraph quickly or for commenting it away.
+  (defun unfill-paragraph ()
+    "Convert a multi-line paragraph into a single line of text."
+    (interactive)
+    (let ((fill-column (point-max)))
+      (fill-paragraph nil)))
+  ;; Handy key definition
+  (define-key global-map "\M-Q" 'unfill-paragraph)
 #+END_SRC
 
 - Now now, how much you like *transparency*?  With this config this method comes default. \\
   you can *toggle* =on= / =off= *transparency* /using/ =C-c t= keystrokes.
 
 #+BEGIN_SRC emacs-lisp
-;;________________________________________________________________
-;;    Transparent Emacs
-;;________________________________________________________________
-(set-frame-parameter (selected-frame) 'alpha '(85 . 50))
-(add-to-list 'default-frame-alist '(alpha . (85 . 50)))
-;; (set-frame-parameter (selected-frame) 'alpha '(<active> . <inactive>))
-;; (set-frame-parameter (selected-frame) 'alpha <both>)
+  ;;________________________________________________________________
+  ;;    Transparent Emacs
+  ;;________________________________________________________________
+  (set-frame-parameter (selected-frame) 'alpha '(85 . 50))
+  (add-to-list 'default-frame-alist '(alpha . (85 . 50)))
+  ;; (set-frame-parameter (selected-frame) 'alpha '(<active> . <inactive>))
+  ;; (set-frame-parameter (selected-frame) 'alpha <both>)
 
-;; Use the following snippet after you’ve set the alpha as above to assign a toggle to “C-c t”:
-(defun toggle-transparency ()
-  "Crave for transparency!"
-  (interactive)
-  (let ((alpha (frame-parameter nil 'alpha)))
-    (set-frame-parameter
-     nil 'alpha
-     (if (eql (cond ((numberp alpha) alpha)
-                    ((numberp (cdr alpha)) (cdr alpha))
-                    ;; Also handle undocumented (<active> <inactive>) form.
-                    ((numberp (cadr alpha)) (cadr alpha)))
-              100)
-         '(85 . 50) '(100 . 100)))))
-(global-set-key (kbd "C-c t") 'toggle-transparency)
+  ;; Use the following snippet after you’ve set the alpha as above to assign a toggle to “C-c t”:
+  (defun toggle-transparency ()
+    "Crave for transparency!"
+    (interactive)
+    (let ((alpha (frame-parameter nil 'alpha)))
+      (set-frame-parameter
+       nil 'alpha
+       (if (eql (cond ((numberp alpha) alpha)
+                      ((numberp (cdr alpha)) (cdr alpha))
+                      ;; Also handle undocumented (<active> <inactive>) form.
+                      ((numberp (cadr alpha)) (cadr alpha)))
+                100)
+           '(85 . 50) '(100 . 100)))))
+  (global-set-key (kbd "C-c t") 'toggle-transparency)
 #+END_SRC
-
 
 * Optional
 ** Setup Bangla Language Environment
@@ -313,6 +408,7 @@ And let's hook them into Text buffer-mode.
 - Change the input-method using =C-\=
 - Enable =company-wordfreq= and other changes for a nice experience using =M-x bn-company-wordfreq=
 Now you can enjoy your *Bangla/Bengali* lang workflow :D
+
 * Recommendations
 Here are some general recommendations on Emacs usage that you might find helpful:
 
@@ -335,7 +431,7 @@ add Lock = Control_R
 This replaces CapsLock with control and also replaces the Ctrl key on the right side with CapsLock just in case you ever need to use it.  Most login systems (GDM, KDM, etc) will load this file when you log in so you might not need to do anything extra for it to take effect, just log out and log back in again.  If that doesn't seem to work, you can add this line to one of your startup files (=.xinitrc=, =.profile=, window manager configuration, etc):
 
 #+begin_src sh
-xmodmap ~/.Xmodmap
+  xmodmap ~/.Xmodmap
 #+end_src
 
 This beautifully written *Replace CapsLock with CTRL* section credits to [[https://github.com/daviwil/emacs-from-scratch/blob/master/README.org][Emacs From Scratch]]

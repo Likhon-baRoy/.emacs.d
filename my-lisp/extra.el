@@ -1,4 +1,4 @@
-;;; extra.el --- Tweaks for some Additional Function configurations -*- lexical-binding: t -*-
+;;; extra.el --- Tweaks for some Additional Function configurations -*- lexical-binding: t; -*-
 ;;; Created on: 2022 Nov 25
 
 ;; Copyright (C) 2021-2022 Likhon Sapiens <likhonhere007@gmail.com>
@@ -36,12 +36,13 @@
 ;;; Code:
 
 
-;; ──────────────────────────── Reload Emacs `init.el' ───────────────────────────
+;; ──────────────────────────── Reload `init.el' ───────────────────────────
 (defun config-reload ()
-  "Uncle dev created a function to reload Emacs config."
+  "Uncle dev created a function to reload Emacs config.  But this sucks for me!"
   (interactive)
   (load-file (expand-file-name "~/.emacs.d/init.el")))
 
+(global-set-key (kbd "C-c R") 'config-reload)
 ;; ─────────────────────── Focus on newly created windows ──────────────────────
 
 ;; (switch-to-buffer (other-buffer (current-buffer) t))
@@ -83,7 +84,7 @@
   (mapc #'disable-theme custom-enabled-themes))
 
 ;; ──────────────────────────── Toggle-Transparency ────────────────────────────
-;; Use the following snippet after you’ve set the alpha value (C-c\C-t).
+;; Use the following snippet after you’ve set the alpha value
 (defun toggle-transparency ()
   "Crave for transparency!"
   (interactive)
@@ -118,9 +119,12 @@
                   ("#+end_example" . ?)
                   ("#+begin_quote" . ?❝)
                   ("#+end_quote" . ?❠) ; ❟ ―
+                  ("#+begin_center" . "ϰ")
+                  ("#+end_center" . "ϰ")
                   ("#+header:" . ?)
                   ("#+name:" . ?﮸)
-                  ("#+title:" . "◈")
+                  ;; ("#+title:" . ?◈)
+                  ;; ("#+author:" . ?✒)
                   ("#+results:" . ?)
                   ("#+call:" . ?)
                   (":properties:" . ?)
@@ -149,6 +153,10 @@
 (add-hook 'prog-mode-hook 'add-pretty-lambda)
 (add-hook 'org-mode-hook 'add-pretty-lambda)
 ;; (remove-hook 'web-mode 'add-pretty-lambda)
+
+;; (setq-default prettify-symbols-alist ; I don't know why it's not working?
+;;               '(("#+begin_quote" . "ϰ")
+;;                 ("#+end_quote" . "ϰ")))
 
 ;; ─────────────────── Added functionality (Generic usecases) ──────────────────
 ;; Unfill paragraph
@@ -193,13 +201,13 @@
 
 ;; ─────────────────────────────────── CURSOR ──────────────────────────────────
 (set-mouse-color "white")
-(setq x-stretch-cursor t)		; make cursor the width of the character it is under i.e. full width of a TAB
+(setq x-stretch-cursor t) ; make cursor the width of the character it is under i.e. full width of a TAB
 (defun djcb-set-cursor-according-to-mode ()
   "Change cursor color and type according to some minor modes."
   (cond
    (buffer-read-only
     (set-cursor-color "yellow")
-    (setq cursor-type '(hbar . 3)))
+    (setq cursor-type 'box)) ; '(hbar . 3)
    (overwrite-mode
     (set-cursor-color "red")
     (setq cursor-type 'hollow))
@@ -283,6 +291,30 @@ point reaches the beginning or end of the buffer, stop there."
         (goto-char (point-min))
         (forward-line (1- line-number))))))
 
+
+;; ───────────────────────────────── Copy line ─────────────────────────────────
+;; (defun copy-line (arg)
+;;   "Copy lines (as many as prefix argument) in the kill ring.
+;;       Ease of use features:
+;;       - Move to start of next line.
+;;       - Appends the copy on sequential calls.
+;;       - Use newline as last char even on the last line of the buffer.
+;;       - If region is active, copy its lines."
+;;   (interactive "p")
+;;   (let ((beg (line-beginning-position))
+;;         (end (line-end-position arg)))
+;;     (when mark-active
+;;       (if (> (point) (mark))
+;;           (setq beg (save-excursion (goto-char (mark)) (line-beginning-position)))
+;;         (setq end (save-excursion (goto-char (mark)) (line-end-position)))))
+;;     (if (eq last-command 'copy-line)
+;;         (kill-append (buffer-substring beg end) (< end beg))
+;;       (kill-ring-save beg end)))
+;;   (beginning-of-line (or (and arg (1+ arg)) 2))
+;;   (if (and arg (not (= 1 arg))) (message "%d lines copied" arg)))
+
+;; (global-set-key (kbd "C-c C-n") 'rename-file-and-buffer)
+;; (global-set-key (kbd "M-k") 'copy-line)
 
 ;;; Finish up
 (provide 'extra)

@@ -1,4 +1,4 @@
-;;; global-keys.el --- Tweaks for Global Key-bindings configurations -*- lexical-binding: t -*-
+;;; global-keys.el --- Tweaks for Global Key-bindings configurations -*- lexical-binding: t; -*-
 ;;; Created on: 2022 Nov 25
 
 ;; Copyright (C) 2021-2022 Likhon Sapiens <likhonhere007@gmail.com>
@@ -57,8 +57,46 @@
 ;;   (kill-buffer))
 
 ;; ───────────────────────────── Global Unbind Key ─────────────────────────────
-(unbind-key "C-z")
+;;; this is confusion
+(global-unset-key (kbd "C-z")) ; unbind (suspend-frame)
+
+;; normal undo and redo
+(global-set-key (kbd "C-z")   'undo-only)
+(global-set-key (kbd "C-S-z") 'undo-tree-redo)
+;; (global-set-key "\M-c" 'toggle-letter-case)
+(global-set-key (kbd "C-`")   'duplicate-current-line)
+(global-set-key (kbd "C-~")   'duplicate-current-word)
+(global-set-key (kbd "C-<insert>") 'kill-ring-save-current-line)
 ;; (bind-key "C-z"               'call-last-kbd-macro) ; call-last-kbd-macro frequently used key on a double key sequence (I think original is ^Xe)
+
+;;----------------------------------------------------------------------
+;;; duplicate lines
+(defun duplicate-current-line()
+  (interactive)
+  (beginning-of-line nil)
+  (let ((b (point)))
+    (end-of-line nil)
+    (copy-region-as-kill b (point)))
+  (beginning-of-line 2)
+  (open-line 1)
+  (yank)
+  (back-to-indentation))
+
+;;----------------------------------------------------------------------
+;;; duplicate word
+(defun duplicate-current-word()
+  (interactive)
+  (beginning-of-sexp)
+  (insert (word-at-point)))
+
+;;----------------------------------------------------------------------
+;;; additional copy function
+(defun kill-ring-save-current-line()
+  "on point line copy"
+  (interactive)
+  (if (use-region-p)
+      (kill-ring-save (point) (mark))
+    (kill-new (thing-at-point 'line))))
 
 ;; ──────────────────────── Make Escape Key Greate again ───────────────────────
 ;; (unbind-key "<escape>")
@@ -119,7 +157,10 @@
 ;; (bind-key "A-C-<backspace>"     'delete-trailing-whitespace)
 
 ;; ;;; Killing
-(bind-key "C-w"               'backward-kill-word)
+
+;;; backward kill like terminal
+(global-unset-key (kbd "C-w"))
+(global-set-key (kbd "C-w") 'backward-kill-word) ;; like in terminal
 ;; instead of `backspace' I use `C-h' and moved `help-command' elsewhere:
 (bind-key "C-h"               'backward-delete-char)
 (bind-key "C-S-H"             'kill-whole-line)
@@ -214,7 +255,7 @@
 ;; (bind-key "A-m"               'manual-entry)
 
 ;; ;;; Shell
-(bind-key "C-!"               'eshell-here)
+(global-set-key (kbd "C-!")   'eshell-here) ; see this function in `shell.el'
 ;; (bind-key "A-e"               'shell)
 ;; (bind-key "A-;"               'async-shell-command)
 ;; (bind-key "M-!"               'async-shell-command)
@@ -276,34 +317,19 @@
 (bind-key "S-<backspace>"     'hs-hide-block)
 (bind-key "C-<backspace>"     'hs-show-block)
 
-;; ;;; Goto-Changes
-(bind-key "C-c r"             'config-reload)
-(bind-key "C-;"               'goto-last-change)
-(bind-key "C-c b ."           'goto-last-change-reverse)
-;; (bind-key "C-c b ,"           'goto-last-change)
-
 ;; ;;; Emojis
 (bind-key "M-<f1>"            'emojify-insert-emoji)
 
 ;; ;;; Misc
-(bind-key "M-<f12>"           'proced)
 (bind-key "C-c T"             'switch-theme)
 (bind-key "C-c t"             'toggle-transparency)
 (bind-key "C-c ;"             'comment-pretty)
 (bind-key "C-a"               'smarter-move-beginning-of-line)
 (bind-key "C-<f5>"            'global-display-line-numbers-mode)
 
-
-;; (bind-key "C-r" 'counsel-minibuffer-history)
 (bind-key "C-r"
           #'(lambda () (interactive)
               (eval (car command-history))))
-
-;; spell check for Bangla text
-(bind-key "C-c B"
-          (lambda () (interactive)
-            (ispell-change-dictionary "bn_BD")
-            (flyspell-buffer)))
 
 ;;; Finish up
 (provide 'global-keys)
