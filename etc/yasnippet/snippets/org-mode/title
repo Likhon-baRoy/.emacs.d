@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: org-title
+# contributor: likhon
+# key: TT
+# --
+#+TITLE:       ${1:`(replace-regexp-in-string "-" " " (capitalize (file-name-nondirectory (file-name-sans-extension (buffer-file-name)))))`}
+#+AUTHOR:      `(user-full-name)`
+#+EMAIL:       `(user-mail-address)`
+#+DATE:        `(format-time-string "%Y %b %d")`
+#+TAGS:        $2
+#+LANGUAGE:    ${3:en}
+#+DESCRIPTION: $4
+
+$0
