@@ -39,8 +39,10 @@
 
 (setq package-enable-at-startup nil ; don't auto-initialize!
       ;; don't add that `custom-set-variables' block to my init.el!
-      package--init-file-ensured t)
-(setq package-archives nil)
+      package--init-file-ensured t
+      package-archives nil
+      package-quickstart nil)
+
 
 ;; It will cause you to have a separate elpa directory for each Emacs version.
 ;; (setq package-user-dir (locate-user-emacs-file
@@ -82,11 +84,13 @@
               nil t)))
 
 (setq
+ use-file-dialog nil
  load-prefer-newer nil
  default-input-method nil
  utf-translate-cjk-mode nil          ; disable CJK coding/encoding (Chinese/Japanese/Korean characters)
  initial-major-mode 'fundamental-mode
  inhibit-default-init t
+ inhibit-splash-screen t
  inhibit-startup-screen t 			 ; Do not show the startup message.
  inhibit-startup-buffer-menu t       ; stop `list-buffers' from showing when opening multiple files.
  my-computer-has-smaller-memory-p t) ; computers with smaller memory. Not sure if it works or not!
@@ -101,6 +105,7 @@
 ;; -UnsetSRF
 
 ;; Maximize the Emacs frame on startup
+(push '(fullscreen . maximized) initial-frame-alist)
 (push '(fullscreen . maximized) default-frame-alist)
 
 ;; Prevent the glimpse of un-styled Emacs by disabling these UI elements early.

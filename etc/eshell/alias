@@ -1,13 +1,12 @@
+alias d dired-other-window $1
+alias e find-file-other-window $1
 alias cls clear 1
 alias la ls -lah
 alias ll ls -lh
-alias d dired $1
 alias sudo *sudo $*
 alias vim find-file $*
 alias ff find-file $1
-alias e find-file-other-window $1
 alias ag ag --vimgrep --color $*
-
 alias g git $*
 alias gP git push $*
 alias gbr git branch $*
@@ -23,7 +22,6 @@ alias gsc git svn dcommit
 alias gsp git stash pop
 alias gsr git svn rebase
 alias gst git status
-
-alias mgd magit-diff-unstaged
-alias mgds magit-diff-staged
+alias mg magit-diff-staged
+alias mgu magit-diff-unstaged
 alias gg git log --color --graph --oneline --abbrev-commit --decorate --all --date=short --pretty=format:"%C(cyan)%h %C(yellow)%ad %C(bold green)%d %C(reset)%s"

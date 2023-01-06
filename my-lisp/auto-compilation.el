@@ -58,9 +58,7 @@
         ("C-n"        . nil)
         ("C-p"        . nil)
         ("C-w"        . nil)
-        ("RET"        . nil)
-        ("<return>"   . nil)
-        ("SPC"        . nil)    ; Prevent SPC from ever triggering a completion.
+        ("SPC"        . nil) ; prevent SPC from ever triggering a completion.
         ("M-n"        . nil)
         ("M-p"        . nil)
         ("M-."        . company-show-location)
@@ -130,7 +128,7 @@
                            (delete 'company-semantic company-backends)))
   )
 ;; Use TAB key to cycle through suggestions.(`tng' means 'TAB and go')
-;; (company-tng-configure-default)
+;; (company-tng-mode)
 
 (add-hook 'prog-mode-hook
           (lambda ()
@@ -213,25 +211,41 @@
   :config (yasnippet-snippets-initialize))
 
 (use-package eglot
+  :custom
+  (eglot-autoshutdown t)
+  (eglot-autoreconnect nil)
+  (eglot-confirm-server-initiated-edits nil)
+  (eldoc-idle-delay 0.0)
+  (eldoc-echo-area-display-truncation-message nil)
+  :hook ((c-mode . eglot-ensure)
+         (c++-mode . eglot-ensure))
+  :bind (:map eglot-mode-map
+              ("C-c r"   . eglot-rename)
+              ("C-c C-a" . eglot-code-actions)
+              ("C-c C-f" . eglot-format-buffer)
+              ("C-c C-i" . eglot-find-implementation))
   :config
   (add-to-list 'eglot-server-programs '(c-mode . ("clangd")))
   (add-to-list 'eglot-server-programs '(c++-mode . ("clangd")))
   (add-to-list 'eglot-server-programs '(python-mode . ("pyls")))
   (add-to-list 'eglot-server-programs '(LaTeX-mode . ("digestif")))
-  (add-hook 'c-mode-hook 'eglot-ensure)
-  (add-hook 'c++-mode-hook 'eglot-ensure)
-  (add-hook 'python-mode-hook 'eglot-ensure)
-  (add-hook 'LaTeX-mode-hook 'eglot-ensure)
   ;; format on save
   (add-hook 'c-mode-hook '(lambda() (add-hook 'before-save-hook 'eglot-format-buffer nil t)))
   (add-hook 'c++-mode-hook '(lambda() (add-hook 'before-save-hook 'eglot-format-buffer nil t)))
-  (add-hook 'python-mode-hook '(lambda() (add-hook 'before-save-hook 'eglot-format-buffer nil t)))
-  (define-key eglot-mode-map (kbd "C-c r") 'eglot-rename)
-  (define-key eglot-mode-map (kbd "C-c C-i") 'eglot-find-implementation))
+  (add-hook 'python-mode-hook '(lambda() (add-hook 'before-save-hook 'eglot-format-buffer nil t))))
 
 (add-hook 'eglot-managed-mode-hook (lambda ()
                                      (add-to-list 'company-backends
                                                   '(company-capf :with company-yasnippet))))
+
+;; Use Dabbrev with Corfu!
+;; (use-package dabbrev
+;;   ;; Swap M-/ and C-M-/
+;;   :bind (("M-/" . dabbrev-completion)
+;;          ("C-M-/" . dabbrev-expand))
+;;   ;; Other useful Dabbrev configurations.
+;;   :custom
+;;   (dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\\'")))
 
 ;;; Finish up
 (provide 'auto-compilation)

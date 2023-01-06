@@ -321,6 +321,8 @@
 (bind-key "M-<f1>"            'emojify-insert-emoji)
 
 ;; ;;; Misc
+(global-set-key (kbd "C-S-o") "\C-a\C-o")
+(global-set-key (kbd "<S-return>") "\C-e\C-m")
 (bind-key "C-c T"             'switch-theme)
 (bind-key "C-c t"             'toggle-transparency)
 (bind-key "C-c ;"             'comment-pretty)

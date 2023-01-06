@@ -449,4 +449,8 @@ Cooking. Traveling. Sports. Teaching. Pokémon. Whatever. :joy:
 
 This project is open source software licensed under the [[https://github.com/sergeyklay/bnf-mode/blob/master/LICENSE][GNU General Public Licence version 3]].
 
-Copyright © 2020, 2022, Free Software Foundation, Inc.
+#+html:<p align="center"> <img src="https://raw.githubusercontent.com/catppuccin/catppuccin/dev/assets/footers/gray0_ctp_on_line.svg?sanitize=true"/> </p>
+
+#+BEGIN_CENTER
+Copyright © 2022-present, Likhon Baroy.
+#+END_CENTER

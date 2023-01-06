@@ -55,9 +55,7 @@
 (setq display-buffer-alist '(("\\`\\*e?shell" display-buffer-pop-up-window)))
 
 (defun eshell-here ()
-  "Opens up a new shell in the directory associated with the
-         current buffer's file. The eshell is renamed to match
-         that directory to make multiple eshell windows easier."
+  "Opens up a new shell in the directory associated with the current buffer's file. The eshell is renamed to match that directory to make multiple eshell windows easier."
   (interactive)
   (let* ((height (/ (window-total-height) 3)))
     (split-window-vertically (- height))
@@ -73,7 +71,7 @@
         (eshell-life-is-too-much) ; Why not? (eshell/exit)
         (ignore-errors
           (delete-window)))
-    (delete-forward-char arg)))
+    (delete-char arg)))
 
 (add-hook 'eshell-mode-hook
           (lambda ()
@@ -96,7 +94,6 @@
       eshell-hist-ignoredups t
       eshell-save-history-on-exit t
       eshell-cmpl-cycle-completions t
-      eshell-destroy-buffer-when-process-dies t
       ;; auto truncate after 20k lines
       eshell-buffer-maximum-lines 20000
       eshell-error-if-no-glob t

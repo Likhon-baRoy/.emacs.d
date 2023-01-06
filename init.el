@@ -81,6 +81,11 @@ If you experience stuttering, increase this.")
   (server-start))
 
 ;; ────────────────────────────────── ENCODING ─────────────────────────────────
+;; default to utf-8 for all the things
+(set-charset-priority 'unicode)
+(setq locale-coding-system 'utf-8
+      coding-system-for-read 'utf-8
+      coding-system-for-write 'utf-8)
 (prefer-coding-system 'utf-8)
 (set-language-environment 'utf-8)
 (setq locale-coding-system 'utf-8)
@@ -91,24 +96,26 @@ If you experience stuttering, increase this.")
 (set-clipboard-coding-system 'utf-8)
 (set-locale-environment "en_US.UTF-8")
 (set-buffer-file-coding-system 'utf-8-unix)
+(setq default-process-coding-system '(utf-8-unix . utf-8-unix))
+
 (when window-system (global-prettify-symbols-mode t))
 
 ;; ────────────────────────────── Generic packages ─────────────────────────────
+(require 'package)
 ;; Select the folder to store packages
 ;; Comment / Uncomment to use desired sites
 (setq package-user-dir (expand-file-name "elpa" user-emacs-directory)
       package-archives
       '(("gnu"   . "https://elpa.gnu.org/packages/")
+        ("nongnu" . "https://elpa.nongnu.org/nongnu/")
         ("melpa-stable" . "https://stable.melpa.org/packages/")
         ("melpa" . "https://melpa.org/packages/")
-        ("org" . "https://orgmode.org/elpa/")
-        ;; ("cselpa" . "https://elpa.thecybershadow.net/packages/")
-        ;; ("melpa-cn" . "http://mirrors.cloud.tencent.com/elpa/melpa/")
-        ;; ("gnu-cn"   . "http://mirrors.cloud.tencent.com/elpa/gnu/")
-        ))
+        ("org" . "https://orgmode.org/elpa/"))
+      package-quickstart nil)
+;; ("cselpa" . "https://elpa.thecybershadow.net/packages/")
+;; ("melpa-cn" . "http://mirrors.cloud.tencent.com/elpa/melpa/")
+;; ("gnu-cn"   . "http://mirrors.cloud.tencent.com/elpa/gnu/"))
 
-(require 'cl)
-(require 'package)
 ;; Configure Package Manager
 (unless (bound-and-true-p package--initialized)
   (setq package-enable-at-startup nil) ; To prevent initializing twice
@@ -122,13 +129,15 @@ If you experience stuttering, increase this.")
 ;;
 
 ;; Install use-package if not installed
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents) ; update archives
-  (package-install 'use-package)) ; grab the newest use-package
 (eval-and-compile
-  (require 'use-package)
-  (require 'bind-key)
-  (setq warning-minimum-level :emergency)) ; :error (default is :warning)
+  (unless (and (fboundp 'package-installed-p)
+               (package-installed-p 'use-package))
+    (package-refresh-contents) ; update archives
+    (package-install 'use-package)) ; grab the newest use-package
+  (if init-file-debug
+      (setq use-package-compute-statistics t)
+    (setq use-package-compute-statistics nil))
+  (require 'use-package))
 
 ;;; Configure use-package
 (use-package use-package
@@ -137,7 +146,6 @@ If you experience stuttering, increase this.")
   (use-package-always-defer nil)        ; :defer t by default
   (use-package-always-ensure t)         ; :ensure t by default
   (use-package-expand-minimally t)
-  (use-package-compute-statistics t)
   (use-package-enable-imenu-support t))
 
 ;; ─────────────────── Additional Packages and Configurations ──────────────────
@@ -229,14 +237,23 @@ If you experience stuttering, increase this.")
 (setq ibuffer-default-sorting-mode 'recency)
 
 ;; ───────────────────────────────── Spellcheck ────────────────────────────────
-
-(when (executable-find "hunspell")
-  (setq-default ispell-program-name "hunspell")
-  ;; (setq ispell-default-dictionary "en_GB")
-  (setq ispell-really-hunspell t))
-
-;; easy spell check
-(global-set-key (kbd "<f8>") 'ispell-word)
+(use-package ispell
+  :bind ("<f8>" . ispell-word) ; easy spell check
+  :custom
+  (ispell-program-name "hunspell") ; require Hunspell
+  (ispell-dictionary "en_US,en_GB,bn_BD")
+  (ispell-personal-dictionary "~/.emacs.d/.hunspell_personal")
+  :config
+  ;; Configure `LANG`, otherwise ispell.el cannot find a 'default
+  ;; dictionary' even though multiple dictionaries will be configured
+  ;; in next line.
+  (setenv "LANG" "en_US.UTF-8")
+  ;; ispell-set-spellchecker-params has to be called
+  ;; before ispell-hunspell-add-multi-dic will work
+  (ispell-set-spellchecker-params)
+  (ispell-hunspell-add-multi-dic ispell-dictionary)
+  (unless (file-exists-p ispell-personal-dictionary)
+    (write-region "" nil ispell-personal-dictionary nil 0)))
 
 (use-package flyspell
   :bind (:map flyspell-mode-map
@@ -274,7 +291,7 @@ If you experience stuttering, increase this.")
 ;; (global-set-key (kbd "C-<f8>") 'flyspell-goto-next-and-popup)
 ;; (define-key flyspell-mode-map (kbd "C-<f8>") 'flyspell-goto-next-and-popup)
 
-;; ────────────────────────────────── WEB-MODE ─────────────────────────────────
+;; ───────────────────────────────── Web-mode ─────────────────────────────────
 (use-package emmet-mode
   :after (web-mode css-mode scss-mode)
   :commands (emmet-mode emmet-expand-line yas-insert-snippet company-complete)
@@ -366,6 +383,7 @@ If you experience stuttering, increase this.")
  backup-by-copying t                ; don't clobber symlinks.
  backup-directory-alist `(("."~/.emacs.d/var/backup/per-session))
  default-directory "~/"
+ custom-safe-themes t
  load-prefer-newer t ; don't use the compiled code if its the older package.
  make-backup-files t               ; backup of a file the first time it is saved.
  delete-by-moving-to-trash t       ; move deleted files to trash.
@@ -408,10 +426,9 @@ If you experience stuttering, increase this.")
  '(show-paren-mismatch ((((class color)) (:background "red" :foreground "white"))))
  )
 
-;; space around the windows
+;; Space around the windows
 ;; (set-fringe-style '(8 . 8))
 ;; (fringe-mode '(8 . 0))      ; Enable fringe on the left for git-gutter-fringe+.
-(save-place-mode 1)
 (global-subword-mode 1)     ; Iterate through CamelCase words.
 (global-auto-revert-mode 1) ; Automatically revert buffer when it changes on disk.
 (electric-pair-mode 1)     ; Enable Matching delimiters.
@@ -516,13 +533,6 @@ If you experience stuttering, increase this.")
       user-login-name      "likhon"
       user-real-login-name "raxit"
       user-mail-address    "likhonhere007@gmail.com")
-;;________________________________________________________________
-;;		Highlight Current LINE
-;;________________________________________________________________
-(when window-system (global-hl-line-mode 1))
-;; (set-face-background 'highlight "#3e4446") ; also try: "#3e4446"/"#gray6"
-;; (set-face-foreground 'highlight nil)
-;; (set-face-underline-p 'highlight "#ff0000")
 
 ;; ────────────────────────── Transparency Alpha Value ─────────────────────────
 (set-frame-parameter (selected-frame) 'alpha '(85 . 50))
@@ -561,6 +571,57 @@ If you experience stuttering, increase this.")
   ;; To disable collection of benchmark data after init is done.
   (add-hook 'after-init-hook 'benchmark-init/deactivate))
 
+;; From: https://panadestein.github.io/emacsd/#org5278580
+(use-package emacs
+  :preface
+  (defun my-reload-emacs ()
+    "Reload the Emacs configuration"
+    (interactive)
+    (load-file "~/.emacs.d/init.el"))
+  (defun revert-buffer-no-confirm ()
+    "Revert buffer without confirmation."
+    (interactive) (revert-buffer t t))
+  :config
+  (if init-file-debug
+      (setq warning-minimum-level :debug)
+    (setq warning-minimum-level :emergency))
+  (fringe-mode '(0 . 0))
+  ;; Terminal transparency
+  (face-spec-set 'default
+                 '((((type tty)) :background "unspecified-bg")))
+  ;; Remember line number
+  (if (fboundp #'save-place-mode)
+      (save-place-mode +1)
+    (setq-default save-place t))
+  ;; Mimetypes
+  (setq mailcap-user-mime-data
+        '((type . "application/pdf")
+          (viewer . pdf-view-mode)))
+  :bind
+  (("C-c R" . my-reload-emacs))
+  ;;  ("<escape>" . keyboard-escape-quit) ; Make ESC close prompts
+  ;;  ("C-c C-r" . revert-buffer-no-confirm)
+  )
+
+;; Emacs built-in ediff is more powerful than vimdiff IMHO.
+;; However, the default configuration can be improved a bit:
+
+;; (use-package ediff
+;;   :preface
+;;   (defvar my-ediff-original-windows nil)
+;;   (defun my-store-pre-ediff-winconfig ()
+;;     "Stores the window arrangement before opening ediff."
+;;     (setq my-ediff-original-windows (current-window-configuration)))
+;;   (defun my-restore-pre-ediff-winconfig ()
+;;     "Resets original window arrangement"
+;;     (set-window-configuration my-ediff-original-windows))
+;;   :hook
+;;   ((ediff-before-setup . my-store-pre-ediff-winconfig)
+;;    (ediff-quit . my-restore-pre-ediff-winconfig))
+;;   :config
+;;   (setq ediff-window-setup-function 'ediff-setup-windows-plain
+;;         ediff-split-window-function 'split-window-horizontally))
+
 (use-package proced
   :commands proced
   :bind ("M-<f12>" . 'proced)
@@ -595,6 +656,8 @@ If you experience stuttering, increase this.")
         ("M-g g" . 'avy-goto-line)
         ("M-g e" . 'avy-goto-word-0)
         ("M-g w" . 'avy-goto-word-1)
+        ;; ("M-" . 'avy-copy-line)
+        ;; ("M-" . 'avy-copy-region)
         ("M-g l" . 'avy-move-line)
         ("M-g M-r" . 'avy-move-region)
         ("C-c C-j" . 'avy-resume))
@@ -674,6 +737,7 @@ If you experience stuttering, increase this.")
   (counsel-describe-function-function #'helpful-callable)
   (counsel-describe-variable-function #'helpful-variable)
   :bind
+  ("<f1> f" . helpful-function)
   ([remap describe-key]      . helpful-key)
   ([remap describe-symbol]   . helpful-symbol)
   ([remap describe-command]  . helpful-command)
@@ -787,6 +851,17 @@ If you experience stuttering, increase this.")
 ;; (vhl/default-face ((nil (:foreground "#FF3333" :background "#FFCDCD")))))
                                         ;end volatile highlites
 
+;; (set-face-background 'highlight "#3e4446") ; also try: "#3e4446"/"#gray6"
+;; (set-face-foreground 'highlight nil)
+;; (set-face-underline-p 'highlight "#ff0000")
+
+(when window-system
+  (use-package hl-line
+    :hook ((prog-mode text-mode) . hl-line-mode)))
+
+(use-package highlight-numbers
+  :hook (prog-mode . highlight-numbers-mode))
+
 (use-package beacon
   :commands beacon-mode
   :init (beacon-mode t)
@@ -816,6 +891,9 @@ If you experience stuttering, increase this.")
   :config (setq alert-default-style 'notifications)
   :delight)
 
+(use-package rainbow-mode
+  :hook (prog-mode . rainbow-mode))
+
 (use-package rainbow-delimiters
   :config (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
   :delight)
@@ -825,7 +903,6 @@ If you experience stuttering, increase this.")
   :config (solaire-global-mode +1)
   :delight)
 
-(setq custom-safe-themes t)
 (use-package doom-themes
   :if window-system
   :custom-face
@@ -849,10 +926,10 @@ If you experience stuttering, increase this.")
 ;; ───────────────────────────────── MODE-LINE ─────────────────────────────────
 (size-indication-mode)
 ;; (display-battery-mode)
-;; (display-time-mode)
 ;; (setq display-time-24hr-format t)
-;; (setq display-time-format "%l:%M %p %b %y"
-;;       display-time-default-load-average nil)
+(setq display-time-format "%l:%M%p" ;  %b %y"
+      display-time-default-load-average nil)
+(display-time-mode)
 ;; (setq display-time-format "%l:%M%P (%a) %e %b ♪") ; %D for date format
 
 ;; ─────────────────────────────────── Fonts ───────────────────────────────────
@@ -868,7 +945,7 @@ If you experience stuttering, increase this.")
 (when (aorst/font-installed-p "Iosevka Aile")
   (set-face-attribute 'variable-pitch nil :font "Iosevka Aile 10"))
 
-(set-face-attribute 'font-lock-comment-face nil :family "Iosevka Aile Oblique" :height 98) ; :foreground "#5B6268"
+(set-face-attribute 'font-lock-comment-face nil :family "Iosevka Aile Oblique" :height 106) ; :foreground "#5B6268"
 (set-face-attribute 'font-lock-function-name-face nil :family "Iosevka Aile" :height 102 :slant 'italic :weight 'normal) ; 'medium
 ;; (set-face-attribute 'font-lock-variable-name-face nil :foreground "#dcaeea" :weight 'bold)
 (set-face-attribute 'font-lock-keyword-face nil :weight 'bold)
@@ -897,9 +974,9 @@ If you experience stuttering, increase this.")
                                        "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" "?:"
                                        "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
                                        "\\\\" "://"))
-  ;; Enables ligature checks globally in all buffers. You can also do it
-  ;; per mode with `ligature-mode'.
-  (global-ligature-mode t))
+                                       ;; Enables ligature checks globally in all buffers. You can also do it
+                                       ;; per mode with `ligature-mode'.
+                                       (global-ligature-mode t))
 
 (when (aorst/font-installed-p "JetBrainsMono")
   (dolist (char/ligature-re
@@ -977,10 +1054,13 @@ If you experience stuttering, increase this.")
   (doom-modeline-major-mode-icon t)
   (doom-modeline-major-mode-color-icon t)
   (doom-modeline-icon (display-graphic-p))
-  (doom-modeline-buffer-modification-icon t)
-  (doom-modeline-flycheck-icon t)
   (doom-modeline-checker-simple-format t)
+  (doom-line-numbers-style 'relative)
+  (doom-modeline-buffer-file-name-style 'relative-to-project)
+  (doom-modeline-buffer-modification-icon t)
   (doom-modeline-buffer-encoding nil)
+  (doom-modeline-buffer-state-icon t)
+  (doom-modeline-flycheck-icon t)
   (doom-modeline-height 35))
 ;; (set-face-background 'mode-line nil)
 
