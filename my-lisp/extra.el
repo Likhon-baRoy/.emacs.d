@@ -297,6 +297,36 @@ point reaches the beginning or end of the buffer, stop there."
               (kill-buffer)))
       (message "Not a file visiting buffer!"))))
 
+;; ─────────────────────────────────── Dired ───────────────────────────────────
+(require 'dired)
+(defun dired-back-to-top ()
+  (interactive)
+  (beginning-of-buffer)
+  (dired-next-line 3))
+
+(define-key dired-mode-map
+  (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
+
+(defun dired-jump-to-bottom ()
+  (interactive)
+  (end-of-buffer)
+  (dired-next-line -1))
+
+(define-key dired-mode-map
+  (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)
+
+;; ───────────────────────── Show LineNumber Temporary ─────────────────────────
+(global-set-key [remap goto-line] 'goto-line-with-feedback)
+
+(defun goto-line-with-feedback ()
+  "Show line numbers temporarily, while prompting for the line number input."
+  (interactive)
+  (unwind-protect
+      (progn
+        (display-line-numbers-mode 1)
+        (goto-line (read-number "Goto line: ")))
+    (display-line-numbers-mode -1)))
+
 ;; ─────────────────────── Open Any File With LineNumber ───────────────────────
 (defadvice find-file (around find-file-line-number
                              (filename &optional wildcards)

@@ -247,6 +247,8 @@
 ;;   :custom
 ;;   (dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\\'")))
 
+(global-set-key (kbd "TAB") #'company-indent-or-complete-common)
+
 ;;; Finish up
 (provide 'auto-compilation)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

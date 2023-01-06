@@ -236,7 +236,7 @@ If you experience stuttering, increase this.")
 (setq ibuffer-expert t)
 (setq ibuffer-default-sorting-mode 'recency)
 
-;; ───────────────────────────────── Spellcheck ────────────────────────────────
+;; ──────────────────────────────── Spellcheck ────────────────────────────────
 (use-package ispell
   :bind ("<f8>" . ispell-word) ; easy spell check
   :custom
@@ -358,9 +358,24 @@ If you experience stuttering, increase this.")
 
 ;; Open dired in same buffer
 ;; Sort Dired buffers
-(setq dired-listing-switches "-agho --group-directories-first")
-;; Copy and move files netween dired buffers
-(setq dired-dwim-target t)
+(require 'dired)
+(setq dired-listing-switches "-agho --group-directories-first"
+      dired-omit-files "^\\.[^.].*"
+      dired-omit-verbose nil
+      dired-dwim-target t ; Copy and move files netween dired buffers
+      dired-hide-details-hide-symlink-targets nil
+      delete-by-moving-to-trash t)
+
+(autoload 'dired-omit-mode "dired-x")
+
+(add-hook 'dired-mode-hook
+          (lambda ()
+            (interactive)
+            (dired-omit-mode 1)
+            (dired-hide-details-mode 1)
+            (hl-line-mode 1)))
+(define-key dired-mode-map ")" #'dired-omit-mode)
+
 ;; Define external image viewer/editor
 (setq image-dired-external-viewer "/usr/bin/sxiv") ;or /usr/bin/gimp
 ;; Image-dired Keyboard shortcuts
@@ -403,7 +418,6 @@ If you experience stuttering, increase this.")
  require-final-newline t
  x-select-enable-clipboard t       ; Makes killing/yanking interact with the clipboard.
  save-interprogram-paste-before-kill t ; Save clipboard strings into kill ring before replacing them.
- global-auto-revert-non-file-buffers t
  apropos-do-all t                  ; Shows all options when running apropos.
  mouse-yank-at-point t             ; Mouse yank commands yank at point instead of at click.
  message-log-max 1000
@@ -502,6 +516,9 @@ If you experience stuttering, increase this.")
  use-dialog-box nil                 ; Don't pop up UI dialogs when prompting.
  echo-keystrokes 0.1                ; Show Keystrokes in Progress Instantly.
  delete-auto-save-files t           ; deletes buffer's auto save file when it is saved or killed with no changes in it.
+ ;; Auto refresh dired, but be quiet about it
+ global-auto-revert-non-file-buffers t
+ auto-revert-verbose nil
  save-place-forget-unreadable-files nil
  blink-matching-paren t             ; Blinking parenthesis.
  next-line-add-newlines nil         ; don't automatically add new line, when scroll down at the bottom of a buffer.
@@ -923,7 +940,7 @@ If you experience stuttering, increase this.")
         ))
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
-;; ───────────────────────────────── MODE-LINE ─────────────────────────────────
+;; ──────────────────────────────── MODE-LINE ─────────────────────────────────
 (size-indication-mode)
 ;; (display-battery-mode)
 ;; (setq display-time-24hr-format t)
@@ -932,21 +949,22 @@ If you experience stuttering, increase this.")
 (display-time-mode)
 ;; (setq display-time-format "%l:%M%P (%a) %e %b ♪") ; %D for date format
 
-;; ─────────────────────────────────── Fonts ───────────────────────────────────
+;; ────────────────────────────────── Fonts ───────────────────────────────────
 (global-font-lock-mode 1)               ; Use font-lock everywhere.
 (setq font-lock-maximum-decoration t)   ; We have CPU to spare; highlight all syntax categories.
 
 ;; Set the font face
 (cond ((aorst/font-installed-p "JetBrainsMono")
-       (set-face-attribute 'default nil :font "JetBrainsMono 10"))
+       (set-face-attribute 'default nil :font (font-spec :family "JetBrainsMono" :size 10.0 :weight 'regular))
+       (set-face-attribute 'fixed-pitch nil :font (font-spec :family "JetBrainsMono" :size 10.0 :weight 'regular)))
       ((aorst/font-installed-p "Source Code Pro")
        (set-face-attribute 'default nil :font "Source Code Pro 10")))
 ;; For variable pitched fonts Iosevka Aile is used if available.
 (when (aorst/font-installed-p "Iosevka Aile")
-  (set-face-attribute 'variable-pitch nil :font "Iosevka Aile 10"))
+  (set-face-attribute 'variable-pitch nil :font (font-spec :family "Iosevka Aile" :height 18 :weight 'regular)))
 
 (set-face-attribute 'font-lock-comment-face nil :family "Iosevka Aile Oblique" :height 106) ; :foreground "#5B6268"
-(set-face-attribute 'font-lock-function-name-face nil :family "Iosevka Aile" :height 102 :slant 'italic :weight 'normal) ; 'medium
+(set-face-attribute 'font-lock-function-name-face nil :family "Iosevka Aile" :height 102 :slant 'italic :weight 'regular) ; 'medium
 ;; (set-face-attribute 'font-lock-variable-name-face nil :foreground "#dcaeea" :weight 'bold)
 (set-face-attribute 'font-lock-keyword-face nil :weight 'bold)
 
@@ -1012,15 +1030,38 @@ If you experience stuttering, increase this.")
            char/ligature-re)))
 
 ;; (use-package smartparens
+;;   :init      (progn
+;;                (require 'smartparens)
+;;                (load-library "smartparens-config"))
+
+;;   :config   (progn
+;;               (smartparens-global-mode t)
+;;               (sp-local-pair 'emacs-lisp-mode "`" nil :when '(sp-in-string-p))
+;;               (sp-with-modes '(html-mode sgml-mode nxml-mode web-mode)
+;;                              (sp-local-pair "<" ">")))
+;;   :bind
+;;   (("C-M-k" . sp-kill-sexp-with-a-twist-of-lime)
+;;    ("C-M-<backspace>" #'backward-kill-sexp)
+;;    ("C-M-f" . sp-forward-sexp)
+;;    ("C-M-b" . sp-backward-sexp)
+;;    ("C-M-n" . sp-up-sexp)
+;;    ("C-M-d" . sp-down-sexp)
+;;    ("C-M-u" . sp-backward-up-sexp)
+;;    ("C-M-p" . sp-backward-down-sexp)
+;;    ("C-M-w" . sp-copy-sexp)
+;;    ("M-s" . sp-splice-sexp)
+;;    ("M-r" . sp-splice-sexp-killing-around)
+;;    ("C-)" . sp-forward-slurp-sexp)
+;;    ("C-}" . sp-forward-barf-sexp)
+;;    ("C-(" . sp-backward-slurp-sexp)
+;;    ("C-{" . sp-backward-barf-sexp)
+;;    ("M-S" . sp-split-sexp)
+;;    ("M-J" . sp-join-sexp)
+;;    ("C-M-t" . sp-transpose-sexp))
+;;   :delight " ⎎")
+
+;; (use-package smartparens
 ;;   :init
-;;   (bind-key "C-M-f" #'sp-forward-sexp smartparens-mode-map)
-;;   (bind-key "C-M-b" #'sp-backward-sexp smartparens-mode-map)
-;;   (bind-key "C-)" #'sp-forward-slurp-sexp smartparens-mode-map)
-;;   (bind-key "C-(" #'sp-backward-slurp-sexp smartparens-mode-map)
-;;   (bind-key "M-)" #'sp-forward-barf-sexp smartparens-mode-map)
-;;   (bind-key "M-(" #'sp-backward-barf-sexp smartparens-mode-map)
-;;   (bind-key "C-S-s" #'sp-splice-sexp)
-;;   (bind-key "C-M-<backspace>" #'backward-kill-sexp)
 ;;   (bind-key "C-M-S-<SPC>" (lambda () (interactive) (mark-sexp -1)))
 
 ;;   :config (smartparens-global-mode t)
