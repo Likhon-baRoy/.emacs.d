@@ -117,7 +117,7 @@
 
 ;; ORG-TODO
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "DOING(d!)" "MAYBE(m)" "READ(r)" "ARCHIVED(a!)" "INPROGRESS(i)" "WAITING(w)" "NEXT(n)" "REVIEW(r)" "|" "HOLD(h)" "DONE(d)" "BLOCKED(b@)" "CANCELED(c)")))
+      '((sequence "TODO(t)" "DOING(D)" "MAYBE(m)" "READ(r)" "ARCHIVED(a!)" "INPROGRESS(i)" "WAITING(w)" "NEXT(n)" "REVIEW(R)" "|" "HOLD(h)" "DONE(d)" "BLOCKED(b@)" "CANCELED(c)")))
 
 (setq org-todo-keyword-faces
       '(("CANCELED" . (:foreground "red" :weight bold))
@@ -228,6 +228,39 @@
 ;;         org-roam-ui-follow t
 ;;         org-roam-ui-update-on-save t
 ;;         org-roam-ui-open-on-start t))
+
+;; ────────────────────────────── Prettify Symbols ─────────────────────────────
+;; Beautify Org Checkbox Symbol
+(defun ma/org-buffer-setup ()
+  "Something for like document, i guess 😕."
+  (push '("[ ]" . "☐" ) prettify-symbols-alist)
+  (push '("[X]" . "☑" ) prettify-symbols-alist)
+  (push '("[-]" . "❍" ) prettify-symbols-alist)
+  )
+(add-hook 'org-mode-hook #'ma/org-buffer-setup)
+
+(defun my/org-mode/load-prettify-symbols ()
+  "Looking pretty good, so i adopted it."
+  (interactive)
+  (setq prettify-symbols-alist
+        (mapcan (lambda (x) (list x (cons (upcase (car x)) (cdr x))))
+                '(("#+begin_src" . ?)
+                  ("#+end_src" . ?)
+                  ("#+begin_example" . ?)
+                  ("#+end_example" . ?)
+                  ("#+begin_quote" . ?❝)
+                  ("#+end_quote" . ?❠) ; ❟ ―  
+                  ("#+begin_center" . "ϰ")
+                  ("#+end_center" . "ϰ")
+                  ("#+header:" . ?)
+                  ("#+name:" . ?﮸)
+                  ;; ("#+title:" . ?◈)
+                  ;; ("#+author:" . ?✒)
+                  ("#+results:" . ?)
+                  ("#+call:" . ?)
+                  (":properties:" . ?)
+                  (":logbook:" . ?)))))
+(add-hook 'org-mode-hook #'my/org-mode/load-prettify-symbols)
 
 ;; ────────────────────────────── Extra Functions ─────────────────────────────
 (defun org-toggle-emphasis ()

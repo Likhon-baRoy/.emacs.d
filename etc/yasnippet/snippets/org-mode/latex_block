@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Org LaTeX Block
+# key: <ela
+# --
+#+BEGIN_EXPORT latex
+$0
+#+END_EXPORT

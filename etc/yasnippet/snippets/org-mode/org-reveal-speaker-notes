@@ -3,5 +3,5 @@
 # key: <n
 # --
 #+BEGIN_NOTES
-  $1
+$0
 #+END_NOTES

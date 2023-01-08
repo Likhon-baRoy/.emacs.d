@@ -44,12 +44,10 @@ An infinite number of monkeys typing into GNU Emacs would never make a good prog
   - [[#custom-functions][Custom functions]]
 - [[#optional][Optional]]
   - [[#setup-bangla-language-environment][Setup Bangla Language Environment]]
-    - [[#requirements][Requirements]]
-    - [[#settings][Settings]]
-    - [[#workflow][Workflow]]
-- [[#recommendation][Recommendation]]
+- [[#recommendations][Recommendations]]
   - [[#replace-capslock-with-ctrl][Replace CapsLock with CTRL]]
-- [[#ask-me-anything][Ask Me Anything]]
+- [[#ask-me-anything][Ask Me Anything!]]
+- [[#scroll-license][:scroll: License]]
 
 * About
 Emacs changes how you *think* about programming.
@@ -96,27 +94,27 @@ Here are some demo... \\
 
 /A dashboard on startup can clean my mind/.😌
 #+BEGIN_CENTER
-[[./screenshots/ss-1.png]]
+[[../screenshots/ss-1.png]]
 #+END_CENTER
 /Center text in the frame, looks nice ;) and =flycheck= with BitMap-Arrow on the right-fringe/ 😎
 #+BEGIN_CENTER
-[[./screenshots/ss-2.png]]
+[[../screenshots/ss-2.png]]
 #+END_CENTER
 /default Transparent mode/ 👍🏻
 #+BEGIN_CENTER
-[[./screenshots/ss-3.png]]
+[[../screenshots/ss-3.png]]
 #+END_CENTER
 /File navigation with Speed-bar./
 #+BEGIN_CENTER
-[[./screenshots/ss-4.png]]
+[[../screenshots/ss-4.png]]
 #+END_CENTER
 /feel the Org-mode/ :D
 #+BEGIN_CENTER
-[[./screenshots/ss-5.png]]
+[[../screenshots/ss-5.png]]
 #+END_CENTER
 /Company-mode with yasnippet/ 🔥
 #+BEGIN_CENTER
-[[./screenshots/ss-6.png]]
+[[../screenshots/ss-6.png]]
 #+END_CENTER
 
 #+html: <p><img alt="GitHub repo size" align="right" src="https://img.shields.io/github/repo-size/Likhon-baRoy/.emacs.d?color=blue&logo=github&style=for-the-badge"></p>

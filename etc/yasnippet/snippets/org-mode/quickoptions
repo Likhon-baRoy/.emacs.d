@@ -1,0 +1,10 @@
+
+# -*- mode: snippet -*-
+# name: quick clean org html options
+# key: <qprop
+# --
+:PROPERTIES:
+#+OPTIONS: toc:nil date:nil author:nil num:nil title:nil html-link-use-abs-url:nil html-postamble:nil html-preamble:nil html-scripts:nil html-style:nil html5-fancy:nil tex:nil
+:END:
+
+$0

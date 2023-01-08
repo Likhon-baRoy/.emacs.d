@@ -136,7 +136,7 @@
 
 ;; ;;; Replace
 (define-key esc-map "&"       'query-replace-regexp) ; redefined ESC-&.
-(bind-key "M-<tab>"           'company-complete-common-or-cycle)
+;; (bind-key "M-<tab>"           'company-complete-common-or-cycle)
 (bind-key "M-#"               'query-replace-regexp)
 (bind-key "M-\""              'insert-pair)	; wrap text in quotes.
 ;; (bind-key "TAB"               'self-insert-command) ; make sure that emacs is actually using `TABS' instead of `SPACES'.

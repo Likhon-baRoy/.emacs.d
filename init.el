@@ -100,6 +100,14 @@ If you experience stuttering, increase this.")
 
 (when window-system (global-prettify-symbols-mode t))
 
+;;________________________________________________________________
+;;		Identity Who I Am ?
+;;________________________________________________________________
+(setq user-full-name       "Likhon Barai"
+      user-login-name      "likhon"
+      user-real-login-name "raxit"
+      user-mail-address    "likhonhere007@gmail.com")
+
 ;; ────────────────────────────── Generic packages ─────────────────────────────
 (require 'package)
 ;; Select the folder to store packages
@@ -260,6 +268,7 @@ If you experience stuttering, increase this.")
               ("C-;"        . nil)
               ("C-,"        . nil)
               ("C-."        . nil)
+              ("M-TAB"      . nil)
               ("S-<f8>"     . flyspell-buffer) ; C-M-S-<f1>
               ("C-<f7>"     . flyspell-auto-correct-word)
               ("C-<f12>"    . flyspell-auto-correct-previous-word))
@@ -543,15 +552,8 @@ If you experience stuttering, increase this.")
                   week))
       (message "%s" file)
       (delete-file file))))
-;;________________________________________________________________
-;;		Identity Who I Am ?
-;;________________________________________________________________
-(setq user-full-name       "Likhon Barai"
-      user-login-name      "likhon"
-      user-real-login-name "raxit"
-      user-mail-address    "likhonhere007@gmail.com")
 
-;; ────────────────────────── Transparency Alpha Value ─────────────────────────
+;; ───────────────────────── Transparency Alpha Value ────────────────────────
 (set-frame-parameter (selected-frame) 'alpha '(85 . 50))
 (add-to-list 'default-frame-alist '(alpha . (85 . 50)))
 ;; (set-frame-parameter (selected-frame) 'alpha '(<active> . <inactive>))
@@ -754,7 +756,6 @@ If you experience stuttering, increase this.")
   (counsel-describe-function-function #'helpful-callable)
   (counsel-describe-variable-function #'helpful-variable)
   :bind
-  ("<f1> f" . helpful-function)
   ([remap describe-key]      . helpful-key)
   ([remap describe-symbol]   . helpful-symbol)
   ([remap describe-command]  . helpful-command)
@@ -769,6 +770,7 @@ If you experience stuttering, increase this.")
             (define-key eyebrowse-mode-map (kbd "M-3") 'eyebrowse-switch-to-window-config-3)
             (define-key eyebrowse-mode-map (kbd "M-4") 'eyebrowse-switch-to-window-config-4)
             (define-key eyebrowse-mode-map (kbd "M-5") 'eyebrowse-switch-to-window-config-5)
+            (define-key eyebrowse-mode-map (kbd "M-TAB") 'eyebrowse-last-window-config)
             (eyebrowse-mode t)
             (setq eyebrowse-wrap-around t)
             (setq eyebrowse-new-workspace t)))
@@ -950,8 +952,8 @@ If you experience stuttering, increase this.")
 ;; (setq display-time-format "%l:%M%P (%a) %e %b ♪") ; %D for date format
 
 ;; ────────────────────────────────── Fonts ───────────────────────────────────
-(global-font-lock-mode 1)               ; Use font-lock everywhere.
-(setq font-lock-maximum-decoration t)   ; We have CPU to spare; highlight all syntax categories.
+(global-font-lock-mode 1)             ; Use font-lock everywhere.
+(setq font-lock-maximum-decoration t) ; We have CPU to spare; highlight all syntax categories.
 
 ;; Set the font face
 (cond ((aorst/font-installed-p "JetBrainsMono")
@@ -959,14 +961,15 @@ If you experience stuttering, increase this.")
        (set-face-attribute 'fixed-pitch nil :font (font-spec :family "JetBrainsMono" :size 10.0 :weight 'regular)))
       ((aorst/font-installed-p "Source Code Pro")
        (set-face-attribute 'default nil :font "Source Code Pro 10")))
+
 ;; For variable pitched fonts Iosevka Aile is used if available.
 (when (aorst/font-installed-p "Iosevka Aile")
-  (set-face-attribute 'variable-pitch nil :font (font-spec :family "Iosevka Aile" :height 18 :weight 'regular)))
-
-(set-face-attribute 'font-lock-comment-face nil :family "Iosevka Aile Oblique" :height 106) ; :foreground "#5B6268"
-(set-face-attribute 'font-lock-function-name-face nil :family "Iosevka Aile" :height 102 :slant 'italic :weight 'regular) ; 'medium
-;; (set-face-attribute 'font-lock-variable-name-face nil :foreground "#dcaeea" :weight 'bold)
-(set-face-attribute 'font-lock-keyword-face nil :weight 'bold)
+  (set-face-attribute 'variable-pitch nil :font (font-spec :family "Iosevka Aile" :size 10.5 :weight 'regular))
+  (set-face-attribute 'font-lock-comment-face nil :family "Iosevka Aile Oblique" :height 106) ; :foreground "#5B6268"
+  (set-face-attribute 'font-lock-function-name-face nil :family "Iosevka Aile" :height 102 :slant 'italic :weight 'regular) ; 'medium
+  ;; (set-face-attribute 'font-lock-variable-name-face nil :foreground "#dcaeea" :weight 'bold)
+  (set-face-attribute 'font-lock-keyword-face nil :weight 'bold)
+  )
 
 ;; (set-frame-font "Comic Mono-10.5" nil t) ; "Monaco-9" "Fantasque Sans Mono-10.5" "Source Code Pro-10" "Fira Code-10"
 
@@ -992,9 +995,9 @@ If you experience stuttering, increase this.")
                                        "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" "?:"
                                        "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
                                        "\\\\" "://"))
-                                       ;; Enables ligature checks globally in all buffers. You can also do it
-                                       ;; per mode with `ligature-mode'.
-                                       (global-ligature-mode t))
+  ;; Enables ligature checks globally in all buffers. You can also do it
+  ;; per mode with `ligature-mode'.
+  (global-ligature-mode t))
 
 (when (aorst/font-installed-p "JetBrainsMono")
   (dolist (char/ligature-re
@@ -1108,6 +1111,7 @@ If you experience stuttering, increase this.")
 ;; ────────────────────────────────── IVY ─────────────────────────────────
 (use-package ivy
   :doc "A generic completion mechanism"
+  :defer 0.1
   :init (ivy-mode 1)
   :bind (("C-s" . swiper)
          ("C-x B" . ivy-switch-buffer-other-window)
@@ -1147,6 +1151,7 @@ If you experience stuttering, increase this.")
 ;; ──────────────────────────────── COUNSEL ───────────────────────────────
 (use-package counsel
   :after ivy
+  :defer 1
   :bind (("M-x" . counsel-M-x)
          ("M-y" . counsel-yank-pop)
          ("C-x b" . counsel-ibuffer)
@@ -1273,7 +1278,7 @@ If you experience stuttering, increase this.")
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
 (use-package expand-region
-  :bind (("C-S-SPC" . er/expand-region)
+  :bind (("C-=" . er/expand-region) ; "C-S-SPC"
          ("C--" . er/contract-region)
          ("C-(" . er/mark-outside-pairs)
          ("C-)" . er/mark-inside-pairs)))

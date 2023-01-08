@@ -201,8 +201,7 @@
   :config
   ;; enalbe nested snippet expansion
   (setq yas-triggers-in-field t)
-  (yas-global-mode)
-  )
+  (yas-global-mode))
 
 (use-package yasnippet-snippets
   :delight

@@ -92,39 +92,6 @@
          '(85 . 50) '(100 . 100)))))
 
 ;; ────────────────────────────── Prettify Symbols ─────────────────────────────
-;; Beautify Org Checkbox Symbol
-(defun ma/org-buffer-setup ()
-  "Something for like document, i guess 😕."
-  (push '("[ ]" . "☐" ) prettify-symbols-alist)
-  (push '("[X]" . "☑" ) prettify-symbols-alist)
-  (push '("[-]" . "❍" ) prettify-symbols-alist)
-  )
-(add-hook 'org-mode-hook #'ma/org-buffer-setup)
-
-(defun my/org-mode/load-prettify-symbols ()
-  "Looking pretty good, so i adopted it."
-  (interactive)
-  (setq prettify-symbols-alist
-        (mapcan (lambda (x) (list x (cons (upcase (car x)) (cdr x))))
-                '(("#+begin_src" . ?)
-                  ("#+end_src" . ?)
-                  ("#+begin_example" . ?)
-                  ("#+end_example" . ?)
-                  ("#+begin_quote" . ?❝)
-                  ("#+end_quote" . ?❠) ; ❟ ―  
-                  ("#+begin_center" . "ϰ")
-                  ("#+end_center" . "ϰ")
-                  ("#+header:" . ?)
-                  ("#+name:" . ?﮸)
-                  ;; ("#+title:" . ?◈)
-                  ;; ("#+author:" . ?✒)
-                  ("#+results:" . ?)
-                  ("#+call:" . ?)
-                  (":properties:" . ?)
-                  (":logbook:" . ?)))))
-(add-hook 'org-mode-hook #'my/org-mode/load-prettify-symbols)
-
-
 (defun add-pretty-lambda ()
   "Make some word or string show as pretty Unicode symbols.  See `https://unicodelookup.com' for more."
   (setq prettify-symbols-alist
@@ -300,6 +267,7 @@ point reaches the beginning or end of the buffer, stop there."
 ;; ─────────────────────────────────── Dired ───────────────────────────────────
 (require 'dired)
 (defun dired-back-to-top ()
+  "Step back 3 lines from the very top."
   (interactive)
   (beginning-of-buffer)
   (dired-next-line 3))
@@ -308,6 +276,7 @@ point reaches the beginning or end of the buffer, stop there."
   (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
 
 (defun dired-jump-to-bottom ()
+  "Step up 1 line from the end."
   (interactive)
   (end-of-buffer)
   (dired-next-line -1))

@@ -3,5 +3,5 @@
 # key: <bs
 # --
 #+BEGIN_SRC bash
-  $0
+$0
 #+END_SRC
