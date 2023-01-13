@@ -5,7 +5,7 @@
 # --
 #+TITLE:       ${1:`(replace-regexp-in-string "-" " " (capitalize (file-name-nondirectory (file-name-sans-extension (buffer-file-name)))))`}
 #+AUTHOR:      `(user-full-name)`
-#+EMAIL:       `(user-mail-address)`
+#+EMAIL:        likhonhere007@gmail.com
 #+DATE:        `(format-time-string "[%Y-%b-%d %a]")`
 #+TAGS:        $2
 

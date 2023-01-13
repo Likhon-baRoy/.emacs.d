@@ -76,7 +76,12 @@
   (interactive)
   (mapc #'disable-theme custom-enabled-themes))
 
-;; ──────────────────────────── Toggle-Transparency ────────────────────────────
+;; ──────────────────────────────── Transparency ───────────────────────────────
+(set-frame-parameter (selected-frame) 'alpha '(85 . 50))
+(add-to-list 'default-frame-alist '(alpha . (85 . 50)))
+;; (set-frame-parameter (selected-frame) 'alpha '(<active> . <inactive>))
+;; (set-frame-parameter (selected-frame) 'alpha <both>)
+
 ;; Use the following snippet after you’ve set the alpha value
 (defun toggle-transparency ()
   "Crave for transparency!"
@@ -250,6 +255,16 @@ point reaches the beginning or end of the buffer, stop there."
               (mode 16 16 :left :elide)
               " "
               filename-and-process)))
+
+
+;; Switching to ibuffer puts the cursor on the most recent buffer
+(defadvice ibuffer (around ibuffer-point-to-most-recent) ()
+           "Open ibuffer with cursor pointed to most recent buffer name."
+           (let ((recent-buffer-name (buffer-name)))
+             ad-do-it
+             (ibuffer-jump-to-buffer recent-buffer-name)))
+(ad-activate 'ibuffer)
+
 ;; ─────────────────────── Delete current file and buffer ──────────────────────
 ;; based on http://emacsredux.com/blog/2013/04/03/delete-file-and-buffer/
 (defun delete-current-file-and-buffer ()
@@ -313,7 +328,6 @@ point reaches the beginning or end of the buffer, stop there."
         (goto-char (point-min))
         (forward-line (1- line-number))))))
 
-
 ;; ───────────────────────────────── Copy line ─────────────────────────────────
 ;; (defun copy-line (arg)
 ;;   "Copy lines (as many as prefix argument) in the kill ring.
@@ -335,8 +349,32 @@ point reaches the beginning or end of the buffer, stop there."
 ;;   (beginning-of-line (or (and arg (1+ arg)) 2))
 ;;   (if (and arg (not (= 1 arg))) (message "%d lines copied" arg)))
 
-;; (global-set-key (kbd "C-c C-n") 'rename-file-and-buffer)
 ;; (global-set-key (kbd "M-k") 'copy-line)
+
+;; ────────────────────────────────── flyspell ─────────────────────────────────
+;; (defun flyspell-check-next-highlighted-word ()
+;;   "Custom function to spell check next highlighted word."
+;;   (interactive)
+;;   (flyspell-goto-next-error)
+;;   (ispell-word))
+
+;; (global-set-key (kbd "M-<f8>") 'flyspell-check-next-highlighted-word)
+
+;; (eval-after-load "flyspell"
+;;   '(progn
+;;      (defun flyspell-goto-next-and-popup ( )
+;;        "Goto the next spelling error, popup menu, and stop when the end of buffer is reached."
+;;        (interactive)
+;;        (while (< (point) (point-max))
+;;          (flyspell-goto-next-error)
+;;          (redisplay)
+;;          (flyspell-correct-word-before-point))
+;;        (message "No more spelling errors in buffer.")
+;;        )
+;;      ))
+;; (global-set-key (kbd "C-<f8>") 'flyspell-goto-next-and-popup)
+;; (define-key flyspell-mode-map (kbd "C-<f8>") 'flyspell-goto-next-and-popup)
+
 
 ;;; Finish up
 (provide 'extra)

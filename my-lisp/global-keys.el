@@ -1,52 +1,53 @@
 ;;; global-keys.el --- Tweaks for Global Key-bindings configurations -*- lexical-binding: t; -*-
-;;; Created on: 2022 Nov 25
-
-;; Copyright (C) 2021-2022 Likhon Sapiens <likhonhere007@gmail.com>
-
-;; Author: Likhon Sapiens <likhonhere007@gmail.com>
+;;
+;; Filename: global-keys.el
+;; Description: This file holds my GNU Emacs Keybindings
+;; Author: Likhon Baroy
+;; Copyright © 2022-present Likhon Baroy <likhonhere007@gmail.com>
+;; Created: 2022 Nov 25
+;; Version: 0.1
 ;; URL: https://github.com/Likhon-baRoy/.emacs.d
-;; Version: 0.1.0
-;; Package-Requires: ((emacs "28.1"))
-
-;; This file is NOT part of GNU Emacs.
-
-;; This program is free software; you can redistribute it and/or modify
-;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation, either version 3 of the License, or
-;; (at your option) any later version.
+;; Keywords: Zmacs .emacs.d keybindings
+;; Compatibility: emacs-version >= 28.2
 ;;
-;; This program is distributed in the hope that it will be useful,
-;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;; GNU General Public License for more details.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; You should have received a copy of the GNU General Public License
-;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 ;;; Commentary:
 ;;
-;; This covers my tweaks for Org that are meant for use in my
-;; Emacs setup: https://github.com/Likhon-baRoy/.emacs.d.
+;; This is the global-keys.el file for Zmacs
 ;;
 ;; Remember that every piece of Elisp that I write is for my own
 ;; educational and recreational purposes.  I am not a programmer and I
 ;; do not recommend that you copy any of this if you are not certain of
 ;; what it does.
-
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; This program is free software: you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or (at
+;; your option) any later version.
+;;
+;; This program is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+;; General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>.
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
 ;;; Code:
 
 
 ;; ───────────────────────── Generic Modified Functions ────────────────────────
+;;; custom-function
+;;;; window
 (defun prev-window ()
   "Go to previous window."
   (interactive)
   (other-window -1))
-
-;; (defun hs-mode-and-hide ()
-;;   "Turn on code folding and folds all code blocks."
-;;   (interactive)
-;;   (hs-minor-mode)
-;;   (hs-hide-all))
 
 ;; (defun switch-to-buffer-force (&optional args)
 ;;   (interactive)
@@ -56,22 +57,10 @@
 ;;   (interactive)
 ;;   (kill-buffer))
 
-;; ───────────────────────────── Global Unbind Key ─────────────────────────────
-;;; this is confusion
-(global-unset-key (kbd "C-z")) ; unbind (suspend-frame)
-
-;; normal undo and redo
-(global-set-key (kbd "C-z")   'undo-only)
-(global-set-key (kbd "C-S-z") 'undo-tree-redo)
-;; (global-set-key "\M-c" 'toggle-letter-case)
-(global-set-key (kbd "C-`")   'duplicate-current-line)
-(global-set-key (kbd "C-~")   'duplicate-current-word)
-(global-set-key (kbd "C-<insert>") 'kill-ring-save-current-line)
-;; (bind-key "C-z"               'call-last-kbd-macro) ; call-last-kbd-macro frequently used key on a double key sequence (I think original is ^Xe)
-
 ;;----------------------------------------------------------------------
-;;; duplicate lines
+;;;; duplicate lines
 (defun duplicate-current-line()
+  "Make duplicate of current line right next to it."
   (interactive)
   (beginning-of-line nil)
   (let ((b (point)))
@@ -83,20 +72,35 @@
   (back-to-indentation))
 
 ;;----------------------------------------------------------------------
-;;; duplicate word
+;;;; duplicate word
 (defun duplicate-current-word()
+  "Duplicate a word before point."
   (interactive)
   (beginning-of-sexp)
   (insert (word-at-point)))
 
 ;;----------------------------------------------------------------------
-;;; additional copy function
+;;;; copy-current-line
 (defun kill-ring-save-current-line()
-  "on point line copy"
+  "Copy line on point."
   (interactive)
   (if (use-region-p)
       (kill-ring-save (point) (mark))
     (kill-new (thing-at-point 'line))))
+
+;;----------------------------------------------------------------------
+;;; keybindings
+;;;; unbind-key
+(global-unset-key (kbd "C-z")) ; unbind (suspend-frame)
+(global-unset-key (kbd "C-x C-z")) ; also this
+
+;; normal undo and redo
+(global-set-key (kbd "C-z")   'undo-only)
+(global-set-key (kbd "C-S-z") 'undo-tree-redo)
+;; (global-set-key "\M-c" 'toggle-letter-case)
+(global-set-key (kbd "C-`")   'duplicate-current-line)
+(global-set-key (kbd "C-~")   'duplicate-current-word)
+(global-set-key (kbd "C-<insert>") 'kill-ring-save-current-line)
 
 ;; ──────────────────────── Make Escape Key Greate again ───────────────────────
 ;; (unbind-key "<escape>")
@@ -104,11 +108,8 @@
 
 ;; ;;; Cursor Movement
 ;; (bind-key "C-x C-x"           'exchange-point-and-mark)
-;; (bind-key "A-SPC"             'pop-to-mark-command)
-;; (bind-key " "                 'pop-to-mark-command)
 ;; (bind-key "A-C-SPC"           'pop-to-mark-command)
 ;; (bind-key "C-x C-."           'pop-global-mark)
-;; (bind-key "M-SPC"             'pop-global-mark)
 ;; (bind-key "C-c C-n"           'next-error)
 ;; (bind-key "C-c C-p"           'previous-error)
 ;; (bind-key "A-j"               'forward-paragraph)
@@ -141,32 +142,46 @@
 (bind-key "M-\""              'insert-pair)	; wrap text in quotes.
 ;; (bind-key "TAB"               'self-insert-command) ; make sure that emacs is actually using `TABS' instead of `SPACES'.
 
-;; ;;; Text Modification
+;;;; text-modification
 (bind-key "M-Q"               'unfill-paragraph)
-(bind-key "C-x C-l"           'toggle-truncate-lines) ; long lines go off the screen
-(bind-key "\C-c\C-d" "\C-a\C- \C-n\M-w\C-y") ; duplicate whole line
+(bind-key "C-x C-z"           'toggle-truncate-lines) ; long lines go off the screen
 (bind-key "C-S-R"             'rename-file)
+(bind-key "\C-c\C-d" "\C-a\C- \C-n\M-w\C-y") ; duplicate whole line
 (bind-key "C-c D"             'delete-current-file-and-buffer)
 ;; (bind-key "C-x M-$"           'ispell-buffer)
 ;; (bind-key "M-;"               'comment-or-uncomment-current-line-or-region)
-;; (bind-key "C-;"               'comment-or-uncomment-current-line-or-region)
 ;; (bind-key "C-o"               'open-line)
 ;; (bind-key "M-|"               'align-regexp)
 ;; (bind-key "RET"               'newline-and-indent)
-;; (bind-key "M-c"               'duplicate-current-line-or-region)
 ;; (bind-key "A-C-<backspace>"     'delete-trailing-whitespace)
 
-;; ;;; Killing
+;; (bind-key "C-c C-\\"          'toggle-input-method)
+;; (bind-key "C-x C-4"           'set-selective-display)
+;; (bind-key "C-h C-n"           'linum-mode)
+;; (bind-key "A-q"               'quoted-insert)
+;; (bind-key "C-c C-c"           'compile)
+;; (bind-key "C-h o"             'list-processes)
 
-;;; backward kill like terminal
+;;;;; transpose
+(bind-key "M-t" nil) ; remove the old keybinding
+(bind-key "M-t c"             'transpose-chars)
+(bind-key "M-t w"             'transpose-words)
+(bind-key "M-t t"             'transpose-words)
+(bind-key "M-t M-t"           'transpose-words)
+(bind-key "M-t l"             'transpose-lines)
+(bind-key "M-t e"             'transpose-sexps)
+(bind-key "M-t s"             'transpose-sentences)
+(bind-key "M-t p"             'transpose-paragraphs)
+
+;;;; Killing
+;; backward kill like terminal
 (global-unset-key (kbd "C-w"))
-(global-set-key (kbd "C-w") 'backward-kill-word) ;; like in terminal
-;; instead of `backspace' I use `C-h' and moved `help-command' elsewhere:
-(bind-key "C-h"               'backward-delete-char)
-(bind-key "C-S-H"             'kill-whole-line)
-(define-key isearch-mode-map "\C-h" 'isearch-delete-char)
-(bind-key "C-q"               'kill-region)
-(bind-key "C-S-q"             'quoted-insert)
+(global-set-key (kbd "C-w") (kbd "C-<backspace>")) ; 'backward-kill-word
+;; instead of `BSP' I use `C-h'
+(global-set-key (kbd "C-h") (kbd "<backspace>")) ; 'backward-delete-char
+(global-set-key (kbd "C-S-H") (kbd "C-S-<backspace>")) ; 'kill-whole-line
+(global-set-key (kbd "C-q") 'kill-region)
+(global-set-key (kbd "C-S-q") 'quoted-insert)
 ;; (bind-key "\C-x\C-k"          'kill-region)
 ;; (bind-key "\C-c\C-k"          'kill-region)
 ;; (bind-key "C-M-S-k"           'backward-kill-sexp)
@@ -177,7 +192,7 @@
 ;; (bind-key "A-C-d A-C-n A-C-l" 'delete-non-matching-lines)
 ;; (bind-key "C-M-<backspace>"   'kill-back-to-indentation)
 
-;; ;;; Buffers
+;;;; Buffers
 ;; (bind-key "C-="               'ediff-buffers)
 ;; (bind-key "C-M-S-l"           'switch-to-buffer-force)
 ;; (bind-key "C-x C-b"           'switch-to-buffer)
@@ -190,15 +205,29 @@
 ;; (bind-key "A-l"               'switch-to-buffer-force)
 (bind-key "M-n"               'next-buffer)
 (bind-key "M-p"               'previous-buffer)
-;; (bind-key "A-J"               'next-buffer)
-;; (bind-key "A-K"               'previous-buffer)
 
-;; ;;; Windows
+;;;; window
 (bind-key "C-,"               'prev-window)
 (bind-key "C-."               'other-window)
 (bind-key "C-x 3"             'split-and-follow-vertically)
 (bind-key "C-x 2"             'split-and-follow-horizontally)
 ;; (bind-key "M-o"               'other-window)
+
+;;;;; resize
+(bind-key "M-J" (lambda () (interactive) (enlarge-window 1)))
+(bind-key "M-K" (lambda () (interactive) (enlarge-window -1)))
+(bind-key "M-H" (lambda () (interactive) (enlarge-window -1 t)))
+(bind-key "M-L" (lambda () (interactive) (enlarge-window 1 t)))
+
+;;;;; windmove
+(windmove-default-keybindings)
+(bind-key "s-<left>"          'windmove-left)
+(bind-key "s-<right>"         'windmove-right)
+(bind-key "s-<down>"          'windmove-down)
+(bind-key "s-<up>"            'windmove-up)
+
+;;;;; swap
+(bind-key "C-x <C-return>"    'window-swap-states)
 
 ;; (bind-key "C-^"               'enlarge-window)
 ;; (bind-key "C-x C--"           'split-window-vertically)
@@ -254,73 +283,19 @@
 ;; (bind-key "C-x v C-h"         'describe-prefix-bindings)
 ;; (bind-key "A-m"               'manual-entry)
 
-;; ;;; Shell
+;;;; Shell
 (global-set-key (kbd "C-!")   'eshell-here) ; see this function in `shell.el'
 ;; (bind-key "A-e"               'shell)
 ;; (bind-key "A-;"               'async-shell-command)
 ;; (bind-key "M-!"               'async-shell-command)
 ;; (bind-key "C-M-!"             'shell-command)
 
-;; Toggle show-trailing-whitespace.
-(bind-key "C-c M-w" (function (lambda () (interactive) (setq show-trailing-whitespace (not show-trailing-whitespace)))))
-
-;; ;;; Resize Window
-(bind-key "M-J" (lambda () (interactive) (enlarge-window 1)))
-(bind-key "M-K" (lambda () (interactive) (enlarge-window -1)))
-(bind-key "M-H" (lambda () (interactive) (enlarge-window -1 t)))
-(bind-key "M-L" (lambda () (interactive) (enlarge-window 1 t)))
-
-;; ;;; Move Window
-(windmove-default-keybindings)
-(bind-key "s-<left>"          'windmove-left)
-(bind-key "s-<right>"         'windmove-right)
-(bind-key "s-<down>"          'windmove-down)
-(bind-key "s-<up>"            'windmove-up)
-
-;; ;;; Swap Window
-(bind-key "C-c <left>"        'windswap-left)
-(bind-key "C-c <right>"       'windswap-right)
-(bind-key "C-c <down>"        'windswap-down)
-(bind-key "C-c <up>"          'windswap-up)
-(bind-key "C-x <C-return>"    'window-swap-states)
-
-;; ;;; Transpose
-(bind-key "M-t" nil) ; remove the old keybinding
-(bind-key "M-t c"             'transpose-chars)
-(bind-key "M-t w"             'transpose-words)
-(bind-key "M-t t"             'transpose-words)
-(bind-key "M-t M-t"           'transpose-words)
-(bind-key "M-t l"             'transpose-lines)
-(bind-key "M-t e"             'transpose-sexps)
-(bind-key "M-t s"             'transpose-sentences)
-(bind-key "M-t p"             'transpose-paragraphs)
-
-;; (bind-key "C-c C-\\"          'toggle-input-method)
-;; (bind-key "C-x C-z"           'toggle-truncate-lines)
-;; (bind-key "C-x C-4"           'set-selective-display)
-;; (bind-key "C-h C-n"           'linum-mode)
-;; (bind-key "A-q"               'quoted-insert)
-;; (bind-key "C-c C-c"           'compile)
-;; (bind-key "C-h o"             'list-processes)
-
 ;; ;;; Mac OS X
 ;; (bind-key "C-<f4>"            'other-frame)
 ;; (bind-key "A-`"               'other-frame)
 ;; (bind-key "A-h"               'ns-do-hide-emacs)
 
-;; ;;; Hide/Show
-(add-hook 'prog-mode-hook     'hs-minor-mode) ; hide-all on Startup in prog-mode
-(bind-key "C-c h"             'hs-hide-all)
-(bind-key "C-c s"             'hs-show-all)
-(bind-key "C-<tab>"           'hs-toggle-hiding) ; fold the current section
-(bind-key "<backtab>"         'hs-hide-level) ; fold the sub sections of the current section
-(bind-key "S-<backspace>"     'hs-hide-block)
-(bind-key "C-<backspace>"     'hs-show-block)
-
-;; ;;; Emojis
-(bind-key "M-<f1>"            'emojify-insert-emoji)
-
-;; ;;; Misc
+;;;; misc
 (global-set-key (kbd "C-S-o") "\C-a\C-o")
 (global-set-key (kbd "<S-return>") "\C-e\C-m")
 (bind-key "C-c T"             'switch-theme)
@@ -329,9 +304,26 @@
 (bind-key "C-a"               'smarter-move-beginning-of-line)
 (bind-key "C-<f5>"            'global-display-line-numbers-mode)
 
+;;; Interactive-bindings
+;;;; resume/run previous cmnd
 (bind-key "C-r"
           #'(lambda () (interactive)
               (eval (car command-history))))
+
+;;;; toggle-trailing-whitespace
+(bind-key "C-c M-w" (function (lambda () (interactive) (setq show-trailing-whitespace (not show-trailing-whitespace)))))
+
+;;;; join-lines
+(global-set-key (kbd "M-j")
+                (lambda ()
+                  (interactive)
+                  (join-line -1)))
+
+;;;; kill-line-backward
+(defun backward-kill-line ()
+  "Kill chars backward until encountering the end of a line."
+  (interactive) (kill-line 0) )
+(global-set-key (kbd "C-S-k") 'backward-kill-line)
 
 ;;; Finish up
 (provide 'global-keys)

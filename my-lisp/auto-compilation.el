@@ -112,17 +112,14 @@
                             company-keywords     ; keywords
                             company-capf         ; what is it?
                             company-cmake
-                            company-c-headers
-                            company-clang        ; too much slow
+                            company-clang
                             company-ispell
-                            company-irony-c-headers
-                            company-irony
                             company-dabbrev-code
                             company-semantic
                             company-yasnippet
                             company-gtags
                             company-etags
-                            company-rtags
+                            ;; company-rtags
                             company-elisp)
                            (company-abbrev company-dabbrev)
                            (delete 'company-semantic company-backends)))
@@ -138,15 +135,12 @@
                     company-capf
                     company-cmake
                     company-yasnippet
-                    company-c-headers
-                    company-clang        ; too much slow
-                    company-irony-c-headers
-                    company-irony
+                    company-clang
                     company-dabbrev-code
                     company-semantic
                     company-gtags
                     company-etags
-                    company-rtags
+                    ;; company-rtags
                     company-elisp)))))
 
 (add-hook 'org-mode-hook
@@ -160,9 +154,16 @@
                     company-dabbrev
                     company-dabbrev-code)))))
 
+(require 'company-capf)
+(require 'company-files)
+(require 'company-ispell)
+(delete-dups (push 'company-capf company-backends))
+(delete-dups (push 'company-files company-backends))
+(delete-dups (push 'company-ispell company-backends))
+(delete-dups (push 'company-debbrev company-backends))
 ;; Delete duplicates from company popups
-(setq-local company-transformers '(delete-dups)
-            company-backends '(company-files (:separate company-dabbrev company-ispell)))
+;; (setq-local company-transformers '(delete-dups)
+;;             company-backends '(company-files (:separate company-dabbrev company-ispell)))
 
 ;; (use-package irony
 ;;   :config
@@ -229,9 +230,9 @@
   (add-to-list 'eglot-server-programs '(python-mode . ("pyls")))
   (add-to-list 'eglot-server-programs '(LaTeX-mode . ("digestif")))
   ;; format on save
-  (add-hook 'c-mode-hook '(lambda() (add-hook 'before-save-hook 'eglot-format-buffer nil t)))
-  (add-hook 'c++-mode-hook '(lambda() (add-hook 'before-save-hook 'eglot-format-buffer nil t)))
-  (add-hook 'python-mode-hook '(lambda() (add-hook 'before-save-hook 'eglot-format-buffer nil t))))
+  (add-hook 'c-mode-hook #'(lambda() (add-hook 'before-save-hook 'eglot-format-buffer nil t)))
+  (add-hook 'c++-mode-hook #'(lambda() (add-hook 'before-save-hook 'eglot-format-buffer nil t)))
+  (add-hook 'python-mode-hook #'(lambda() (add-hook 'before-save-hook 'eglot-format-buffer nil t))))
 
 (add-hook 'eglot-managed-mode-hook (lambda ()
                                      (add-to-list 'company-backends

@@ -36,9 +36,7 @@
 ;;; Code:
 
 
-;; ─────────────────────────────────── *ORG* ───────────────────────────────────
-(setq org-latex-inputenc-alist '(("utf8" . "utf8x")))
-
+;;; org-pkg
 (use-package org
   :defer t
   :after org
@@ -47,28 +45,43 @@
   :hook ((org-mode . prettify-symbols-mode)
          (org-mode . visual-line-mode)
          (org-mode . variable-pitch-mode))
-  :bind
-  (:map org-mode-map
-        ("M-k"    . org-metaup)
-        ("M-j"    . org-metadown)
-        ("C-'"    . nil)
-        ("<f5>"    . org-cycle-agenda-files))
+  :bind (("C-c l" . org-store-link)
+         ("C-c a" . org-agenda)
+         ("C-c b" . org-iswitchb)
+         ("C-c c" . org-capture)
+         ("C-c s" . org-babel-next-src-block)
+         ("C-c M-n" . org-babel-next-src-block)
+         ("C-c S" . org-babel-previous-src-block)
+         ("C-c M-p" . org-babel-previous-src-block)
+         :map org-mode-map
+         ("M-k"    . org-metaup)
+         ("M-j"    . org-metadown)
+         ("C-'"    . nil)
+         ("<f5>"    . org-cycle-agenda-files))
   :init
   ;; general settings
   (when (file-directory-p "~/org")
     (setq org-directory "~/org"
           +org-export-directory "~/org/export"
-          org-default-notes-file "~/org/personal/todo.org"
           org-id-locations-file "~/org/.orgids"
+          org-agenda-files '("~/org/todo.org")
+          org-capture-templates
+          '(("t" "Todo" entry (file "~/personal/todo.org")
+             "* TODO %?\n%U\n")
+            ("n" "Notes" entry (file+headline "~/personal/notes.org" "Notes")
+             "* %? :NOTE:\n%U\n")
+            ("j" "Journal" entry (file+datetree "~/org/journal.org")
+             "* %?\n%U\n"))
           ))
   :config
   (org-indent-mode)
   (auto-fill-mode 0)
   (visual-line-mode 1)
   (variable-pitch-mode 1)
-  (global-set-key (kbd "C-c a") 'org-agenda))
+  (global-set-key (kbd "C-c a") 'org-agenda)
+  (define-key global-map "\C-cc" 'org-capture))
 
-;; Improve org mode looks
+;;;; Improve org mode looks
 (setq
  org-ellipsis " ▾"                 ; ↴, ▼, ▶, ⤵, ▾
  org-roam-v2-ack t                 ; anonying startup message
@@ -106,7 +119,20 @@
 (setq org-outline-path-complete-in-steps nil)
 (setq org-refile-use-outline-path t)
 
-;; Execute Org src block
+;;;; org-bullets
+(use-package org-bullets
+  :after org
+  :hook (org-mode . org-bullets-mode)
+  :custom
+  (org-bullets-bullet-list '("◉" "✿" "✚" "✸" "❀" "○"))) ; "●" "▷" "🞛" "◈" "✖"
+
+;;;; toc
+(use-package toc-org
+  :after org
+  :init (add-hook 'org-mode-hook #'toc-org-enable))
+
+;;; org-bable
+;; Execute org src block
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
@@ -114,8 +140,9 @@
    (shell . t)))
 
 (push '("conf-unix" . conf-unix) org-src-lang-modes)
+(setq org-latex-inputenc-alist '(("utf8" . "utf8x")))
 
-;; ORG-TODO
+;;; todo
 (setq org-todo-keywords
       '((sequence "TODO(t)" "DOING(D)" "MAYBE(m)" "READ(r)" "ARCHIVED(a!)" "INPROGRESS(i)" "WAITING(w)" "NEXT(n)" "REVIEW(R)" "|" "HOLD(h)" "DONE(d)" "BLOCKED(b@)" "CANCELED(c)")))
 
@@ -134,12 +161,7 @@
         ("WAITING"  . (:foreground "purple" :background "tomato" :weight bold))
         ("INPROGRESS" . (:foreground "yellow" :weight bold)))) ; #00d3d0
 
-(use-package org-bullets
-  :after org
-  :hook (org-mode . org-bullets-mode)
-  :custom
-  (org-bullets-bullet-list '("◉" "✿" "✚" "✸" "❀" "○"))) ; "●" "▷" "🞛" "◈" "✖"
-
+;;; replace-org-char
 ;; Replace list hyphen with dot
 (font-lock-add-keywords 'org-mode
                         '(("^ *\\([-]\\) "
@@ -161,10 +183,6 @@
                 (org-level-7 . 1.1)
                 (org-level-8 . 1.1)))
   (set-face-attribute (car face) nil :font "Iosevka Aile" :weight 'medium :height (cdr face)))
-
-(use-package toc-org
-  :after org
-  :init (add-hook 'org-mode-hook #'toc-org-enable))
 
 ;; Make sure org-indent face is available
 (require 'org-indent)
@@ -197,9 +215,9 @@
 ;; (setq org-html-head-include-default-style nil
 ;;       org-html-htmlize-output-type 'css)
 
-;; This is needed as of Org 9.2
+;;; org-tempo
 (require 'org-tempo)
-
+;;; org-roam
 ;; (use-package org-roam
 ;;   :straight t
 ;;   :custom
@@ -230,6 +248,7 @@
 ;;         org-roam-ui-open-on-start t))
 
 ;; ────────────────────────────── Prettify Symbols ─────────────────────────────
+;;; custom-function
 ;; Beautify Org Checkbox Symbol
 (defun ma/org-buffer-setup ()
   "Something for like document, i guess 😕."
@@ -262,7 +281,7 @@
                   (":logbook:" . ?)))))
 (add-hook 'org-mode-hook #'my/org-mode/load-prettify-symbols)
 
-;; ────────────────────────────── Extra Functions ─────────────────────────────
+;;;; toggle-emphasis
 (defun org-toggle-emphasis ()
   "Toggle hiding/showing of org emphasis markers."
   (interactive)

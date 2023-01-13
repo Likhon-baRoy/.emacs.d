@@ -1,0 +1,57 @@
+# -*- mode: snippet -*-
+# name: elisp-README
+# contributor: Likhon
+# key: _readme
+# --
+;;; `(file-name-nondirectory (buffer-file-name))` --- ${1:file-for} -*- lexical-binding: t; -*-
+;;
+;; Filename: `(file-name-nondirectory (buffer-file-name))`
+;; Description: ${2:a short description}
+;; Author: `(user-full-name)`
+;; Copyright © 2022-present `(user-full-name)` <likhonhere007@gmail.com>
+;; Created: `(format-time-string "%Y %b %d")`
+;; Version: 0.1
+;; URL: https://github.com/Likhon-baRoy/.emacs.d
+;; Keywords: Zmacs .emacs.d keybindings
+;; Compatibility: emacs-version >= 28.2
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;; Commentary:
+;;
+;; This is the `(file-name-nondirectory (buffer-file-name))` file for Zmacs
+;;
+;; Remember that every piece of Elisp that I write is for my own
+;; educational and recreational purposes.  I am not a programmer and I
+;; do not recommend that you copy any of this if you are not certain of
+;; what it does.
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; This program is free software: you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or (at
+;; your option) any later version.
+;;
+;; This program is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+;; General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>.
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;; Code:
+
+
+$0
+
+;;; Finish up
+(provide '`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; `(file-name-nondirectory (buffer-file-name))` ends here
+;; Local Variables:
+;; byte-compile-warnings: (not free-vars)
+;; End:
