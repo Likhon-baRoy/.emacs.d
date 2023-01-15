@@ -203,8 +203,10 @@
 ;; (bind-key "C-A-b"             'switch-to-buffer-force)
 ;; (bind-key "C-A-l"             'switch-to-buffer-force)
 ;; (bind-key "A-l"               'switch-to-buffer-force)
-(bind-key "M-n"               'next-buffer)
-(bind-key "M-p"               'previous-buffer)
+(global-set-key [C-left] 'previous-buffer)
+(global-set-key [C-right] 'next-buffer)
+(global-set-key (kbd "M-n") 'next-buffer)
+(global-set-key (kbd "M-p") 'previous-buffer)
 
 ;;;; window
 (bind-key "C-,"               'prev-window)
@@ -214,10 +216,14 @@
 ;; (bind-key "M-o"               'other-window)
 
 ;;;;; resize
-(bind-key "M-J" (lambda () (interactive) (enlarge-window 1)))
-(bind-key "M-K" (lambda () (interactive) (enlarge-window -1)))
-(bind-key "M-H" (lambda () (interactive) (enlarge-window -1 t)))
-(bind-key "M-L" (lambda () (interactive) (enlarge-window 1 t)))
+(global-set-key (kbd "M-J") 'shrink-window) ; "C-M-S-j"
+(global-set-key (kbd "M-K") 'enlarge-window)
+(global-set-key (kbd "M-H") 'shrink-window-horizontally)
+(global-set-key (kbd "M-L") 'enlarge-window-horizontally)
+;; (bind-key "M-J" (lambda () (interactive) (enlarge-window 1)))
+;; (bind-key "M-K" (lambda () (interactive) (enlarge-window -1)))
+;; (bind-key "M-H" (lambda () (interactive) (enlarge-window -1 t)))
+;; (bind-key "M-L" (lambda () (interactive) (enlarge-window 1 t)))
 
 ;;;;; windmove
 (windmove-default-keybindings)
@@ -324,6 +330,13 @@
   "Kill chars backward until encountering the end of a line."
   (interactive) (kill-line 0) )
 (global-set-key (kbd "C-S-k") 'backward-kill-line)
+
+;;;; occur-isearch
+;; Activate occur easily inside isearch
+(define-key isearch-mode-map (kbd "C-o")
+  (lambda () (interactive)
+    (let ((case-fold-search isearch-case-fold-search))
+      (occur (if isearch-regexp isearch-string (regexp-quote isearch-string))))))
 
 ;;; Finish up
 (provide 'global-keys)

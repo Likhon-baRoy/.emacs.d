@@ -66,9 +66,9 @@
           org-id-locations-file "~/org/.orgids"
           org-agenda-files '("~/org/todo.org")
           org-capture-templates
-          '(("t" "Todo" entry (file "~/personal/todo.org")
+          '(("t" "Todo" entry (file "~/org/personal/todo.org")
              "* TODO %?\n%U\n")
-            ("n" "Notes" entry (file+headline "~/personal/notes.org" "Notes")
+            ("n" "Notes" entry (file+headline "~/org/personal/notes.org" "Notes")
              "* %? :NOTE:\n%U\n")
             ("j" "Journal" entry (file+datetree "~/org/journal.org")
              "* %?\n%U\n"))

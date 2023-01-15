@@ -190,7 +190,11 @@ If you experience stuttering, increase this.")
 
 ;;;; ibuffer
 (use-package ibuffer
-  :bind ("C-x C-b" . ibuffer)
+  :bind (("C-x C-b" . ibuffer)
+         :map ibuffer-mode-map
+         ("M-n" . nil)
+         ("M-o" . nil)
+         ("M-p" . nil))
   :delight)
 
 (setq ibuffer-saved-filter-groups
@@ -414,16 +418,16 @@ If you experience stuttering, increase this.")
 (use-package drag-stuff
   :hook ((prog-mode org-mode) . drag-stuff-mode )
   :bind
-  ("C-M-j" . drag-stuff-down)
-  ("C-M-k" . drag-stuff-up))
+  ("C-M-S-j" . drag-stuff-down)
+  ("C-M-S-k" . drag-stuff-up))
 
 ;;;; aggressive-indent
 (use-package aggressive-indent
-  :defer t
-  :doc "Intended Indentation"
-  ;; :hook ((prog-mode org-mode) . aggressive-indent-mode)
-  :init (add-hook 'prog-mode-hook #'aggressive-indent-mode)
-  :delight)
+:defer t
+:doc "Intended Indentation"
+;; :hook ((prog-mode org-mode) . aggressive-indent-mode)
+:init (add-hook 'prog-mode-hook #'aggressive-indent-mode)
+:delight)
 ;; (add-to-list 'aggressive-indent-excluded-modes 'snippet-mode)
 (add-hook 'snippet-mode-hook (lambda () (aggressive-indent-mode -1)))
 
@@ -442,7 +446,6 @@ If you experience stuttering, increase this.")
 (use-package ivy
   :doc "A generic completion mechanism"
   :defer 0.1
-  :init (ivy-mode 1)
   :bind (("C-s" . swiper)
          ("<f6>" . ivy-resume)
   	     ("C-c v" . ivy-push-view)
@@ -474,6 +477,7 @@ If you experience stuttering, increase this.")
   (enable-recursive-minibuffers t)
   (ivy-magic-slash-non-match-action 'ivy-magic-slash-non-match-create)
   :config
+  (ivy-mode t)
   ;; visual line mode on swiper scans every visual line, which can be really slow in large files.
   (setq swiper-use-visual-line-p #'ignore)
   ;; Use different regex strategies per completion command
@@ -573,15 +577,15 @@ If you experience stuttering, increase this.")
 
 ;; History for ivy completion, it sometimes makes ivy really slow, so maybe remove the cache file every once in a while
 (use-package ivy-prescient
+  :defer t
   :after (prescient counsel)
+  :init (ivy-prescient-mode t)
   :custom (ivy-prescient-retain-classic-highlighting t)
-  :hook (after-init . ivy-prescient-mode)
-  :config (ivy-prescient-mode t)
   :delight)
 
 (use-package swiper
-  :defer t
   :doc "A better search"
+  :defer t
   ;; :bind (("C-s" . swiper-isearch))
   :delight)
 
@@ -774,6 +778,12 @@ If you experience stuttering, increase this.")
 ;; A dashboard on startup can clean my mind
 (use-package dashboard
   :after all-the-icons
+  :bind (:map dashboard-mode-map
+              ;; ("j" . nil)
+              ;; ("k" . nil)
+              ("n" . 'dashboard-next-line)
+              ("p" . 'dashboard-previous-line)
+              )
   :init (add-hook 'dashboard-mode-hook (lambda () (setq show-trailing-whitespace nil)))
   :custom
   (dashboard-set-navigator t)
@@ -1143,7 +1153,7 @@ If you experience stuttering, increase this.")
   (use-package hl-line
     :hook ((prog-mode text-mode) . hl-line-mode)))
 
-;;;; whinner
+;;;; winner
 (use-package winner
   :doc "a minor mode that records your window configurations and lets you undo and redo changes made to it."
   :config (winner-mode 1)
@@ -1262,10 +1272,12 @@ If you experience stuttering, increase this.")
       dired-dwim-target t ; Copy and move files netween dired buffers
       dired-recursive-copies 'always ; "always" means no asking
       dired-recursive-deletes 'top   ; "top" means ask once for top level directory
+      dired-ls-F-marks-symlinks t ; -F marks links with @
       dired-hide-details-hide-symlink-targets nil
       auto-save-list-file-prefix nil ; not create directory .emacs.d/auto-save-list
       ;; Auto refresh dired, but be quiet about it
       global-auto-revert-non-file-buffers t
+      wdired-allow-to-change-permissions t
       auto-revert-verbose nil
       auto-revert-interval 1
       delete-by-moving-to-trash t)
@@ -1279,6 +1291,7 @@ If you experience stuttering, increase this.")
             (dired-hide-details-mode 1)
             (hl-line-mode 1)))
 (define-key dired-mode-map "z" #'dired-omit-mode)
+(define-key dired-mode-map "l" #'dired-up-directory)
 
 ;; Define external image viewer/editor
 (setq image-dired-external-viewer "/usr/bin/sxiv") ;or /usr/bin/gimp
