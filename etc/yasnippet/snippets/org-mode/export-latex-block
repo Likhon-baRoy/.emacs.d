@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: #+begin_export latex
+# key: /ela
+# --
+#+begin_export latex
+$0
+#+end_export

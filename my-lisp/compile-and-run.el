@@ -44,8 +44,9 @@
   (compile (concat "g++ " (file-name-nondirectory (buffer-file-name)) " -o "
                    (file-name-sans-extension (file-name-nondirectory (buffer-file-name))) " && ./"
                    (file-name-sans-extension (file-name-nondirectory (buffer-file-name)))) t )
-  (other-window 1)
-  (goto-char (point-max)))
+  ;; (other-window 1)
+  ;; (goto-char (point-max))
+  )
 
 ;; (defun exit-after-compile-hook (cur-buffer msg)
 ;;   "When nil: Don't kill the window.  0: Affect visible and iconified frames."

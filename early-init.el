@@ -37,11 +37,15 @@
 ;;; Code:
 
 
-(setq package-enable-at-startup nil ; don't auto-initialize!
-      ;; don't add that `custom-set-variables' block to my init.el!
-      package--init-file-ensured t
-      package-archives nil
-      package-quickstart nil)
+;; https://github.com/hlissner/doom-emacs/blob/58af4aef56469f3f495129b4e7d947553f420fca/core/core.el#L200
+(unless (daemonp)
+  (advice-add #'display-startup-echo-area-message :override #'ignore))
+
+(setq
+ package-enable-at-startup nil ; don't auto-initialize!
+ package--init-file-ensured t ; don't add that `custom-set-variables' block to init
+ package-quickstart nil ; prevent `package.el' loading packages prior to their init-file
+ package-archives nil)
 
 
 ;; It will cause you to have a separate elpa directory for each Emacs version.
@@ -74,25 +78,41 @@
               nil t)))
 
 (setq
+ site-run-file nil ; unset SRF
  use-file-dialog nil
+ mode-line-format nil ; don't want a mode line while loading init
  load-prefer-newer nil
+ auto-mode-case-fold nil ; use case-sensitive `auto-mode-alist' for performance
  default-input-method nil
- utf-translate-cjk-mode nil          ; disable CJK coding/encoding (Chinese/Japanese/Korean characters)
- initial-major-mode 'fundamental-mode
+ utf-translate-cjk-mode nil ; disable CJK coding/encoding (Chinese/Japanese/Korean characters)
+ initial-scratch-message nil ; empty the initial *scratch* buffer.
+ auto-save-list-file-prefix nil ; disable auto-save
+ command-line-x-option-alist nil ; remove irreleant command line options for faster startup
+ use-short-answers t ; y/n for yes/no
+ vc-follow-symlinks t ; Do not ask about symlink following
  inhibit-default-init t
  inhibit-splash-screen t
- inhibit-startup-screen t 			 ; Do not show the startup message.
- inhibit-startup-buffer-menu t       ; stop `list-buffers' from showing when opening multiple files.
- my-computer-has-smaller-memory-p t) ; computers with smaller memory. Not sure if it works or not!
+ inhibit-startup-screen t 		; do not show the startup message
+ inhibit-startup-message t      ; reduce noise at startup
+ inhibit-startup-buffer-menu t  ; stop `list-buffers' from showing when opening multiple files
+ fast-but-imprecise-scrolling t ; more performant rapid scrolling over unfontified regions
+ frame-inhibit-implied-resize t ; do not resize the frame at this early stage
+ ffap-machine-p-known 'reject   ; don't ping things that look like domain names
+ inhibit-compacting-font-caches t ; Inhibit frame resizing for performance
+ read-process-output-max (* 1024 1024) ; Increase how much is read from processes in a single chunk.
+ redisplay-skip-fontification-on-input t ; Inhibits it for better scrolling performance.
+ ;; create-lockfiles nil ; Disable lockfiles
+ ;; make-backup-files nil ; Disable backup files
+ idle-update-delay 1.0 ; slow down UI updates down
+ select-active-regions 'only ; Emacs hangs when large selections contain mixed line endings
+ ad-redefinition-action 'accept ; disable warnings from legacy advice system
+ initial-major-mode 'fundamental-mode
+ inhibit-startup-echo-area-message user-login-name)
 
 ;; UnsetFNHA
 (defvar file-name-handler-alist-original file-name-handler-alist)
 (setq file-name-handler-alist nil)
 ;; -UnsetFNHA
-
-;; UnsetSRF
-(setq site-run-file nil)
-;; -UnsetSRF
 
 ;; Maximize the Emacs frame on startup
 (push '(fullscreen . maximized) initial-frame-alist)
@@ -102,9 +122,6 @@
 (push '(menu-bar-lines . 0) default-frame-alist)
 (push '(tool-bar-lines . 0) default-frame-alist)
 (push '(vertical-scroll-bars) default-frame-alist)
-
-;; Do not resize the frame at this early stage.
-(setq frame-inhibit-implied-resize t)
 
 ;; Prevent unwanted runtime builds; packages are compiled ahead-of-time when
 ;; they are installed and site files are compiled when gccemacs is installed.

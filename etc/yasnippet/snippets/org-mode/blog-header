@@ -1,0 +1,18 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: blog-heading
+# key: /blog
+# condition: (eq 1 (line-number-at-pos))
+# --
+#+TITLE:        ${1:`(replace-regexp-in-string "-" " " (capitalize (file-name-nondirectory (file-name-sans-extension (buffer-file-name)))))`}
+#+AUTHOR:       ${2:`user-full-name`}
+#+EMAIL:        ${3:`user-mail-address`}
+#+DATE:         `(format-time-string "[%Y-%b-%d %a]")`
+#+URI:          `(replace-regexp-in-string (concat (getenv "HOME") "/[^/]*/") "/" (file-name-sans-extension (buffer-file-name)))`/
+#+TAGS:         blog $4
+#+KEYWORDS:     $5
+#+LANGUAGE:     ${6: en}
+#+OPTIONS:      H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t
+#+DESCRIPTION:  ${7: some description for this blog}
+
+
+$0

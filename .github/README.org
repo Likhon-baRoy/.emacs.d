@@ -449,6 +449,6 @@ This project is open source software licensed under the [[https://github.com/ser
 
 #+html:<p align="center"> <img src="https://raw.githubusercontent.com/catppuccin/catppuccin/dev/assets/footers/gray0_ctp_on_line.svg?sanitize=true"/> </p>
 
-#+BEGIN_CENTER
-Copyright © 2022-present, Likhon Baroy.
-#+END_CENTER
+#+begin_quote
+Copyright © 2022-present, Likhon Baroy <likhonhere007@gmail.com>.
+#+end_quote

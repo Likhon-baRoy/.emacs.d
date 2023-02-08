@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: #+begin_center
+# key: /cen
+# --
+#+begin_center
+$0
+#+end_center

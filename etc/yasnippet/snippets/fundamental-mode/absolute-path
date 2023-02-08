@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: asolute path
+# key: </
+# --
+`(read-file-name "")`

@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: Org Options
-# key: _opt
+# name: #+options
+# key: /op
 # --
 #+OPTIONS: $0

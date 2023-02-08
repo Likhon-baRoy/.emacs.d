@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: Quick Startup
-# contributor: rho
-# key: _qstup
-# --
-#+STARTUP: ${1:$$(yas-choose-value '("overview" "content" "showall" "showeverything"))} ${2:$$(yas-choose-value '("inlineimages" "noinlineimages"))} ${3:$$(yas-choose-value '("entitiespretty" "entitiesplain"))} ${4:$$(yas-choose-value '("align" "noalign"))} ${5:$$(yas-choose-value '("hidestars" "")) ${6:$$(yas-choose-value '("latexpreview" ""))}
-$0

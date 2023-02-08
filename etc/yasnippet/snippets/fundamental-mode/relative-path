@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: relative path
+# key: <.
+# --
+`(file-relative-name (read-file-name "") (file-name-directory (buffer-file-name)))`

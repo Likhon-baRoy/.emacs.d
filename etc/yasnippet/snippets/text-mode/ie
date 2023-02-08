@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: ie
-# key: ie
+# name: i.e.
+# key: /ie
 # --
 (i.e. $1)$0

@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: gcd-fun
+# contributor: Likhon
+# key: /gcd
+# --
+int gcd (int u, int v)$0 { // Euclid's algorithm
+  int t;
+  while (u > 0) {
+    if (u < v) {
+      t = u; u = v; v = t;
+    }
+    u -= v;
+  }
+  return v;
+}

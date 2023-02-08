@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: #+begin_comment
+# key: /cmn
+# --
+#+begin_comment
+$0
+#+end_comment

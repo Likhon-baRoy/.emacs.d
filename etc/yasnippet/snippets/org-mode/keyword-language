@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: keyword language
+# key:
+# condition: (save-excursion (beginning-of-line) (looking-at "^\\s-*#\\+LANGUAGE:"))
+# --
+ ${1:$$(yas-choose-value '("en" "en-us" "bn" "ben" "de" "de-de" "fr" "it" "es"))} $0

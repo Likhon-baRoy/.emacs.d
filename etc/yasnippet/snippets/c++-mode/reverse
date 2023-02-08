@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: reverse-array
+# contributor: Likhon
+# key: /rev
+# --
+void rev (int* arr, int n)$0 {
+  int left = 0, right = n - 1;
+  while (left < right) {
+    swap(arr[left], arr[right]);
+    left++, right--;
+  }
+}

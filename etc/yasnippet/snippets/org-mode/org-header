@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: org-insert-heading
+# contributor: Likhon
+# key: /h1
+# condition: (eq 1 (line-number-at-pos))
+# --
+#+TITLE:        ${1:`(replace-regexp-in-string "-" " " (capitalize (file-name-nondirectory (file-name-sans-extension (buffer-file-name)))))`}
+#+AUTHOR:       ${2:`user-full-name`}
+#+EMAIL:        ${3:`user-mail-address`}
+#+DATE:         `(format-time-string "[%Y-%b-%d %a]")`
+#+TAGS:         $4
+
+:PROPERTIES:
+#+OPTIONS: $5
+:END:
+
+
+$0

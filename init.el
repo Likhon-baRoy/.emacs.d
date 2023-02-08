@@ -89,6 +89,12 @@ If you experience stuttering, increase this.")
 ;; ("melpa-cn" . "http://mirrors.cloud.tencent.com/elpa/melpa/")
 ;; ("gnu-cn"   . "http://mirrors.cloud.tencent.com/elpa/gnu/"))
 
+(setq package-archive-priorities
+      '(("melpa" .  4)
+        ("melpa-stable" . 3)
+        ("org" . 2)
+        ("gnu" . 1)))
+
 ;; Configure Package Manager
 (unless (bound-and-true-p package--initialized)
   (setq package-enable-at-startup nil) ; To prevent initializing twice
@@ -243,9 +249,6 @@ If you experience stuttering, increase this.")
              (window-system))
     (all-the-icons-install-fonts t)))
 
-;; If you experience a slow down in performance when rendering multiple icons simultaneously, you can try setting the following variable:
-(setq inhibit-compacting-font-caches t)
-
 ;;;; avy
 (use-package avy
   :bind(("C-'" . 'avy-goto-char)
@@ -289,8 +292,8 @@ If you experience stuttering, increase this.")
   :when window-system
   :defer t
   :bind (("C-x P" . git-gutter:popup-hunk)
-         ("C-x p" . git-gutter:previous-hunk)
-         ("C-x n" . git-gutter:next-hunk)
+         ("M-P" . git-gutter:previous-hunk)
+         ("M-N" . git-gutter:next-hunk)
          ("C-c G" . git-gutter:popup-hunk))
   :hook ((prog-mode org-mode) . git-gutter-mode )
   :config
@@ -457,6 +460,7 @@ If you experience stuttering, increase this.")
          ("C-k" . ivy-previous-line)
          ("C-l" . ivy-dispatching-call) ; l for list
          ("C-o" . ivy-dispatching-done) ; o for other
+         ("C-d" . ivy-switch-buffer-kill) ; d for delete
          :map ivy-switch-buffer-map
          ("C-j" . ivy-next-line)
          ("C-k" . ivy-previous-line)
@@ -503,12 +507,12 @@ If you experience stuttering, increase this.")
          ("C-c F" . counsel-org-file)
          ("C-c g" . counsel-git)
          ("C-c i" . counsel-imenu)
-         ("C-c j" . counsel-git-grep)
+         ("C-c j" . counsel-git-grep) ; M-s g
          ("C-c f" . counsel-file-jump)
          ("C-x l" . counsel-locate)
          ("C-c L" . counsel-git-log)
          ("C-c m" . counsel-linux-app)
-         ("C-c n" . counsel-fzf)
+         ("C-c n" . counsel-fzf) ; M-s z
          ("C-c o" . counsel-outline)
          ;; ("C-c T" . counsel-load-theme)
          ("C-c z" . counsel-bookmark)
@@ -522,7 +526,7 @@ If you experience stuttering, increase this.")
 		 ("<f2> j" . counsel-set-variable)
 		 ("<f2> u" . counsel-unicode-char))
   ;; ("C-c /" . counsel-ag)
-  ;; ("C-c s" . counsel-rg)
+  ;; ("C-c s" . counsel-rg) ; M-s z
   ;; ("C-S-o" . counsel-rhythmbox)
   (:map counsel-find-file-map
         ("RET" . ivy-alt-done))
@@ -626,7 +630,6 @@ If you experience stuttering, increase this.")
   (if window-system
       (fancy-battery-mode)
     (display-battery-mode)))
-
 ;;;;; olivetti
 (use-package olivetti
   :hook ((text-mode         . olivetti-mode)
@@ -644,15 +647,15 @@ If you experience stuttering, increase this.")
 
 ;;;;; hl-indent
 (use-package highlight-indent-guides
-  :delight
-  :commands highlight-indent-guides-mode
   :custom
   (highlight-indent-guides-delay 0)
   (highlight-indent-guides-responsive t)
   (highlight-indent-guides-method 'character)
   ;; (highlight-indent-guides-auto-enabled t)
   ;; (highlight-indent-guides-character ?\┆) ;; Indent character samples: | ┆ ┊
-  :hook (prog-mode  . highlight-indent-guides-mode))
+  :commands highlight-indent-guides-mode
+  :hook (prog-mode  . highlight-indent-guides-mode)
+  :delight " ㄓ")
 
 ;;;;; hl-volatile
 (use-package volatile-highlights
@@ -729,7 +732,7 @@ If you experience stuttering, increase this.")
 (use-package doom-themes
   :if window-system
   :custom-face
-  (cursor ((t (:background "BlanchedAlmond"))))
+  (cursor ((t (:background "wheat4"))))
   :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
@@ -950,6 +953,7 @@ If you experience stuttering, increase this.")
 
 ;;;;; projectile
 (use-package projectile
+  :disabled t
   :delight '(:eval (concat " [" projectile-project-name "]"))
   :pin melpa-stable
   :custom
@@ -982,7 +986,7 @@ If you experience stuttering, increase this.")
   )
 
 ;;________________________________________________________________
-;;;    default pkg
+;;;    built-in
 ;;________________________________________________________________
 ;;;; Emacs
 ;; https://panadestein.github.io/emacsd/#org5278580
@@ -1018,7 +1022,16 @@ If you experience stuttering, increase this.")
   (("C-c R" . my-reload-emacs))
   ;;  ("<escape>" . keyboard-escape-quit) ; Make ESC close prompts
   ;;  ("C-c C-r" . revert-buffer-no-confirm)
+  :hook (before-save . delete-trailing-whitespace)
   )
+
+;;;; man
+(use-package man
+  :bind (
+         :map Man-mode-map
+         ("q" . kill-this-buffer))
+  :custom
+  (Man-notify-method 'newframe))
 
 ;;;; recentf
 (use-package recentf
@@ -1229,12 +1242,14 @@ If you experience stuttering, increase this.")
   :hook ((prog-mode org-mode) . electric-pair-mode)
   :config
   (setq electric-pair-preserve-balance t
+        electric-pair-skip-whitespace nil
         electric-pair-delete-adjacent-pairs t
-        electric-pair-open-newline-between-pairs nil)
+        electric-pair-open-newline-between-pairs nil
+        electric-pair-skip-whitespace-chars '(9 10 32)
+        electric-pair-skip-self 'electric-pair-default-skip-self)
   (setq electric-pair-pairs '( ; make electric-pair-mode work on more brackets.
                               (?\{ . ?\})
                               (?\[ . ?\])
-                              (?\< . ?\>)
                               )))
 
 ;; Disable electric-pair-mode in minibuffer during Macro definition
@@ -1242,13 +1257,16 @@ If you experience stuttering, increase this.")
 
 (defun my-inhibit-electric-pair-mode (char)
   (not (member major-mode my-electic-pair-modes)))
+
 (setq electric-pair-inhibit-predicate #'my-inhibit-electric-pair-mode)
 
-;; disable `<>' auto pairing in electric-pair-mode for org-mode
-(add-hook 'org-mode-hook (lambda ()
-                           (setq-local electric-pair-inhibit-predicate
-                                       `(lambda (c)
-                                          (if (char-equal c ?<) t (,electric-pair-inhibit-predicate c))))))
+(add-hook 'org-mode-hook '+electric-inhibit-<)
+(defun +electric-inhibit-< ()
+  "Disable auto pairing of  `<>'."
+  (setq-local electric-pair-inhibit-predicate
+              `(lambda (c)
+                 (if (char-equal c ?<) t
+                   (,electric-pair-inhibit-predicate c)))))
 
 ;;;; WhiteSpaces
 ;; display white spaces and newlines
@@ -1292,9 +1310,24 @@ If you experience stuttering, increase this.")
             (hl-line-mode 1)))
 (define-key dired-mode-map "z" #'dired-omit-mode)
 (define-key dired-mode-map "l" #'dired-up-directory)
+(bind-keys :map dired-mode-map
+           ("/" . dired-goto-file)
+           ("," . dired-create-directory)
+           ("." . dired-create-empty-file)
+           ;; ("I" . dired-insert-subdir)
+           ("K" . dired-kill-subdir)
+           ;; ("O" . dired-find-file-other-window)
+           ("[" . dired-prev-dirline)
+           ("]" . dired-next-dirline)
+           ;; ("^" . mode-line-other-buffer)
+           ("x" . dired-do-delete)
+           ("X" . dired-do-flagged-delete)
+           ("y" . dired-do-copy))
 
 ;; Define external image viewer/editor
 (setq image-dired-external-viewer "/usr/bin/sxiv") ;or /usr/bin/gimp
+;; (setq image-dired-marking-shows-next nil)
+(setq image-dired-thumb-size 256)
 ;; Image-dired Keyboard shortcuts
 (with-eval-after-load 'dired
   (define-key dired-mode-map (kbd "C-c x") 'image-dired)
@@ -1368,11 +1401,10 @@ If you experience stuttering, increase this.")
 (electric-indent-mode nil)  ; Auto indentation.
 (global-subword-mode 1)     ; Iterate through CamelCase words.
 (global-auto-revert-mode 1) ; Automatically revert buffer when it changes on disk.
+(mouse-avoidance-mode 'exile)
 ;; Font lock of special Dash variables (it, acc, etc.). Comes default with Emacs.
 (global-dash-fontify-mode)
 (when window-system (global-prettify-symbols-mode t))
-;; Remove trailing whitespace on save
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;;;; Modeline
 (size-indication-mode)
@@ -1414,11 +1446,9 @@ If you experience stuttering, increase this.")
  mouse-yank-at-point t             ; Mouse yank commands yank at point instead of at click.
  message-log-max 1000
  fill-column 80
- initial-scratch-message nil       ; Empty the initial *scratch* buffer.
  make-pointer-invisible t          ; hide cursor when writing.
- column-number-mode t              ; Show (line,column) in mode-line.
- cua-selection-mode t              ; Delete regions.
- vc-follow-symlinks t              ; always follow git symlinks
+ column-number-mode t              ; show (line,column) in mode-line.
+ cua-selection-mode t              ; delete regions.
  enable-recursive-minibuffers t    ; allow commands to be run on minibuffers.
  dired-kill-when-opening-new-dired-buffer t   ; delete dired buffer when opening another directory
  backward-delete-char-untabify-method 'hungry ; Alternatives is: 'all (remove all consecutive whitespace characters, even newlines).
@@ -1557,8 +1587,9 @@ If you experience stuttering, increase this.")
 
 ;;; enable some major-mode
 (put 'scroll-left 'disabled nil)
-(put 'narrow-to-page 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
+(put 'narrow-to-defun  'disabled nil)
+(put 'narrow-to-page   'disabled nil)
 (put 'dired-find-alternate-file 'disabled nil)
 
 ;;; Finish up

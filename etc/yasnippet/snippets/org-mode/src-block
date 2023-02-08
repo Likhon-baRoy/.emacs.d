@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: #+begin_src
+# key: /s
+# --
+#+begin_src ${1:$$(yas-choose-value '("C" "C++" "D" "R" "asymptote" "bash" "calc" "clojure" "css" "ditaa" "dot" "emacs-lisp" "fortran" "gnuplot" "haskell" "java" "js" "latex" "ledger" "lilypond" "lisp" "luaawk" "matlab" "mscgen" "ocaml" "octave" "org" "oz" "perl" "plantuml" "processing" "python" "ruby" "sass" "scheme" "screen" "sed" "sh" "sql" "sqlite" "vala"))} $2
+$0
+#+end_src

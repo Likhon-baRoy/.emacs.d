@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: insert-date
 # contributor: likhon
-# key: _date
+# key: /date
 # --
 $(format-time-string "%B %e, %Y")

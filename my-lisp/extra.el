@@ -97,31 +97,36 @@
          '(85 . 50) '(100 . 100)))))
 
 ;; ────────────────────────────── Prettify Symbols ─────────────────────────────
-(defun add-pretty-lambda ()
-  "Make some word or string show as pretty Unicode symbols.  See `https://unicodelookup.com' for more."
-  (setq prettify-symbols-alist
-        '(("lambda" . 955)
-          ("delta" . 120517)
-          ("epsilon" . 120518)
-          ("<" . 10216)
-          (">" . 10217)
-          ("[" . 10214)
-          ("]" . 10215)
-          ;; ("!=" . 8800)
-          ("<<" . 10218)
-          (">>" . 10219)
-          ("->" . 8594)
-          ;; ("<=" . 10877)
-          ;; (">=" . 10878)
-          )))
+(add-hook 'prog-mode-hook 'prettify-symbols-mode)
+(add-hook 'org-mode-hook 'prettify-symbols-mode)
+;; (remove-hook 'web-mode 'prettify-symbols-mode)
 
-(add-hook 'prog-mode-hook 'add-pretty-lambda)
-(add-hook 'org-mode-hook 'add-pretty-lambda)
-;; (remove-hook 'web-mode 'add-pretty-lambda)
-
-;; (setq-default prettify-symbols-alist ; I don't know why it's not working?
-;;               '(("#+begin_quote" . "ϰ")
-;;                 ("#+end_quote" . "ϰ")))
+;; Make some word or string show as pretty Unicode symbols.  See `https://unicodelookup.com' for more.
+(setq-default prettify-symbols-alist
+              '(("<-" . ?←)
+                ("->" . ?→)
+                ("->>" . ?↠)
+                ("=>" . ?⇒)
+                ("/=" . ?≠)
+                ;; ("!=" . ?≠)
+                ;; ("==" . ?≡)
+                ;; ("<=" . ?≤)
+                ;; (">=" . ?≥)
+                ("=<<" . (?= (Br . Bl) ?≪))
+                (">>=" . (?≫ (Br . Bl) ?=))
+                ("<=<" . ?↢)
+                (">=>" . ?↣)
+                ("lambda" . 955)
+                ("delta" . 120517)
+                ("epsilon" . 120518)
+                ("<" . 10216)
+                (">" . 10217)
+                ;; ("[" . 10214)
+                ;; ("]" . 10215)
+                ("<<" . 10218)
+                (">>" . 10219)
+                ))
+(setq prettify-symbols-unprettify-at-point 'right-edge)
 
 ;; ─────────────────── Added functionality (Generic usecases) ──────────────────
 ;; Unfill paragraph
@@ -153,16 +158,16 @@
       (progn
         (insert comment-start)
         (when (equal comment-start ";")
-          (insert comment-start))
-        (insert " ")
-        (dotimes (_ space-on-each-side) (insert comment-char))
-        (when (> comment-length 0) (insert " "))
-        (insert comment)
-        (when (> comment-length 0) (insert " "))
-        (dotimes (_ (if (= (% comment-length 2) 0)
-                        (- space-on-each-side 1)
-                      space-on-each-side))
-          (insert comment-char))))))
+(insert comment-start))
+(insert " ")
+(dotimes (_ space-on-each-side) (insert comment-char))
+(when (> comment-length 0) (insert " "))
+(insert comment)
+(when (> comment-length 0) (insert " "))
+(dotimes (_ (if (= (% comment-length 2) 0)
+                (- space-on-each-side 1)
+              space-on-each-side))
+  (insert comment-char))))))
 
 ;; ─────────────────────────────────── CURSOR ──────────────────────────────────
 (set-mouse-color "white")
@@ -280,6 +285,7 @@ point reaches the beginning or end of the buffer, stop there."
       (message "Not a file visiting buffer!"))))
 
 ;; ─────────────────────────────────── Dired ───────────────────────────────────
+;; http://whattheemacsd.com/
 (require 'dired)
 (defun dired-back-to-top ()
   "Step back 3 lines from the very top."
@@ -298,6 +304,27 @@ point reaches the beginning or end of the buffer, stop there."
 
 (define-key dired-mode-map
   (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)
+
+;; Move more quickly
+(global-set-key (kbd "C-S-n")
+                (lambda ()
+                  (interactive)
+                  (ignore-errors (next-line 5))))
+
+(global-set-key (kbd "C-S-p")
+                (lambda ()
+                  (interactive)
+                  (ignore-errors (previous-line 5))))
+
+(global-set-key (kbd "C-S-f")
+                (lambda ()
+                  (interactive)
+                  (ignore-errors (forward-char 5))))
+
+(global-set-key (kbd "C-S-b")
+                (lambda ()
+                  (interactive)
+                  (ignore-errors (backward-char 5))))
 
 ;; ───────────────────────── Show LineNumber Temporary ─────────────────────────
 (global-set-key [remap goto-line] 'goto-line-with-feedback)

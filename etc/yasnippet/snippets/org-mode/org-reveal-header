@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: org-reveal header
+# key: /h2
+# condition: (eq 1 (line-number-at-pos))
+# --
+#+TITLE: ${1:Title of slidedeck}
+#+AUTHOR: ${2:`user-full-name`}
+#+EMAIL: ${3:`user-mail-address`}
+
+#+REVEAL_MARGIN: 0.1
+#+REVEAL_MIN_SCALE: 0.5
+#+REVEAL_MAX_SCALE: 2.5
+#+REVEAL_ROOT: `org-reveal-root`
+#+REVEAL_THEME: ${4:moon$(yas-choose-value '("beige" "black" "blood" "league" "moon" "night" "serif" "simple" "sky" "solarized" "white"))}
+#+REVEAL_TITLE_SLIDE: `org-reveal-title-slide`
+#+REVEAL_TITLE_SLIDE_BACKGROUND: nil
+#+REVEAL_TRANS: ${5:cube$(yas-choose-value '("none" "cube" "fade" "concave" "convex" "page" "slide" "zoom"))}
+#+REVEAL_EXTRA_JS: { src: 'file: `user-emacs-directory`templates/reveal/Reveal.js-Title-Footer/plugin/title-footer/title-footer.js', async: true, callback: function() { title_footer.initialize(); } }
+
+#+OPTIONS: toc:nil num:nil email:t
+#+OPTIONS: reveal_width:1200 reveal_height:800
+#+OPTIONS: reveal_title_slide:"<h1>%t</h1><br/><h2>%a</h2><h3>Affiliation,&nbsp%e</h3><br/><h2>%d</h2>"
+
+$0

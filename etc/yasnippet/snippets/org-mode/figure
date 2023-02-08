@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: figure
+# key: /fig
+# --
+#+NAME: fig:${1:label}
+#+CAPTION: ${2:caption}
+#+ATTR_LATEX: ${3::options [htp]}
+#+begin_figure
+$0
+#+end_figure

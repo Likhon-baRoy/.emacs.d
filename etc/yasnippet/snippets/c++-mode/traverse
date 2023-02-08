@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: print-array
+# contributor: Likhon
+# key: /tra
+# --
+void traverse (int* arr, int n)$0 {
+  rep (i,0,n) printf("%d ", arr[i]);
+  printf("\n");
+}

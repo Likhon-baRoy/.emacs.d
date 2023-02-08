@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: scanf
-# key: sf
-# --
-scanf("%${1:d}", &${2:n});$0

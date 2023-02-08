@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
-# name: elisp-README
+# name: elisp README
 # contributor: Likhon
-# key: _readme
+# key: /readme
 # --
 ;;; `(file-name-nondirectory (buffer-file-name))` --- ${1:file-for} -*- lexical-binding: t; -*-
 ;;

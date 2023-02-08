@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: prime-check-fun
+# contributor: Likhon
+# key: /prime
+# --
+bool isPrime (int n)$0 {
+  if (n <= 1) return false;
+  for (int i = 2; (i * i) <= n; ++i) {
+    if (!(n%i))
+      return false;
+  }
+  return true;
+}

@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: Org Properties
-# key: <prop
+# name: properties
+# key: /prop
 # --
 :PROPERTIES:
 $0

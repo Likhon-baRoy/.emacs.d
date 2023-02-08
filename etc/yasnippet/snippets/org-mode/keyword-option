@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: keyword options
+# key:
+# condition: (save-excursion (beginning-of-line) (looking-at "^\\s-*#\\+OPTIONS:"))
+# --
+ ${1:$$(yas-choose-value '("':" "*:" "-:" "::" "<:" "\n:" "^:" "author:" "date:" "email:" "H:" "title:" "toc:"))} $0

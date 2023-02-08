@@ -1,29 +1,43 @@
 # -*- mode: snippet -*-
-# name: comfi
-# key: comfi
+# name: contest-setup
+# contributor: Likhon
+# key: /cpp
+# condition: (eq 1 (line-number-at-pos))
 # --
+/* #+ATHOUR: Likhon Barai */
 #include <bits/stdc++.h>
 using namespace std;
 
-// Shortcuts for "common" data type in contests
-typedef long long 		ll;
-typedef pair<int,int> 	ii;
-typedef vector<int> 	vi;
-typedef vector<ii> 		vii;
-#define INF 1000000000;
-#define REP(i,a,b) for (for i = a; i <= b; i++)
+// Shortcuts for "common" data type
+typedef long long     ll;
+typedef pair<int,int> ii;
+typedef vector<int>   vi;
+typedef vector<ii>    vii;
 
-int main () {
+#define rep(i,a,b)    for (int i = a; i < b; ++i)
+#define dep(i,a,b)    for (int i = a; i >= b; --i)
+#define zep(i,a,b)    for (int i = a; i <= b; i++)
+#define vout(x)       for (auto &i:x) cout << i << " "; cout << "\n";
+#define out(a,n)      for(int i=0;i<n;i++) cout << a[i] << " "; cout << "\n";
+inline int gcd(int a, int b) { if(b) while((a %= b) && (b %= a)); return (a + b); }
+#define TT int T; scanf("%d", &T); while (T--)
+#define precise cout << fixed << setprecision(4);
+#define _ ios_base::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+#define str_unique(s) s.resize(unique(s.begin(), s.end()) - s.begin());
+#define str_unique1   s.erase(unique(s.begin(),s.end()),s.end());
+#define int_length(x) to_string(x).length()
+#define all(x)        x.begin(), x.end()
+#define pb            push_back
+#define INF 100'00'00'000;
+const int sz = 1e6+5;
 
-  // ios::sync_with_stdio(0);
-  // cin.tie(0);
+int main () { _
+#ifndef ONLINE_JUDGE
+  freopen("input.txt", "r", stdin);
+  freopen("output.txt", "w", stdout);
+#endif // ONLINE_JUDGE
 
-  // freopen("input.txt", "r", stdin);
-  // freopen("output.txt", "w", stdout);
-  // char ch[10]; scanf(" %[^\n]", ch);
-
-    int T, N, count = 0, ans = 0, total = 0;
-    double avg = 0;
+  // (A-Z)[65-90], (a-z)[97-122], (0-9)[48-57]
 
     $0
 

@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: keyword startup
+# key:
+# condition: (save-excursion (beginning-of-line) (looking-at "^\\s-*#\\+STARTUP:"))
+# --
+ ${1:$$(yas-choose-value '(
+"overview"
+"content"
+"showall"
+"showeverything"
+"indent"
+"noindent"
+"align"
+"noalign"
+"inlineimages"
+"noinlineimages"
+"latexpreview"
+"nolatexpreview"
+"hideblocks"
+"nohideblocks"
+"entitiespretty"
+"entitiesplain"
+))} $0

@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: reverse-recursively
+# contributor: Likhon
+# key: /revrec
+# --
+void rev_rec(int *arr, int left, int right)$0 {
+  if (left >= right)
+    return;
+
+  int temp = arr[left];
+  arr[left] = arr[right];
+  arr[right] = temp;
+
+  rev_rec(arr, left + 1, right - 1);
+}
