@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: vector<>
+# contributor: Likhon
+# key: /v
+# --
+vector<${1:data-type}> $0

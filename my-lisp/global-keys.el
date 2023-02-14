@@ -58,6 +58,17 @@
 ;;   (kill-buffer))
 
 ;;----------------------------------------------------------------------
+;;;; kill-region/quoted-insert
+(global-set-key (kbd "C-q") 'kill-or-quoted-insert)
+
+(defun kill-or-quoted-insert (arg)
+  "Kill the region if it is active, otherwise fall back to the default behavior."
+  (interactive "P")
+  (if (use-region-p)
+      (kill-region (region-beginning) (region-end))
+    (quoted-insert (or arg 1))))
+
+;;----------------------------------------------------------------------
 ;;;; duplicate lines
 (defun duplicate-current-line()
   "Make duplicate of current line right next to it."
@@ -73,11 +84,22 @@
 
 ;;----------------------------------------------------------------------
 ;;;; duplicate word
+
 (defun duplicate-current-word()
   "Duplicate a word before point."
   (interactive)
-  (beginning-of-sexp)
-  (insert (word-at-point)))
+  (let ((word-to-duplicate (thing-at-point 'word)))
+    (if word-to-duplicate
+        (progn
+          (backward-word)
+          (insert word-to-duplicate))
+      (message "No word found before point"))))
+
+;; (defun duplicate-current-word()
+;;   "Duplicate a word before point."
+;;   (interactive)
+;;   (beginning-of-sexp)
+;;   (insert (word-at-point)))
 
 ;;----------------------------------------------------------------------
 ;;;; copy-current-line
@@ -95,11 +117,11 @@
 (global-unset-key (kbd "C-x C-z")) ; also this
 
 ;; normal undo and redo
-(global-set-key (kbd "C-z")   'undo-only)
+(global-set-key (kbd "C-z") 'undo-only)
 (global-set-key (kbd "C-S-z") 'undo-tree-redo)
 ;; (global-set-key "\M-c" 'toggle-letter-case)
-(global-set-key (kbd "C-`")   'duplicate-current-line)
-(global-set-key (kbd "C-~")   'duplicate-current-word)
+(global-set-key (kbd "C-`") 'duplicate-current-line)
+(global-set-key (kbd "C-~") 'duplicate-current-word)
 (global-set-key (kbd "C-<insert>") 'kill-ring-save-current-line)
 
 ;; ──────────────────────── Make Escape Key Greate again ───────────────────────
@@ -180,8 +202,7 @@
 ;; instead of `BSP' I use `C-h'
 (global-set-key (kbd "C-h") (kbd "<backspace>")) ; 'backward-delete-char
 (global-set-key (kbd "C-S-H") (kbd "C-S-<backspace>")) ; 'kill-whole-line
-(global-set-key (kbd "C-q") 'kill-region)
-(global-set-key (kbd "C-S-q") 'quoted-insert)
+
 ;; (bind-key "\C-x\C-k"          'kill-region)
 ;; (bind-key "\C-c\C-k"          'kill-region)
 ;; (bind-key "C-M-S-k"           'backward-kill-sexp)

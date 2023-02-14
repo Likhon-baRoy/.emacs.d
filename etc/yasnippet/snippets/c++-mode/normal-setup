@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: normal-setup
+# contributor: Likhon
+# key: /normi
+# condition: (eq 1 (line-number-at-pos))
+# --
+/*
+
+  #+ATHOUR: Likhon Barai
+  #+EMAIL:  <likhonhere007@gmail.com>
+
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main () {
+  int N, i, j, k, l, ans = 0, sum = 0, result = 0;
+  cin >> N$0;
+
+  return 0;
+}

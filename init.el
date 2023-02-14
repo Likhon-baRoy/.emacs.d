@@ -676,6 +676,7 @@ If you experience stuttering, increase this.")
 (use-package beacon
   :commands beacon-mode
   :init (beacon-mode t)
+  :bind ("C-S-l" . 'beacon-blink)
   :config
   (setq
    beacon-blink-when-window-changes t  ; only flash on window/buffer changes...

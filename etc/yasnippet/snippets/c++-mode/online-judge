@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: input-output
+# contributor: Likhon
+# key: /oj
+# --
+#ifndef ONLINE_JUDGE
+  freopen("input.txt", "r", stdin);
+  freopen("output.txt", "w", stdout);
+#endif // ONLINE_JUDGE

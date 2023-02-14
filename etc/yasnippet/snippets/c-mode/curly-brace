@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: curly-brace
+# contributor: Likhon
+# key: {
+# --
+{
+  $0

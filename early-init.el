@@ -82,11 +82,13 @@
  use-file-dialog nil
  mode-line-format nil ; don't want a mode line while loading init
  load-prefer-newer nil
+ create-lockfiles nil ; disable lockfiles
+ make-backup-files nil ; disable backup files
+ auto-save-list-file-prefix nil ; disable auto-save
  auto-mode-case-fold nil ; use case-sensitive `auto-mode-alist' for performance
  default-input-method nil
  utf-translate-cjk-mode nil ; disable CJK coding/encoding (Chinese/Japanese/Korean characters)
  initial-scratch-message nil ; empty the initial *scratch* buffer.
- auto-save-list-file-prefix nil ; disable auto-save
  command-line-x-option-alist nil ; remove irreleant command line options for faster startup
  use-short-answers t ; y/n for yes/no
  vc-follow-symlinks t ; Do not ask about symlink following
@@ -101,8 +103,6 @@
  inhibit-compacting-font-caches t ; Inhibit frame resizing for performance
  read-process-output-max (* 1024 1024) ; Increase how much is read from processes in a single chunk.
  redisplay-skip-fontification-on-input t ; Inhibits it for better scrolling performance.
- ;; create-lockfiles nil ; Disable lockfiles
- ;; make-backup-files nil ; Disable backup files
  idle-update-delay 1.0 ; slow down UI updates down
  select-active-regions 'only ; Emacs hangs when large selections contain mixed line endings
  ad-redefinition-action 'accept ; disable warnings from legacy advice system

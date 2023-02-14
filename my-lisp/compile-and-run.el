@@ -54,7 +54,7 @@
 ;;     (quit-window nil (get-buffer-window cur-buffer 0))))
 ;; (add-hook 'compilation-finish-functions #'exit-after-compile-hook)
 
-(with-eval-after-load "cc-mode" (define-key c++-mode-map [f5] #'compile-and-run))
+(with-eval-after-load "cc-mode" (define-key c++-mode-map [f12] #'compile-and-run))
 
 ;; (add-hook 'c++-mode-hook
 ;;           (lambda () (global-set-key (kbd "<f5>") #'compileandrun)))
@@ -66,7 +66,7 @@
   (other-window 1)
   (goto-char (point-max)))
 
-(with-eval-after-load "cc-mode" (define-key c++-mode-map [f12] #'cpp))
+(with-eval-after-load "cc-mode" (define-key c++-mode-map [f5] #'cpp))
 
 (defun c-program ()
   "Compile with `./a.out' and Run program within `eshell'."

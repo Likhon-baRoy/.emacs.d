@@ -4,7 +4,13 @@
 # key: /cpp
 # condition: (eq 1 (line-number-at-pos))
 # --
-/* #+ATHOUR: Likhon Barai */
+/*
+
+  #+ATHOUR: Likhon Barai
+  #+EMAIL:  <likhonhere007@gmail.com>
+
+*/
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -14,13 +20,13 @@ typedef pair<int,int> ii;
 typedef vector<int>   vi;
 typedef vector<ii>    vii;
 
-#define rep(i,a,b)    for (int i = a; i < b; ++i)
-#define dep(i,a,b)    for (int i = a; i >= b; --i)
-#define zep(i,a,b)    for (int i = a; i <= b; i++)
+#define rep(i,a,b)    for (int i{a}; i < b; ++i)
+#define dep(i,a,b)    for (int i{a}; i >= b; --i)
+#define zep(i,a,b)    for (int i{a}; i <= b; ++i)
 #define vout(x)       for (auto &i:x) cout << i << " "; cout << "\n";
 #define out(a,n)      for(int i=0;i<n;i++) cout << a[i] << " "; cout << "\n";
 inline int gcd(int a, int b) { if(b) while((a %= b) && (b %= a)); return (a + b); }
-#define TT int T; scanf("%d", &T); while (T--)
+#define TT int T; cin >> T; while (T--)
 #define precise cout << fixed << setprecision(4);
 #define _ ios_base::sync_with_stdio(0), cin.tie(0), cout.tie(0);
 #define str_unique(s) s.resize(unique(s.begin(), s.end()) - s.begin());
@@ -39,7 +45,10 @@ int main () { _
 
   // (A-Z)[65-90], (a-z)[97-122], (0-9)[48-57]
 
-    $0
+  int n, m, i, j, k, l, cnt = 0, sum = 0, ans = 0, res = 0, total = 0;
+  double dsum = 0, dans = 0, dtotal = 0;
 
-    return 0;
+  $0
+
+  return 0;
 }

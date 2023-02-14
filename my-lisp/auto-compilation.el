@@ -68,7 +68,6 @@
         ("C-<return>" . company-complete-selection)
         ("C-l"        . company-complete-selection)
         ("<tab>"      . company-indent-or-complete-common)
-        ("TAB"        . company-indent-or-complete-common)
         ("C-j"        . company-select-next)
         ("C-k"        . company-select-previous)
         ("C-d"        . company-show-doc-buffer)
