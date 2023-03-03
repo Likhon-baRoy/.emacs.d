@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: iterative-power
+# contributor: Likhon
+# key: /pow
+# --
+inline ll pow(ll base, ll pow) { // * Iterative power function
+  ll ans = 1;
+  while (pow) {
+    if (pow & 1) {
+      ans = ans * base % (1e9+7);
+    }
+    base = base * base % (1e9+7);
+    pow >>= 1;
+  }
+  return ans;
+}

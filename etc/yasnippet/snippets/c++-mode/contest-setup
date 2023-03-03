@@ -15,29 +15,44 @@
 using namespace std;
 
 // Shortcuts for "common" data type
-typedef long long     ll;
-typedef pair<int,int> ii;
-typedef vector<int>   vi;
-typedef vector<ii>    vii;
+typedef long long      ll;
+typedef vector<int>    vi;
+typedef pair<int,int>  ii;
+typedef vector<string> vs;
+typedef vector<char>   vc;
+typedef vector<bool>   vb;
+typedef vector<ii>     vii;
+typedef vector<vi>     vvi;
+typedef vector<vb>     vvb;
+typedef vector<vc>     vvc;
+typedef set<int>       si;
 
+#define read(x)       for (auto &it : x) cin >> it;
 #define rep(i,a,b)    for (int i{a}; i < b; ++i)
 #define dep(i,a,b)    for (int i{a}; i >= b; --i)
 #define zep(i,a,b)    for (int i{a}; i <= b; ++i)
-#define vout(x)       for (auto &i:x) cout << i << " "; cout << "\n";
+#define fr(i,a,b,c)   for(int i{a}; i <= b; i += c)
+#define frb(i,a,b,c)  for(int i{a}; i >= b; i -= c)
+#define vout(x)       for (auto &i : x) cout << i << " "; cout << "\n";
 #define out(a,n)      for(int i=0;i<n;i++) cout << a[i] << " "; cout << "\n";
-inline int gcd(int a, int b) { if(b) while((a %= b) && (b %= a)); return (a + b); }
+inline int gcd(int a, int b) {if(b) while((a %= b) && (b %= a)); return (a + b);}
 #define TT int T; cin >> T; while (T--)
 #define precise cout << fixed << setprecision(4);
 #define _ ios_base::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-#define str_unique(s) s.resize(unique(s.begin(), s.end()) - s.begin());
-#define str_unique1   s.erase(unique(s.begin(),s.end()),s.end());
-#define int_length(x) to_string(x).length()
-#define all(x)        x.begin(), x.end()
+#define lowb(a, x)    (lower_bound((a).begin(),(a).end(),(x))-(a).begin())
+#define uppb(a, x)    (upper_bound((a).begin(),(a).end(),(x))-(a).begin())
+#define str_uniq(s)   s.resize(unique(s.begin(), s.end()) - s.begin());
+#define str_uniq1      s.erase(unique(s.begin(),s.end()),s.end());
+#define onlyuniq(v)   v.erase(unique(v.begin(), v.end()), v.end()); // remove duplicates in a sorted vector
+#define int_len(x)    to_string(x).length()
+#define all(x)        (x).begin(),(x).end()
+#define rall(x)       (x).rbegin(),(x).rend()
 #define pb            push_back
-#define INF 100'00'00'000;
-const int sz = 1e6+5;
+#define sz(s)         (int)s.size()
 
-int main () { _
+const int mod = 1e9 + 7, inf = 2e9;
+
+int32_t main () { _
 #ifndef ONLINE_JUDGE
   freopen("input.txt", "r", stdin);
   freopen("output.txt", "w", stdout);

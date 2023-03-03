@@ -62,7 +62,8 @@
 (global-set-key (kbd "C-q") 'kill-or-quoted-insert)
 
 (defun kill-or-quoted-insert (arg)
-  "Kill the region if it is active, otherwise fall back to the default behavior."
+  "Kill the region if it is active, otherwise fall back to the default behavior.
+With a prefix argument ARG, insert the next ARG characters literally."
   (interactive "P")
   (if (use-region-p)
       (kill-region (region-beginning) (region-end))
@@ -111,6 +112,19 @@
     (kill-new (thing-at-point 'line))))
 
 ;;----------------------------------------------------------------------
+;;;; copy-whole-buffer-don't-move-cursor
+(defun copy-buffer-and-stay ()
+  "Copy the entire buffer and stay in the same position."
+  (interactive)
+  (let ((current-point (point)))
+    (set-mark (point-min))
+    (goto-char (point-max))
+    (kill-ring-save (region-beginning) (region-end))
+    (goto-char current-point)))
+
+(global-set-key (kbd "C-x M-w") 'copy-buffer-and-stay)
+
+;;----------------------------------------------------------------------
 ;;; keybindings
 ;;;; unbind-key
 (global-unset-key (kbd "C-z")) ; unbind (suspend-frame)
@@ -119,10 +133,6 @@
 ;; normal undo and redo
 (global-set-key (kbd "C-z") 'undo-only)
 (global-set-key (kbd "C-S-z") 'undo-tree-redo)
-;; (global-set-key "\M-c" 'toggle-letter-case)
-(global-set-key (kbd "C-`") 'duplicate-current-line)
-(global-set-key (kbd "C-~") 'duplicate-current-word)
-(global-set-key (kbd "C-<insert>") 'kill-ring-save-current-line)
 
 ;; ──────────────────────── Make Escape Key Greate again ───────────────────────
 ;; (unbind-key "<escape>")
@@ -168,8 +178,12 @@
 (bind-key "M-Q"               'unfill-paragraph)
 (bind-key "C-x C-z"           'toggle-truncate-lines) ; long lines go off the screen
 (bind-key "C-S-R"             'rename-file)
-(bind-key "\C-c\C-d" "\C-a\C- \C-n\M-w\C-y") ; duplicate whole line
 (bind-key "C-c D"             'delete-current-file-and-buffer)
+;; (bind-key "\C-c\C-d" "\C-a\C- \C-n\M-w\C-y") ; duplicate whole line
+;; (global-set-key "\M-c" 'toggle-letter-case)
+(global-set-key (kbd "C-`") 'duplicate-current-line)
+(global-set-key (kbd "C-~") 'duplicate-current-word)
+(global-set-key (kbd "C-c C-d") 'kill-ring-save-current-line) ; C-<insert>
 ;; (bind-key "C-x M-$"           'ispell-buffer)
 ;; (bind-key "M-;"               'comment-or-uncomment-current-line-or-region)
 ;; (bind-key "C-o"               'open-line)
@@ -329,7 +343,7 @@
 (bind-key "C-c t"             'toggle-transparency)
 (bind-key "C-c ;"             'comment-pretty)
 (bind-key "C-a"               'smarter-move-beginning-of-line)
-(bind-key "C-<f5>"            'global-display-line-numbers-mode)
+(bind-key "C-<f1>"            'global-display-line-numbers-mode)
 
 ;;; Interactive-bindings
 ;;;; resume/run previous cmnd

@@ -45,6 +45,7 @@
   (switch-to-buffer (other-buffer (current-buffer) t)))
 
 (defun split-and-follow-horizontally ()
+  "Split the window horizontally and navigate to the new window."
   (interactive)
   (split-window-below)
   (balance-windows)
@@ -52,6 +53,7 @@
   (switcheroo))
 
 (defun split-and-follow-vertically ()
+  "Split the window vertically and navigate to the new window."
   (interactive)
   (split-window-right)
   (balance-windows)
@@ -59,6 +61,23 @@
   (switcheroo))
 
 ;; ──────────────────────────────── Switch Theme ───────────────────────────────
+;; (defun switch-theme (theme)
+;;   "Disable any currently active themes and load THEME."
+;;   ;; This interactive call is taken from `load-theme'
+;;   (interactive
+;;    (list
+;;     (intern (completing-read "Load custom theme: "
+;;                              (mapc 'symbol-name
+;;                                    (custom-available-themes))))))
+;;   (let ((enabled-themes custom-enabled-themes))
+;;     (mapc #'disable-theme custom-enabled-themes)
+;;     (load-theme theme t)))
+
+;; (defun disable-active-themes ()
+;;   "Disable any currently active themes listed in `custom-enabled-themes'."
+;;   (interactive)
+;;   (mapc #'disable-theme custom-enabled-themes))
+
 (defun switch-theme (theme)
   "Disable any currently active themes and load THEME."
   ;; This interactive call is taken from `load-theme'
@@ -67,14 +86,8 @@
     (intern (completing-read "Load custom theme: "
                              (mapc 'symbol-name
                                    (custom-available-themes))))))
-  (let ((enabled-themes custom-enabled-themes))
-    (mapc #'disable-theme custom-enabled-themes)
-    (load-theme theme t)))
-
-(defun disable-active-themes ()
-  "Disable any currently active themes listed in `custom-enabled-themes'."
-  (interactive)
-  (mapc #'disable-theme custom-enabled-themes))
+  (mapc #'disable-theme custom-enabled-themes)
+  (load-theme theme t))
 
 ;; ──────────────────────────────── Transparency ───────────────────────────────
 (set-frame-parameter (selected-frame) 'alpha '(85 . 50))
@@ -263,11 +276,15 @@ point reaches the beginning or end of the buffer, stop there."
 
 
 ;; Switching to ibuffer puts the cursor on the most recent buffer
-(defadvice ibuffer (around ibuffer-point-to-most-recent) ()
-           "Open ibuffer with cursor pointed to most recent buffer name."
-           (let ((recent-buffer-name (buffer-name)))
-             ad-do-it
-             (ibuffer-jump-to-buffer recent-buffer-name)))
+(defadvice ibuffer
+    (around ibuffer-point-to-most-recent) ()
+    "Open ibuffer with cursor pointed to most recent buffer name.
+   This advice sets the cursor position to the name of the most recently
+   visited buffer when ibuffer is called. This makes it easier to quickly
+   switch back to a recent buffer without having to search for it in the list."
+    (let ((recent-buffer-name (buffer-name)))
+      ad-do-it
+      (ibuffer-jump-to-buffer recent-buffer-name)))
 (ad-activate 'ibuffer)
 
 ;; ─────────────────────── Delete current file and buffer ──────────────────────
@@ -290,7 +307,7 @@ point reaches the beginning or end of the buffer, stop there."
 (defun dired-back-to-top ()
   "Step back 3 lines from the very top."
   (interactive)
-  (beginning-of-buffer)
+  (goto-char (point-min))
   (dired-next-line 3))
 
 (define-key dired-mode-map
@@ -299,32 +316,57 @@ point reaches the beginning or end of the buffer, stop there."
 (defun dired-jump-to-bottom ()
   "Step up 1 line from the end."
   (interactive)
-  (end-of-buffer)
+  (goto-char (point-max))
   (dired-next-line -1))
 
 (define-key dired-mode-map
   (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)
 
-;; Move more quickly
-(global-set-key (kbd "C-S-n")
-                (lambda ()
-                  (interactive)
-                  (ignore-errors (next-line 5))))
+;;;; move-quickly
+(defun my-next-lines ()
+  "Move to the next 5 lines."
+  (interactive)
+  (forward-line 5))
 
-(global-set-key (kbd "C-S-p")
-                (lambda ()
-                  (interactive)
-                  (ignore-errors (previous-line 5))))
+(defun my-previous-lines ()
+  "Move to the previous 5 lines."
+  (interactive)
+  (forward-line -5))
 
-(global-set-key (kbd "C-S-f")
-                (lambda ()
-                  (interactive)
-                  (ignore-errors (forward-char 5))))
+(defun my-forward-chars ()
+  "Move to the forward 5 chars."
+  (interactive)
+  (forward-char 5))
 
-(global-set-key (kbd "C-S-b")
-                (lambda ()
-                  (interactive)
-                  (ignore-errors (backward-char 5))))
+(defun my-backward-chars ()
+  "Move to the backward 5 chars."
+  (interactive)
+  (forward-char -5))
+
+(define-key global-map (kbd "C-S-n") #'my-next-lines)
+(define-key global-map (kbd "C-S-p") #'my-previous-lines)
+(define-key global-map (kbd "C-S-f") #'my-forward-chars)
+(define-key global-map (kbd "C-S-b") #'my-backward-chars)
+
+;; (global-set-key (kbd "C-S-n")
+;;                 (lambda ()
+;;                   (interactive)
+;;                   (ignore-errors (forward-line 5))))
+
+;; (global-set-key (kbd "C-S-p")
+;;                 (lambda ()
+;;                   (interactive)
+;;                   (ignore-errors (forward-line -5))))
+
+;; (global-set-key (kbd "C-S-f")
+;;                 (lambda ()
+;;                   (interactive)
+;;                   (ignore-errors (forward-char 5))))
+
+;; (global-set-key (kbd "C-S-b")
+;;                 (lambda ()
+;;                   (interactive)
+;;                   (ignore-errors (backward-char 5))))
 
 ;; ───────────────────────── Show LineNumber Temporary ─────────────────────────
 (global-set-key [remap goto-line] 'goto-line-with-feedback)
@@ -335,7 +377,7 @@ point reaches the beginning or end of the buffer, stop there."
   (unwind-protect
       (progn
         (display-line-numbers-mode 1)
-        (goto-line (read-number "Goto line: ")))
+        (forward-line (read-number "Goto line: ")))
     (display-line-numbers-mode -1)))
 
 ;; ─────────────────────── Open Any File With LineNumber ───────────────────────

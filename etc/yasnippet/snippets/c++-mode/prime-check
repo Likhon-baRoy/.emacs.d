@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: prime-check-fun
+# contributor: Likhon
+# key: /prime
+# --
+bool isprime(int x)$0 { // * Check if a number is prime or not.
+    if (x < 2)
+        return false;
+    if (x < 4)
+        return true;
+    if (!(x & 1))
+        return false;
+    for (int i = 3; i * i <= x; i += 2)
+        if (!(x%i))
+          return false;
+  return true;
+}

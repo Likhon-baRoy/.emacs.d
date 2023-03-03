@@ -54,10 +54,9 @@
          ("C-c S" . org-babel-previous-src-block)
          ("C-c M-p" . org-babel-previous-src-block)
          :map org-mode-map
-         ("M-k"    . org-metaup)
-         ("M-j"    . org-metadown)
          ("C-'"    . nil)
-         ("<f5>"    . org-cycle-agenda-files))
+         ("M-;"    . 'comment-dwim-2)
+         ("<f5>"   . org-cycle-agenda-files))
   :init
   ;; general settings
   (when (file-directory-p "~/org")
