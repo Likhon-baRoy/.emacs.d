@@ -184,6 +184,10 @@ With a prefix argument ARG, insert the next ARG characters literally."
 (global-set-key (kbd "C-`") 'duplicate-current-line)
 (global-set-key (kbd "C-~") 'duplicate-current-word)
 (global-set-key (kbd "C-c C-d") 'kill-ring-save-current-line) ; C-<insert>
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (local-set-key (kbd "C-c C-d") 'kill-ring-save-current-line)))
+
 ;; (bind-key "C-x M-$"           'ispell-buffer)
 ;; (bind-key "M-;"               'comment-or-uncomment-current-line-or-region)
 ;; (bind-key "C-o"               'open-line)

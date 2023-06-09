@@ -1281,12 +1281,12 @@ If you experience stuttering, increase this.")
 
 ;;;; zonning
 ;;zone out the display when it goes idle for a given length of tim
-(setq zone-idle-time 300)
-(setq zone-timer (run-with-idle-timer zone-idle-time t 'zone))
-(setq zone-programs [
-		             zone-pgm-drip
-		             zone-pgm-drip-fretfully
-		             ])
+;; (setq zone-idle-time 300)
+;; (setq zone-timer (run-with-idle-timer zone-idle-time t 'zone))
+;; (setq zone-programs [
+;; 		             zone-pgm-drip
+;; 		             zone-pgm-drip-fretfully
+;; 		             ])
 
 ;;;; Dired
 (require 'dired)
@@ -1591,13 +1591,6 @@ If you experience stuttering, increase this.")
       (message "%s" file)
       (delete-file file))))
 
-;;; enable some major-mode
-(put 'scroll-left 'disabled nil)
-(put 'narrow-to-region 'disabled nil)
-(put 'narrow-to-defun  'disabled nil)
-(put 'narrow-to-page   'disabled nil)
-(put 'dired-find-alternate-file 'disabled nil)
-
 ;;; Finish up
 (provide 'init)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1605,3 +1598,11 @@ If you experience stuttering, increase this.")
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars)
 ;; End:
+
+;;; enable some major-mode
+(put 'scroll-left 'disabled nil)
+(put 'downcase-region 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
+(put 'narrow-to-defun  'disabled nil)
+(put 'narrow-to-page   'disabled nil)
+(put 'dired-find-alternate-file 'disabled nil)

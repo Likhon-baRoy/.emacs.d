@@ -54,7 +54,11 @@
 ;;     (quit-window nil (get-buffer-window cur-buffer 0))))
 ;; (add-hook 'compilation-finish-functions #'exit-after-compile-hook)
 
-(with-eval-after-load "cc-mode" (define-key c++-mode-map [f12] #'compile-and-run))
+(eval-after-load 'cc-mode
+  '(progn
+     (define-key c++-mode-map (kbd "C-c C-c") 'compile-and-run)
+     (define-key c-mode-map (kbd "C-c C-c") 'compile-and-run)))
+;; (with-eval-after-load "cc-mode" (define-key c++-mode-map "C-c\C-c" #'compile-and-run))
 
 ;; (add-hook 'c++-mode-hook
 ;;           (lambda () (global-set-key (kbd "<f5>") #'compileandrun)))
