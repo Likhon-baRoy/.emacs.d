@@ -250,7 +250,7 @@ Also this project relies on the following list of applications:
 - [[http://ctags.sourceforge.net][Exuberant Ctags]] (=ctags=)
 - Install [[https://www.jetbrains.com/lp/mono/][JetBrains Mono]], [[https://typeof.net/Iosevka/][Iosevka Aile]] (=font=)
 - Install [[https://cmake.org/install/][cmake]], [[https://clang.llvm.org/get_started.html][clang]], [[https://clang.llvm.org/get_started.html][llvm]], [[http://www.gdbtutorial.com/tutorial/how-install-gdb][gdb]] for programming purpose
-- Install [[https://github.com/domtronn/all-the-icons.el][all-the-icons]] fonts if already not installed, =M-x all-the-icons-install-fonts=
+- Install [[https://github.com/rainstormstudio/nerd-icons.el/tree/main][nerd-icons]] fonts if already not installed, =M-x nerd-icons-install-fonts=
 - Install [[https://github.com/googlefonts/noto-emoji][emoji font]] (*Noto Emoji* & =noto-cjk=, /for all the fonts imaginable/) for *Linux*
 - [[https://hunspell.github.io][Hunspell (=hunspell=)]] with [[https://stackoverflow.com/a/9436234/1661465][dictionaries]]
 

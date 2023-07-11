@@ -242,12 +242,21 @@ If you experience stuttering, increase this.")
       t
     nil))
 ;;;; all-the-icons
-(use-package all-the-icons
-  :if (display-graphic-p)
-  :config
-  (when (and (not (aorst/font-installed-p "all-the-icons"))
-             (window-system))
-    (all-the-icons-install-fonts t)))
+;; (use-package all-the-icons
+;;   :if (display-graphic-p)
+;;   :config
+;;   (when (and (not (aorst/font-installed-p "all-the-icons"))
+;;              (window-system))
+;;     (all-the-icons-install-fonts t)))
+
+;; doom-modeline dropped all-the-icons support in favor of nerd-icons
+(use-package nerd-icons
+  ;; :custom
+  ;; The Nerd Font you want to use in GUI
+  ;; "Symbols Nerd Font Mono" is the default and is recommended
+  ;; but you can use any other Nerd Font if you want
+  ;; (nerd-icons-font-family "Symbols Nerd Font Mono")
+  )
 
 ;;;; avy
 (use-package avy
@@ -758,7 +767,6 @@ If you experience stuttering, increase this.")
 
 ;;;; custom-modeline
 (use-package doom-modeline
-  :after all-the-icons
   :init (doom-modeline-mode)
   :custom
   ;; Don't compact font caches during GC. Windows Laggy Issue
@@ -786,7 +794,6 @@ If you experience stuttering, increase this.")
 ;;;; dashboard
 ;; A dashboard on startup can clean my mind
 (use-package dashboard
-  :after all-the-icons
   :bind (:map dashboard-mode-map
               ;; ("j" . nil)
               ;; ("k" . nil)
@@ -804,22 +811,22 @@ If you experience stuttering, increase this.")
   (dashboard-startup-banner (concat user-emacs-directory "etc/banners/ue-colorful.png"))
   :config
   (dashboard-setup-startup-hook)
-  (setq dashboard-footer-icon (all-the-icons-octicon "calendar"
-                                                     :height 1.1
-                                                     :v-adjust -0.05
-                                                     :face 'font-lock-keyword-face))
+  (setq dashboard-footer-icon (nerd-icons-codicon "nf-cod-calendar"
+                                                  :height 1.1
+                                                  :v-adjust -0.05
+                                                  :face 'font-lock-keyword-face))
 
   (setq dashboard-navigator-buttons
         `(;; line1
-          ((,(all-the-icons-octicon "octoface" :height 1.1 :v-adjust 0.0)
+          ((,(nerd-icons-codicon "nf-cod-octoface" :height 1.5 :v-adjust 0.0)
             "Homepage"
             "Browse homepage"
             (lambda (&rest _) (browse-url "https://github.com/Likhon-baRoy/.emacs.d")) nil "" " |")
-           (,(all-the-icons-faicon "refresh" :height 1.1 :v-adjust 0.0)
+           (,(nerd-icons-codicon "nf-cod-refresh" :height 1.5 :v-adjust 0.0)
             "Update"
             "Update Zmacs"
             (lambda (&rest _) (auto-package-update-maybe)) warning "" " |")
-           (,(all-the-icons-faicon "flag" :height 1.1 :v-adjust 0.0) nil
+           (,(nerd-icons-faicon "nf-fa-flag" :height 1.5 :v-adjust 0.0) nil
             "Report a BUG"
             (lambda (&rest _) (browse-url "https://github.com/Likhon-baRoy/.emacs.d/issues/new")) error "" ""))
           ;; line 2
@@ -831,16 +838,16 @@ If you experience stuttering, increase this.")
           (("" "\n" "" nil nil "" ""))
 
           ;; Keybindings
-          ((,(all-the-icons-octicon "search" :height 0.9 :v-adjust -0.1)
+          ((,(nerd-icons-faicon "nf-fa-search" :height 0.9 :v-adjust -0.1)
             " Find file" nil
             (lambda (&rest _) (counsel-find-file)) nil "" "            C-x C-f"))
-          ((,(all-the-icons-octicon "file-directory" :height 1.0 :v-adjust -0.1)
+          ((,(nerd-icons-octicon "nf-oct-file_directory" :height 1.0 :v-adjust -0.1)
             " Open project" nil
             (lambda (&rest _) (counsel-projectile-switch-project)) nil "" "         C-x p d"))
-          ((,(all-the-icons-octicon "three-bars" :height 1.1 :v-adjust -0.1)
+          ((,(nerd-icons-octicon "nf-oct-three_bars" :height 1.1 :v-adjust -0.1)
             " File explorer" nil
             (lambda (&rest _) (counsel-projectile-switch-project)) nil "" "        C-x p D"))
-          ((,(all-the-icons-octicon "settings" :height 0.9 :v-adjust -0.1)
+          ((,(nerd-icons-codicon "nf-cod-settings" :height 0.9 :v-adjust -0.1)
             " Open settings" nil
             (lambda (&rest _) (open-config-file)) nil "" "        C-c e  "))))
 
