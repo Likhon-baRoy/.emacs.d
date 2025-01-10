@@ -369,16 +369,16 @@ point reaches the beginning or end of the buffer, stop there."
 ;;                   (ignore-errors (backward-char 5))))
 
 ;; ───────────────────────── Show LineNumber Temporary ─────────────────────────
-(global-set-key [remap goto-line] 'goto-line-with-feedback)
+;; (global-set-key [remap goto-line] 'goto-line-with-feedback)
 
-(defun goto-line-with-feedback ()
-  "Show line numbers temporarily, while prompting for the line number input."
-  (interactive)
-  (unwind-protect
-      (progn
-        (display-line-numbers-mode 1)
-        (forward-line (read-number "Goto line: ")))
-    (display-line-numbers-mode -1)))
+;; (defun goto-line-with-feedback ()
+;;   "Show line numbers temporarily, while prompting for the line number input."
+;;   (interactive)
+;;   (unwind-protect
+;;       (progn
+;;         (display-line-numbers-mode 1)
+;;         (forward-line (read-number "Goto line: ")))
+;;     (display-line-numbers-mode -1)))
 
 ;; ─────────────────────── Open Any File With LineNumber ───────────────────────
 (defadvice find-file (around find-file-line-number
