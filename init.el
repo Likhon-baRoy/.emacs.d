@@ -1519,7 +1519,6 @@ If you experience stuttering, increase this.")
  transient-mark-mode t              ; highlight the stuff you are marking.
  ffap-machine-p-known 'reject       ; Don't ping things that look like domain names.
  pgtk-wait-for-event-timeout 0.001
- display-line-numbers-type 'relative
  speedbar-show-unknown-files t ; browse source tree with Speedbar file browser
  frame-title-format '(buffer-file-name "Emacs: %b (%f)" "Emacs: %b") ; name of the file I am editing as the name of the window.
  )
