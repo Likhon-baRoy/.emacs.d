@@ -642,6 +642,7 @@ If you experience stuttering, increase this.")
   (if window-system
       (fancy-battery-mode)
     (display-battery-mode)))
+
 ;;;;; olivetti
 (use-package olivetti
   :hook ((text-mode         . olivetti-mode)
@@ -652,7 +653,8 @@ If you experience stuttering, increase this.")
          (markdown-mode     . olivetti-mode)
          (mu4e-view-mode    . olivetti-mode)
          (elfeed-show-mode  . olivetti-mode)
-         (mu4e-compose-mode . olivetti-mode))
+         (mu4e-compose-mode . olivetti-mode)
+         (web-mode . (lambda () (olivetti-mode -1))))  ;; Disable olivetti-mode in web-mode
   :custom
   (olivetti-body-width 80)
   :delight " ⊗") ; Ⓐ ⊛
