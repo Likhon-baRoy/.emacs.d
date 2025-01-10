@@ -265,7 +265,7 @@ If you experience stuttering, increase this.")
 (use-package avy
   :bind(("C-'" . 'avy-goto-char)
         ("C-:" . 'avy-goto-char-2)
-        ("M-g g" . 'avy-goto-line)
+        ("M-g M-g" . 'avy-goto-line)
         ("M-g e" . 'avy-goto-word-0)
         ("M-g w" . 'avy-goto-word-1)
         ;; ("M-" . 'avy-copy-line)
