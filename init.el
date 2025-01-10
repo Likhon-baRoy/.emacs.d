@@ -171,6 +171,9 @@ If you experience stuttering, increase this.")
    auto-save-file-name-transforms
    `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
 
+(use-package sudo-edit
+  :ensure t)
+
 (use-package delight
   :doc "A feature that removes certain minor-modes from mode-line.
 "
