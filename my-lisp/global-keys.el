@@ -352,6 +352,7 @@ With a prefix argument ARG, insert the next ARG characters literally."
 (bind-key "C-c t"             'toggle-transparency)
 (bind-key "C-c ;"             'comment-pretty)
 (bind-key "C-a"               'smarter-move-beginning-of-line)
+(bind-key "M-g g"             'goto-line-relative)
 (bind-key "C-<f1>"            'global-display-line-numbers-mode)
 
 ;;; Interactive-bindings
