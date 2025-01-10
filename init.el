@@ -987,6 +987,16 @@ If you experience stuttering, increase this.")
       gdb-many-windows t) ; GDB interface supports a number of other windows
 
 ;;;;; web
+(use-package web-mode
+  :ensure t
+  :mode (("\\.html?\\'" . web-mode)
+         ("\\.php\\'" . web-mode)
+         ("\\.css\\'" . web-mode))
+  :config
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2))
+
 (use-package emmet-mode
   :after (web-mode css-mode scss-mode)
   :commands (emmet-mode emmet-expand-line yas-insert-snippet company-complete)
