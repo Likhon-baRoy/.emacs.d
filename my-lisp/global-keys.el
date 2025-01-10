@@ -188,6 +188,11 @@ With a prefix argument ARG, insert the next ARG characters literally."
           (lambda ()
             (local-set-key (kbd "C-c C-d") 'kill-ring-save-current-line)))
 
+;; Unbind M-o in html-mode to remove 'set-face' functionality
+(add-hook 'html-mode-hook
+          (lambda ()
+            (local-unset-key (kbd "M-o"))))  ;; Unbind M-o in html-mode
+
 ;; (bind-key "C-x M-$"           'ispell-buffer)
 ;; (bind-key "M-;"               'comment-or-uncomment-current-line-or-region)
 ;; (bind-key "C-o"               'open-line)
