@@ -38,18 +38,18 @@
 
 ;; ──────────────────────────────── COMPANY-MODE ───────────────────────────────
 (use-package company-box
-  :delight
+  :ensure t
   :after company
   :hook (company-mode . company-box-mode))
 ;; (set-face-background 'company-box--apply-color "#555555")
 
 (use-package company
+  :ensure t
   :defer 2
   :delight " Ⱞ"
   :commands company-mode
   ;; :after prog-mode
   ;; :hook (prog-mode . company-mode)
-  :hook (after-init . global-company-mode)
   :bind
   (:map company-active-map
         ("C-h"        . nil)
@@ -96,7 +96,6 @@
   (company-minimum-prefix-length 1)
   (company-dabbrev-code-modes t)
   (company-dabbrev-code-everywhere t)
-  (company-dabbrev-ignore-case nil)
   (company-debbrev-other-buffers 'all)
   (company-dabbrev-downcase nil)
   (company-tooltip-limit 10)
@@ -107,6 +106,7 @@
   ;; (company-require-match #'company-explicit-action-p)
   ;; (company-frontends '(company-pseudo-tooltip-frontend))
   :config
+  (global-company-mode)
   (setq company-backends '((company-files        ; files & directory
                             company-keywords     ; keywords
                             company-capf         ; what is it?
@@ -153,13 +153,18 @@
                     company-dabbrev
                     company-dabbrev-code)))))
 
-(require 'company-capf)
-(require 'company-files)
-(require 'company-ispell)
-(delete-dups (push 'company-capf company-backends))
-(delete-dups (push 'company-files company-backends))
-(delete-dups (push 'company-ispell company-backends))
-(delete-dups (push 'company-debbrev company-backends))
+(with-eval-after-load 'company
+  (require 'company-capf)
+  (require 'company-files)
+  (require 'company-ispell)
+  ;; Just in case you're using this one
+  (require 'company-dabbrev)
+
+  (delete-dups (push 'company-capf company-backends))
+  (delete-dups (push 'company-files company-backends))
+  (delete-dups (push 'company-ispell company-backends))
+  (delete-dups (push 'company-dabbrev company-backends)))
+
 ;; Delete duplicates from company popups
 ;; (setq-local company-transformers '(delete-dups)
 ;;             company-backends '(company-files (:separate company-dabbrev company-ispell)))
@@ -186,8 +191,10 @@
 
 ;; Required for proportional font
 (use-package company-posframe
-  :config (company-posframe-mode t)
-  :delight)
+  :ensure t
+  :after company
+  :config
+  (company-posframe-mode 1))
 
 (use-package yasnippet
   :delight yas-minor-mode " ¥"
