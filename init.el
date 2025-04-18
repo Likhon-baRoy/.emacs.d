@@ -238,12 +238,6 @@ If you experience stuttering, increase this.")
   ;; To disable collection of benchmark data after init is done.
   (add-hook 'after-init-hook 'benchmark-init/deactivate))
 
-;;;; check font-name
-(defun aorst/font-installed-p (font-name)
-  "Check if font with FONT-NAME is available."
-  (if (find-font (font-spec :name font-name))
-      t
-    nil))
 ;;;; all-the-icons
 ;; (use-package all-the-icons
 ;;   :if (display-graphic-p)
@@ -894,38 +888,39 @@ If you experience stuttering, increase this.")
   (global-ligature-mode t))
 
 ;;;;; ligature-for-jetbrain
-(when (aorst/font-installed-p "JetBrainsMono")
-  (dolist (char/ligature-re
-           `((?-  ,(rx (or (or "-->" "-<<" "->>" "-|" "-~" "-<" "->") (+ "-"))))
-             (?/  ,(rx (or (or "/==" "/=" "/>" "/**" "/*") (+ "/"))))
-             (?*  ,(rx (or (or "*>" "*/") (+ "*"))))
-             (?<  ,(rx (or (or "<<=" "<<-" "<|||" "<==>" "<!--" "<=>" "<||" "<|>" "<-<"
-                               "<==" "<=<" "<-|" "<~>" "<=|" "<~~" "<$>" "<+>" "</>" "<*>"
-                               "<->" "<=" "<|" "<:" "<>"  "<$" "<-" "<~" "<+" "</" "<*")
-                           (+ "<"))))
-             (?:  ,(rx (or (or ":?>" "::=" ":>" ":<" ":?" ":=") (+ ":"))))
-             (?=  ,(rx (or (or "=>>" "==>" "=/=" "=!=" "=>" "=:=") (+ "="))))
-             (?!  ,(rx (or (or "!==" "!=") (+ "!"))))
-             (?>  ,(rx (or (or ">>-" ">>=" ">=>" ">]" ">:" ">-" ">=") (+ ">"))))
-             (?&  ,(rx (+ "&")))
-             (?|  ,(rx (or (or "|->" "|||>" "||>" "|=>" "||-" "||=" "|-" "|>" "|]" "|}" "|=")
-                           (+ "|"))))
-             (?.  ,(rx (or (or ".?" ".=" ".-" "..<") (+ "."))))
-             (?+  ,(rx (or "+>" (+ "+"))))
-             (?\[ ,(rx (or "[<" "[|")))
-             (?\{ ,(rx "{|"))
-             (?\? ,(rx (or (or "?." "?=" "?:") (+ "?"))))
-             (?#  ,(rx (or (or "#_(" "#[" "#{" "#=" "#!" "#:" "#_" "#?" "#(") (+ "#"))))
-             (?\; ,(rx (+ ";")))
-             (?_  ,(rx (or "_|_" "__")))
-             (?~  ,(rx (or "~~>" "~~" "~>" "~-" "~@")))
-             (?$  ,(rx "$>"))
-             (?^  ,(rx "^="))
-             (?\] ,(rx "]#"))))
-    (apply (lambda (char ligature-re)
-             (set-char-table-range composition-function-table char
-                                   `([,ligature-re 0 font-shape-gstring])))
-           char/ligature-re)))
+(when (fboundp 'my/font-available-p)
+  (when (my/font-available-p "JetBrainsMono")
+    (dolist (char/ligature-re
+             `((?-  ,(rx (or (or "-->" "-<<" "->>" "-|" "-~" "-<" "->") (+ "-"))))
+               (?/  ,(rx (or (or "/==" "/=" "/>" "/**" "/*") (+ "/"))))
+               (?*  ,(rx (or (or "*>" "*/") (+ "*"))))
+               (?<  ,(rx (or (or "<<=" "<<-" "<|||" "<==>" "<!--" "<=>" "<||" "<|>" "<-<"
+                                 "<==" "<=<" "<-|" "<~>" "<=|" "<~~" "<$>" "<+>" "</>" "<*>"
+                                 "<->" "<=" "<|" "<:" "<>"  "<$" "<-" "<~" "<+" "</" "<*")
+                             (+ "<"))))
+               (?:  ,(rx (or (or ":?>" "::=" ":>" ":<" ":?" ":=") (+ ":"))))
+               (?=  ,(rx (or (or "=>>" "==>" "=/=" "=!=" "=>" "=:=") (+ "="))))
+               (?!  ,(rx (or (or "!==" "!=") (+ "!"))))
+               (?>  ,(rx (or (or ">>-" ">>=" ">=>" ">]" ">:" ">-" ">=") (+ ">"))))
+               (?&  ,(rx (+ "&")))
+               (?|  ,(rx (or (or "|->" "|||>" "||>" "|=>" "||-" "||=" "|-" "|>" "|]" "|}" "|=")
+                             (+ "|"))))
+               (?.  ,(rx (or (or ".?" ".=" ".-" "..<") (+ "."))))
+               (?+  ,(rx (or "+>" (+ "+"))))
+               (?\[ ,(rx (or "[<" "[|")))
+               (?\{ ,(rx "{|"))
+               (?\? ,(rx (or (or "?." "?=" "?:") (+ "?"))))
+               (?#  ,(rx (or (or "#_(" "#[" "#{" "#=" "#!" "#:" "#_" "#?" "#(") (+ "#"))))
+               (?\; ,(rx (+ ";")))
+               (?_  ,(rx (or "_|_" "__")))
+               (?~  ,(rx (or "~~>" "~~" "~>" "~-" "~@")))
+               (?$  ,(rx "$>"))
+               (?^  ,(rx "^="))
+               (?\] ,(rx "]#"))))
+      (apply (lambda (char ligature-re)
+               (set-char-table-range composition-function-table char
+                                     `([,ligature-re 0 font-shape-gstring])))
+             char/ligature-re))))
 
 ;;________________________________________________________________
 ;;;;    programming
@@ -1218,7 +1213,7 @@ If you experience stuttering, increase this.")
   :bind ("<f8>" . ispell-word) ; easy spell check
   :custom
   (ispell-program-name "hunspell") ; require Hunspell
-  (ispell-dictionary "en_US,en_GB,bn_BD")
+  (ispell-dictionary "en_US")
   (ispell-personal-dictionary "~/.emacs.d/.hunspell_personal")
   :config
   ;; Configure `LANG`, otherwise ispell.el cannot find a 'default
@@ -1242,9 +1237,9 @@ If you experience stuttering, increase this.")
               ("C-x M-$"    . flyspell-buffer)
               ("C-<f7>"     . flyspell-auto-correct-word)
               ("C-<f12>"    . flyspell-auto-correct-previous-word))
-  :init (progn (dolist (hook '(org-mode-hook text-mode-hook message-mode-hook))
-                 (add-hook hook 'turn-on-flyspell))
-               (add-hook 'prog-mode-hook 'flyspell-prog-mode))
+  :hook ((org-mode text-mode message-mode) . turn-on-flyspell)
+  (prog-mode . flyspell-prog-mode)
+  :commands (flyspell-mode flyspell-prog-mode)
   :delight " ⓢ")
 
 ;; Saves the minibuffer history on every Emacs session.
@@ -1522,40 +1517,6 @@ If you experience stuttering, increase this.")
  speedbar-show-unknown-files t ; browse source tree with Speedbar file browser
  frame-title-format '(buffer-file-name "Emacs: %b (%f)" "Emacs: %b") ; name of the file I am editing as the name of the window.
  )
-
-;;________________________________________________________________
-;;;;    Fonts
-;;________________________________________________________________
-(global-font-lock-mode 1)             ; Use font-lock everywhere.
-(setq font-lock-maximum-decoration t) ; We have CPU to spare; highlight all syntax categories.
-
-;; Set the font face
-(cond ((aorst/font-installed-p "JetBrainsMono")
-       (set-face-attribute 'default nil :font (font-spec :family "JetBrainsMono" :size 10.0 :weight 'regular))
-       (set-face-attribute 'fixed-pitch nil :font (font-spec :family "JetBrainsMono" :size 10.0 :weight 'regular)))
-      ((aorst/font-installed-p "Source Code Pro")
-       (set-face-attribute 'default nil :font "Source Code Pro 10")))
-
-;; For variable pitched fonts Iosevka Aile is used if available.
-(when (aorst/font-installed-p "Iosevka Aile")
-  (set-face-attribute 'variable-pitch nil :font (font-spec :family "Iosevka Aile" :size 10.5 :weight 'regular))
-  (set-face-attribute 'font-lock-comment-face nil :family "Iosevka Aile Oblique" :height 106) ; :foreground "#5B6268"
-  (set-face-attribute 'font-lock-function-name-face nil :family "Iosevka Aile" :height 102 :slant 'italic :weight 'regular) ; 'medium
-  ;; (set-face-attribute 'font-lock-variable-name-face nil :foreground "#dcaeea" :weight 'bold)
-  (set-face-attribute 'font-lock-keyword-face nil :weight 'bold)
-  )
-
-;; Set up emoji rendering
-;; Default Windows emoji font
-(when (member "Segoe UI Emoji" (font-family-list))
-  (set-fontset-font t 'symbol (font-spec :family "Segoe UI Emoji") nil 'prepend)
-  (set-fontset-font "fontset-default" '(#xFE00 . #xFE0F) "Segoe UI Emoji"))
-
-;; Linux emoji font
-(when (member "Noto Color Emoji" (font-family-list))
-  (set-fontset-font t 'symbol (font-spec :family "Noto Color Emoji") nil 'prepend)
-  (set-fontset-font "fontset-default" '(#xFE00 . #xFE0F) "Noto Color Emoji"))
-
 ;;________________________________________________________________
 ;;;;    Custom settings
 ;;________________________________________________________________
@@ -1593,10 +1554,11 @@ If you experience stuttering, increase this.")
 
 ;;;; Load custom-files
 (defun load-directory (dir)
-  "Load all *.el files in a directory."
+  "Load every .el file in DIR."
   (let ((load-it (lambda (f)
                    (load-file (concat (file-name-as-directory dir) f)))))
-    (mapc load-it (directory-files dir nil "\\.el$"))))
+    (mapc load-it
+          (directory-files dir nil "\\.el$"))))
 
 (load-directory "~/.emacs.d/my-lisp") ; load my configuration of packages
 
