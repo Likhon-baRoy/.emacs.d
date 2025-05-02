@@ -14,7 +14,7 @@
 
 ;; Define fallback fonts
 (defvar my/default-mono-font
-  (my/first-available-font "JetBrainsMono" "Source Code Pro" "DejaVu Sans Mono" "Monospace")
+  (my/first-available-font "JetBrains Mono" "Source Code Pro" "DejaVu Sans Mono" "Monospace")
   "Primary monospaced font.")
 
 (defvar my/variable-font
