@@ -60,7 +60,7 @@ Emacs is a *mutable environment*. You can set variables, tweak functions with ad
 
 Emacs provides *functionality without applications*. Rather than separate applications, functionality is all integrated into your Emacs instance. Amazingly, this works. Ever wanted to use the same snippet tool for writing C++ classes as well as emails?
 
-Emacs is full of *incredible software concepts that haven't hit the mainstream yet*. For example:
+Emacs is full of *incredible software concepts that haven't hit mainstream yet*. For example:
 
 -   Many platforms have a single item clipboard. Emacs has an *infinite clipboard*.
 -   If you undo a change, and then continue editing, you can't redo the original change. Emacs allows *undoing to any historical state*, even allowing tree-based exploration of history.
@@ -81,16 +81,16 @@ This beautifully written *About EMACS* section credits to [[https://github.com/r
 Welcome to the /Emacs Of Dream/. Wait no, I meant the *Emacs Operating System*. \\
 This repository contains my personal configuration for *GNU Emacs* that I use on the daily and port around from system to system with me. This is an example of a fully custom Emacs configuration that you can use as inspiration when building your own!
 
-Customization began with *single-file* =~/.emacs= with few settings and some random *snippets*. Didn't took long to become monster. It loved to *cherry-picked* 🍒 packages literally form anywhere, I was like why don't you *apt-get*.
+Customization began with *single-file* =~/.emacs= with few settings and some random *snippets*. Didn't took long to become a monster. It loved to *cherry-pick* 🍒 packages literally form anywhere, I was like why don't you *apt-get*.
 
 The configuration depends on [[file:init.el][init.el]], [[https://github.com/Likhon-baRoy/.emacs.d/tree/main/my-lisp][my-lisp]](dir) and [[file:early-init.el][early-init.el]] (sets up a few initial GUI settings), bootstraps [[https://github.com/jwiegley/use-package][use-package]]. and loads [[file:init.el][init.el]], which is where the majority of the configuration magic happens.
 
 This is an Emacs distribution that aims to enhance the default Emacs experience. It alters a lot of the default settings, bundles of additional packages and adds its own core library to the mix. The final product offers an easy to use Emacs configuration for Emacs newcomers and lots of additional power for Emacs power users.
 
-It's able to run on *GNU/Linux*, *macOS* and *Windows*. It is compatible ONLY with *GNU Emacs 27.1* and *Above*. In general you're advised to always run with the latest stable release - currently *28.2*.
+It's able to run on *GNU/Linux*, *macOS* and *Windows*. It is compatible ONLY with *GNU Emacs 27.1* and *Above*. In general you're advised to always run the latest stable release - currently *28.2*.
 
 * Screenshots
-Here are some demo... \\
+Here are some demos... \\
 
 /A dashboard on startup can clean my mind/.😌
 #+BEGIN_CENTER
@@ -128,22 +128,22 @@ Just keep in mind that this repo isn’t set up to be used directly as your own 
 * Installation
 [[https://GitHub.com/Likhon-baRoy/][http://ForTheBadge.com/images/badges/built-with-swag.svg]]
 
-🧨 *DISCLAIMER:* 🐒 MAKE SURE YOU HAVE THE BACKUP ⚠ AUTHOR will
+🧨 *DISCLAIMER:* 🐒 MAKE SURE YOU HAVE THE BACKUP ⚠ THE AUTHOR will
    _not_ be _responsible_ for the 🔥 _harm_ 🔥 cause by using this
    configuration.
 
-   Oh! you wanna use my config! its super duper +easy+ ! may be in
-   future I'm still +trying+ avoiding make the installer (literally
+   Oh! you wanna use my config! its super duper +easy+ ! It may be in the
+   future but I'm still +trying+ to avoid making the installer (literally
    don't know how) and just trying to get by my work.
 
 1. Install [[https://www.gnu.org/software/emacs/][GNU Emacs]].
 2. Move =~/.emacs= or =~/.emacs.d=, if you already have it.
 3. Clone this repo to =HOME= or =~/= path using git and update all the submodules.\\
-   /Run this snippets on your terminal:/
+   /Run these snippets in your terminal:/
 #+begin_src sh
   cd ~
   git clone https://github.com/Likhon-baRoy/.emacs.d.git
-  cd.emacs.d
+  cd .emacs.d
 #+end_src
 4. Ensure a stable connection to Melpa Packages, then open Emacs.
 5. Enter =y= when prompted with =Auto-update packages now?=, wait for all packages to install. /(Ignore the warnings on the first launch.)/
@@ -153,21 +153,21 @@ Just keep in mind that this repo isn’t set up to be used directly as your own 
 ** Why this Config?
 
    There is absolutely no reason for you to use this config, it would
-   be like first time 🏊 swimmer, who mostly likely drown with
-   unnecessary amount of effort. Although I'm great at underwater so
-   to say some what athletic *underachievers*.
+   be like the first time 🏊 swimmer, who would mostly likely drown with
+   an unnecessary amount of effort. Although I'm great underwater so
+   to say somewhat athletic *underachievers*.
 
-   Time 🕥 and time 🕝 again I learned *elisp* just to forget with
+   Time 🕥 and time 🕝 again I learned *elisp* just to forget it with
    endless pondering and compromises, without ✍ jotting things down,
    it would have been impossible to configure. May be this started for
    maintenance, now its more of rants taking over the configuration! 😎
 
-   If you ask, would I have started with other's config? I would
+   If you ask me, would I have started with other's config? I would
    definitely say *YES*. But you should *understand* all-in-one
-   package 📦 or distribution is like bringing gun 🔫 to the fist 👊
+   package 📦 or distribution is like bringing a gun 🔫 to a fist 👊
    fight. You might end up using less than 5 % of the *bloat*. And if
-   you want to change or fix something it big 😫 pain to pealing
-   layers after layers to find the actual root cause. Yet you might
+   you want to change or fix something it is a big 😫 pain to peel
+   layer after layer to find the actual root cause. Yet you might
    want to try these first
 
    - [[https://github.com/hlissner/doom-emacs][Doom Emacs]]
@@ -181,7 +181,7 @@ Just keep in mind that this repo isn’t set up to be used directly as your own 
    - [[https://github.com/raxod502/radian][Radian]]
    - [[https://github.com/purcell/emacs.d][purcell emacs.d]]
 
-   And there configurations too.
+   And these configurations too.
 
    - [[https://github.com/mattduck/dotfiles/blob/master/emacs.d.symlink/init.org][mattduck]]
    - [[https://github.com/DiegoVicen/my-emacs][DiegoVicen]]
@@ -195,13 +195,13 @@ Just keep in mind that this repo isn’t set up to be used directly as your own 
 
 ** Troubleshooting
 
-   While troubleshooting I go though these procedure (may not be in
-   same ordering)
+   While troubleshooting I go though these procedures (may not be in the
+   same order)
 
    - hate myself when it happens
    - *REMOVE* the damn plugin and *GET BACK TO WORK*
    - *throw* ERROR MSG at google and try *catching* relevant pages
-   - may be waste few hrs with random *trials*
+   - maybe waste few hrs with random *trials*
    - set debug variable
 
      #+BEGIN_SRC emacs-lisp :tangle no
@@ -219,7 +219,7 @@ If you spotted a bug or you have any suggestions, please fill in an issue. If yo
 
 ** Special Thanks
 Everyone starts somewhere, and I started here.
-My heart whelming *Thanks* 🙏🏽 to you guy's 💜, who put all their effort always makes *Emacs* go one-step further.
+My heart whelming *Thanks* 🙏🏽 to you guy's 💜, whose effort always makes *Emacs* go one-step further.
 
 - *UncleDave* ([[https://github.com/daedreth/UncleDavesEmacs#readme][GitHub]], [[https://www.youtube.com/watch?v=d6iY_1aMzeg&list=PLX2044Ew-UVVv31a0-Qn3dA6Sd_-NyA1n][YouTube]])
 - *Howard Abrams* ([[https://github.com/howardabrams/dot-files][GitHub]], [[https://www.youtube.com/@howardabrams1/featured][YouTube]])
@@ -233,7 +233,7 @@ And many other people from the *Internet World*.
 
 * Prerequisites
 ** User Information
-Please update this file your personal info.
+Please update this file with your personal info.
 #+BEGIN_SRC emacs-lisp
 (setq user-full-name       "Your Name"
       user-login-name      "Login_Name"
@@ -258,9 +258,9 @@ Also this project relies on the following list of applications:
 
 📝 *Note:* (/for beginners/) I'll be using =Ctrl= as =C=, =Alt= as =M=, =Shift= as =S=, =Space= as =SPC= and =BackSpace= as =BS=. \\
 
-+ You must wanna see this documentation 👉🏽 [[https://github.com/Likhon-baRoy/org-notes/blob/main/Emacs/emacs_user-manual.org][Emacs-user-manual]].
++ You might wanna see this documentation 👉🏽 [[https://github.com/Likhon-baRoy/org-notes/blob/main/Emacs/emacs_user-manual.org][Emacs-user-manual]].
 
-After installation process is done.  Whenever you open a files within Emacs, the whole file will be opened in folding mode.  Which you'll obviously won't see until you find the shortcut key-binding.  There is a default feature for this which called *hs-minor-mode* I just change some default key-bindings for more useful. \\
+After installation process is done.  Whenever you open a file within Emacs, the whole file will be opened in folding mode.  Which you obviously won't see until you find the shortcut key-binding.  There is a default feature for this which called *hs-minor-mode* I just changed some default key-bindings for more useful. \\
 
 *check this out:*
 #+begin_example
@@ -273,7 +273,7 @@ After installation process is done.  Whenever you open a files within Emacs, the
 #+end_example
 
 * Custom Configurations
-Here is my some personal changes for *Emacs* which comes default with this configuration.
+Here are some of my personal changes for *Emacs* which comes default with this configuration.
 ** Custom key bindings
 
 #+BEGIN_SRC emacs-lisp
@@ -329,7 +329,7 @@ Here is my some personal changes for *Emacs* which comes default with this confi
   (define-key global-map "\M-Q" 'unfill-paragraph)
 #+END_SRC
 
-- Now now, how much you like *transparency*?  With this config this method comes default. \\
+- Now now, how much do you like *transparency*?  With this config, this method comes default. \\
   you can *toggle* =on= / =off= *transparency* /using/ =C-c t= keystrokes.
 
 #+BEGIN_SRC emacs-lisp
@@ -365,7 +365,7 @@ Writing in Bangla using *company-wordfreq*.
 - Install Bangla font [[https://www.freebanglafont.com/download.php?id=656][Kalpurush]]
 
 *** Settings
-You can put this configuration code to you =init.el= file or make an extra separate file and put it in =~/.emacs.d/my-lisp/= directory then Emacs will autoload this file from there.
+You can put this configuration code to your =init.el= file or make an extra separate file and put it in =~/.emacs.d/my-lisp/= directory then Emacs will autoload this file from there.
 
 set your keyboard default layout to =Probhat= key-layout.
 #+BEGIN_SRC emacs-lisp
@@ -373,7 +373,7 @@ set your keyboard default layout to =Probhat= key-layout.
   (set-fontset-font "fontset-default" 'bengali (font-spec :family "Kalpurush" :size 16))
 #+END_SRC
 
-Install the following package for auto suggestions of Bangla word.
+Install the following package for auto suggestions of Bangla words.
 #+BEGIN_SRC emacs-lisp
   (use-package company-wordfreq
     :delight " 𝛄")
@@ -394,7 +394,7 @@ We need to the set up the following in the local buffer. This can be done by inv
     (setq-local company-transformers nil))
 #+END_SRC
 
-And let's hook them into Text buffer-mode.
+And let's hook them up into Text buffer-mode.
 #+BEGIN_SRC emacs-lisp
   (add-hook 'text-mode-hook (lambda ()
                               (setq-local company-backends '(company-wordfreq))
@@ -426,7 +426,7 @@ add control = Control_L
 add Lock = Control_R
 #+end_src
 
-This replaces CapsLock with control and also replaces the Ctrl key on the right side with CapsLock just in case you ever need to use it.  Most login systems (GDM, KDM, etc) will load this file when you log in so you might not need to do anything extra for it to take effect, just log out and log back in again.  If that doesn't seem to work, you can add this line to one of your startup files (=.xinitrc=, =.profile=, window manager configuration, etc):
+This replaces CapsLock with control and also replaces the Ctrl key on the right side with CapsLock just in case you ever need to use it.  Most login systems (GDM, KDM, etc) will load this file when you log in so you may not need to do anything extra for it to take effect, just log out and log back in again.  If that doesn't seem to work, you can add this line to one of your startup files (=.xinitrc=, =.profile=, window manager configuration, etc):
 
 #+begin_src sh
   xmodmap ~/.Xmodmap
@@ -436,16 +436,16 @@ This beautifully written *Replace CapsLock with CTRL* section credits to [[https
 
 * Ask Me Anything!
 #+html: <a href="../../issues/new">:speech_balloon: <b>Ask a question</b></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="../../issues?q=is%3Aissue+is%3Aclosed+sort%3Aupdated-desc">:book: <b>Read questions</b></a>
-/I get questions by email, occasionally. This way anyone can read the answer!/
+/I get questions by email, occasionally. But this way anyone can read the answer!/
 
 [[https://GitHub.com/Likhon-baRoy/.emacs.d][https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg]]
 
-Anything means *anything*. Personal questions. Money. Work. Life. Code.
-Cooking. Traveling. Sports. Teaching. Pokémon. Whatever. :joy:
+Anything means *anything*, Personal questions, Money, Work, Life, Code,
+Cooking, Traveling, Sports, Teaching, Pokémon, Whatever. :joy:
 
 * :scroll: License
 
-This project is open source software licensed under the [[https://github.com/sergeyklay/bnf-mode/blob/master/LICENSE][GNU General Public Licence version 3]].
+This project is open source software which is licensed under the [[https://github.com/sergeyklay/bnf-mode/blob/master/LICENSE][GNU General Public Licence version 3]].
 
 #+html:<p align="center"> <img src="https://raw.githubusercontent.com/catppuccin/catppuccin/dev/assets/footers/gray0_ctp_on_line.svg?sanitize=true"/> </p>
 
