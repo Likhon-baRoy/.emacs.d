@@ -43,7 +43,7 @@ An infinite number of monkeys typing into GNU Emacs would never make a good prog
   - [[#custom-key-bindings][Custom key bindings]]
   - [[#custom-functions][Custom functions]]
 - [[#optional][Optional]]
-  - [[#setup-bangla-language-environment][Setup Bangla Language Environment]]
+  - [[#setup-bangla-language-environment][Setup the Bangla Language Environment]]
 - [[#recommendations][Recommendations]]
   - [[#replace-capslock-with-ctrl][Replace CapsLock with CTRL]]
 - [[#ask-me-anything][Ask Me Anything!]]
@@ -78,10 +78,10 @@ This beautifully written *About EMACS* section credits to [[https://github.com/r
 
 ** About README
 
-Welcome to the /Emacs Of Dream/. Wait no, I meant the *Emacs Operating System*. \\
-This repository contains my personal configuration for *GNU Emacs* that I use on the daily and port around from system to system with me. This is an example of a fully custom Emacs configuration that you can use as inspiration when building your own!
+Welcome to the /Emacs Of Your Dreams/. Wait no, I meant the *Emacs Operating System*. \\
+This repository contains my personal configuration for *GNU Emacs* that I use on the daily and port around from system to system with me. This is an example of a fully customizable Emacs configuration that you can use as an inspiration when building your own!
 
-Customization began with *single-file* =~/.emacs= with few settings and some random *snippets*. Didn't took long to become a monster. It loved to *cherry-pick* 🍒 packages literally form anywhere, I was like why don't you *apt-get*.
+Customization began with a *single-file* =~/.emacs= with a few settings and some random *snippets*. It didn't take long to become a monster. I loved to *cherry-pick* 🍒 packages literally from anywhere, I was like why don't you *apt-get*.
 
 The configuration depends on [[file:init.el][init.el]], [[https://github.com/Likhon-baRoy/.emacs.d/tree/main/my-lisp][my-lisp]](dir) and [[file:early-init.el][early-init.el]] (sets up a few initial GUI settings), bootstraps [[https://github.com/jwiegley/use-package][use-package]]. and loads [[file:init.el][init.el]], which is where the majority of the configuration magic happens.
 
@@ -92,11 +92,11 @@ It's able to run on *GNU/Linux*, *macOS* and *Windows*. It is compatible ONLY wi
 * Screenshots
 Here are some demos... \\
 
-/A dashboard on startup can clean my mind/.😌
+/A dashboard on startup to clean my mind/.😌
 #+BEGIN_CENTER
 [[../screenshots/ss-1.png]]
 #+END_CENTER
-/Center text in the frame, looks nice ;) and =flycheck= with BitMap-Arrow on the right-fringe/ 😎
+/Centered text in the frame, looks nice ;) and =flycheck= with BitMap-Arrow on the right-fringe/ 😎
 #+BEGIN_CENTER
 [[../screenshots/ss-2.png]]
 #+END_CENTER
@@ -121,7 +121,7 @@ Here are some demos... \\
 
 * How to Use This Configuration
 
-This repo is meant to be a companion to the Emacs From Scratch video series, serving as an example of a custom configuration build on top of vanilla Emacs. I give instructions below for how to set it up to try it out, but it isn’t meant to be used as your main configuration! My goal here is to provide a working configuration that you can take inspiration from (and copy from directly).
+This repo is meant to be a companion to the Emacs From Scratch video series, serving as an example of a custom configuration build on top of vanilla Emacs. I give instructions below on how to set it up to try it out, but it isn’t meant to be used as your main configuration! My goal here is to provide a working configuration that you can take inspiration from (and copy from directly).
 
 Just keep in mind that this repo isn’t set up to be used directly as your own configuration! Copy the code to your own dotfiles repository and have fun :)
 
@@ -129,7 +129,7 @@ Just keep in mind that this repo isn’t set up to be used directly as your own 
 [[https://GitHub.com/Likhon-baRoy/][http://ForTheBadge.com/images/badges/built-with-swag.svg]]
 
 🧨 *DISCLAIMER:* 🐒 MAKE SURE YOU HAVE THE BACKUP ⚠ THE AUTHOR will
-   _not_ be _responsible_ for the 🔥 _harm_ 🔥 cause by using this
+   _not_ be _responsible_ for the 🔥 _harm_ 🔥 caused by using this
    configuration.
 
    Oh! you wanna use my config! its super duper +easy+ ! It may be in the
@@ -163,7 +163,7 @@ Just keep in mind that this repo isn’t set up to be used directly as your own 
    maintenance, now its more of rants taking over the configuration! 😎
 
    If you ask me, would I have started with other's config? I would
-   definitely say *YES*. But you should *understand* all-in-one
+   definitely say *YES*. But you should *understand* an all-in-one
    package 📦 or distribution is like bringing a gun 🔫 to a fist 👊
    fight. You might end up using less than 5 % of the *bloat*. And if
    you want to change or fix something it is a big 😫 pain to peel
